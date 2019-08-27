@@ -1,0 +1,35 @@
+
+
+
+<div class="main-content" >
+    <div class="container-fluid">
+                     
+                              <div class="row">
+                                      <div class="col-md-4"> 
+                                        <div class="list-group">
+                                            <button type="button" class="list-group-item list-group-item-action active">
+                                              Vos JobDemandes  ({{jobDemandes.length}})
+                                            </button>
+                                            <button type="button" 
+                                                   class="list-group-item list-group-item-action"
+                                                   *ngFor="let jobDemande of jobDemandes;let i= index"
+                                                    
+                                                   (click)="getJobDemandeDetails(jobDemande)">({{i}}) from {{jobDemande.sender.name}}</button>
+   
+                                          </div>
+                                           </div> 
+                                           <div class="vl"></div>
+                                           <div class="col-md">
+                                              <div class="incenter">
+                                                 <router-outlet > </router-outlet>
+                                             </div>     
+                                                
+                                           </div>
+
+                              
+                         
+                      </div>
+             
+        
+  </div>
+</div>

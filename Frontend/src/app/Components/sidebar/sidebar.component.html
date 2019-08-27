@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <h1>CVManagement</h1>
+      <span class="menu-spacer"></span>
+      <div >
+        <a mat-button [routerLink]="'/Acceuil'" > Acceuil </a>
+        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()">Profil </a>
+        <a mat-button [routerLink]="'/JobSearch'" *ngIf="this.authService.loggedIn()"> JobSearch </a>
+        <a mat-button [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn()"> Notification </a>
+        <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()">Emploi du Temps </a>
+        <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" > Login </a>
+        <a mat-button [routerLink]="'/JobDemande'" *ngIf="this.authService.loggedIn()" > JobDemande </a>
+        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()"> Logout</a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>

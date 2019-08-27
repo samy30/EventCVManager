@@ -1,0 +1,50 @@
+ 
+ <mat-card>
+    <mat-card-header>
+        <mat-card-title>Liste des entretiens</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+     <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="entreprise">
+        <th mat-header-cell *matHeaderCellDef> Entreprise </th>
+        <td mat-cell *matCellDef="let element"> {{element.entreprise}} </td>
+      </ng-container>
+    
+    <ng-container matColumnDef="candidat">
+      <th mat-header-cell *matHeaderCellDef> Candidat </th>
+      <td mat-cell *matCellDef="let element"> {{element.candidat}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="poste">
+      <th mat-header-cell *matHeaderCellDef> Poste </th>
+      <td mat-cell *matCellDef="let element"> {{element.poste}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="debut">
+      <th mat-header-cell *matHeaderCellDef> Heure Debut </th>
+      <td mat-cell *matCellDef="let element"> {{element.debut}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="fin">
+        <th mat-header-cell *matHeaderCellDef> Heure Fin </th>
+        <td mat-cell *matCellDef="let element"> {{element.fin}} </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card-content>
+</mat-card>

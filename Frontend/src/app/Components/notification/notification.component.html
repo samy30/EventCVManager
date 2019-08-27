@@ -1,0 +1,34 @@
+
+
+<div class="main-content" >
+    <div class="container-fluid">
+                     
+                              <div class="row">
+                                      <div class="col-md-4"> 
+                                        <div class="list-group">
+                                            <button type="button" class="list-group-item list-group-item-action active">
+                                              Vos Notifications  ({{notifications.length}})
+                                            </button>
+                                            <button type="button" 
+                                                   class="list-group-item list-group-item-action"
+                                                   *ngFor="let notification of notifications;let i= index"
+                                                    
+                                                   (click)="getNotificationDetails(notification)">({{i}}) from {{notification.entreprise.name}}</button>
+   
+                                          </div>
+                                           </div> 
+                                           <div class="vl"></div>
+                                           <div class="col-md">
+                                              <div class="incenter">
+                                                 <router-outlet > </router-outlet>
+                                             </div>     
+                                                
+                                           </div>
+
+                              
+                         
+                      </div>
+             
+        
+  </div>
+</div>

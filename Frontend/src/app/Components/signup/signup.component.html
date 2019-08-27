@@ -1,0 +1,43 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<body>
+    <div id="login">
+        <h3 class="text-center text-white pt-5">SignUp form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
+                            <h3 class="text-center ">SignUp</h3>
+                            <div class="form-group">
+                                <label for="username" >UserName:</label><br>
+                                <input type="text"  formControlName="username" class="form-control" required>
+                                <mat-error *ngIf="isFieldInvalid('username')">
+                                    username required
+                                  </mat-error>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" >Password:</label><br>
+                                <input type="text"  formControlName="password" class="form-control" required>
+                                <mat-error *ngIf="isFieldInvalid('password')">
+                                    password required
+                                  </mat-error>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
+                                  [disabled]="!isFormValid(signupForm)"
+                                >
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
