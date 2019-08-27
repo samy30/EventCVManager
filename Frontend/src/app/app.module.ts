@@ -45,6 +45,7 @@ import { JobDemandeComponent } from './Components/job-demande/job-demande.compon
 import { NotificationDetailComponent } from './Components/notification-detail/notification-detail.component';
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import {UserService} from './Services/user.service';
+import {CustomInterceptor} from './http-interceptors/CustomInterceptor';
 
 @NgModule({
   declarations: [
@@ -100,10 +101,9 @@ import {UserService} from './Services/user.service';
   ],
   entryComponents: [InsertCVComponent],
   providers: [
-    httpInterceptorProviders,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: CustomInterceptor ,
       multi: true
     },
     AuthGuard,

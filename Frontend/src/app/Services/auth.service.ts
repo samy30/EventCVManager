@@ -6,6 +6,10 @@ import { Observable, BehaviorSubject,of } from 'rxjs';
 import User from '../Models/user';
 import { error } from 'util';
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +24,13 @@ export class AuthService {
   login(user:User): Observable<any> {
     console.log("authservice");
     console.log(user);
-    //return this.http.post<User>(`${this.authUrl}/auth/login`, user);
+    let test = {
+      usernameOrEmail : user.username,
+      password : user.password
+    }
+    // return this.http.post<User>(`${this.authUrl}/auth/signin`, user);
     if(user.username=="admin"&&user.password=="admin")return of({token:"michoumicha"});
-    return this.http.post<any>(`${this.authUrl}/auth/login`, user);
+    return this.http.post<any>(`${this.authUrl}/auth/signin`, test, httpOptions);
 
   }
 
