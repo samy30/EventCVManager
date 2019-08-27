@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarService } from 'src/app/services/sidebar.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from  '@angular/router';
+import {SidebarService} from "../../Services/sidebar.service";
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -11,7 +11,7 @@ import { Router } from  '@angular/router';
 export class SidebarComponent implements OnInit {
   menus;
   auths = {};
-  
+
   constructor(private sideBarService: SidebarService,
     private authService:AuthService,
      private router:Router

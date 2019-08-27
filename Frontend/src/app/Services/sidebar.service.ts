@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { of } from 'rxjs'; 
-import Menu from '../models/menu';
+import { of } from 'rxjs';
+import Menu from '../Models/menu';
 @Injectable({
   providedIn: 'root'
 })
