@@ -37,8 +37,15 @@ public class UserController {
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        UserSummary userSummary = new UserSummary(currentUser.getId(),currentUser.getUsername(),currentUser.getFirstName(),currentUser.getLastName(),currentUser.getGender(),currentUser.getAge(),currentUser.getEmail());
         return userSummary;
+    }
+
+    @GetMapping("/enterprise/me")
+    @PreAuthorize("hasRole('ENTERPRISE')")
+    public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
+        EnterpriseSummary enterpriseSummary = new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail());
+        return enterpriseSummary;
     }
 
     @GetMapping("/user/checkUsernameAvailability")
@@ -54,15 +61,26 @@ public class UserController {
     }
 
     @GetMapping("/users/{username}")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         long cvCount = cvRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getCreatedAt());
+        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt());
 
         return userProfile;
+    }
+
+    @GetMapping("/enterprises/{username}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public EnterpriseProfile getEnterpriseProfile(@PathVariable(value = "username") String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt());
+        return enterpriseProfile;
     }
 
     @GetMapping("/users/{username}/cvs")

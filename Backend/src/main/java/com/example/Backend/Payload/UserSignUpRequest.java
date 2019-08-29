@@ -4,16 +4,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class SignUpRequest {
-    @Size(min = 4, max = 40)
-    private String name;
+public class UserSignUpRequest {
 
     private String firstName;
     private String lastName;
-    private String gender;
-    private String description;
-    private String activity;
     private long age;
+    private String gender;
 
     @NotBlank
     @Size(min = 3, max = 15)
@@ -27,16 +23,6 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
-
-    private String role;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -54,36 +40,20 @@ public class SignUpRequest {
         this.lastName = lastName;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getActivity() {
-        return activity;
-    }
-
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
-
     public long getAge() {
         return age;
     }
 
     public void setAge(long age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getUsername() {
@@ -108,13 +78,5 @@ public class SignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

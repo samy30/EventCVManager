@@ -16,9 +16,14 @@ public class UserPrincipal implements UserDetails {
 
     private String name;
 
+    private String firstName;
+    private String lastName;
+    private Long age;
+    private String gender;
+    private String description;
+    private String activity;
     private String username;
 
-    @JsonIgnore
     private String email;
 
     @JsonIgnore
@@ -26,9 +31,15 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String description, String activity, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.description = description;
+        this.activity = activity;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -43,6 +54,12 @@ public class UserPrincipal implements UserDetails {
         return new UserPrincipal(
                 user.getId(),
                 user.getName(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getAge(),
+                user.getGender(),
+                user.getDescription(),
+                user.getActivity(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
@@ -60,6 +77,30 @@ public class UserPrincipal implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getActivity() {
+        return activity;
     }
 
     @Override

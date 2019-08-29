@@ -103,7 +103,7 @@ import {CustomInterceptor} from './http-interceptors/CustomInterceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: CustomInterceptor ,
+      useClass: TokenInterceptor,
       multi: true
     },
     AuthGuard,

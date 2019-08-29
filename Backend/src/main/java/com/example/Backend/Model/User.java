@@ -27,7 +27,22 @@ public class User extends AuditModel {
     private String name;
 
     @Size(max = 40)
-    private String enterpriseDescription;
+    private String firstName;
+
+    @Size(max = 40)
+    private String lastName;
+
+
+    private Long age;
+
+    @Size(max = 40)
+    private String gender;
+
+    @Size(max = 40)
+    private String description;
+
+    @Size(max = 40)
+    private String activity;
 
     @NotBlank
     @Size(max = 15)
@@ -42,6 +57,8 @@ public class User extends AuditModel {
     @NotBlank
     @Size(max = 100)
     private String password;
+
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -58,6 +75,47 @@ public class User extends AuditModel {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.description = description;
+        this.activity = activity;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(@Size(max = 40) String name, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+        this.name = name;
+        this.description = description;
+        this.activity = activity;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 
     public Long getId() {
@@ -106,5 +164,45 @@ public class User extends AuditModel {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -6,10 +6,6 @@ import { Observable, BehaviorSubject,of } from 'rxjs';
 import User from '../Models/user';
 import { error } from 'util';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'}),
-  withCredentials: true
-};
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +26,7 @@ export class AuthService {
     }
     // return this.http.post<User>(`${this.authUrl}/auth/signin`, user);
     if(user.username=="admin"&&user.password=="admin")return of({token:"michoumicha"});
-    return this.http.post<any>(`${this.authUrl}/auth/signin`, test, httpOptions);
+    return this.http.post<any>(`${this.authUrl}/auth/signin`, test);
 
   }
 

@@ -78,10 +78,29 @@ public class AuthController {
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
+        if(signUpRequest.getRole() != null) {
+            if (signUpRequest.getRole().equals("ROLE_USER")) {
+                user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+            }
+            if (signUpRequest.getRole().equals("ROLE_ENTERPRISE")) {
+                user = new User(signUpRequest.getName(), signUpRequest.getDescription(), signUpRequest.getActivity(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+            }
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
+        if(signUpRequest.getRole() != null) {
+            if (signUpRequest.getRole().equals("ROLE_ENTERPRISE")) {
+                userRole = roleRepository.findByName(RoleName.ROLE_ENTERPRISE)
+                        .orElseThrow(() -> new AppException("User Role not set."));
+            } else if (signUpRequest.getRole().equals("ROLE_ADMIN")) {
+                userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                        .orElseThrow(() -> new AppException("User Role not set."));
+            }
+        }
+
 
         user.setRoles(Collections.singleton(userRole));
 
