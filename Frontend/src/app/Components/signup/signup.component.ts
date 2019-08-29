@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
-import { Router } from  '@angular/router';
-import  User  from  'src/app/Models/user';
-import { AuthService } from  'src/app/Services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService} from 'src/app/Services/auth.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -10,17 +9,36 @@ import { AuthService } from  'src/app/Services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private router: Router,private formBuilder:FormBuilder,private authService:AuthService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) { }
   username: string;
   password: string;
+  chosenSignupForm = 0 ;
   signupForm: FormGroup;
+  signupEnterpriseForm: FormGroup;
   isSubmitted  =  false;
 
   ngOnInit() {
     this.signupForm  =  this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      gender: ['', Validators.required],
+      age: [0, Validators.required]
      });
+    this.signupEnterpriseForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      activity: ['', Validators.required],
+    });
+  }
+
+  chooseForm(index: number) {
+    this.chosenSignupForm = index;
   }
 
   isFieldInvalid(field: string) { // {6}
@@ -30,32 +48,36 @@ export class SignupComponent implements OnInit {
   );
    }
 
-   isFormValid(form:FormGroup):boolean{
-     return( !this.isFieldInvalid("username")&&!this.isFieldInvalid("password")
-              &&this.signupForm.get("username").valid &&this.signupForm.get("password").valid);
+   isFormValid(form: FormGroup): boolean {
+     return( !this.isFieldInvalid('username') && !this.isFieldInvalid('password')
+              && this.signupForm.get('username').valid && this.signupForm.get('password').valid);
    }
 
 
-  signup(){
-    this.isSubmitted=true;
-    this.authService.register(this.signupForm.value).subscribe(
-      res=>{
-        console.log("logged in");
+  signup() {
+    this.isSubmitted = true;
+    this.authService.registerJobSeeker(this.signupForm.value).subscribe(
+      res => {
+        console.log('registered');
         console.log(res);
-           this.authService.setToken(res.token);
-            this.router.navigate(['/Profil']);
-          },
-      err=>{
-         console.log("not toekn");
+        this.router.navigate(['/Profile']);
+        },
+      err => {
+         console.log('not token');
       }
-    )
-    console.log(this.signupForm.value);
-  
+    );
   }
- 
- 
- 
- 
-
+  signupEnterprise() {
+    this.isSubmitted = true;
+    this.authService.registerEnterprise(this.signupEnterpriseForm.value).subscribe(
+      res => {
+        console.log('registered');
+        this.router.navigate(['/Profile']);
+      },
+      err => {
+        console.log('not registered');
+      }
+    );
+  }
 
   }

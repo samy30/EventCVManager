@@ -27,6 +27,33 @@ export class AuthService {
     // return fake token to be able to connect
     return of({token: 'michoumicha'});
   }
+  registerEnterprise(user): Observable<any> {
+    const enterprise = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      description: user.description,
+      activity: user.activity,
+      role: 'ROLE_ENTERPRISE'
+    };
+    console.log(enterprise);
+    return this.http.post<User>(`${this.authUrl}/auth/signup`, enterprise);
+  }
+  registerJobSeeker(user): Observable<any> {
+    const jobSeeker = {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      gender: user.gender,
+      age: user.age,
+      role: 'ROLE_USER'
+    };
+    console.log(jobSeeker);
+    return this.http.post<User>(`${this.authUrl}/auth/signup`, jobSeeker);
+  }
 
   logout() {
     localStorage.removeItem('token');
