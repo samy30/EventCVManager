@@ -1,10 +1,7 @@
-import { catchError } from 'rxjs/operators';
-
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject,of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import User from '../Models/user';
-import { error } from 'util';
 
 
 @Injectable({
@@ -12,45 +9,44 @@ import { error } from 'util';
 })
 export class AuthService {
 
-  authUrl = 'http://localhost:49320/api';
- 
+  authUrl = 'http://localhost:8080/api';
+
 
   constructor(private http: HttpClient) { }
 
-  login(user:User): Observable<any> {
-    console.log("authservice");
-    console.log(user);
-    //return this.http.post<User>(`${this.authUrl}/auth/login`, user);
-    if(user.username=="admin"&&user.password=="admin")return of({token:"michoumicha"});
-    return this.http.post<any>(`${this.authUrl}/auth/login`, user);
-    
-  }
- 
-  register(user): Observable<any> {
-    //return this.http.post<User>(`${this.authUrl}/auth/register`, user);
-    //return fake token to be able to connect
-    return of({token:"michoumicha"});
+  login(user: User): Observable<any> {
+    const authRequest = {
+      usernameOrEmail : user.username,
+      password: user.password
+    };
+    return this.http.post<any>(`${this.authUrl}/auth/signin`, authRequest);
   }
 
-  logout(){
+  register(user): Observable<any> {
+    // return this.http.post<User>(`${this.authUrl}/auth/register`, user);
+    // return fake token to be able to connect
+    return of({token: 'michoumicha'});
+  }
+
+  logout() {
     localStorage.removeItem('token');
   }
- 
-  getToken(){
+
+  getToken() {
     return localStorage.getItem('token');
   }
- 
-  loggedIn(){
+
+  loggedIn() {
     return !! this.getToken();
   }
- 
- setToken(token){
-     localStorage.setItem('token',token);
+
+ setToken(token) {
+     localStorage.setItem('token', token);
   }
- 
- 
- 
- 
+
+
+
+
 /*
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.userUrl}/ApplicationUsers/current`);

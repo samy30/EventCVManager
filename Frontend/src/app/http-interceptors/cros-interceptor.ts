@@ -13,7 +13,7 @@ export class CrosInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const credentialsReq = req.clone({withCredentials: true, setHeaders: {'X-XSRF-TOKEN': 'MY-TOKEN', 'Content-Type': 'application/json'}});
+    const credentialsReq = req.clone({ setHeaders: {'X-XSRF-TOKEN': 'MY-TOKEN', 'Content-Type': 'application/json'}});
     return next.handle(credentialsReq).pipe(
       (tap(event => {
         if (event instanceof HttpResponse) {
