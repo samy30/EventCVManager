@@ -29,7 +29,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendrierComponent } from './Components/calendrier/calendrier.component';
-import { LoginComponent } from './Components/login/login.component';
+import { LoginComponent } from './Components/login/login.component'; 
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { JobSearchComponent } from './Components/job-search/job-search.component';
@@ -40,12 +40,12 @@ import { AuthGuard } from './Services/auth.guard';
 import { AuthService } from './Services/auth.service';
 import { SignupComponent } from './Components/signup/signup.component';
 import { ProfilComponent } from './Components/profil/profil.component';
+import { UserService } from './services/user.service';
 import { NotificationComponent } from './Components/notification/notification.component';
 import { JobDemandeComponent } from './Components/job-demande/job-demande.component';
 import { NotificationDetailComponent } from './Components/notification-detail/notification-detail.component';
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
-import {UserService} from './Services/user.service';
-import {CustomInterceptor} from './http-interceptors/CustomInterceptor';
+import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import {CustomInterceptor} from './http-interceptors/CustomInterceptor';
     NotificationComponent,
     JobDemandeComponent,
     NotificationDetailComponent,
-    JobDemandeDetailComponent
+    JobDemandeDetailComponent,
+    OfferCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +102,7 @@ import {CustomInterceptor} from './http-interceptors/CustomInterceptor';
   ],
   entryComponents: [InsertCVComponent],
   providers: [
+    httpInterceptorProviders,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

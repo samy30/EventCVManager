@@ -13,6 +13,7 @@
         <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()">Emploi du Temps </a>
         <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" > Login </a>
         <a mat-button [routerLink]="'/JobDemande'" *ngIf="this.authService.loggedIn()" > JobDemande </a>
+        <a mat-button [routerLink]="'/OfferCreation'" *ngIf="this.authService.loggedIn()" > OfferCreation </a>
         <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()"> Logout</a>
       </div>
     </mat-toolbar-row>

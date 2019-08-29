@@ -2,9 +2,11 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.CV;
+import com.example.Backend.Model.JobOffer;
 import com.example.Backend.Model.User;
 import com.example.Backend.Payload.*;
 import com.example.Backend.Repository.CVRepository;
+import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.UserRepository;
 import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.UserPrincipal;
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
     private CVRepository cvRepository;
+
+    @Autowired
+    private JobOfferRepository jobOfferRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -92,6 +97,28 @@ public class UserController {
         // Retrieve all polls created by the given username
         List<CV> cvs = cvRepository.findByCreatedBy(user.getId());
         return cvs ;
+    }
+
+    @GetMapping("/enterprises/{username}/jobOffers")
+    public List<JobOffer> getJobOffersCreatedBy(@PathVariable(value = "username") String username,
+                                          @CurrentUser UserPrincipal currentUser) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
+
+
+        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
+        return jobOffers ;
+    }
+
+    @GetMapping("/enterprises/me/jobOffers")
+    @PreAuthorize("hasRole('ENTERPRISE')")
+    public List<JobOffer> getJobOffersCreatedByCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        User user = userRepository.findByUsername(currentUser.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+
+
+        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
+        return jobOffers ;
     }
 
 

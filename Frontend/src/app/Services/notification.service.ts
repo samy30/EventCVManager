@@ -88,7 +88,7 @@ export class NotificationService {
     );
   }
 
-  updateOffer(data, id): Observable<any> {
+  updateNotification(data, id): Observable<any> {
     return this.http.put(`${apiUrl}/${id}`, data, httpOptions)
       .pipe(
         catchError(this.handleError)

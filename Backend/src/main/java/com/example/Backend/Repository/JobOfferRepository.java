@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> findByCreatedBy(Long userId);
+    long countByCreatedBy(Long userId);
 }

@@ -14,12 +14,14 @@ import JobDemande from './Models/job-demande';
 import { JobDemandeComponent } from './Components/job-demande/job-demande.component';
 import { NotificationDetailComponent } from './Components/notification-detail/notification-detail.component';
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
+import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 
 
 const routes: Routes = [
   {path:'EmploiTemps',component: CalendrierComponent, canActivate:[AuthGuard]},
   {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard]},
   {path:'Login',component: LoginComponent},
+  {path:'OfferCreation',component: OfferCreationComponent},
   {path:'Notification',
        component: NotificationComponent,
        children:[

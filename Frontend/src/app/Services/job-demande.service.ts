@@ -22,10 +22,7 @@ export class JobDemandeService {
     { id: 1,sender:{'id':1,'name':'Sami'},poste:'engineer',addresse:'sfax' ,description:'description'},
     { id: 1,sender:{'id':1,'name':'Khairi'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
   ];
-  // get job demandes sended to current entrep
-  getJobDemandes():Observable<any[]>{
-      return of(this.jobDemandes);
-  }
+ 
 
    
   private handleError(error: HttpErrorResponse) {
@@ -53,13 +50,14 @@ export class JobDemandeService {
   emitJobDemande(jobDemande){
       this.eventCallback.next(jobDemande);
    }
-
-  getoffers(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions).pipe(
+ // get job demandes sended to current entrep
+   getJobDemandes(): Observable<any> {
+    /*return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
-      catchError(this.handleError));
+      catchError(this.handleError));*/
+      return of(this.jobDemandes);
   }
-  getOffer(id: string): Observable<any> {
+  getJobDemande(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
       map(this.extractData),
@@ -72,14 +70,14 @@ export class JobDemandeService {
     );
   }
 
-  updateOffer(data, id): Observable<any> {
+  updateJobDemande(data, id): Observable<any> {
     return this.http.put(`${apiUrl}/${id}`, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  deleteOffer(id: string): Observable<{}> {
+  deleteJobDemande(id: string): Observable<{}> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(

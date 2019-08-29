@@ -1,0 +1,57 @@
+
+<div class="main-content" >
+      <div class="container-fluid">
+          <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                        <div class="card-header">
+                               <h3> Create your job Offer</h3>
+                              </div>
+                      <div class="content">
+                          <form [formGroup]="offerFormGroup">
+                             
+  
+                                  <div class="row">
+  
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>nom_poste</label>
+                                            <input formControlName="nom_poste" type="text" class="form-control" placeholder="nom_poste">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>nom_entreprise</label>
+                                            <input formControlName="nom_entreprise" type="text" class="form-control" placeholder="nom_entreprise">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>adress</label>
+                                            <input formControlName="adress" type="text" class="form-control" placeholder="adress">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Competences requises</label>
+                                            <input formControlName="competences" type="text" class="form-control" placeholder="Competences requises">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="createOffer()">Create Offer</button>
+                                <div class="clearfix"></div>
+                           </form>
+                                
+                        </div>
+                    </div>
+               </div>
+          </div>
+       </div>
+    </div>
+  
+  
+  

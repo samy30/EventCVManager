@@ -15,13 +15,25 @@ public class JobOffer extends UserDateAudit {
     private Long id;
 
     @NotBlank
-    private String status;
+    private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "needed_job__id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonBackReference
-    private NeededJob neededJob;
+    private String[] skills;
+
+    private String town ;
+
+    @JoinColumn(name = "enterprise_id", unique = true)
+    @OneToOne(cascade = CascadeType.MERGE)
+    private User enterprise;
+
+
+
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "needed_job__id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonBackReference
+//    private NeededJob neededJob;
+
 
     public Long getId() {
         return id;
@@ -31,19 +43,35 @@ public class JobOffer extends UserDateAudit {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public NeededJob getNeededJob() {
-        return neededJob;
+    public String[] getSkills() {
+        return skills;
     }
 
-    public void setNeededJob(NeededJob neededJob) {
-        this.neededJob = neededJob;
+    public void setSkills(String[] skills) {
+        this.skills = skills;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public User getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(User enterprise) {
+        this.enterprise = enterprise;
     }
 }

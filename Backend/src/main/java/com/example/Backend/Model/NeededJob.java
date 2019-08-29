@@ -13,10 +13,8 @@ public class NeededJob extends UserDateAudit{
     @NotBlank
     private String JobName;
 
-    @NotBlank
     private Long number;
 
-    @NotBlank
     private boolean isExpired;
 
     public Long getId() {

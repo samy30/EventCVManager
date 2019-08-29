@@ -12,24 +12,20 @@ import { error } from 'util';
 })
 export class AuthService {
 
-  authUrl = 'http://localhost:8080/api';
-
+  authUrl = 'http://localhost:49320/api';
+ 
 
   constructor(private http: HttpClient) { }
 
   login(user:User): Observable<any> {
     console.log("authservice");
     console.log(user);
-    let test = {
-      usernameOrEmail : user.username,
-      password : user.password
-    }
-    // return this.http.post<User>(`${this.authUrl}/auth/signin`, user);
+    //return this.http.post<User>(`${this.authUrl}/auth/login`, user);
     if(user.username=="admin"&&user.password=="admin")return of({token:"michoumicha"});
-    return this.http.post<any>(`${this.authUrl}/auth/signin`, test);
-
+    return this.http.post<any>(`${this.authUrl}/auth/login`, user);
+    
   }
-
+ 
   register(user): Observable<any> {
     //return this.http.post<User>(`${this.authUrl}/auth/register`, user);
     //return fake token to be able to connect
@@ -39,22 +35,22 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
   }
-
+ 
   getToken(){
     return localStorage.getItem('token');
   }
-
+ 
   loggedIn(){
     return !! this.getToken();
   }
-
+ 
  setToken(token){
      localStorage.setItem('token',token);
   }
-
-
-
-
+ 
+ 
+ 
+ 
 /*
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.userUrl}/ApplicationUsers/current`);

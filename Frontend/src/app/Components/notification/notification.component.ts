@@ -17,6 +17,7 @@ export class NotificationComponent implements OnInit {
    // currentUser=this.loadCurrentUser();
     this.loadNotifications();
   }
+  
   //get current user's notifications
   loadNotifications(){
        this.notificationService.getNotifications()
