@@ -1,43 +1,41 @@
-
-
 <div class="main-content" >
-          <div class="container-fluid">
-              <div class="row">
-                
-                     <div class="card ">
-                            <div class="card-header">
-                                    <h3>Select desired Post</h3>
-                            </div>
-                            <div class="card-body">
-                                    <div class="row">
-                                            <div class="col-md-4"> 
-                                                    <form [formGroup]="PostesForm" (ngSubmit)="onSubmit()">
-                                                            <label formArrayName="postes" *ngFor="let poste of PostesForm.get('postes').controls; let i = index">
-                                                               <div class="pretty p-default p-curve p-thick">
-                                                                  <input type="checkbox" [formControlName]="i" />
-                                                                  <div class="state">    
-                                                                      <label> {{postList[i].poste}}</label>
-                                                                  </div>
-                                                              </div>
-                                                            </label>
-                                                              
-                                                            <hr>
-                                                            <button type="submit" class="btn btn-info btn-fill btn-violet"  (click)="updateUser()">Search Job</button>
-                                                            
-                                                           </form>
-                                                 </div> 
-                                                 <div class="vl"></div>
-                                                 <div class="col-md">
-                                                    <div class="incenter">
-                                                       <router-outlet > </router-outlet>
-                                                   </div>     
-                                                      
-                                                 </div>
+  <div class="container-fluid">
+    <div class="row">
 
-                                    </div>
-                                </div>
-                            </div>
-                   
-                </div>
+      <div class="card ">
+        <div class="card-header">
+          <h3>Select desired Post</h3>
         </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <form [formGroup]="PostesForm" (ngSubmit)="onSubmit()">
+                <div *ngFor="let poste of postList">
+                  <div class="pretty p-default p-curve p-thick">
+                    <input type="radio" value="{{poste.id}}" formControlName="choice" />
+                    <div class="state">
+                      <label> {{poste.name}}</label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+                <button type="submit" class="btn btn-info btn-fill btn-violet"  >Search Job</button>
+
+              </form>
+            </div>
+            <div class="vl"></div>
+            <div class="col-md">
+              <div class="incenter">
+                <router-outlet > </router-outlet>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

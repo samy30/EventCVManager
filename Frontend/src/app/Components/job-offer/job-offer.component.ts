@@ -22,14 +22,14 @@ export class JobOfferComponent implements OnInit {
        public dialog: MatDialog,
        private cvService:CVService,
        private jobDemandeService:JobDemandeService) {
-    
+
    }
 
   ngOnInit() {
     var nb=0;
     this.posteService.eventCallback$.subscribe(postes => {
       console.log("postes here");
-      this.selectedPostes=postes;
+      this.selectedPostes=postes;//2
       //get offers based on selectedPostes
           this.jobOfferService.getOffers(this.selectedPostes).subscribe(offers => {
             //list of jobOffers
@@ -39,12 +39,12 @@ export class JobOfferComponent implements OnInit {
            });
       console.log(postes);
     });
-   
+
   }
   createdCV:any;
   jobDemande:any;
   currentUser;
-  // 
+  //
   getJob(offer){
     const dialogRef = this.dialog.open(InsertCVComponent, {
       width:'95%',
@@ -60,7 +60,7 @@ export class JobOfferComponent implements OnInit {
       this.cvService.postCV(this.createdCV).subscribe(cv=>{
            this.createdCV=cv;
            console.log("cvCreated");
-           //create Job-demande 
+           //create Job-demande
             this.jobDemande={
                  id:0,
                  cv:this.createdCV,
@@ -74,7 +74,7 @@ export class JobOfferComponent implements OnInit {
                  })
       })
     });
-    
+
   }
 
 }

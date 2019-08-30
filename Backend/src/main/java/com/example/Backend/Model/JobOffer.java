@@ -14,14 +14,15 @@ public class JobOffer extends UserDateAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String name;
+    @JoinColumn(name = "job_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Job name;
 
     private String[] skills;
 
     private String town ;
 
-    @JoinColumn(name = "enterprise_id", unique = true)
+    @JoinColumn(name = "enterprise_id")
     @OneToOne(cascade = CascadeType.MERGE)
     private User enterprise;
 
@@ -43,11 +44,11 @@ public class JobOffer extends UserDateAudit {
         this.id = id;
     }
 
-    public String getName() {
+    public Job getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Job name) {
         this.name = name;
     }
 

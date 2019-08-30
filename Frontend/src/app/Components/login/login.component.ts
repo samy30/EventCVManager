@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       res=>{
         console.log("logged in");
         console.log(res);
-           this.authService.setToken(res.token);
+           this.authService.setToken(res.accessToken);
             this.router.navigate(['/Profil']);
           },
       err=>{
@@ -49,27 +49,27 @@ export class LoginComponent implements OnInit {
       }
     )
     console.log(this.loginForm.value);
-  
+
   }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /*
   login() : void {
 

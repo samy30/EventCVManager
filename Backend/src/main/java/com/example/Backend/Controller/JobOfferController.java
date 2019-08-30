@@ -1,8 +1,10 @@
 package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
+import com.example.Backend.Model.Job;
 import com.example.Backend.Model.JobOffer;
 import com.example.Backend.Repository.JobOfferRepository;
+import com.example.Backend.Repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ import java.util.List;
 public class JobOfferController {
     @Autowired
     JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    JobRepository jobRepository;
     // Get All JobOffers
     @GetMapping("/jobOffer")
     public List<JobOffer> getAllJobOffers() {
@@ -59,5 +64,14 @@ public class JobOfferController {
         jobOfferRepository.delete(jobOffer);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/jobOffer/jobs/{id}")
+    public List<JobOffer> getJobOffersByName(@PathVariable(value = "id") Long id) {
+
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
+        List<JobOffer> jobOffers = jobOfferRepository.findByName(job);
+        return jobOffers ;
     }
 }
