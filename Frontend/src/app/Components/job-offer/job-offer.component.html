@@ -5,44 +5,44 @@
 
 <!-- details card section starts from here -->
 <section class="details-card">
-    <h2>Available Offers</h2>
-    <hr>
-    <div class="container">
-        <div class="row">
-          
+  <h2>Available Offers</h2>
+  <hr>
+  <div class="container">
+    <div class="row">
 
-                <div class="col-md-4" *ngFor="let offer of jobOffers">
-                    <div class="divup" >
-                        <div class="card-content">
-                            <div class="card-img">
-                                <img src="https://placeimg.com/380/230/tech" alt="">
-                               
-                            </div>
-                            <div class="card-desc">
-                                <div class="linediv">
-                                        <h4 >Entreprise:</h4>
-                                        <h3>{{offer.entreprise.name}}</h3>
-                                </div>
-                                <div class="linediv">
-                                        <h4 >Addresse:</h4>
-                                        <h3>{{offer.addresse}}</h3>
-                                </div>
-                                <div class="linediv">
-                                        <h4 >Poste:</h4>
-                                        <h3>{{offer.poste}}</h3>
-                                </div>
-                                
-                                        <h4>description:</h4>
-                                        <p>trhhhhhhhtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</p>
-                                
-                                
-                               
-                                <a  class="btn-card" (click)="getJob(offer)">Get Job</a>   
-                             </div>
-                          </div>
-                      </div>
-                    </div>
+
+      <div class="col-md-4" *ngFor="let offer of jobOffers">
+        <div class="divup" >
+          <div class="card-content">
+            <div class="card-img">
+              <img src="https://placeimg.com/380/230/tech" alt="">
+
+            </div>
+            <div class="card-desc">
+              <div class="linediv">
+                <h4 >Entreprise:</h4>
+                <h3>{{offer.enterprise.name}}</h3>
+              </div>
+              <div class="linediv">
+                <h4 >Addresse:</h4>
+                <h3>{{offer.town}}</h3>
+              </div>
+              <div class="linediv">
+                <h4 >Poste:</h4>
+                <h3>{{offer.name.name}}</h3>
+              </div>
+
+              <h4>skills:</h4>
+              <div *ngFor="let skill of offer.skills" >
+                <p>{{skill}}</p>
+              </div>
+
+              <a  class="btn-card" (click)="getJob(offer)">Get Job</a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- details card section starts from here -->

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,6 +13,9 @@ const apiUrl = 'http://localhost:8080/api/job';
 })
 export class JobsService {
   constructor(private http: HttpClient) { }
+
+  private eventCallback = new Subject<any>();
+  eventCallback$ = this.eventCallback.asObservable();
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -65,5 +68,9 @@ export class JobsService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  sendPosts(num) {
+    this.eventCallback.next(num);
   }
 }

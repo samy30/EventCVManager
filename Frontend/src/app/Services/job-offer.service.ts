@@ -6,15 +6,15 @@ import { map, catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/offers';
+const apiUrl = 'http://localhost:8080/api/jobOffer';
 @Injectable({
   providedIn: 'root'
 })
 
 export class JobOfferService {
 
-  constructor(private http:HttpClient) { }
-  
+  constructor(private http: HttpClient) { }
+
   offers = [
     { id: 1, entreprise:{'id':1,'name':'INSAT'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
     { id: 2,entreprise:{'id':1,'name':'Headit'},poste:'Graphic Designer',addresse:'tunis',description:'description' },
@@ -23,11 +23,13 @@ export class JobOfferService {
     { id: 1,entreprise:{'id':1,'name':'GOOGLE'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
   ];
   // search offers based on selected postes
-  getOffers(postes):Observable<any[]>{
-      return of(this.offers);
+  getOffers(id: string): Observable<any> {
+    const url = `${apiUrl}/jobs/${id}`;
+    return this.http.get(url, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 
-   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
