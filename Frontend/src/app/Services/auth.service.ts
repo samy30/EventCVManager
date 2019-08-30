@@ -23,9 +23,9 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
-    // return this.http.post<User>(`${this.authUrl}/auth/register`, user);
+     return this.http.post<User>(`${this.authUrl}/auth/register`, user);
     // return fake token to be able to connect
-    return of({token: 'michoumicha'});
+   // return of({token: 'michoumicha'});
   }
   registerEnterprise(user): Observable<any> {
     const enterprise = {
