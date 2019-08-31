@@ -69,15 +69,15 @@
     <p-messages [(value)]="msgs"></p-messages>
       <div class="container-fluid">
           <div class="card text-center">
-          
-              
+
+
                   <div class="row">
                       <div class="card card-user">
-                          
+
                           <div class="image">
                               <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
                           </div>
-                         
+
                           <div class="content" *ngIf="user">
                               <div class="author">
                                       <img  style=" object-fit: cover;" class="avatar border-gray" src="{{user.image}}" alt="..."/>
@@ -91,7 +91,7 @@
                           <hr>
                       </div>
                          <p-progressBar *ngIf="Uploading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
-        
+
                        <div *ngIf="Uploaded" class="card card-user">
                          <h5 >Choissiez une nouvelle image</h5>
                          <p-fileUpload  accept="image/*" customUpload="true" (uploadHandler)="changeListener($event)"></p-fileUpload>
@@ -99,7 +99,7 @@
                   </div>
             <div class="row">
               <div class="col-md-12">
-                  
+
                       <div class="content">
                           <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
                               <div class="row">
@@ -118,7 +118,7 @@
                                        </div>
                                   </div>
                                   <div class="col-md-6 pull-right">
-    
+
                                         <div class="row">
                                             <div class="form-group">
                                                 <label>Adresse</label>
@@ -139,15 +139,15 @@
                                         </div>
                                   </div>
                               </div>
-  
+
                               <div class="row">
                                   <div class="col-md-6">
                                       <hr>
                                       <div class="row">
-                                          <label>Logiciels</label>   
-                                          <div class="col-md-6"> 
-                                                 
-                                              <button type="button" class="btn btn-primary small" (click)="addLogicielClick()">  
+                                          <label>Logiciels</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addLogicielClick()">
                                                   +
                                               </button>
                                               <div formArrayName="softwares" >
@@ -155,23 +155,23 @@
                                                       <div [formGroupName]="i">
                                                                 <input formControlName="name" class="form-control" placeholder="software" >
                                                                 <input formControlName="level" class="form-control" type="number" placeholder="level" >
-                                                            
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteLogicielClick(i)">  
+
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteLogicielClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                       <hr>
                                       <div class="row">
-                                          <label>Langues</label> 
-                                          <div class="col-md-6"> 
-                                                  
-                                              <button type="button" class="btn btn-primary small" (click)="addLangueClick()">  
+                                          <label>Langues</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addLangueClick()">
                                                   +
                                               </button>
                                               <div formArrayName="languages" >
@@ -179,23 +179,23 @@
                                                       <div [formGroupName]="i">
                                                                 <input formControlName="name" class="form-control" placeholder="language" >
                                                                 <input formControlName="level" class="form-control"  type="number" placeholder="level" >
-                                                            
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteLangueClick(i)">  
+
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteLangueClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                       <hr>
                                       <div class="row">
-                                          <label>Interets</label> 
-                                          <div class="col-md-6"> 
-                                                  
-                                              <button type="button" class="btn btn-primary small" (click)="addInteretClick()">  
+                                          <label>Interets</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addInteretClick()">
                                                   +
                                               </button>
                                               <div formArrayName="interests" >
@@ -203,24 +203,24 @@
                                                       <div [formGroupName]="i">
                                                                 <input formControlName="name"  class="form-control" placeholder="interest" >
                                                                 <input formControlName="description" class="form-control" placeholder="description">
-                                                            
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteInteretClick(i)">  
+
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteInteretClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                   </div>
                                   <div class="col-md-6 pull-right">
                                       <div class="row">
-                                          <label>Experiences</label> 
-                                          <div class="col-md-6"> 
-                                                  
-                                              <button type="button" class="btn btn-primary small" (click)="addExperienceClick()">  
+                                          <label>Experiences</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addExperienceClick()">
                                                   +
                                               </button>
                                               <div formArrayName="professionalExperiences" >
@@ -230,24 +230,24 @@
                                                                 <input formControlName="post" class="form-control" placeholder="post" >
                                                                 <input formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
                                                                 <input formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
-                                                                
-                                                            
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteExperienceClick(i)">  
+
+
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteExperienceClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                       <hr>
                                       <div class="row">
-                                          <label>Formations</label> 
-                                          <div class="col-md-6"> 
-                                                  
-                                              <button type="button" class="btn btn-primary small" (click)="addFormationClick()">  
+                                          <label>Formations</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addFormationClick()">
                                                   +
                                               </button>
                                               <div formArrayName="studies" >
@@ -257,52 +257,51 @@
                                                                 <input formControlName="institution" class="form-control" placeholder="institution" >
                                                                 <input formControlName="mention" class="form-control" placeholder="mention" >
                                                                 <input type="date" class="form-control" formControlName="date" placeholder="date" >
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteFormationClick(i)">  
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteFormationClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                       <hr>
                                       <div class="row">
-                                          <label>socialMedias</label> 
-                                          <div class="col-md-6"> 
-                                                  
-                                              <button type="button" class="btn btn-primary small" (click)="addSocialMediaClick()">  
+                                          <label>socialMedias</label>
+                                          <div class="col-md-6">
+
+                                              <button type="button" class="btn btn-primary small" (click)="addSocialMediaClick()">
                                                   +
                                               </button>
                                               <div formArrayName="socialMedias" >
                                                   <div  *ngFor="let socialMedia  of CVForm.get('socialMedias').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                 <input formControlName="type" class="form-control" placeholder="type" >
-                                                                <input formControlName="path"  class="form-control" placeholder="path" >                         
-                                                                <button type="button" class="btn btn-primary small" (click)="deleteSocialMediaClick(i)">  
+                                                                <input formControlName="path"  class="form-control" placeholder="path" >
+                                                                <button type="button" class="btn btn-primary small" (click)="deleteSocialMediaClick(i)">
                                                                     del
-                                                                </button> 
-                                                            
+                                                                </button>
+
                                                       </div>
-                                                      
+
                                                     </div>
                                               </div>
-                                          </div>                             
+                                          </div>
                                       </div>
                                   </div>
-                              </div> 
-                              <hr>                                                                          
-                              <button type="submit" class="btn btn-info btn-fill pull-center" [disabled]="!CVForm.valid">Envoyer CV</button>
+                              </div>
+                              <hr>
+                              <button type="submit" class="btn btn-info btn-fill pull-center" >Envoyer CV</button>
                               <div class="clearfix"></div>
                           </form>
                       </div>
-                  
+
               </div>
-              
+
           </div>
         </div>
       </div>
   </div>
 
-  

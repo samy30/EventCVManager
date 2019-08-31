@@ -31,7 +31,7 @@ public class CV extends UserDateAudit {
     @NotBlank
     private String email;
 
-    @NotBlank
+    @Column(columnDefinition="LONGTEXT")
     private String photo;
 
     @JsonManagedReference

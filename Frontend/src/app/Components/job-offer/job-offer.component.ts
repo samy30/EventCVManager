@@ -7,7 +7,7 @@ import { CVService } from 'src/app/Services/cv.service';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import {JobsService} from '../../Services/jobs.service';
 import { AuthService } from 'src/app/Services/auth.service';
-import { Subscription, Observable,interval,timer} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class JobOfferComponent implements OnInit {
               public dialog: MatDialog,
               private cvService: CVService,
               private jobDemandeService: JobDemandeService,
-              private authService:AuthService) {
+              private authService: AuthService) {
 
    }
   jobOffers: any[] = [];
@@ -30,13 +30,13 @@ export class JobOfferComponent implements OnInit {
   createdCV: any;
   jobDemande: any;
   currentUser;
-  sub:Subscription;
+  sub: Subscription;
   ngOnInit() {
      this.loadSelectedPost();
      this.loadLoggedUser();
  
   }
-    
+
      loadSelectedPost(){
       this.jobsService.eventCallback$.subscribe(postes => {
         console.log('postes here');
@@ -57,7 +57,7 @@ export class JobOfferComponent implements OnInit {
                 this.currentUser=user;
              })
      }
-    
+
   //
   getJob(offer) {
     const dialogRef = this.dialog.open(InsertCVComponent, {
@@ -67,7 +67,7 @@ export class JobOfferComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createdCV =result;
+      this.createdCV = result;
       console.log('The dialog was closed');
       console.log(result);
       // save created CV in database
@@ -75,7 +75,7 @@ export class JobOfferComponent implements OnInit {
            this.createdCV = cv;
            console.log('cvCreated');
            // create Job-demande
-           console.log("offre selected");
+           console.log('offre selected');
            console.log(offer);
            this.jobDemande = {
                  cv: this.createdCV.id,
