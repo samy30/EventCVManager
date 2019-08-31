@@ -2,6 +2,7 @@ import { Component, OnInit ,Inject} from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import {CVService} from '../../Services/cv.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import _ from "lodash"
 @Component({
   selector: 'app-insert-cv',
   templateUrl: './insert-cv.component.html',
@@ -19,9 +20,10 @@ export class InsertCVComponent implements OnInit {
   softwares:FormArray;
   languages:FormArray;
   interests:FormArray;
-  experience_professionnelle:FormArray;
+  professionalExperiences:FormArray;
   studies:FormArray;
-  image ;
+  socialMedias:FormArray;
+  image;
   constructor(
     private cvService: CVService,
     private formBuilder: FormBuilder,
@@ -35,16 +37,16 @@ export class InsertCVComponent implements OnInit {
   ngOnInit() {
     this.CVForm = this.formBuilder.group({  
       firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],  
-      lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]], 
-      poste: ['', [Validators.required]],   
-      adress: ['', [Validators.required]], 
+      lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],  
+      address: ['', [Validators.required]], 
       phone: ['', [Validators.required]], 
-      email: ['', [Validators.required]], 
+      email: ['', [Validators.required,Validators.email]], 
       softwares:this.formBuilder.array([ this.createLogiciel()]),
       languages:this.formBuilder.array([ this.createLangue()]),
       interests:this.formBuilder.array([ this.createInteret()]),
-      experience_professionnelle:this.formBuilder.array([ this.createExperience()]),
+      professionalExperiences:this.formBuilder.array([ this.createExperience()]),
       studies:this.formBuilder.array([ this.createFormation()]),
+      socialMedias:this.formBuilder.array([ this.createSocialMedia()]),
     });
    // this.fetchData();
   }
@@ -52,6 +54,7 @@ export class InsertCVComponent implements OnInit {
  createLogiciel():FormGroup{  
     return this.formBuilder.group({  
       name: ['', Validators.required],  
+      level: ['', Validators.required],
     });  
   }  
  
@@ -65,9 +68,27 @@ export class InsertCVComponent implements OnInit {
     this.softwares.removeAt(i);
   }
 
+  createSocialMedia():FormGroup{  
+    return this.formBuilder.group({  
+      type: ['', Validators.required],  
+      path: ['', Validators.required],  
+    });  
+  }  
+ 
+  addSocialMediaClick(): void {  
+    this.socialMedias=this.CVForm.get('socialMedias') as FormArray;
+    this.socialMedias.push(this.createLogiciel());
+  }  
+
+  deleteSocialMediaClick(i){
+    console.log(i);
+    this.socialMedias.removeAt(i);
+  }
+
   createLangue():FormGroup{  
     return this.formBuilder.group({  
       name: ['', Validators.required],  
+      level: ['', Validators.required],  
     });  
   }  
  
@@ -84,6 +105,7 @@ export class InsertCVComponent implements OnInit {
   createInteret():FormGroup{  
     return this.formBuilder.group({  
       name: ['', Validators.required],  
+      description: [''], 
     });  
   }  
  
@@ -99,30 +121,30 @@ export class InsertCVComponent implements OnInit {
   
   createExperience():FormGroup{  
     return this.formBuilder.group({  
-      entreprise: ['', Validators.required],  
-      poste:['', Validators.required],
-      starting_date:['',Validators.required],
-      finishing_date:['',Validators.required]
+      enterprise: ['', Validators.required],  
+      post:['', Validators.required],
+      startingDate:['',Validators.required],
+      finishingDate:['',Validators.required]
     });  
   }  
  
   addExperienceClick(): void {  
-    this.experience_professionnelle=this.CVForm.get('experience_professionnelle') as FormArray;
-    this.experience_professionnelle.push(this.createExperience());
+    this.professionalExperiences=this.CVForm.get('professionalExperiences') as FormArray;
+    this.professionalExperiences.push(this.createExperience());
   }  
 
   deleteExperienceClick(i){
     console.log(i);
     if(i==null)i=0;
-    this.experience_professionnelle.removeAt(i);
+    this.professionalExperiences.removeAt(i);
   }
 
   createFormation():FormGroup{  
     return this.formBuilder.group({  
-      diplome: ['', Validators.required], 
-      university :['', Validators.required], 
-      pays:['', Validators.required], 
-      date:['', Validators.required],
+      name: ['', Validators.required], 
+      institution :['', Validators.required], 
+      date:['', Validators.required], 
+      mention:['', Validators.required],
     });  
   }  
  
@@ -142,8 +164,10 @@ export class InsertCVComponent implements OnInit {
       this.fetchData()
     });*/
     console.log("voila");
-    console.log(this.CVForm.value);
-    this.dialogRef.close(this.CVForm.value);
+   
+    var resultCV=_.merge(this.CVForm.value,{photo:this.image});
+    console.log(resultCV);
+    this.dialogRef.close(resultCV);
   }
 
   fetchData() {

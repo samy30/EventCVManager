@@ -49,7 +49,7 @@ export class JobOfferComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createdCV = result;
+      this.createdCV =result;
       console.log('The dialog was closed');
       console.log(result);
       // save created CV in database
@@ -58,7 +58,7 @@ export class JobOfferComponent implements OnInit {
            console.log('cvCreated');
            // create Job-demande
            this.jobDemande = {
-                 id: 0,
+                 
                  cv: this.createdCV,
                  entreprise: offer.entreprise,
                  sender: this.currentUser

@@ -46,6 +46,7 @@ import { NotificationDetailComponent } from './Components/notification-detail/no
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 import {UserService} from "./Services/user.service";
+import { AdministrationComponent } from './Components/administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {UserService} from "./Services/user.service";
     JobDemandeComponent,
     NotificationDetailComponent,
     JobDemandeDetailComponent,
-    OfferCreationComponent
+    OfferCreationComponent,
+    AdministrationComponent
   ],
   imports: [
     BrowserModule,
