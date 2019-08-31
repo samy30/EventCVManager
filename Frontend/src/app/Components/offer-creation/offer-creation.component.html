@@ -10,13 +10,17 @@
                       <div class="content">
                           <form [formGroup]="offerFormGroup">
                              
-  
-                                  <div class="row">
-  
+                                 
+                                  <div class="row">  
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>nom_poste</label>
-                                            <input formControlName="nom_poste" type="text" class="form-control" placeholder="nom_poste">
+                                       <div class="form-group">
+                                        <mat-label>Job Name</mat-label>
+                                        <hr>
+                                        <mat-select formControlName="nom_poste" placeholder="Select poste">  
+                                                <mat-option *ngFor="let job of jobs" [value]="job.id">
+                                                        {{ job.name }}
+                                                      </mat-option>
+                                        </mat-select> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">

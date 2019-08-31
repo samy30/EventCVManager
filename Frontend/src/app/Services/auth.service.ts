@@ -35,7 +35,7 @@ export class AuthService {
       name: user.name,
       description: user.description,
       activity: user.activity,
-      role: 'ROLE_ENTERPRISE'
+      role: 'ROLE_ENTREPRISE'
     };
     console.log(enterprise);
     return this.http.post<User>(`${this.authUrl}/auth/signup`, enterprise);
@@ -71,7 +71,10 @@ export class AuthService {
      localStorage.setItem('token', token);
   }
 
-
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>(`${this.authUrl}/user/me`);
+  }
+  
 
 
 /*
