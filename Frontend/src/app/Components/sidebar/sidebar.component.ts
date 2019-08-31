@@ -17,16 +17,30 @@ export class SidebarComponent implements OnInit {
      private router:Router
     ) { }
 
+    loggedUser;
+
   ngOnInit() {
 
     console.log("sidebar");
     console.log(this.authService.loggedIn());
+    this.loadLoggedUser();
 
   }
+    
+  loadLoggedUser(){
+    this.authService.getCurrentUser()
+      .subscribe(user=>{
+        console.log("current");
+        console.log(user);
+        this.loggedUser=user;
+     });
+  }
+
    logout(){
      console.log("logout");
       this.authService.logout();
       this.router.navigate(["/Login"]);
+      this.loggedUser={};
       console.log(this.authService.loggedIn());
    }
 }
