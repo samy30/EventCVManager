@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> findByCreatedBy(Long userId);
-    List<JobOffer> findByName(Job name);
+    List<JobOffer> findByJob(Job job);
     long countByCreatedBy(Long userId);
 }

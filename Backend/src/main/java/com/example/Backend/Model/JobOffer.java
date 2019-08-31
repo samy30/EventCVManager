@@ -14,9 +14,9 @@ public class JobOffer extends UserDateAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "job_id")
+    @JoinColumn(name = "job_id", nullable = false)
     @OneToOne(cascade = CascadeType.MERGE)
-    private Job name;
+    private Job job;
 
     private String[] skills;
 
@@ -30,7 +30,7 @@ public class JobOffer extends UserDateAudit {
 
 
 //    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "needed_job__id", nullable = false)
+//    @JoinColumn(job = "needed_job__id", nullable = false)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
 //    @JsonBackReference
 //    private NeededJob neededJob;
@@ -44,12 +44,12 @@ public class JobOffer extends UserDateAudit {
         this.id = id;
     }
 
-    public Job getName() {
-        return name;
+    public Job getJob() {
+        return job;
     }
 
-    public void setName(Job name) {
-        this.name = name;
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     public String[] getSkills() {

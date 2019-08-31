@@ -71,7 +71,7 @@ public class JobOfferController {
 
         Job job = jobRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
-        List<JobOffer> jobOffers = jobOfferRepository.findByName(job);
+        List<JobOffer> jobOffers = jobOfferRepository.findByJob(job);
         return jobOffers ;
     }
 }
