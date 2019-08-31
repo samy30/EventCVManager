@@ -14,9 +14,9 @@ export class JobDemandeComponent implements OnInit {
               private route:ActivatedRoute) { }
   jobDemandes:any[]=[];
   ngOnInit() {
-    this.loadJobDemandes();
+
   }
-   //load jobDemandes seded to me
+   //load jobDemandes sended to me
   loadJobDemandes(){
       this.jobDemandeService.getJobDemandes()
          .subscribe(jobDemandes=>{

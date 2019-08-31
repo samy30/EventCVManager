@@ -7,7 +7,6 @@ import { CVService } from 'src/app/Services/cv.service';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import {JobsService} from '../../Services/jobs.service';
 import { AuthService } from 'src/app/Services/auth.service';
-import 'rxjs/add/observable/interval';
 import { Subscription, Observable,interval,timer} from 'rxjs';
 
 
@@ -35,8 +34,7 @@ export class JobOfferComponent implements OnInit {
   ngOnInit() {
      this.loadSelectedPost();
      this.loadLoggedUser();
-   /*  this.sub=Observable.timer(0,1000)
-    .subscribe((val) => { console.log('called'); });*/
+ 
   }
     
      loadSelectedPost(){
@@ -80,9 +78,9 @@ export class JobOfferComponent implements OnInit {
            console.log("offre selected");
            console.log(offer);
            this.jobDemande = {
-                 cv: this.createdCV,
-                 offer: offer,
-                 sender: this.currentUser
+                 cv: this.createdCV.id,
+                 JobOffer: offer.id,
+                 status:"pending"
             };
             console.log('job demande');
             console.log(this.jobDemande);
