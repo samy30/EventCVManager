@@ -6,6 +6,9 @@ import { InsertCVComponent } from 'src/app/Pages/insert-cv/insert-cv.component';
 import { CVService } from 'src/app/Services/cv.service';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import {JobsService} from '../../Services/jobs.service';
+import { AuthService } from 'src/app/Services/auth.service';
+import { Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-job-offer',
@@ -18,7 +21,8 @@ export class JobOfferComponent implements OnInit {
               private jobsService: JobsService,
               public dialog: MatDialog,
               private cvService: CVService,
-              private jobDemandeService: JobDemandeService) {
+              private jobDemandeService: JobDemandeService,
+              private authService: AuthService) {
 
    }
   jobOffers: any[] = [];
@@ -26,20 +30,35 @@ export class JobOfferComponent implements OnInit {
   createdCV: any;
   jobDemande: any;
   currentUser;
-
+  sub: Subscription;
   ngOnInit() {
-    this.jobsService.eventCallback$.subscribe(postes => {
-      console.log('postes here');
-      this.selectedJob = postes; // 2
-      // get offers based on selectedPostes
-      this.jobOfferService.getOffers(this.selectedJob).subscribe(offers => {
-            // list of jobOffers
-             this.jobOffers = offers;
-             console.log('offers');
-             console.log(offers);
-           });
-    });
+     this.loadSelectedPost();
+     this.loadLoggedUser();
+   /*  this.sub=Observable.timer(0,1000)
+    .subscribe((val) => { console.log('called'); });*/
   }
+
+     loadSelectedPost(){
+      this.jobsService.eventCallback$.subscribe(postes => {
+        console.log('postes here');
+        this.selectedJob = postes; // 2
+        // get offers based on selectedPostes
+        this.jobOfferService.getOffers(this.selectedJob).subscribe(offers => {
+              // list of jobOffers
+               this.jobOffers = offers;
+               console.log('offers');
+               console.log(offers);
+             });
+      });
+     }
+
+     loadLoggedUser(){
+          this.authService.getCurrentUser()
+             .subscribe(user=>{
+                this.currentUser=user;
+             })
+     }
+
   //
   getJob(offer) {
     const dialogRef = this.dialog.open(InsertCVComponent, {
@@ -49,7 +68,7 @@ export class JobOfferComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createdCV =result;
+      this.createdCV = result;
       console.log('The dialog was closed');
       console.log(result);
       // save created CV in database
@@ -57,12 +76,15 @@ export class JobOfferComponent implements OnInit {
            this.createdCV = cv;
            console.log('cvCreated');
            // create Job-demande
+           console.log('offre selected');
+           console.log(offer);
            this.jobDemande = {
-                 
                  cv: this.createdCV,
-                 entreprise: offer.entreprise,
+                 offer: offer,
                  sender: this.currentUser
             };
+            console.log('job demande');
+            console.log(this.jobDemande);
             // post job-demande
            this.jobDemandeService.postJobDemande(this.jobDemande)
                  .subscribe(demande => {
