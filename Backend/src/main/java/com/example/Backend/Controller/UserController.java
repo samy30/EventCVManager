@@ -70,7 +70,7 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-   /* @GetMapping("/users/{username}")
+    @GetMapping("/users/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
@@ -81,20 +81,8 @@ public class UserController {
         UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt());
 
         return userProfile;
-    }*/
-    
-    @GetMapping("/users/{id}")
-   // @PreAuthorize("hasRole('ADMIN')")
-    public UserProfile getUserProfile(@PathVariable(value = "id") Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
-
-        long cvCount = cvRepository.countByCreatedBy(user.getId());
-
-        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt());
-
-        return userProfile;
     }
+      
 
     @GetMapping("/enterprises/{username}")
     @PreAuthorize("hasRole('ADMIN')")
