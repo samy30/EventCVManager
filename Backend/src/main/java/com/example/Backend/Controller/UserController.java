@@ -2,6 +2,7 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.CV;
+import com.example.Backend.Model.JobDemande;
 import com.example.Backend.Model.JobOffer;
 import com.example.Backend.Model.User;
 import com.example.Backend.Payload.*;
@@ -129,6 +130,7 @@ public class UserController {
         return jobOffers ;
     }
 
+  
 
 //    @GetMapping("/users/{username}/votes")
 //    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,

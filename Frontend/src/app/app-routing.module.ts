@@ -15,6 +15,7 @@ import { JobDemandeComponent } from './Components/job-demande/job-demande.compon
 import { NotificationDetailComponent } from './Components/notification-detail/notification-detail.component';
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
+import { AdministrationComponent } from './Components/administration/administration.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard]},
   {path:'Login',component: LoginComponent},
   {path:'OfferCreation',component: OfferCreationComponent},
+  {path:'Administration',component: AdministrationComponent},
   {path:'Notification',
        component: NotificationComponent,
        children:[

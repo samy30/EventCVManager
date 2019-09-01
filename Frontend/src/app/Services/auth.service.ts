@@ -35,7 +35,7 @@ export class AuthService {
       name: user.name,
       description: user.description,
       activity: user.activity,
-      role: 'ROLE_ENTREPRISE'
+      role: 'ROLE_ENTERPRISE'
     };
     console.log(enterprise);
     return this.http.post<User>(`${this.authUrl}/auth/signup`, enterprise);
@@ -76,7 +76,7 @@ export class AuthService {
   }
   
   getUser(id): Observable<User>{
-    return this.http.get<User>(`${this.authUrl}/users/${id}`);
+    return this.http.get<User>(`${this.authUrl}/user/${id}`);
   }
 
 /*
