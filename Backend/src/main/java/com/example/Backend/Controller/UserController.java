@@ -2,10 +2,12 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.CV;
+import com.example.Backend.Model.JobDemande;
 import com.example.Backend.Model.JobOffer;
 import com.example.Backend.Model.User;
 import com.example.Backend.Payload.*;
 import com.example.Backend.Repository.CVRepository;
+import com.example.Backend.Repository.JobDemandeRepository;
 import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.UserRepository;
 import com.example.Backend.Security.CurrentUser;
@@ -36,6 +38,9 @@ public class UserController {
 
     @Autowired
     private JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    private JobDemandeRepository jobDemandeRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -124,6 +129,26 @@ public class UserController {
 
         List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
         return jobOffers ;
+    }
+
+    @GetMapping("/enterprises/{username}/jobDemandes")
+    public List<JobDemande> getJobDemandesForEnterprise(@PathVariable(value = "username") String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
+
+
+        List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
+        return jobDemandes ;
+    }
+
+    @GetMapping("/users/{username}/jobDemandes")
+    public List<JobDemande> getJobDemandesForUser(@PathVariable(value = "username") String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
+
+
+        List<JobDemande> jobDemandes = jobDemandeRepository.findBySender(user);
+        return jobDemandes ;
     }
 
 
