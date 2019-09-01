@@ -23,6 +23,7 @@ export class JobOfferComponent implements OnInit {
               private cvService: CVService,
               private jobDemandeService: JobDemandeService,
               private authService: AuthService) {
+                this.loadSelectedPost();
 
    }
   jobOffers: any[] = [];
@@ -32,7 +33,7 @@ export class JobOfferComponent implements OnInit {
   currentUser;
   sub: Subscription;
   ngOnInit() {
-     this.loadSelectedPost();
+   // this.loadSelectedPost();
      this.loadLoggedUser();
  
   }
@@ -78,8 +79,8 @@ export class JobOfferComponent implements OnInit {
            console.log('offre selected');
            console.log(offer);
            this.jobDemande = {
-                 cv: this.createdCV.id,
-                 JobOffer: offer.id,
+                 cv: {id:this.createdCV.id},
+                 jobOffer: {id:offer.id},
                  status:"pending"
             };
             console.log('job demande');
