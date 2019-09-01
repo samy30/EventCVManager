@@ -87,6 +87,7 @@ public class UserController {
 
         return userProfile;
     }
+      
 
     @GetMapping("/enterprises/{username}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -97,6 +98,8 @@ public class UserController {
         EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt());
         return enterpriseProfile;
     }
+    
+   
 
     @GetMapping("/users/{username}/cvs")
     public List<CV> getCVsCreatedBy(@PathVariable(value = "username") String username,

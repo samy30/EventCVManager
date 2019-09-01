@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-job-demande-detail',
@@ -10,10 +11,11 @@ import { NotificationService } from 'src/app/Services/notification.service';
 export class JobDemandeDetailComponent implements OnInit {
 
   constructor(private jobDemandeService:JobDemandeService,
-              private notificationService:NotificationService) { }
+              private notificationService:NotificationService,
+              private authService:AuthService) { }
 
   jobDemande;
-  
+  sender;
   ngOnInit() {
     this.loadJobDetail();
   }
@@ -22,6 +24,14 @@ export class JobDemandeDetailComponent implements OnInit {
       this.jobDemandeService.eventCallback$
          .subscribe(jobDemande=>{
              this.jobDemande=jobDemande;
+             this.getSender(jobDemande);
+         })
+  }
+
+  getSender(jobDemande){
+     this.authService.getUser(jobDemande.createdBy)
+         .subscribe(user=>{
+             this.sender=user;
          })
   }
 

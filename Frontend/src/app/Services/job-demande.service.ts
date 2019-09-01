@@ -6,7 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/demandes';
+const apiUrl = 'http://localhost:8080/api/jobDemande';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,10 +52,10 @@ export class JobDemandeService {
    }
  // get job demandes sended to current entrep
    getJobDemandes(): Observable<any> {
-    /*return this.http.get(apiUrl, httpOptions).pipe(
+    return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
-      catchError(this.handleError));*/
-      return of(this.jobDemandes);
+      catchError(this.handleError));
+     // return of(this.jobDemandes);
   }
   getJobDemande(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
