@@ -1,15 +1,9 @@
 package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
-import com.example.Backend.Model.CV;
-import com.example.Backend.Model.JobDemande;
-import com.example.Backend.Model.JobOffer;
-import com.example.Backend.Model.User;
+import com.example.Backend.Model.*;
 import com.example.Backend.Payload.*;
-import com.example.Backend.Repository.CVRepository;
-import com.example.Backend.Repository.JobDemandeRepository;
-import com.example.Backend.Repository.JobOfferRepository;
-import com.example.Backend.Repository.UserRepository;
+import com.example.Backend.Repository.*;
 import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.UserPrincipal;
 import com.example.Backend.Util.AppConstants;
@@ -23,8 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -42,6 +35,9 @@ public class UserController {
     @Autowired
     private JobDemandeRepository jobDemandeRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/user/me")
@@ -54,6 +50,27 @@ public class UserController {
     public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
         EnterpriseSummary enterpriseSummary = new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail());
         return enterpriseSummary;
+    }
+
+    @GetMapping("/user")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/user/users")
+    public List<User> getAllNormalUsers() {
+        Optional<Role> role = roleRepository.findByName(RoleName.ROLE_USER);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role.get());
+        return userRepository.findByRoles(roles);
+    }
+
+    @GetMapping("/user/enterprises")
+    public List<User> getAllEnterprises() {
+        Optional<Role> role = roleRepository.findByName(RoleName.ROLE_ENTERPRISE);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role.get());
+        return userRepository.findByRoles(roles);
     }
 
     // Get a Single User
@@ -134,6 +151,17 @@ public class UserController {
         return jobOffers ;
     }
 
+    @GetMapping("/enterprises/me/jobDemandes")
+    @PreAuthorize("hasRole('ENTERPRISE')")
+    public List<JobDemande> getJobDemandesForCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        User user = userRepository.findByUsername(currentUser.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+
+
+        List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
+        return jobDemandes ;
+    }
+
     @GetMapping("/enterprises/{username}/jobDemandes")
     public List<JobDemande> getJobDemandesForEnterprise(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
@@ -153,6 +181,30 @@ public class UserController {
         List<JobDemande> jobDemandes = jobDemandeRepository.findBySender(user);
         return jobDemandes ;
     }
+
+    @GetMapping("/users/me/jobDemandes/notifications")
+    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {
+        User user = userRepository.findByUsername(currentUser.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+
+
+        List<JobDemande> jobDemandes1 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"accepted",false);
+        List<JobDemande> jobDemandes2 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"refused",false);
+        jobDemandes1.addAll(jobDemandes2);
+        return jobDemandes1 ;
+    }
+
+    @GetMapping("/enterprises/me/jobDemandes/notifications")
+    public List<JobDemande> getJobDemandesForEnterpriseForNotification(@CurrentUser UserPrincipal currentUser) {
+        User user = userRepository.findByUsername(currentUser.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+
+
+        List<JobDemande> jobDemandes = jobDemandeRepository.findBySeenByEnterpriseAndEnterprise(false, user);
+        return jobDemandes ;
+    }
+
+
 
 
 //    @GetMapping("/users/{username}/votes")

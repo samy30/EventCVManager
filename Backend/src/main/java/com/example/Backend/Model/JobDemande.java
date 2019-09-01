@@ -33,7 +33,9 @@ public class JobDemande extends UserDateAudit {
     @NotBlank
     private String status;
 
+    @NotBlank
     private boolean seenByEnterprise;
+    @NotBlank
     private boolean seenByUser;
 
 
