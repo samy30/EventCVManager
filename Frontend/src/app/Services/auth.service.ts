@@ -74,8 +74,8 @@ export class AuthService {
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/user/me`);
   }
-  
-  getUser(id): Observable<User>{
+
+  getUser(id): Observable<User> {
     return this.http.get<User>(`${this.authUrl}/user/${id}`);
   }
 

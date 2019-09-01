@@ -22,9 +22,19 @@ public class JobDemande extends UserDateAudit {
     @JoinColumn(name = "cv_id", nullable = false)
     private CV cv;
 
+    @JoinColumn(name = "enterprise_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    private User enterprise;
+
+    @JoinColumn(name = "sender_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    private User sender;
+
     @NotBlank
     private String status;
 
+    private boolean seenByEnterprise;
+    private boolean seenByUser;
 
 
     public Long getId() {
@@ -57,5 +67,37 @@ public class JobDemande extends UserDateAudit {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isSeenByEnterprise() {
+        return seenByEnterprise;
+    }
+
+    public void setSeenByEnterprise(boolean seenByEnterprise) {
+        this.seenByEnterprise = seenByEnterprise;
+    }
+
+    public boolean isSeenByUser() {
+        return seenByUser;
+    }
+
+    public void setSeenByUser(boolean seenByUser) {
+        this.seenByUser = seenByUser;
+    }
+
+    public User getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(User enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 }
