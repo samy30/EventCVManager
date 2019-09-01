@@ -51,6 +51,13 @@ public class UserController {
         return enterpriseSummary;
     }
 
+    // Get a Single User
+    @GetMapping("/user/{id}")
+    public User getUserById(@PathVariable(value = "id") Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    }
+
     @GetMapping("/user/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
         Boolean isAvailable = !userRepository.existsByUsername(username);
