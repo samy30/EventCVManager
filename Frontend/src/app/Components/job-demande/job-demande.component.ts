@@ -22,9 +22,9 @@ export class JobDemandeComponent implements OnInit {
   }
    //load jobDemandes sended to me
   loadJobDemandes(){
-      this.jobDemandeService.getJobDemandes()
+      this.jobDemandeService.getMyJobDemandes()
          .subscribe(jobDemandes=>{
-             this.jobDemandes=jobDemandes;
+            this.jobDemandes=jobDemandes;
              this.loadSenders(jobDemandes);
              console.log("job demandes");
              console.log(jobDemandes);

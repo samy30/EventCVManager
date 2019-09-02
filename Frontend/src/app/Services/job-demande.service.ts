@@ -50,13 +50,20 @@ export class JobDemandeService {
   emitJobDemande(jobDemande){
       this.eventCallback.next(jobDemande);
    }
- // get job demandes sended to current entrep
+ 
    getJobDemandes(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
      // return of(this.jobDemandes);
   }
+// get job demandes sended to current entrep
+  getMyJobDemandes(): Observable<any>{
+    return this.http.get("http://localhost:8080/api/enterprises/me/jobDemandes", httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
   getJobDemande(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
