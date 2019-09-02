@@ -1,5 +1,5 @@
-import { Component, OnInit ,Inject} from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { Component, OnInit ,Inject, Input} from '@angular/core';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import {CVService} from '../../Services/cv.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import _ from "lodash"
@@ -24,17 +24,13 @@ export class InsertCVComponent implements OnInit {
   studies:FormArray;
   socialMedias:FormArray;
   image;
+  @Input()cv;
   constructor(
     private cvService: CVService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<InsertCVComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-   
-  }
-
-
-  ngOnInit() {
     this.CVForm = this.formBuilder.group({  
       firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],  
       lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],  
@@ -48,9 +44,30 @@ export class InsertCVComponent implements OnInit {
       studies:this.formBuilder.array([ this.createFormation()]),
       socialMedias:this.formBuilder.array([ this.createSocialMedia()]),
     });
-   // this.fetchData();
+  }
+
+
+  ngOnInit() {
+     if(this.cv)this.fillCVForm();
+      
   }
   
+  fillCVForm(){
+       this.CVForm.patchValue({
+        firstName: this.cv.firstName, 
+        lastName: this.cv.lastName,  
+        address:this.cv.address, 
+        phone: this.cv.phone,  
+        email: this.cv.email ,
+        softwares:this.cv.softwares,
+        languages:this.formBuilder.array([ this.createLangue()]),
+        interests:this.formBuilder.array([ this.createInteret()]),
+        professionalExperiences:this.formBuilder.array([ this.createExperience()]),
+        studies:this.formBuilder.array([ this.createFormation()]),
+        socialMedias:this.formBuilder.array([ this.createSocialMedia()]),
+       });
+  }
+
  createLogiciel():FormGroup{  
     return this.formBuilder.group({  
       name: ['', Validators.required],  
@@ -77,7 +94,7 @@ export class InsertCVComponent implements OnInit {
  
   addSocialMediaClick(): void {  
     this.socialMedias=this.CVForm.get('socialMedias') as FormArray;
-    this.socialMedias.push(this.createLogiciel());
+    this.socialMedias.push(this.createSocialMedia());
   }  
 
   deleteSocialMediaClick(i){

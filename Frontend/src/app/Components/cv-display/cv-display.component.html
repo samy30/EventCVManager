@@ -1,0 +1,188 @@
+
+<div class="main-content" >
+    <p-messages [(value)]="msgs"></p-messages>
+      <div class="container-fluid">
+          <div class="card text-center">
+            
+            <div class="row">
+              <div class="col-md-12">
+                    <div classs="card-header">  <h4 class="card-title">User CV</h4> </div>
+                      <div class="content text-center ">
+                          <form [formGroup]="CVForm" >
+                              <hr>
+                              <div class="row text-center">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label>Prenom</label>
+                                              <input readonly formControlName="firstName" type="text" class="form-control" placeholder="firstName">
+                                          </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nom</label>
+                                                    <input readonly formControlName="lastName" type="text" class="form-control" placeholder="lastName">
+                                                </div>
+                                             </div>
+                                            
+                                       </div>
+                                        <hr>
+                                       <div class="row">
+                                            <div class="col-md-6">
+                                                    <div class="form-group">
+                                                            <label>Adresse</label>
+                                                            <input readonly type="text" class="form-control" placeholder="address" formControlName="address">
+                                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                    <div class="form-group">
+                                                            <label >telephone</label>
+                                                            <input readonly type="text" class="form-control" placeholder="telephone" formControlName="phone">
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                           <div class="col-md-12">
+                                                <div class="form-group">
+                                                        <label for="exampleInputEmail1">Adresse Email</label>
+                                                        <input readonly readonlytype="email" class="form-control" placeholder="Email" formControlName="email">
+                                                    </div>
+                                           </div>
+                                        </div>
+                                        <hr>
+                                      <div class="row">
+                                          
+                                          <div class="col-md-12"> 
+                                                <label >Logiciels</label>
+                                              <div formArrayName="softwares" >
+                                                  <div  *ngFor="let software of CVForm.get('softwares').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                               <label>logiciel({{i+1}})</label>
+                                                                <input readonly formControlName="name" class="form-control" placeholder="software" >
+                                                                <input readonly formControlName="level" class="form-control" type="number" placeholder="level" >                                                             
+
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                </div>
+                                      
+                                      <hr>
+                                      <div class="row">
+                                         
+                                          <div class="col-md-12">
+                                                <label>Langues</label>
+                                              <div formArrayName="languages" >
+                                                  <div  *ngFor="let language of CVForm.get('languages').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                                <label>langue({{i+1}})</label>
+                                                                <input readonly formControlName="name" class="form-control" placeholder="language" >
+                                                                <input readonly formControlName="level" class="form-control"  type="number" placeholder="level" >                                                           
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                         
+                                          <div class="col-md-12">
+                                                <label>Interets</label>
+                                              <div formArrayName="interests" >
+                                                  <div  *ngFor="let interest of CVForm.get('interests').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                                <label>interest({{i+1}})</label>
+                                                                <input readonly formControlName="name"  class="form-control" placeholder="interest" >
+                                                                <input readonly formControlName="description" class="form-control" placeholder="description">                                                        
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  
+                                     <hr>
+                                      <div class="row">                              
+                                          <div class="col-md-12">
+                                                <div class="text-center">
+                                                        <label>Experiences</label>
+                                                </div>
+                                              <div formArrayName="professionalExperiences" >
+                                                  <div  *ngFor="let experiences_professionnelle of CVForm.get('professionalExperiences').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                               <label>Experience ({{i+1}})</label>
+                                                                <input readonly formControlName="enterprise" class="form-control" placeholder="Entreprise" >
+                                                                <input readonly formControlName="post" class="form-control" placeholder="post" >
+                                                                <input readonly formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
+                                                                <input readonly formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
+
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                          
+                                          <div class="col-md-12">
+                                                <label>Formations</label>
+                                              <div formArrayName="studies" >
+                                                  <div  *ngFor="let study of CVForm.get('studies').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                               <label>Formation({{i+1}})</label>
+                                                                <input readonly formControlName="name" class="form-control" placeholder="name" >
+                                                                <input readonly formControlName="institution" class="form-control" placeholder="institution" >
+                                                                <input readonly formControlName="mention" class="form-control" placeholder="mention" >
+                                                                <input readonly type="date" class="form-control" formControlName="date" placeholder="date" >                                                      
+
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                         
+                                          <div class="col-md-12">
+                                                <label>socialMedias</label>
+                                              <div formArrayName="socialMedias" >
+                                                  <div  *ngFor="let socialMedia  of CVForm.get('socialMedias').controls; let i = index">
+                                                      <div [formGroupName]="i">
+                                                                <label>socialMedia({{i+1}})</label>
+                                                                <div style="white-space:nowrap">
+                                                                        <label for="type">type:</label>
+                                                                        <input if="type" readonly formControlName="type" class="form-control" placeholder="type" >
+                                                                </div>
+                                                                <div style="white-space:nowrap">
+                                                                        <label for="path">path:</label>
+                                                                        <input readonly formControlName="path"  class="form-control" placeholder="path" >  
+                                                                </div>
+                                                                                                
+                                                      </div>
+
+                                                    </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  
+                              
+                              <hr>
+                              <button type="submit" class="btn btn-info btn-fill pull-left" (click)="Accepter()" >Accepter</button>
+                              <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="Refuser()" >Refuser</button>
+                              <div class="clearfix"></div>
+                          </form>
+                      </div>
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+

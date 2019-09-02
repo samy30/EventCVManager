@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -16,15 +16,18 @@ export class JobDemandeDetailComponent implements OnInit {
 
   jobDemande;
   sender;
+  jobDemandeCV;
   ngOnInit() {
     this.loadJobDetail();
   }
+
 
   loadJobDetail(){
       this.jobDemandeService.eventCallback$
          .subscribe(jobDemande=>{
              this.jobDemande=jobDemande;
              this.getSender(jobDemande);
+             this.jobDemandeCV=jobDemande.cv;
          })
   }
 
@@ -35,14 +38,24 @@ export class JobDemandeDetailComponent implements OnInit {
          })
   }
 
+  getDecision(decision:boolean){
+       if(decision){
+         this.acceptDemande();
+       }
+       else {
+         console.log("demande refusée");
+       }
+  }
+
   acceptDemande(){
     //create notification with sender entreprise receiver demandesender and poste 
     var notification={};
+    console.log("demande acceptée")
     //post it in database
-    this.notificationService.postNotification(notification)
+   /* this.notificationService.postNotification(notification)
        .subscribe(notif=>{
             console.log("notification created");
-       })
+       })*/
   }
 
 }

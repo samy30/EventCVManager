@@ -38,6 +38,9 @@
                       </div>
                     </div>
         </div>
+        <div class="row">
+             <app-cv-display [cv]="jobDemandeCV" (decisionEmitter)="getDecision($event)"></app-cv-display>
+        </div>
     </div>
 </section>
 <!-- details card section starts from here -->

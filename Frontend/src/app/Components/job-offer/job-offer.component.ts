@@ -81,7 +81,8 @@ export class JobOfferComponent implements OnInit {
            this.jobDemande = {
                  cv: {id:this.createdCV.id},
                  jobOffer: {id:offer.id},
-                 status:"pending"
+                 status:"pending",
+
             };
             console.log('job demande');
             console.log(this.jobDemande);

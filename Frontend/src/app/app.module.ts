@@ -7,7 +7,7 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSortModule, MatDialogModule } from '@angular/material';
+import { MatStepperModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSortModule, MatDialogModule, MatDialogRef } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -47,6 +47,7 @@ import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-d
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
+import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AdministrationComponent } from './Components/administration/administrat
     NotificationDetailComponent,
     JobDemandeDetailComponent,
     OfferCreationComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    CvDisplayComponent
   ],
   imports: [
     BrowserModule,
