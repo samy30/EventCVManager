@@ -182,27 +182,27 @@ public class UserController {
         return jobDemandes ;
     }
 
-    @GetMapping("/users/me/jobDemandes/notifications")
-    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+//    @GetMapping("/users/me/jobDemandes/notifications")
+//    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {
+//        User user = userRepository.findByUsername(currentUser.getUsername())
+//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+//
+//
+//        List<JobDemande> jobDemandes1 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"accepted",false);
+//        List<JobDemande> jobDemandes2 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"refused",false);
+//        jobDemandes1.addAll(jobDemandes2);
+//        return jobDemandes1 ;
+//    }
 
-
-        List<JobDemande> jobDemandes1 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"accepted",false);
-        List<JobDemande> jobDemandes2 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"refused",false);
-        jobDemandes1.addAll(jobDemandes2);
-        return jobDemandes1 ;
-    }
-
-    @GetMapping("/enterprises/me/jobDemandes/notifications")
-    public List<JobDemande> getJobDemandesForEnterpriseForNotification(@CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
-
-
-        List<JobDemande> jobDemandes = jobDemandeRepository.findBySeenByEnterpriseAndEnterprise(false, user);
-        return jobDemandes ;
-    }
+//    @GetMapping("/enterprises/me/jobDemandes/notifications")
+//    public List<JobDemande> getJobDemandesForEnterpriseForNotification(@CurrentUser UserPrincipal currentUser) {
+//        User user = userRepository.findByUsername(currentUser.getUsername())
+//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
+//
+//
+//        List<JobDemande> jobDemandes = jobDemandeRepository.findBySeenByEnterpriseAndEnterprise(false, user);
+//        return jobDemandes ;
+//    }
 
 
 

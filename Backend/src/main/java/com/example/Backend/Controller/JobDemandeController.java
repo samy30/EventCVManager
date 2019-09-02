@@ -43,9 +43,8 @@ public class JobDemandeController {
         JobDemande jobDemande = jobDemandeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobDemande", "id", id));
 
-        jobDemande.setCv(jobDemandeDetails.getCv());
-        jobDemande.setJobOffer(jobDemandeDetails.getJobOffer());
-        jobDemande.setStatus(jobDemandeDetails.getStatus());
+        if(jobDemandeDetails.getCv() != null) jobDemande.setCv(jobDemandeDetails.getCv());
+        if(jobDemandeDetails.getStatus() != null) jobDemande.setStatus(jobDemandeDetails.getStatus());
 
         JobDemande updatedJobDemande = jobDemandeRepository.save(jobDemande);
         return updatedJobDemande;
