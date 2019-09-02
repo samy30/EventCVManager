@@ -33,10 +33,7 @@ public class JobDemande extends UserDateAudit {
     @NotBlank
     private String status;
 
-    @NotBlank
-    private boolean seenByEnterprise;
-    @NotBlank
-    private boolean seenByUser;
+    private boolean confirmedByUser;
 
 
     public Long getId() {
@@ -71,22 +68,6 @@ public class JobDemande extends UserDateAudit {
         this.status = status;
     }
 
-    public boolean isSeenByEnterprise() {
-        return seenByEnterprise;
-    }
-
-    public void setSeenByEnterprise(boolean seenByEnterprise) {
-        this.seenByEnterprise = seenByEnterprise;
-    }
-
-    public boolean isSeenByUser() {
-        return seenByUser;
-    }
-
-    public void setSeenByUser(boolean seenByUser) {
-        this.seenByUser = seenByUser;
-    }
-
     public User getEnterprise() {
         return enterprise;
     }
@@ -101,5 +82,13 @@ public class JobDemande extends UserDateAudit {
 
     public void setSender(User sender) {
         this.sender = sender;
+    }
+
+    public boolean isConfirmedByUser() {
+        return confirmedByUser;
+    }
+
+    public void setConfirmedByUser(boolean confirmedByUser) {
+        this.confirmedByUser = confirmedByUser;
     }
 }
