@@ -49,6 +49,12 @@ import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { EnterpriseListingComponent } from './Components/enterprise/enterprise-listing/enterprise-listing.component';
+import { EnterpriseEditionComponent } from './Components/enterprise/enterprise-edition/enterprise-edition.component';
+import { EnterpriseCreationComponent } from './Components/enterprise/enterprise-creation/enterprise-creation.component';
+import { JobOfferListingComponent } from './Components/job-offer-listing/job-offer-listing.component';
+import { StatistiqueComponent } from './Components/statistique/statistique.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -68,9 +74,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     JobDemandeDetailComponent,
     OfferCreationComponent,
     AdministrationComponent,
-    CvDisplayComponent
+    CvDisplayComponent,
+    EnterpriseListingComponent,
+    EnterpriseEditionComponent,
+    EnterpriseCreationComponent,
+    JobOfferListingComponent,
+    StatistiqueComponent
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -105,7 +117,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     ProgressBarModule
 
   ],
-  entryComponents: [InsertCVComponent],
+  entryComponents: [InsertCVComponent,EnterpriseCreationComponent,OfferCreationComponent],
   providers: [
     httpInterceptorProviders,
     {

@@ -14,7 +14,6 @@ export class SignupComponent implements OnInit {
   password: string;
   chosenSignupForm = 0 ;
   signupForm: FormGroup;
-  signupEnterpriseForm: FormGroup;
   isSubmitted  =  false;
 
   ngOnInit() {
@@ -27,14 +26,6 @@ export class SignupComponent implements OnInit {
       gender: ['', Validators.required],
       age: [0, Validators.required]
      });
-    this.signupEnterpriseForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      activity: ['', Validators.required],
-    });
   }
 
   chooseForm(index: number) {
@@ -64,18 +55,6 @@ export class SignupComponent implements OnInit {
         },
       err => {
          console.log('not token');
-      }
-    );
-  }
-  signupEnterprise() {
-    this.isSubmitted = true;
-    this.authService.registerEnterprise(this.signupEnterpriseForm.value).subscribe(
-      res => {
-        console.log('registered');
-        this.router.navigate(['/Profile']);
-      },
-      err => {
-        console.log('not registered');
       }
     );
   }

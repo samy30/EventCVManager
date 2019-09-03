@@ -1,11 +1,12 @@
-<div class="contai">
+<div class="container">
      <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <mat-tab-group>
-                <mat-tab label="Chercheur d'emploi"> hehhh</mat-tab>
-                <mat-tab label="Entreprise"> Entreprise </mat-tab>
-                <mat-tab label="Job Offers">Job Offers </mat-tab>
-                <mat-tab label="Job Demandes">Job Offers </mat-tab>
+                   <mat-tab label="Entreprise"> 
+                      <app-enterprise-listing></app-enterprise-listing>
+                   </mat-tab>
+                <mat-tab label="Job Offers"><app-job-offer-listing></app-job-offer-listing></mat-tab>
+                <mat-tab label="Statistique"> <app-statistique></app-statistique></mat-tab>
               </mat-tab-group>
         </div>
      </div>

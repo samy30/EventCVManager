@@ -1,0 +1,44 @@
+
+<div class="container">
+  
+      <div class="row">
+         <div class="col-md-12">
+             <div class="center">
+                        <mat-tab-group mat-stretch-tabs>
+                                    <mat-tab label="Gender"> 
+                                  <div >
+                                        <canvas baseChart
+                                        [data]="pieChartGenderData"
+                                        [labels]="pieChartGenderLabels"
+                                        [chartType]="pieChartType">
+                                       </canvas>
+                                  </div>
+                                    </mat-tab>
+                                 <mat-tab label="Age"><div style="display: block">
+                                        <canvas baseChart
+                                        [data]="pieChartData"
+                                        [labels]="pieChartLabels"
+                                        [chartType]="pieChartType">
+                                       </canvas></div>
+                                </mat-tab>
+                                 <mat-tab label="Town"> 
+                                     <div style="display: block">
+                                        <canvas baseChart
+                                        [data]="pieChartData"
+                                        [labels]="pieChartLabels"
+                                        [chartType]="pieChartType"></canvas>
+                                  </div></mat-tab>
+                                  <mat-tab label="Job"> 
+                                          <div style="display: block">
+                                             <canvas baseChart
+                                             [data]="pieChartJobLabels"
+                                             [labels]="pieChartLabels"
+                                             [chartType]="pieChartJobData"></canvas>
+                                       </div></mat-tab>
+                               </mat-tab-group>
+             </div>
+         </div>
+      
+      </div>
+ </div>
+   

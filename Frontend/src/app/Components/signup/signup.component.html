@@ -10,17 +10,7 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                      <div class="row" *ngIf="chosenSignupForm === 0">
-                        <br>
-                        <br>
-                        <div class="col-6">
-                          <button type="button" class="btn btn-primary" (click)="chooseForm(1)">Start as a job seeker</button>
-                        </div>
-                        <div class="col-6">
-                          <button type="button" class="btn btn-primary" (click)="chooseForm(2)">Start as an enterprise</button>
-                        </div>
-                      </div>
-                      <div *ngIf="chosenSignupForm === 1">
+                      <div >
                         <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
                           <h3 class="text-center ">SignUp</h3>
                           <div class="form-group">
@@ -69,39 +59,7 @@
                             >
                           </div>
                         </form>
-                      </div>
-                      <div *ngIf="chosenSignupForm === 2">
-                        <form  class="form"  [formGroup]="signupEnterpriseForm" (ngSubmit)="signupEnterprise()">
-                          <h3 class="text-center ">Register Enterprise</h3>
-                          <div class="form-group">
-                            <label for="name" >Enterprise Name:</label><br>
-                            <input type="text" id="name"  formControlName="name" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="username" >UserName:</label><br>
-                            <input type="text" id="username"  formControlName="username" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="email" >Email Address:</label><br>
-                            <input type="email" id="email"  formControlName="email" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="password" >Password:</label><br>
-                            <input type="password" id="password"  formControlName="password" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="description" >Description:</label><br>
-                            <textarea id="description"  formControlName="description" class="form-control" required></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label for="activity" >Activity:</label><br>
-                            <input type="text" id="activity"  formControlName="activity" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                          </div>
-                        </form>
-                      </div>
+                      </div>                
                     </div>
                 </div>
             </div>
