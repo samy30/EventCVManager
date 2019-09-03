@@ -41,8 +41,14 @@ export class LoginComponent implements OnInit {
       res=>{
         console.log("logged in");
         console.log(res);
-           this.authService.setToken(res.accessToken);
+            this.authService.setToken(res.accessToken);
+            this.authService.getCurrentUser()
+                .subscribe(user=>{
+                    this.authService.setCurrentUser(user);
+                })
             this.router.navigate(['/Profil']);
+            //inform sidebar with new authentication
+            this.authService.informUserAuthentication(1);
           },
       err=>{
          console.log("not toekn");

@@ -17,17 +17,26 @@ export class AuthGuard implements CanActivate {
       console.log("guard constructor");
      }
 
-    canActivate():boolean {
-      if (!this.authService.loggedIn())
-        {
-           console.log("redirect Login");
-           this.authService.logout();
-           this.router.navigate(['/Login']);
-            return false;
-        }
-      else {
-       // this.router.navigate(['/Profil']);
-        return true;
-      }
-   }
+    canActivate(next: ActivatedRouteSnapshot,
+              state: RouterStateSnapshot):boolean {
+                  const allowedRoles = next.data.allowedRoles;
+                  let result=this.authService.isAuthorized(allowedRoles);   
+                  if(!this.authService.loggedIn()){
+                    console.log("redirect *********** Login");
+                    this.authService.logout();
+                    this.router.navigate(['/Login']);
+                     return false;
+                  }                  
+                  else if (!result)
+                    {
+                      console.log("redirect *********** Profil");
+                      console.log(this.authService.isAuthorized(allowedRoles))  
+                      this.router.navigate(['/Profil']);
+                      return false;
+                    }
+                  else {               
+                    return true;
+                  }
+                  
+         }
  }

@@ -11,6 +11,7 @@ import {SidebarService} from "../../Services/sidebar.service";
 export class SidebarComponent implements OnInit {
   menus;
   auths = {};
+  role:string;
 
   constructor(private sideBarService: SidebarService,
     private authService:AuthService,
@@ -24,15 +25,30 @@ export class SidebarComponent implements OnInit {
     console.log("sidebar");
     console.log(this.authService.loggedIn());
     this.loadLoggedUser();
+    this.listenToAuthentication();
 
   }
-    
+
+  listenToAuthentication(){
+
+    this.authService.eventCallback$.subscribe(postes => {
+         this.loadLoggedUser();
+     });
+
+  }
+
   loadLoggedUser(){
     this.authService.getCurrentUser()
       .subscribe(user=>{
         console.log("current");
         console.log(user);
         this.loggedUser=user;
+        this.role=this.loggedUser.authorities[0].authority;
+        console.log("role");
+        console.log(this.role);
+     },
+     err=>{
+         console.log("user non authenticated")
      });
   }
 
@@ -41,6 +57,7 @@ export class SidebarComponent implements OnInit {
       this.authService.logout();
       this.router.navigate(["/Login"]);
       this.loggedUser={};
+      this.role='';
       console.log(this.authService.loggedIn());
    }
 }

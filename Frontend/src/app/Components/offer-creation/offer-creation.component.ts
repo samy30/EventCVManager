@@ -16,7 +16,7 @@ export class OfferCreationComponent implements OnInit {
   offer;
   jobs:any[]=[];
   loggedEntreprise;
-  skills:FormArray
+  skills:FormArray;
   constructor(  private formBuilder: FormBuilder,
     private jobOfferService:JobOfferService,
     private jobsService:JobsService,
@@ -77,7 +77,7 @@ export class OfferCreationComponent implements OnInit {
           id:this.loggedEntreprise.id
         },
         town:this.offerFormGroup.get('town').value,
-        skills:this.skills.value.map(s=>s.name)
+        skills:this.offerFormGroup.get('skills').value.map(s=>s.name)
      }
      console.log("offer");
      console.log(this.offer);

@@ -5,6 +5,7 @@ import {CVService} from '../../Services/cv.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import _ from "lodash"
 import { NgForOf } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-cv-display',
   templateUrl: './cv-display.component.html',
@@ -25,12 +26,13 @@ export class CvDisplayComponent implements OnInit {
   professionalExperiences:FormArray;
   studies:FormArray;
   socialMedias:FormArray;
-  image;
+  image:SafeResourceUrl;
   @Input()cv;
   @Output() decisionEmitter = new EventEmitter();
   constructor(
     private cvService: CVService,
     private formBuilder: FormBuilder,
+    private sanitization: DomSanitizer
   ) {
     this.CVForm = this.formBuilder.group({  
       firstName: [''],  
@@ -75,6 +77,7 @@ export class CvDisplayComponent implements OnInit {
        this.patchSocialMedias();
        this. patchProfessionalExperiences();
        this.patchStudies();
+       this.image = this.sanitization.bypassSecurityTrustStyle(this.cv.photo);
   }
 
  patchSoftwares(){

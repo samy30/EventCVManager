@@ -48,6 +48,7 @@ import { OfferCreationComponent } from './Components/offer-creation/offer-creati
 import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
 import User from '../Models/user';
+import { reject ,resolve} from 'q';
 
 
 @Injectable({
@@ -57,6 +60,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
   }
 
   getToken() {
@@ -71,6 +75,17 @@ export class AuthService {
      localStorage.setItem('token', token);
   }
 
+  setCurrentUser(user){// save it in localstorage
+    if(user){
+      localStorage.setItem('currentUser',JSON.stringify(user));
+      JSON.parse(localStorage.getItem('currentUser'));
+    }
+    else{
+      localStorage.setItem('currentUser', null);
+      JSON.parse(localStorage.getItem('currentUser'));
+    }
+  }
+
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/user/me`);
   }
@@ -78,6 +93,31 @@ export class AuthService {
   getUser(id): Observable<User> {
     return this.http.get<User>(`${this.authUrl}/user/${id}`);
   }
+
+  private eventCallback = new Subject<any>();
+  eventCallback$ = this.eventCallback.asObservable();
+
+  informUserAuthentication(flag) {
+    this.eventCallback.next(flag);
+  }
+
+
+  isAuthorized(allowedRoles: string[]): boolean {
+    if (allowedRoles == null || allowedRoles.length === 0) {
+      return true;
+    }
+    var currentUserRoles=[],user;
+    user=JSON.parse(localStorage.getItem('currentUser'));
+    if(user&&user.authorities) currentUserRoles=user.authorities.map(a=>a.authority);
+   // if(currentUserRoles.length===0)return false;
+    return currentUserRoles.every(function (value) {
+      return (allowedRoles.indexOf(value) >= 0);
+    });
+    
+  }
+
+  
+
 
 /*
   getCurrentUser(): Observable<any> {

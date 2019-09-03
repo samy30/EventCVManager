@@ -9,6 +9,12 @@
                     <div classs="card-header">  <h4 class="card-title">User CV</h4> </div>
                       <div class="content text-center ">
                           <form [formGroup]="CVForm" >
+                              <div class="row">  
+                                    <div  *ngIf="image">
+                                            <img  style=" object-fit: cover;" class="avatar border-gray" [src]="image " alt='....' />                                           
+                                    </div>
+                                    
+                              </div>
                               <hr>
                               <div class="row text-center">
                                       <div class="col-md-6">
