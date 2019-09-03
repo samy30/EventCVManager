@@ -81,7 +81,10 @@ export class JobOfferComponent implements OnInit {
            this.jobDemande = {
                  cv: {id:this.createdCV.id},
                  jobOffer: {id:offer.id},
+                 sender:{id:this.currentUser.id},
+                 enterprise:{id:offer.enterprise.id},
                  status:"pending",
+                 confirmedByUser:false
 
             };
             console.log('job demande');

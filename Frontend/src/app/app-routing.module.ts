@@ -19,11 +19,15 @@ import { AdministrationComponent } from './Components/administration/administrat
 
 
 const routes: Routes = [
-  {path:'EmploiTemps',component: CalendrierComponent, canActivate:[AuthGuard]},
-  {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard]},
+  {path:'EmploiTemps',component: CalendrierComponent, canActivate:[AuthGuard],
+                 data: { allowedRoles: ['ROLE_ENTERPRISE'] } },
+  {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard],
+                data: { allowedRoles: ['ROLE_ENTERPRISE','ROLE_USER','ROLE_ADMIN'] }},
   {path:'Login',component: LoginComponent},
-  {path:'OfferCreation',component: OfferCreationComponent},
-  {path:'Administration',component: AdministrationComponent},
+  {path:'OfferCreation',component: OfferCreationComponent,
+                data: { allowedRoles: ['ROLE_ENTERPRISE'] }},
+  {path:'Administration',component: AdministrationComponent,
+                data: { allowedRoles: ['ROLE_ENTERPRISE'] }},
   {path:'Notification',
        component: NotificationComponent,
        children:[
@@ -31,7 +35,8 @@ const routes: Routes = [
             path: 'NotificationDetail',
             component: NotificationDetailComponent
         }],
-        canActivate:[AuthGuard]
+        canActivate:[AuthGuard],
+        data: { allowedRoles: ['ROLE_USER'] }
       },
   {path:'JobDemande',component: JobDemandeComponent,
         children:[
@@ -39,7 +44,8 @@ const routes: Routes = [
             path: 'JobDemandeDetail',
             component: JobDemandeDetailComponent
          }],
-        canActivate:[AuthGuard]
+        canActivate:[AuthGuard],
+        data: { allowedRoles: ['ROLE_ENTERPRISE'] }
    },
   {path:'Signup',component: SignupComponent},
   {     path:'JobSearch',
@@ -49,7 +55,8 @@ const routes: Routes = [
               path: 'joboffer',
               component: JobOfferComponent
           }],
-          canActivate:[AuthGuard]
+          canActivate:[AuthGuard],
+          data: { allowedRoles: ['ROLE_USER'] }
     }
     ,
   
