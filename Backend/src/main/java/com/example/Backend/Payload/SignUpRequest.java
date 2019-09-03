@@ -13,6 +13,7 @@ public class SignUpRequest {
     private String gender;
     private String description;
     private String activity;
+    private String notificationID;
     private long age;
 
     @NotBlank
@@ -116,5 +117,13 @@ public class SignUpRequest {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

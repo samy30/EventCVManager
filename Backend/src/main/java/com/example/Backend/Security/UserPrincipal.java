@@ -23,6 +23,7 @@ public class UserPrincipal implements UserDetails {
     private String description;
     private String activity;
     private String username;
+    private String notificationID;
 
     private String email;
 
@@ -31,7 +32,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String description, String activity, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
@@ -44,6 +45,7 @@ public class UserPrincipal implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.notificationID = notificationID;
     }
 
     public static UserPrincipal create(User user) {
@@ -60,6 +62,7 @@ public class UserPrincipal implements UserDetails {
                 user.getGender(),
                 user.getDescription(),
                 user.getActivity(),
+                user.getNotificationID(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
@@ -103,6 +106,10 @@ public class UserPrincipal implements UserDetails {
         return activity;
     }
 
+    public String getNotificationID() {
+        return notificationID;
+    }
+
     @Override
     public String getUsername() {
         return username;
@@ -112,6 +119,7 @@ public class UserPrincipal implements UserDetails {
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

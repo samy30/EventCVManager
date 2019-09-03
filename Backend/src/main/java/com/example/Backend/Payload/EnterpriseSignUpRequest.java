@@ -11,6 +11,8 @@ public class EnterpriseSignUpRequest {
 
     private  String description;
 
+    private String notificationID;
+
     @NotBlank
     @Size(min = 3, max = 15)
     private String username;
@@ -70,5 +72,13 @@ public class EnterpriseSignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

@@ -74,4 +74,15 @@ public class JobOfferController {
         List<JobOffer> jobOffers = jobOfferRepository.findByJob(job);
         return jobOffers ;
     }
+
+    @GetMapping("/jobOffer/jobs/count/{id}")
+    public Long countJobOffersByJob(@PathVariable(value = "id") Long id) {
+
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
+        Long jobOffersNumber = jobOfferRepository.countByJob(job);
+        return jobOffersNumber ;
+    }
+
+
 }

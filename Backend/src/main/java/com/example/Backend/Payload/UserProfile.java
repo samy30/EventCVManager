@@ -12,8 +12,9 @@ public class UserProfile {
     private long age;
     private String gender;
     private Date joinedAt;
+    private String notificationID;
 
-    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt) {
+    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt, String notificationID) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -22,6 +23,7 @@ public class UserProfile {
         this.age = age;
         this.gender = gender;
         this.joinedAt = joinedAt;
+        this.notificationID = notificationID;
     }
 
     public Long getId() {
@@ -88,4 +90,11 @@ public class UserProfile {
         this.joinedAt = joinedAt;
     }
 
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
+    }
 }

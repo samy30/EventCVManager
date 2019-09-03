@@ -9,14 +9,16 @@ public class EnterpriseProfile {
     private String activity;
     private String email;
     private Date joinedAt;
+    private String notificationID;
 
-    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt) {
+    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt, String notificationID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.activity = activity;
         this.email = email;
         this.joinedAt = joinedAt;
+        this.notificationID = notificationID;
     }
 
     public Long getId() {
@@ -65,5 +67,13 @@ public class EnterpriseProfile {
 
     public void setJoinedAt(Date joinedAt) {
         this.joinedAt = joinedAt;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

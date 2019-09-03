@@ -80,10 +80,10 @@ public class AuthController {
 
         if(signUpRequest.getRole() != null) {
             if (signUpRequest.getRole().equals("ROLE_USER")) {
-                user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+                user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(),signUpRequest.getNotificationID());
             }
             if (signUpRequest.getRole().equals("ROLE_ENTERPRISE")) {
-                user = new User(signUpRequest.getName(), signUpRequest.getDescription(), signUpRequest.getActivity(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+                user = new User(signUpRequest.getName(), signUpRequest.getDescription(), signUpRequest.getActivity(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(),signUpRequest.getNotificationID());
             }
         }
 
