@@ -48,7 +48,7 @@ public class UserController {
     @GetMapping("/enterprise/me")
     @PreAuthorize("hasRole('ENTERPRISE')")
     public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
-        EnterpriseSummary enterpriseSummary = new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail());
+        EnterpriseSummary enterpriseSummary = new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getNotificationID());
         return enterpriseSummary;
     }
 
@@ -100,7 +100,7 @@ public class UserController {
 
         long cvCount = cvRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt());
+        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getNotificationID());
 
         return userProfile;
     }
@@ -112,7 +112,7 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt());
+        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt(),user.getNotificationID());
         return enterpriseProfile;
     }
     
@@ -180,6 +180,13 @@ public class UserController {
 
         List<JobDemande> jobDemandes = jobDemandeRepository.findBySender(user);
         return jobDemandes ;
+    }
+
+    @GetMapping("/users/gender/count/{gender}")
+    public Long countUsersByGender(@PathVariable(value = "gender") String gender) {
+
+        Long usersNumber = userRepository.countByGender(gender);
+        return usersNumber ;
     }
 
 //    @GetMapping("/users/me/jobDemandes/notifications")

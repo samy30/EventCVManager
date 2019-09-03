@@ -23,10 +23,15 @@ public class NotificationController {
     PushNotificationsService pushNotificationsService;
 
     @RequestMapping(value = "/send", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<String> send() throws JSONException {
+    public void  sendNotificationTo(){
+        this.send("eEpJjRgdNqI:APA91bEjCZ9q1sMyVSIHhlvPy8POOx9c5ZztkDdo8FYynFZKqs8NjTSRUcaWogxAq_IWZ29NEXQC-b85HVV736YOQFdsRjIJWiMOj9acMPXrV0Mb2ZFG9lkLYqQgIG1UrZhuNFc469QM");
+    }
+
+
+    public ResponseEntity<String> send(String notificationID) throws JSONException {
 
         JSONObject body = new JSONObject();
-        body.put("to","eEpJjRgdNqI:APA91bEjCZ9q1sMyVSIHhlvPy8POOx9c5ZztkDdo8FYynFZKqs8NjTSRUcaWogxAq_IWZ29NEXQC-b85HVV736YOQFdsRjIJWiMOj9acMPXrV0Mb2ZFG9lkLYqQgIG1UrZhuNFc469QM");
+        body.put("to",notificationID);
         body.put("priority", "high");
 
         JSONObject notification = new JSONObject();

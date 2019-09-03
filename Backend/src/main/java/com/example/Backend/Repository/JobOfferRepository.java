@@ -12,4 +12,5 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> findByCreatedBy(Long userId);
     List<JobOffer> findByJob(Job job);
     long countByCreatedBy(Long userId);
+    long countByJob(Job job);
 }

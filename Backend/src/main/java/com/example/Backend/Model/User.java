@@ -44,6 +44,8 @@ public class User extends AuditModel {
     @Size(max = 40)
     private String activity;
 
+    private String notificationID;
+
     @NotBlank
     @Size(max = 15)
     private String username;
@@ -77,7 +79,7 @@ public class User extends AuditModel {
         this.password = password;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -89,9 +91,10 @@ public class User extends AuditModel {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -99,15 +102,17 @@ public class User extends AuditModel {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+    public User(@Size(max = 40) String name, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
         this.name = name;
         this.description = description;
         this.activity = activity;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.notificationID = notificationID;
     }
 
     public String getActivity() {
@@ -204,5 +209,13 @@ public class User extends AuditModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

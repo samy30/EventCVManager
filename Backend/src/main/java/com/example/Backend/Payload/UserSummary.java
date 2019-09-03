@@ -8,8 +8,9 @@ public class UserSummary {
     private String gender;
     private long age;
     private String email;
+    private String notificationID;
 
-    public UserSummary(Long id, String username, String firstName, String lastName, String gender, long age, String email) {
+    public UserSummary(Long id, String username, String firstName, String lastName, String gender, long age, String email, String notificationID) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -17,6 +18,7 @@ public class UserSummary {
         this.gender = gender;
         this.age = age;
         this.email = email;
+        this.notificationID = notificationID;
     }
 
     public Long getId() {
@@ -73,5 +75,13 @@ public class UserSummary {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

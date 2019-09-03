@@ -10,6 +10,7 @@ public class UserSignUpRequest {
     private String lastName;
     private long age;
     private String gender;
+    private String notificationID;
 
     @NotBlank
     @Size(min = 3, max = 15)
@@ -78,5 +79,13 @@ public class UserSignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }

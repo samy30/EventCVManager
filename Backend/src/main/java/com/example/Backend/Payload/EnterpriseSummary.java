@@ -6,13 +6,15 @@ public class EnterpriseSummary {
     private String description;
     private String activity;
     private String email;
+    private String notificationID;
 
-    public EnterpriseSummary(Long id, String name, String description, String activity, String email) {
+    public EnterpriseSummary(Long id, String name, String description, String activity, String email, String notificationID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.activity = activity;
         this.email = email;
+        this.notificationID = notificationID;
     }
 
     public Long getId() {
@@ -53,5 +55,13 @@ public class EnterpriseSummary {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNotificationID() {
+        return notificationID;
+    }
+
+    public void setNotificationID(String notificationID) {
+        this.notificationID = notificationID;
     }
 }
