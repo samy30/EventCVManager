@@ -1,0 +1,48 @@
+
+<div class="container">
+  
+      <div class="row">
+         <div class="col-md-12">
+             <div class="center">
+                        <mat-tab-group >
+                                    <mat-tab label="Gender"> 
+                                      <div style="display: block" *ngIf="readyGenderFlag">
+                                        <canvas baseChart
+                                        [data]="pieChartGenderData"
+                                        [labels]="pieChartGenderLabels"
+                                        [chartType]="pieChartType"
+                                        [legend]="true"
+                                        >
+                                       </canvas>
+                                    </div>
+                                    </mat-tab>
+                                    
+                                <!-- <mat-tab label="Age"><div style="display: block">
+                                        <canvas baseChart
+                                        [data]="pieChartData"
+                                        [labels]="pieChartLabels"
+                                        [chartType]="pieChartType">
+                                       </canvas></div>
+                                </mat-tab>
+                                 <mat-tab label="Town"> 
+                                     <div style="display: block">
+                                        <canvas baseChart
+                                        [data]="pieChartData"
+                                        [labels]="pieChartLabels"
+                                        [chartType]="pieChartType"></canvas>
+                                  </div></mat-tab>-->
+                                  <mat-tab label="Job"> 
+                                          <div style="display: block" *ngIf="readyJobFlag">
+                                             <canvas baseChart
+                                             [data]="pieChartJobData"
+                                             [labels]="pieChartJobLabels"
+                                             [chartType]="pieChartType"
+                                             [legend]="true"></canvas>
+                                       </div></mat-tab>
+                               </mat-tab-group>
+             </div>
+         </div>
+      
+      </div>
+ </div>
+   

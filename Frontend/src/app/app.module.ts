@@ -49,6 +49,7 @@ import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+<<<<<<< HEAD
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -56,6 +57,15 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {MessagingService} from './Services/messaging.service';
 import {AsyncPipe} from '@angular/common';
+=======
+import { EnterpriseListingComponent } from './Components/enterprise/enterprise-listing/enterprise-listing.component';
+import { EnterpriseEditionComponent } from './Components/enterprise/enterprise-edition/enterprise-edition.component';
+import { EnterpriseCreationComponent } from './Components/enterprise/enterprise-creation/enterprise-creation.component';
+import { JobOfferListingComponent } from './Components/job-offer-listing/job-offer-listing.component';
+import { StatistiqueComponent } from './Components/statistique/statistique.component';
+import { ChartsModule } from 'ng2-charts';
+
+>>>>>>> 81c6c9c960974bfaa7e7b6cdcef124c2c646d942
 
 @NgModule({
   declarations: [
@@ -75,9 +85,15 @@ import {AsyncPipe} from '@angular/common';
     JobDemandeDetailComponent,
     OfferCreationComponent,
     AdministrationComponent,
-    CvDisplayComponent
+    CvDisplayComponent,
+    EnterpriseListingComponent,
+    EnterpriseEditionComponent,
+    EnterpriseCreationComponent,
+    JobOfferListingComponent,
+    StatistiqueComponent
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -116,7 +132,7 @@ import {AsyncPipe} from '@angular/common';
     AngularFireModule.initializeApp(environment.firebase),
 
   ],
-  entryComponents: [InsertCVComponent],
+  entryComponents: [InsertCVComponent,EnterpriseCreationComponent,OfferCreationComponent],
   providers: [
     httpInterceptorProviders,
     {

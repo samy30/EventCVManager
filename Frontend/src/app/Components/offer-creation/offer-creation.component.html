@@ -8,15 +8,16 @@
                                <h3> Create your job Offer</h3>
                               </div>
                       <div class="content">
-                          <form [formGroup]="offerFormGroup">
-                             
-                                 
+                          <form [formGroup]="offerFormGroup">                               
                                   <div class="row">  
+                                        <div class="col-md-2">
+                                                <mat-label>Job Name :</mat-label> 
+                                        </div>
                                     <div class="col-md-6">
                                        <div class="form-group">
-                                        <mat-label>Job Name</mat-label>
-                                        
-                                        <mat-select formControlName="nom_poste" placeholder="Select poste">  
+                                            
+                                        <mat-select formControlName="nom_poste" placeholder="Select poste"> 
+                                               
                                                 <mat-option *ngFor="let job of jobs" [value]="job.id">
                                                         {{ job.name }}
                                                       </mat-option>
@@ -24,22 +25,37 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>nom_entreprise</label>
-                                            <input formControlName="nom_entreprise" type="text" class="form-control" placeholder="nom_entreprise">
-                                        </div>
-                                    </div>
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
+                                    <div class="col-md-2">
+                                            <label>nom_entreprise</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                 
+                                             <mat-select formControlName="nom_enterprise" placeholder="Select entreprise"> 
+                                                    
+                                                     <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise.id">
+                                                             {{ enterprise.name }}
+                                                           </mat-option>
+                                             </mat-select> 
+                                             </div>
+                                         </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-2">
                                             <label>town</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                           
                                             <input formControlName="town" type="text" class="form-control" placeholder="town">
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="row">
                                    
                                        <div class="col-md-1"><label>Skills</label> </div>  

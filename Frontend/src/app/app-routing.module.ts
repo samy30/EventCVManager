@@ -24,10 +24,8 @@ const routes: Routes = [
   {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard],
                 data: { allowedRoles: ['ROLE_ENTERPRISE','ROLE_USER','ROLE_ADMIN'] }},
   {path:'Login',component: LoginComponent},
-  {path:'OfferCreation',component: OfferCreationComponent,
-                data: { allowedRoles: ['ROLE_ENTERPRISE'] }},
   {path:'Administration',component: AdministrationComponent,
-                data: { allowedRoles: ['ROLE_ENTERPRISE'] }},
+                data: { allowedRoles: ['ROLE_ENTERPRISE','ROLE_USER'] }},
   {path:'Notification',
        component: NotificationComponent,
        children:[

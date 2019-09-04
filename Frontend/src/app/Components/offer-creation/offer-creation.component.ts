@@ -5,6 +5,8 @@ import { JobsService } from 'src/app/Services/jobs.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import _ from "lodash"
 import {map} from 'rxjs/operators'
+import { EnterpriseService } from 'src/app/Services/enterprise.service';
+import { MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-offer-creation',
   templateUrl: './offer-creation.component.html',
@@ -15,16 +17,19 @@ export class OfferCreationComponent implements OnInit {
   offerFormGroup: FormGroup;
   offer;
   jobs:any[]=[];
+  enterprises:any[]=[];
   loggedEntreprise;
   skills:FormArray;
   constructor(  private formBuilder: FormBuilder,
     private jobOfferService:JobOfferService,
     private jobsService:JobsService,
-    private authService:AuthService
+    private authService:AuthService,
+    private enterpriseService:EnterpriseService,
+    public dialogRef: MatDialogRef<OfferCreationComponent>
   ) {
     this.offerFormGroup = this.formBuilder.group({
       nom_poste: ['', Validators.required],
-      nom_entreprise: ['', Validators.required],
+      nom_enterprise: ['', Validators.required],
       town: ['', Validators.required],
       skills: this.formBuilder.array([ this.createSkill() ])
     });
@@ -33,6 +38,7 @@ export class OfferCreationComponent implements OnInit {
   ngOnInit() {
     this.loadLoggedEntreprise();
      this.loadJobs();
+     this.loadEnterprises();
      
   }
 
@@ -66,6 +72,13 @@ export class OfferCreationComponent implements OnInit {
        })
   }
 
+  loadEnterprises(){
+     this.enterpriseService.getEnterprises()
+        .subscribe(enterprises=>{
+             this.enterprises=enterprises;
+        })
+  }
+   
    createOffer(){
       //var skills:any[]=[];
     //  skills.push(this.offerFormGroup.get('skills').value);
@@ -74,7 +87,7 @@ export class OfferCreationComponent implements OnInit {
           id:this.offerFormGroup.get('nom_poste').value,
         },
         enterprise: {
-          id:this.loggedEntreprise.id
+          id:this.offerFormGroup.get('nom_enterprise').value
         },
         town:this.offerFormGroup.get('town').value,
         skills:this.offerFormGroup.get('skills').value.map(s=>s.name)
@@ -88,7 +101,12 @@ export class OfferCreationComponent implements OnInit {
                    .subscribe(res=>{
                        console.log("final result");
                        console.log(res);
+                       this.dialogRef.close();
                    })
      })
    }
+
+   onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

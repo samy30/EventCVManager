@@ -15,13 +15,6 @@ export class JobOfferService {
 
   constructor(private http: HttpClient) { }
 
-  offers = [
-    { id: 1, entreprise:{'id':1,'name':'INSAT'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
-    { id: 2,entreprise:{'id':1,'name':'Headit'},poste:'Graphic Designer',addresse:'tunis',description:'description' },
-    { id: 3,entreprise:{'id':1,'name':'Isamm'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
-    { id: 1,entreprise:{'id':1,'name':'Isamm'},poste:'Graphic Designer',addresse:'sfax' ,description:'description'},
-    { id: 1,entreprise:{'id':1,'name':'GOOGLE'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
-  ];
   // search offers based on selected postes
   getOffers(id: string): Observable<any> {
     const url = `${apiUrl}/jobs/${id}`;
@@ -50,11 +43,13 @@ export class JobOfferService {
     return body || { };
   }
 
-  getoffers(): Observable<any> {
+
+  getJobOffers(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
+
   getOffer(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(

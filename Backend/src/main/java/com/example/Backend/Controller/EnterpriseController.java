@@ -2,6 +2,7 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.*;
+import com.example.Backend.Payload.ApiResponse;
 import com.example.Backend.Payload.EnterpriseProfile;
 import com.example.Backend.Payload.EnterpriseSummary;
 import com.example.Backend.Repository.JobDemandeRepository;
@@ -11,11 +12,14 @@ import com.example.Backend.Repository.UserRepository;
 import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -66,9 +70,13 @@ public class EnterpriseController {
     // Update an enterprise
     @PutMapping("/enterprise/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','ENTERPRISE')")
-    public User updateEnterprise(@PathVariable(value = "id") Long id,
+    public ResponseEntity<?> updateEnterprise(@PathVariable(value = "id") Long id,
                                  @Valid @RequestBody EnterpriseSummary enterpriseSummary) {
 
+        if(userRepository.existsByEmail(enterpriseSummary.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
         User enterprise = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
@@ -78,7 +86,12 @@ public class EnterpriseController {
         enterprise.setEmail(enterpriseSummary.getEmail());
 
         User updatedEnterprise = userRepository.save(enterprise);
-        return updatedEnterprise;
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(updatedEnterprise.getUsername()).toUri();
+
+        return ResponseEntity.created(location).body(updatedEnterprise);
     }
 
     // Delete an Enterprise
