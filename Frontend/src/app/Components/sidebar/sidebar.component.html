@@ -7,9 +7,9 @@
       <span class="menu-spacer"></span>
       <div >
         <a mat-button [routerLink]="'/Acceuil'" > Acceuil </a>
-        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()">Profil </a>
+        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" >Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn() 
-                                                    ">Administration </a>
+                                                        && this.role=='ROLE_ADMIN'">Administration </a>
         <a mat-button [routerLink]="'/JobSearch'" 
                 *ngIf="this.authService.loggedIn() &&
                       this.role=='ROLE_USER'"> JobSearch </a>

@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatDialog, MatTableDataSource } from '@angular/m
 import { EnterpriseService } from 'src/app/Services/enterprise.service';
 import { Message } from 'primeng/components/common/message';
 import { EnterpriseCreationComponent } from '../enterprise-creation/enterprise-creation.component';
+import { EnterpriseEditionComponent } from '../enterprise-edition/enterprise-edition.component';
 
 export interface PeriodicElement {
   name: string;
@@ -71,8 +72,21 @@ export class EnterpriseListingComponent implements OnInit {
      });
   }
 
- deleteProduct(id){
+ deleteEnterprise(id){
 
+ }
+
+ updateEnterprise(id){
+  const dialogRef = this.dialog.open(EnterpriseEditionComponent, {
+    width: '700px',
+    data:{id:id}
+  });
+  dialogRef.afterClosed().subscribe(async result => {
+      if ( result) {
+          this.loadEnterprises();
+          this.showSuccess( 'Entreprise ajoutée', 'Entreprise a été ajoutée avec success' );
+       }
+   });
  }
 
 /*

@@ -5,25 +5,25 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, BehaviorSubject,of } from 'rxjs';
 import User from '../Models/user';
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+const apiUrl = 'http://localhost:8080/api/jobOffer/jobs/count';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userUrl = 'http://localhost:49320/api';
-
+  authUrl = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
-  getCurrentUser(): Observable<any> {
-    return this.http.get<any>(`${this.userUrl}/ApplicationUsers/current`);
-  }
-
-  get checkUser(): boolean {
-   // console.log("ttttttttttt"+localStorage.getItem('jwtToken'));
-    return localStorage.getItem('jwtToken') !== null;
-  }
-
  
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>(`${this.authUrl}/user/me`);
+  }
+  
   getUsers(criteria): Observable<User[]> {
     return this.http.get<User[]>(`${this.userUrl}/ApplicationUsers`);
   }
