@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireMessaging} from '@angular/fire/messaging';
@@ -10,6 +10,8 @@ import {take} from 'rxjs/operators';
 })
 export class MessagingService {
   currentMessage = new BehaviorSubject(null);
+  private eventCallback = new Subject<boolean>(); // Source
+  eventCallback$ = this.eventCallback.asObservable(); // Stream
 
   constructor(
     private angularFireDB: AngularFireDatabase,
@@ -64,7 +66,14 @@ export class MessagingService {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
         console.log('new message received. ', payload);
+        this.emitNotification();
         this.currentMessage.next(payload);
       });
   }
+  emitNotification() {
+    this.eventCallback.next(true);
+  }
+
+
+
 }

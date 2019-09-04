@@ -50,7 +50,6 @@ public class User extends AuditModel {
     @Size(max = 15)
     private String username;
 
-    @NaturalId
     @NotBlank
     @Size(max = 40)
     @Email

@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
@@ -45,12 +46,6 @@ public class UserController {
         return currentUser;
     }
 
-    @GetMapping("/enterprise/me")
-    @PreAuthorize("hasRole('ENTERPRISE')")
-    public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
-        EnterpriseSummary enterpriseSummary = new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getNotificationID());
-        return enterpriseSummary;
-    }
 
     @GetMapping("/user")
     public List<User> getAllUsers() {
@@ -60,14 +55,6 @@ public class UserController {
     @GetMapping("/user/users")
     public List<User> getAllNormalUsers() {
         Optional<Role> role = roleRepository.findByName(RoleName.ROLE_USER);
-        Set<Role> roles = new HashSet<>();
-        roles.add(role.get());
-        return userRepository.findByRoles(roles);
-    }
-
-    @GetMapping("/user/enterprises")
-    public List<User> getAllEnterprises() {
-        Optional<Role> role = roleRepository.findByName(RoleName.ROLE_ENTERPRISE);
         Set<Role> roles = new HashSet<>();
         roles.add(role.get());
         return userRepository.findByRoles(roles);
@@ -104,19 +91,7 @@ public class UserController {
 
         return userProfile;
     }
-      
 
-    @GetMapping("/enterprises/{username}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public EnterpriseProfile getEnterpriseProfile(@PathVariable(value = "username") String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-
-        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt(),user.getNotificationID());
-        return enterpriseProfile;
-    }
-    
-   
 
     @GetMapping("/users/{username}/cvs")
     public List<CV> getCVsCreatedBy(@PathVariable(value = "username") String username,
@@ -129,7 +104,7 @@ public class UserController {
         return cvs ;
     }
 
-    @GetMapping("/enterprises/{username}/jobOffers")
+    @GetMapping("/enterprise/{username}/jobOffers")
     public List<JobOffer> getJobOffersCreatedBy(@PathVariable(value = "username") String username,
                                           @CurrentUser UserPrincipal currentUser) {
         User user = userRepository.findByUsername(username)
@@ -138,38 +113,6 @@ public class UserController {
 
         List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
         return jobOffers ;
-    }
-
-    @GetMapping("/enterprises/me/jobOffers")
-    @PreAuthorize("hasRole('ENTERPRISE')")
-    public List<JobOffer> getJobOffersCreatedByCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
-
-
-        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
-        return jobOffers ;
-    }
-
-    @GetMapping("/enterprises/me/jobDemandes")
-    @PreAuthorize("hasRole('ENTERPRISE')")
-    public List<JobDemande> getJobDemandesForCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(currentUser.getUsername())
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
-
-
-        List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
-        return jobDemandes ;
-    }
-
-    @GetMapping("/enterprises/{username}/jobDemandes")
-    public List<JobDemande> getJobDemandesForEnterprise(@PathVariable(value = "username") String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
-
-
-        List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
-        return jobDemandes ;
     }
 
     @GetMapping("/users/{username}/jobDemandes")
@@ -188,6 +131,7 @@ public class UserController {
         Long usersNumber = userRepository.countByGender(gender);
         return usersNumber ;
     }
+
 
 //    @GetMapping("/users/me/jobDemandes/notifications")
 //    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {

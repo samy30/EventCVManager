@@ -49,6 +49,13 @@ import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {MessagingService} from './Services/messaging.service';
+import {AsyncPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -102,7 +109,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     MatSidenavModule,
     MatProgressSpinnerModule,
     FileUploadModule,
-    ProgressBarModule
+    ProgressBarModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
 
   ],
   entryComponents: [InsertCVComponent],
@@ -115,7 +126,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     },
     AuthGuard,
     AuthService,
-    UserService
+    UserService,
+    MessagingService,
+    AsyncPipe
   ],
   bootstrap: [AppComponent]
 })

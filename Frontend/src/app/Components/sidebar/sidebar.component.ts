@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
-import { Router } from  '@angular/router';
-import {SidebarService} from "../../Services/sidebar.service";
+import { Router} from '@angular/router';
+import {SidebarService} from '../../Services/sidebar.service';
+import {MessagingService} from '../../Services/messaging.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,26 +11,34 @@ import {SidebarService} from "../../Services/sidebar.service";
 
 export class SidebarComponent implements OnInit {
   menus;
+  message;
   auths = {};
-  role:string;
+  role: string;
 
   constructor(private sideBarService: SidebarService,
-    private authService:AuthService,
-     private router:Router
+              private authService: AuthService,
+              private router: Router,
+              private messagingService: MessagingService
     ) { }
 
     loggedUser;
 
   ngOnInit() {
 
-    console.log("sidebar");
+    console.log('sidebar');
     console.log(this.authService.loggedIn());
     this.loadLoggedUser();
     this.listenToAuthentication();
+    this.notify();
+
+    const userId = 'user002';
+    this.messagingService.requestPermission(userId);
+    this.messagingService.receiveMessage();
+    this.message = this.messagingService.currentMessage;
 
   }
 
-  listenToAuthentication(){
+  listenToAuthentication() {
 
     this.authService.eventCallback$.subscribe(postes => {
          this.loadLoggedUser();
@@ -37,27 +46,33 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  loadLoggedUser(){
+  loadLoggedUser() {
     this.authService.getCurrentUser()
-      .subscribe(user=>{
-        console.log("current");
+      .subscribe(user => {
+        console.log('current');
         console.log(user);
-        this.loggedUser=user;
-        this.role=this.loggedUser.authorities[0].authority;
-        console.log("role");
+        this.loggedUser = user;
+        this.role = this.loggedUser.authorities[0].authority;
+        console.log('role');
         console.log(this.role);
      },
-     err=>{
-         console.log("user non authenticated")
+     err => {
+         console.log('user non authenticated');
      });
   }
 
-   logout(){
-     console.log("logout");
-      this.authService.logout();
-      this.router.navigate(["/Login"]);
-      this.loggedUser={};
-      this.role='';
-      console.log(this.authService.loggedIn());
+   logout() {
+     console.log('logout');
+     this.authService.logout();
+     this.router.navigate(['/Login']);
+     this.loggedUser = {};
+     this.role = '';
+     console.log(this.authService.loggedIn());
+   }
+
+   notify() {
+     this.messagingService.eventCallback$.subscribe(postes => {
+       alert(postes);
+     });
    }
 }
