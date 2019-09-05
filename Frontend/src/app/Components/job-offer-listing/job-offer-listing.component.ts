@@ -4,6 +4,7 @@ import { EnterpriseService } from 'src/app/Services/enterprise.service';
 import { Message } from 'primeng/components/common/message';
 import { OfferCreationComponent } from '../offer-creation/offer-creation.component';
 import { JobOfferService } from 'src/app/Services/job-offer.service';
+import { JobOfferEditionComponent } from '../job-offer-edition/job-offer-edition.component';
 
 
 export interface PeriodicElement {
@@ -77,5 +78,18 @@ export class JobOfferListingComponent implements OnInit {
  deleteJobOffer(id){
 
  }
+
+ updateOffer(id)  {
+  const dialogRef = this.dialog.open(JobOfferEditionComponent, {
+    width: '800px',
+    data:{id:id}
+  });
+  dialogRef.afterClosed().subscribe(async result => {
+      if ( result) {
+      this.loadJobOffers();
+       this.showSuccess( 'jobOffer ajoutée', 'jobOffer a été ajoutée avec success' );
+       }
+   });
+}
 
 }

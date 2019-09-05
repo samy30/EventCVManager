@@ -73,4 +73,5 @@ export class JobsService {
   sendPosts(num) {
     this.eventCallback.next(num);
   }
+  
 }

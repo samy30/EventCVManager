@@ -116,6 +116,23 @@ export class AuthService {
     
   }
 
+  updateUser(id,updatedUser): Observable<User>{
+    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`,updatedUser);
+  }
+
+  updateEnterprise(id,updatedEnterprise): Observable<User>{
+    const enterprise = {
+     
+      email: updatedEnterprise.email,
+      name: updatedEnterprise.name,
+      description: updatedEnterprise.description,
+      activity: updatedEnterprise.activity,
+    };
+    console.log(enterprise);
+    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`,updatedEnterprise);
+  }
+
+  
   
 
 
@@ -141,9 +158,7 @@ export class AuthService {
   deleteUser(id): Observable<User>{
     return this.http.delete<User>(`${this.userUrl}/ApplicationUsers/${id}`);
   }
-  updateUser(id,updatedUser): Observable<User>{
-    return this.http.put<User>(`${this.userUrl}/ApplicationUsers/${id}`,updatedUser);
-  }
+ 
   getUser(id): Observable<User>{
     return this.http.get<User>(`${this.userUrl}/ApplicationUsers/${id}`);
   }*/

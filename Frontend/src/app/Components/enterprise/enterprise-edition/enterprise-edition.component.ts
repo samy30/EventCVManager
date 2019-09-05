@@ -30,9 +30,7 @@ export class EnterpriseEditionComponent implements OnInit {
      }
 
   ngOnInit() {
-
     this.loadEnterprise(this.id);
-
   }
   
   createEnterpriseForm(){
@@ -72,12 +70,14 @@ export class EnterpriseEditionComponent implements OnInit {
 
    updateEnterprise() {
     this.isSubmitted = true;
-    this.authService.registerEnterprise(this.signupEnterpriseForm.value).subscribe(
+    this.authService.updateEnterprise(this.id,this.signupEnterpriseForm.value).subscribe(
       res => {
-        console.log('registered');
+        this.dialogRef.close(true);
+        console.log('updated');
        // this.router.navigate(['/Profile']);
       },
       err => {
+        this.dialogRef.close(false);
         console.log('not registered');
       }
     );
