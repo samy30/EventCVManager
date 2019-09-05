@@ -105,7 +105,7 @@ public class EnterpriseController {
         return ResponseEntity.ok().build();
     }
 
-
+    // get job offers created by enterprise
     @GetMapping("/enterprise/me/jobOffers")
     @PreAuthorize("hasRole('ENTERPRISE')")
     public List<JobOffer> getJobOffersCreatedByCurrentUser(@CurrentUser UserPrincipal currentUser) {

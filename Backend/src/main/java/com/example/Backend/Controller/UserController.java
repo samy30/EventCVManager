@@ -132,6 +132,20 @@ public class UserController {
         return usersNumber ;
     }
 
+    // Update a User Notification Token
+    @PutMapping("/users/{id}/notificationToken")
+    public User updateUserNotificationToken(@PathVariable(value = "id") Long id,
+                         @Valid @RequestBody NotificationToken notificationToken) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        user.setNotificationID(notificationToken.getToken());
+
+        User updatedUser = userRepository.save(user);
+        return updatedUser;
+    }
+
 
 //    @GetMapping("/users/me/jobDemandes/notifications")
 //    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {
