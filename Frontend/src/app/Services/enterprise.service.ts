@@ -16,7 +16,7 @@ export class EnterpriseService {
   constructor(private http: HttpClient) { }
 
   getEnterprises(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/user/enterprises`);
+    return this.http.get<any>(`${this.apiUrl}/enterprise`);
   }
 
 }
