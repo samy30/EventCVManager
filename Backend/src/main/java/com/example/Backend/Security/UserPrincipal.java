@@ -159,4 +159,8 @@ public class UserPrincipal implements UserDetails {
 
         return Objects.hash(id);
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

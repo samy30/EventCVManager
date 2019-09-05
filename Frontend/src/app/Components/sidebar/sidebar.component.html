@@ -8,17 +8,17 @@
       <div >
         <a mat-button [routerLink]="'/Acceuil'" > Acceuil </a>
         <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" >Profil </a>
-        <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn() 
+        <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'">Administration </a>
-        <a mat-button [routerLink]="'/JobSearch'" 
+        <a mat-button [routerLink]="'/JobSearch'"
                 *ngIf="this.authService.loggedIn() &&
                       this.role=='ROLE_USER'"> JobSearch </a>
-        <a mat-button [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn() && 
+        <a mat-button [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn() &&
                                               this.role!=='ROLE_AdMIN'"> Notification </a>
         <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()">Emploi du Temps </a>
         <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" > Login </a>
         <a mat-button [routerLink]="'/JobDemande'"
-                    *ngIf="this.authService.loggedIn() && 
+                    *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" > JobDemande </a>
         <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()"> Logout</a>
       </div>

@@ -49,6 +49,15 @@ import {UserService} from "./Services/user.service";
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+<<<<<<< HEAD
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {MessagingService} from './Services/messaging.service';
+import {AsyncPipe} from '@angular/common';
+=======
 import { EnterpriseListingComponent } from './Components/enterprise/enterprise-listing/enterprise-listing.component';
 import { EnterpriseEditionComponent } from './Components/enterprise/enterprise-edition/enterprise-edition.component';
 import { EnterpriseCreationComponent } from './Components/enterprise/enterprise-creation/enterprise-creation.component';
@@ -57,6 +66,7 @@ import { StatistiqueComponent } from './Components/statistique/statistique.compo
 import { ChartsModule } from 'ng2-charts';
 import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
 
+>>>>>>> 81c6c9c960974bfaa7e7b6cdcef124c2c646d942
 
 @NgModule({
   declarations: [
@@ -117,7 +127,11 @@ import { JobOfferEditionComponent } from './Components/job-offer-edition/job-off
     MatSidenavModule,
     MatProgressSpinnerModule,
     FileUploadModule,
-    ProgressBarModule
+    ProgressBarModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
 
   ],
   entryComponents: [InsertCVComponent,EnterpriseCreationComponent,
@@ -132,7 +146,9 @@ import { JobOfferEditionComponent } from './Components/job-offer-edition/job-off
     },
     AuthGuard,
     AuthService,
-    UserService
+    UserService,
+    MessagingService,
+    AsyncPipe
   ],
   bootstrap: [AppComponent]
 })
