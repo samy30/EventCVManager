@@ -1,5 +1,7 @@
 package com.example.Backend.Controller;
 
+import com.example.Backend.Model.Notification;
+import com.example.Backend.Repository.NotificationRepository;
 import com.example.Backend.Service.PushNotificationsService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -21,6 +22,29 @@ public class NotificationController {
 
     @Autowired
     PushNotificationsService pushNotificationsService;
+
+    @Autowired
+    NotificationRepository notificationRepository;
+
+    // Get Notification by receiver ID
+    @GetMapping("/notification/{id}")
+    public List<Notification> getNotificationByReceiverId(@PathVariable(value = "id") Long id) {
+        return notificationRepository.findByReceiverID(id);
+    }
+
+    // Count all Notifications by receiver ID
+    @GetMapping("/notification/{id}/all")
+    public Long countNotificationByReceiverId(@PathVariable(value = "id") Long id) {
+        Long seen = notificationRepository.countBySeenAndReceiverID(true,id);
+        long unseen = notificationRepository.countBySeenAndReceiverID(false,id);
+        return (seen+unseen);
+    }
+
+    // Count unseen Notifications by receiver ID
+    @GetMapping("/notification/{id}/unseen")
+    public Long countUnseenNotificationByReceiverId(@PathVariable(value = "id") Long id) {
+        return notificationRepository.countBySeenAndReceiverID(false,id);
+    }
 
     @RequestMapping(value = "/send", method = RequestMethod.GET, produces = "application/json")
     public void  sendNotificationTo(){
