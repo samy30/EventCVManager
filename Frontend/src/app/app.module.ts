@@ -55,6 +55,7 @@ import { EnterpriseCreationComponent } from './Components/enterprise/enterprise-
 import { JobOfferListingComponent } from './Components/job-offer-listing/job-offer-listing.component';
 import { StatistiqueComponent } from './Components/statistique/statistique.component';
 import { ChartsModule } from 'ng2-charts';
+import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { ChartsModule } from 'ng2-charts';
     EnterpriseEditionComponent,
     EnterpriseCreationComponent,
     JobOfferListingComponent,
-    StatistiqueComponent
+    StatistiqueComponent,
+    JobOfferEditionComponent
   ],
   imports: [
     ChartsModule,
@@ -118,7 +120,9 @@ import { ChartsModule } from 'ng2-charts';
     ProgressBarModule
 
   ],
-  entryComponents: [InsertCVComponent,EnterpriseCreationComponent,OfferCreationComponent],
+  entryComponents: [InsertCVComponent,EnterpriseCreationComponent,
+                    OfferCreationComponent,EnterpriseEditionComponent,
+                    JobOfferEditionComponent],
   providers: [
     httpInterceptorProviders,
     {

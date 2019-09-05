@@ -1,21 +1,13 @@
 <div class="container">
-    <form  class="form"  [formGroup]="signupEnterpriseForm" (ngSubmit)="signupEnterprise()" style="height:400px; overflow:auto;">
+    <form  class="form"  [formGroup]="signupEnterpriseForm" (ngSubmit)="updateEnterprise()" style="height:400px; overflow:auto;">
             <h3 class="text-center ">Register Enterprise</h3>
             <div class="form-group">
               <label for="name" >Enterprise Name:</label><br>
               <input type="text" id="name"  formControlName="name" class="form-control" required>
             </div>
             <div class="form-group">
-              <label for="username" >UserName:</label><br>
-              <input type="text" id="username"  formControlName="username" class="form-control" required>
-            </div>
-            <div class="form-group">
               <label for="email" >Email Address:</label><br>
               <input type="email" id="email"  formControlName="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="password" >Password:</label><br>
-              <input type="password" id="password"  formControlName="password" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="description" >Description:</label><br>
@@ -26,7 +18,7 @@
               <input type="text" id="activity"  formControlName="activity" class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+              <button  name="submit" class="btn btn-info btn-md" > update</button>
             </div>
         </form>
 </div>
