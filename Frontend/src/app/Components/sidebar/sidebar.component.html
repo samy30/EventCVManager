@@ -1,11 +1,14 @@
 
 
-<mat-toolbar color="primary" style="height:100px ; background :1f790b7">
+<mat-toolbar color="primary" style="height:100px ; background :1d70b7">
     <mat-toolbar-row style="background : 1f790b7">
-      <h1>CVManagement</h1>
+      
       <span class="menu-spacer" style="background : 1f790b7"></span>
       <div style="background : 1f790b7">
-        <a mat-button [routerLink]="'/Acceuil'" class="link"> Acceuil </a>
+        <a mat-button [routerLink]="'/Acceuil'" class="link"> 
+          <img class="d-block w-100" 
+          
+                    src="../assets/images/logo.png" style="top:3px" alt="First slide"> </a>
         <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'" class="link">Administration </a>
