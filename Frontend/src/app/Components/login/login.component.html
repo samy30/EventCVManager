@@ -31,7 +31,9 @@
                                     password required
                                   </mat-error>
                             </div>
-                            
+                            <mat-error *ngIf="this.isSubmitted && this.Authenticated" >
+                                 invalid username or password
+                            </mat-error>
 
                             <div class="form-group">
                                 <label for="remember-me" ><span>Remember me</span> 
