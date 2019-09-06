@@ -31,15 +31,17 @@ export class JobListingComponent implements OnInit  {
    jobs:any[]=[];
 
    ngOnInit() {
-      this.loadPosts
+      this.loadPosts();
   }
 
   addJob(){
-     var jobName=this.name.nativeElement;
+     var jobName=this.name.nativeElement.value;
+     console.log("jobName");
      console.log(jobName);
      if(jobName){
          this.jobService.postJob({name:jobName})
             .subscribe(job=>{
+                this.name.nativeElement.value=null;;
                  this.loadPosts();
             })
      }
@@ -69,6 +71,7 @@ export class JobListingComponent implements OnInit  {
       .subscribe(job=>{
           console.log("deleted Job");
           console.log(job);
+          this.loadPosts();
       })
   }
 

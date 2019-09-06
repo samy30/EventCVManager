@@ -19,4 +19,20 @@ export class EnterpriseService {
     return this.http.get<any>(`${this.apiUrl}/enterprise`);
   }
 
+  updateEnterprise(id,updatedEnterprise): Observable<any>{
+    const enterprise = {
+      email: updatedEnterprise.email,
+      name: updatedEnterprise.name,
+      description: updatedEnterprise.description,
+      activity: updatedEnterprise.activity,
+    };
+    console.log(enterprise);
+    return this.http.put<any>(`${this.apiUrl}/enterprise/${id}`,updatedEnterprise);
+  }
+
+  deleteEnterprise(id): Observable<any>{
+    return this.http.delete<any>(`${this.apiUrl}/enterprise/${id}`);
+  }
+ 
+
 }

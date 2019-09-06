@@ -70,7 +70,7 @@ export class JobOfferService {
       );
   }
 
-  deleteOffer(id: string): Observable<{}> {
+  deleteOffer(id): Observable<{}> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(

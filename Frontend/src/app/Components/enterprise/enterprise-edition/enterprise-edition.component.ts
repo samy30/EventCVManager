@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { EnterpriseService } from 'src/app/Services/enterprise.service';
 
 @Component({
   selector: 'app-enterprise-edition',
@@ -23,7 +24,8 @@ export class EnterpriseEditionComponent implements OnInit {
               private authService: AuthService,
               private router:Router,
                public dialogRef: MatDialogRef<EnterpriseEditionComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: any) 
+               @Inject(MAT_DIALOG_DATA) public data: any,
+               private enterpriseService:EnterpriseService) 
     { 
        this.createEnterpriseForm();
        this.id=this.data.id;
@@ -70,7 +72,7 @@ export class EnterpriseEditionComponent implements OnInit {
 
    updateEnterprise() {
     this.isSubmitted = true;
-    this.authService.updateEnterprise(this.id,this.signupEnterpriseForm.value).subscribe(
+    this.enterpriseService.updateEnterprise(this.id,this.signupEnterpriseForm.value).subscribe(
       res => {
         this.dialogRef.close(true);
         console.log('updated');
