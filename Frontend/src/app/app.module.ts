@@ -64,8 +64,8 @@ import { JobOfferListingComponent } from './Components/job-offer-listing/job-off
 import { StatistiqueComponent } from './Components/statistique/statistique.component';
 import { ChartsModule } from 'ng2-charts';
 import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
+import {FooterComponent} from './Components/footer/footer.component';
+import {CarouselComponent} from './Components/carousel/carousel.component';
 
 
 @NgModule({

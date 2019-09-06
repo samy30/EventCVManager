@@ -3,17 +3,17 @@
     <p-messages [(value)]="msgs"></p-messages>
       <div class="container-fluid">
           <div class="card text-center">
-            
+
             <div class="row">
               <div class="col-md-12">
                     <div classs="card-header">  <h4 class="card-title">User CV</h4> </div>
                       <div class="content text-center ">
                           <form [formGroup]="CVForm" >
-                              <div class="row">  
+                              <div class="row">
                                     <div  *ngIf="image">
-                                            <img  style=" object-fit: cover;" class="avatar border-gray" [src]="image " alt='....' />                                           
+                                            <img  style=" object-fit: cover;" class="avatar border-gray" [src]="image " alt='....' />
                                     </div>
-                                    
+
                               </div>
                               <hr>
                               <div class="row text-center">
@@ -29,7 +29,7 @@
                                                     <input readonly formControlName="lastName" type="text" class="form-control" placeholder="lastName">
                                                 </div>
                                              </div>
-                                            
+
                                        </div>
                                         <hr>
                                        <div class="row">
@@ -57,15 +57,15 @@
                                         </div>
                                         <hr>
                                       <div class="row">
-                                          
-                                          <div class="col-md-12"> 
+
+                                          <div class="col-md-12">
                                                 <label >Logiciels</label>
                                               <div formArrayName="softwares" >
                                                   <div  *ngFor="let software of CVForm.get('softwares').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                <label>logiciel({{i+1}})</label>
                                                                 <input readonly formControlName="name" class="form-control" placeholder="software" >
-                                                                <input readonly formControlName="level" class="form-control" type="number" placeholder="level" >                                                             
+                                                                <input readonly formControlName="level" class="form-control" type="number" placeholder="level" >
 
                                                       </div>
 
@@ -73,10 +73,10 @@
                                               </div>
                                           </div>
                                 </div>
-                                      
+
                                       <hr>
                                       <div class="row">
-                                         
+
                                           <div class="col-md-12">
                                                 <label>Langues</label>
                                               <div formArrayName="languages" >
@@ -84,7 +84,7 @@
                                                       <div [formGroupName]="i">
                                                                 <label>langue({{i+1}})</label>
                                                                 <input readonly formControlName="name" class="form-control" placeholder="language" >
-                                                                <input readonly formControlName="level" class="form-control"  type="number" placeholder="level" >                                                           
+                                                                <input readonly formControlName="level" class="form-control"  type="number" placeholder="level" >
                                                       </div>
 
                                                     </div>
@@ -93,7 +93,7 @@
                                       </div>
                                       <hr>
                                       <div class="row">
-                                         
+
                                           <div class="col-md-12">
                                                 <label>Interets</label>
                                               <div formArrayName="interests" >
@@ -101,16 +101,16 @@
                                                       <div [formGroupName]="i">
                                                                 <label>interest({{i+1}})</label>
                                                                 <input readonly formControlName="name"  class="form-control" placeholder="interest" >
-                                                                <input readonly formControlName="description" class="form-control" placeholder="description">                                                        
+                                                                <input readonly formControlName="description" class="form-control" placeholder="description">
                                                       </div>
 
                                                     </div>
                                               </div>
                                           </div>
                                       </div>
-                                  
+
                                      <hr>
-                                      <div class="row">                              
+                                      <div class="row">
                                           <div class="col-md-12">
                                                 <div class="text-center">
                                                         <label>Experiences</label>
@@ -132,7 +132,7 @@
                                       </div>
                                       <hr>
                                       <div class="row">
-                                          
+
                                           <div class="col-md-12">
                                                 <label>Formations</label>
                                               <div formArrayName="studies" >
@@ -142,7 +142,7 @@
                                                                 <input readonly formControlName="name" class="form-control" placeholder="name" >
                                                                 <input readonly formControlName="institution" class="form-control" placeholder="institution" >
                                                                 <input readonly formControlName="mention" class="form-control" placeholder="mention" >
-                                                                <input readonly type="date" class="form-control" formControlName="date" placeholder="date" >                                                      
+                                                                <input readonly type="date" class="form-control" formControlName="date" placeholder="date" >
 
                                                       </div>
 
@@ -152,7 +152,7 @@
                                       </div>
                                       <hr>
                                       <div class="row">
-                                         
+
                                           <div class="col-md-12">
                                                 <label>socialMedias</label>
                                               <div formArrayName="socialMedias" >
@@ -165,17 +165,17 @@
                                                                 </div>
                                                                 <div style="white-space:nowrap">
                                                                         <label for="path">path:</label>
-                                                                        <input readonly formControlName="path"  class="form-control" placeholder="path" >  
+                                                                        <input readonly formControlName="path"  class="form-control" placeholder="path" >
                                                                 </div>
-                                                                                                
+
                                                       </div>
 
                                                     </div>
                                               </div>
                                           </div>
                                       </div>
-                                  
-                              
+
+
                               <hr>
                               <button type="submit" class="btn btn-info btn-fill pull-left" (click)="Accepter()" >Accepter</button>
                               <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="Refuser()" >Refuser</button>
@@ -184,7 +184,7 @@
                       </div>
 
               </div>
-            
+
           </div>
         </div>
       </div>
