@@ -46,17 +46,32 @@
   #register-link {
     color: #641c9e;
   }
+
+  .link:hover{ background: #f4f4f4; color: #641c9e; }
+  .right{
   
+    margin-left: 45%;
+    
+    // 
+  }
+  .link-login:hover{ background: #f4f4f4; color: #641c9e; }
+  .link-login{
+    margin-left:950px;
+    font-size:17px;  
+  }
+  .link,.link-img{
+    font-size:17px;  
+  }
 // css of new navbar
+/*
 
 
-  .navbar{ background:#641c9e;height:15px;}
 
 .nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
 
 .nav-link{ margin-left: 1em !important;}
 
-.nav-link:hover{ background: #f4f4f4; color: #641c9e; }
+
 .navbar-brand:hover{ background: #f4f4f4; color: #641c9e; }
 //.navbar-collapse{ justify-content: flex-end;}
 
@@ -66,4 +81,4 @@
   float: right;
   margin-left:30em; 
 
-}
+}*/

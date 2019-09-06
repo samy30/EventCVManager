@@ -1,30 +1,28 @@
 
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-      </button>
+
+<mat-toolbar color="primary" style="height:100px ; background :1f790b7">
+    <mat-toolbar-row style="background : 1f790b7">
       <h1>CVManagement</h1>
-      <span class="menu-spacer"></span>
-      <div >
-        <a mat-button [routerLink]="'/Acceuil'" class="nav-link"> Acceuil </a>
-        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="nav-link">Profil </a>
+      <span class="menu-spacer" style="background : 1f790b7"></span>
+      <div style="background : 1f790b7">
+        <a mat-button [routerLink]="'/Acceuil'" class="link"> Acceuil </a>
+        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
-                                                        && this.role=='ROLE_ADMIN'" class="nav-link">Administration </a>
+                                                        && this.role=='ROLE_ADMIN'" class="link">Administration </a>
         <a mat-button [routerLink]="'/JobSearch'"
                 *ngIf="this.authService.loggedIn() &&
-                      this.role=='ROLE_USER'" class="nav-link"> JobSearch </a>
+                      this.role=='ROLE_USER'" class="link"> JobSearch </a>
         <a mat-button [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn() &&
-                                              this.role!=='ROLE_AdMIN'" class="nav-link"> Notification </a>
-        <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()" class="nav-link">Emploi du Temps </a>
-        <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" > Login </a>
+                                              this.role!=='ROLE_AdMIN'" class="link"> Notification </a>
+        <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()" class="link">Emploi du Temps </a>
+        <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" class="link-login" > Login </a>
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
-                       this.role=='ROLE_ENTERPRISE'" class="nav-link" > JobDemande </a>
+                       this.role=='ROLE_ENTERPRISE'" class="link" > JobDemande </a>
         
-        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" >Logout</a>
-        <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" (click)="logout()">
-            <img *ngIf="loggedUser" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;"> 
+        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Logout</a>
+        <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img">
+            <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;"> 
                {{loggedUser.username}}
           </a>
         
@@ -82,5 +80,6 @@
  </ul> 
  </div>
 </div></nav>-->
+
 
 
