@@ -66,6 +66,8 @@ import { ChartsModule } from 'ng2-charts';
 import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
 import {FooterComponent} from './Components/footer/footer.component';
 import {CarouselComponent} from './Components/carousel/carousel.component';
+import { NotreplatformeComponent } from './components/notreplatforme/notreplatforme.component';
+import { QuisommesnousComponent } from './components/quisommesnous/quisommesnous.component';
 
 
 @NgModule({
@@ -95,7 +97,9 @@ import {CarouselComponent} from './Components/carousel/carousel.component';
     JobOfferEditionComponent,
     JobListingComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    NotreplatformeComponent,
+    QuisommesnousComponent
   ],
   imports: [
     ChartsModule,
