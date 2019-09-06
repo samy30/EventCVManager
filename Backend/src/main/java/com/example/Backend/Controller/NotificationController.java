@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @RestController
+@RequestMapping("/api")
 public class NotificationController {
 
     private final String TOPIC = "JavaSampleApproach";

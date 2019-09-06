@@ -1,8 +1,11 @@
 package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
+import com.example.Backend.Model.Job;
 import com.example.Backend.Model.JobDemande;
+import com.example.Backend.Model.Notification;
 import com.example.Backend.Repository.JobDemandeRepository;
+import com.example.Backend.Repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,9 @@ public class JobDemandeController {
     @Autowired
     JobDemandeRepository jobDemandeRepository;
 
+    @Autowired
+    NotificationRepository notificationRepository;
+
     // Get All JobDemandes
     @GetMapping("/jobDemande")
     public List<JobDemande> getAllJobDemandes() {
@@ -25,7 +31,9 @@ public class JobDemandeController {
     // Create a new JobDemande
     @PostMapping("/jobDemande")
     public JobDemande createJobDemande(@Valid @RequestBody JobDemande jobDemande) {
-        return jobDemandeRepository.save(jobDemande);
+        JobDemande createdJobDemande = jobDemandeRepository.save(jobDemande);
+        notifyEnterprise(createdJobDemande.getSender().getId(),createdJobDemande.getEnterprise().getId(),createdJobDemande.getJobOffer().getId(),createdJobDemande.getId(),"Job Demande sent",true);
+        return createdJobDemande;
     }
 
     // Get a Single JobDemande
@@ -59,5 +67,11 @@ public class JobDemandeController {
         jobDemandeRepository.delete(jobDemande);
 
         return ResponseEntity.ok().build();
+    }
+
+    // notify enterprise
+    public void notifyEnterprise(Long sender,Long receiver, Long jobOffer, Long jobDemande, String content, boolean seen){
+        Notification notification = new Notification(sender,receiver,jobOffer,jobDemande,content,seen);
+        Notification cratedNotification = notificationRepository.save(notification);
     }
 }
