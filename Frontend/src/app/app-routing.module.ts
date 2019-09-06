@@ -57,7 +57,6 @@ const routes: Routes = [
           data: { allowedRoles: ['ROLE_USER'] }
     }
     ,
-  
   { path: '**', component: HomeComponent }
 ];
 

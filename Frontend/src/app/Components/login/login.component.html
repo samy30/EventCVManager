@@ -27,7 +27,7 @@
                                     password required
                                   </mat-error>
                             </div>
-                            <mat-error *ngIf="this.isSubmitted && this.Authenticated" >
+                            <mat-error *ngIf="this.isSubmitted && !this.Authenticated" >
                                  invalid username or password
                             </mat-error>
 

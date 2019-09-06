@@ -15,16 +15,13 @@ export class SidebarComponent implements OnInit {
   message;
   auths = {};
   role: string;
-  private readonly notifier: NotifierService;
+  private readonly notifier: NotifierService ;
 
   constructor(private sideBarService: SidebarService,
               private authService: AuthService,
               private router: Router,
-              private messagingService: MessagingService,
-              notifierService: NotifierService
-    ) {
-    this.notifier = notifierService;
-  }
+              private messagingService: MessagingService
+    ) { }
 
     loggedUser;
 
@@ -77,7 +74,8 @@ export class SidebarComponent implements OnInit {
 
    notify() {
      this.messagingService.eventCallback$.subscribe(postes => {
-       this.notifier.notify( 'success', 'woslotek notif');
+       alert(postes);
+       
      });
    }
 }
