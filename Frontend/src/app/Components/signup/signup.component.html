@@ -43,21 +43,36 @@
                             <label for="lastName" >Last Name:</label><br>
                             <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
                           </div>
-                          <div class="form-group">
-                            <label for="gender" >Gender:</label><br>
-                            <input type="text" id="gender" formControlName="gender" class="form-control" required>
-                          </div>
 
-                          <div class="form-group">
-                            <label for="age" >Age:</label><br>
-                            <input type="number" id="age" formControlName="age" class="form-control" required>
-                          </div>
-
-                          <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
-                                   [disabled]="!isFormValid(signupForm)"
-                            >
-                          </div>
+                          
+                           <div class="row">
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gender" >Gender:</label><br>
+                                    <input type="text" id="gender" formControlName="gender" class="form-control" required>
+                                  </div>
+                             </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="age" >Age:</label><br>
+                                    <input type="number" id="age" formControlName="age" class="form-control" required>
+                                  </div>
+                             </div>
+                           </div>
+                         
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="age" >Town:</label><br>
+                                        <input id="age"  class="form-control" >
+                                      </div>
+                                </div>
+                            </div>    
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
+                                       [disabled]="!isFormValid(signupForm)"
+                                >
+                              </div>                  
                         </form>
                       </div>                
                     </div>
