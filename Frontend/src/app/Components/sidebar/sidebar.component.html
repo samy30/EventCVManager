@@ -1,13 +1,10 @@
 
 
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button>
-        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-      </button>
-      <h1>CVManagement</h1>
-      <span class="menu-spacer"></span>
-      <div >
+<mat-toolbar style="height:100px ; background :#1d70b7">
+    <mat-toolbar-row style="background : #1d70b7">
+      <h1 style="color: white">CVManagement</h1>
+      <span class="menu-spacer" style="background : 1f790b7"></span>
+      <div style="background : #1d70b7">
         <a mat-button [routerLink]="'/Acceuil'" class="link"> Acceuil </a>
         <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
@@ -22,13 +19,13 @@
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" class="link" > JobDemande </a>
-        
+
         <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Logout</a>
         <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img">
-            <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;"> 
+            <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">
                {{loggedUser.username}}
           </a>
-        
+
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -40,47 +37,47 @@
         <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
       </button>
   <a class="navbar-brand" [routerLink]="'/Acceuil'">Home</a>
- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
  </button>
  <div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
   <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()">Profil</a>       
-   </li>  
+      <a class="nav-link" [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()">Profil</a>
+   </li>
  <li class="nav-item">
      <a class="nav-link " [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
-                           && this.role=='ROLE_ADMIN'">Administration</a>    
+                           && this.role=='ROLE_ADMIN'">Administration</a>
   </li>
-  <li class="nav-item"> 
+  <li class="nav-item">
      <a class="nav-link " [routerLink]="'/JobSearch'"
                     *ngIf="this.authService.loggedIn() &&
-                           this.role=='ROLE_USER'">JobSearch</a>        
-   </li>   
- <li class="nav-item">  
+                           this.role=='ROLE_USER'">JobSearch</a>
+   </li>
+ <li class="nav-item">
     <a class="nav-link " [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn() &&
-                       this.role!=='ROLE_AdMIN'"> Notification </a>       
-  </li>  
- <li class="nav-item"> 
+                       this.role!=='ROLE_AdMIN'"> Notification </a>
+  </li>
+ <li class="nav-item">
   <a class="nav-link " [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()">Emploi du Temps </a>
-</li> 
-<li class="nav-item right"> 
+</li>
+<li class="nav-item right">
     <a class="nav-link " [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" > Login </a>
-  </li> 
-  <li class="nav-item"> 
+  </li>
+  <li class="nav-item">
       <a class="nav-link "[routerLink]="'/JobDemande'"
                   *ngIf="this.authService.loggedIn() &&
                     this.role=='ROLE_ENTERPRISE'" > JobDemande </a>
     </li>
-    <li class="nav-item right"> 
+    <li class="nav-item right">
         <a class="nav-link "  *ngIf="this.authService.loggedIn()" [routerLink]="" (click)="logout()">Logout</a>
       </li>
-      <li class="nav-item "> 
+      <li class="nav-item ">
           <a class="nav-link "  *ngIf="this.authService.loggedIn()" [routerLink]="" (click)="logout()">
-              <img  src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;"> 
+              <img  src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">
               Moumni
             </a>
-        </li> 
- </ul> 
+        </li>
+ </ul>
  </div>
 </div></nav>-->
 

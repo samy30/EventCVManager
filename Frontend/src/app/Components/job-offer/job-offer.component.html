@@ -21,23 +21,23 @@
             <div class="card-desc">
               <div class="linediv">
                 <h4 >Entreprise:</h4>
-                <h3>{{offer.enterprise.name}}</h3>
+                <h3 style="color: white">{{offer.enterprise.name}}</h3>
               </div>
               <div class="linediv">
                 <h4 >Addresse:</h4>
-                <h3>{{offer.town}}</h3>
+                <h3 style="color: white">{{offer.town}}</h3>
               </div>
               <div class="linediv">
                 <h4 >Job:</h4>
-                <h3>{{offer.job.name}}</h3>
+                <h3 style="color: white">{{offer.job.name}}</h3>
               </div>
 
               <h4>skills:</h4>
               <div *ngFor="let skill of offer.skills" >
-                <h3>{{skill}}</h3>
+                <h3 style="color: white">{{skill}}</h3>
               </div>
 
-              <a  class="btn-card" (click)="getJob(offer)">Get Job</a>
+              <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Get Job</a>
             </div>
           </div>
         </div>

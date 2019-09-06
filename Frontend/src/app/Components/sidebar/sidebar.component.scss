@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .example-card-center{
       height:300px;
       width: 300px;
@@ -14,11 +14,11 @@
   .example-card-center.mat-card-content{
       justify-content: center;
   }
-  
+
   body {
     margin: 0;
     padding: 0;
-    background-color: #641c9e;
+    background-color: #1d70b7;
     height: 100vh;
   }
   #login .container #login-row #login-column #login-box {
@@ -34,33 +34,38 @@
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
   }
-  
+
   label  {
-    color: #641c9e;
-  }
-  
-  h3 {
-    color: #641c9e;
-  }
-  
-  #register-link {
-    color: #641c9e;
+    color: #1d70b7;
   }
 
-  .link:hover{ background: #f4f4f4; color: #641c9e; }
-  .right{
-  
-    margin-left: 45%;
-    
-    // 
+  h3 {
+    color: #1d70b7;
   }
-  .link-login:hover{ background: #f4f4f4; color: #641c9e; }
+
+  #register-link {
+    color: #1d70b7;
+  }
+
+  .link:hover{ background: #f4f4f4; color: #1d70b7; }
+  .right{
+
+    margin-left: 45%;
+
+    //
+  }
+
+  .link {
+    color: white;
+  }
+  .link-login:hover{ background: #f4f4f4; color: #1d70b7; }
   .link-login{
     margin-left:950px;
-    font-size:17px;  
+    font-size:17px;
   }
   .link,.link-img{
-    font-size:17px;  
+    font-size:17px;
+    color: white;
   }
 // css of new navbar
 /*
@@ -72,13 +77,13 @@
 .nav-link{ margin-left: 1em !important;}
 
 
-.navbar-brand:hover{ background: #f4f4f4; color: #641c9e; }
+.navbar-brand:hover{ background: #f4f4f4; color: #1d70b7; }
 //.navbar-collapse{ justify-content: flex-end;}
 
 .navbar-toggler{  background:#fff !important;}
 
 .right {
   float: right;
-  margin-left:30em; 
+  margin-left:30em;
 
 }*/

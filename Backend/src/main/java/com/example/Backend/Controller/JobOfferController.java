@@ -3,8 +3,10 @@ package com.example.Backend.Controller;
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.Job;
 import com.example.Backend.Model.JobOffer;
+import com.example.Backend.Model.User;
 import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.JobRepository;
+import com.example.Backend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,11 @@ public class JobOfferController {
 
     @Autowired
     JobRepository jobRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+
     // Get All JobOffers
     @GetMapping("/jobOffer")
     public List<JobOffer> getAllJobOffers() {
@@ -39,21 +46,29 @@ public class JobOfferController {
                 .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "id", id));
     }
 
-//    // Update a JobOffer
-//    @PutMapping("/jobOffer/{id}")
-//    public JobOffer updateJobOffer(@PathVariable(value = "id") Long id,
-//                                   @Valid @RequestBody JobOffer jobOfferDetails) {
-//
-//        JobOffer jobOffer = jobOfferRepository.findById(id)
-//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "id", id));
-//
-//        jobOffer.setName(jobOfferDetails.getName());
-//        jobOffer.setLevel(jobOfferDetails.getLevel());
-//        jobOffer.setCv(jobOfferDetails.getCv());
-//
-//        JobOffer updatedJobOffer = jobOfferRepository.save(jobOffer);
-//        return updatedJobOffer;
-//    }
+    // Update a JobOffer
+    @PutMapping("/jobOffer/{id}")
+    public JobOffer updateJobOffer(@PathVariable(value = "id") Long id,
+                                   @Valid @RequestBody JobOffer jobOfferDetails) {
+
+        User enterprise = userRepository.findById(jobOfferDetails.getEnterprise().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("enterprise", "id", id));
+
+        Job job = jobRepository.findById(jobOfferDetails.getJob().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
+
+        JobOffer jobOffer = jobOfferRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "id", id));
+
+
+        jobOffer.setEnterprise(enterprise);
+        jobOffer.setJob(job);
+        jobOffer.setTown(jobOfferDetails.getTown());
+        jobOffer.setSkills(jobOfferDetails.getSkills());
+
+        JobOffer updatedJobOffer = jobOfferRepository.save(jobOffer);
+        return updatedJobOffer;
+    }
 
     // Delete a JobOffer
     @DeleteMapping("/jobOffer/{id}")
