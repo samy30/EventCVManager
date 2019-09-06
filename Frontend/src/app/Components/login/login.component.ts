@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(user=>{
                     this.authService.setCurrentUser(user);
                 })
-            this.router.navigate(['/Profil']);
+            this.router.navigate(['/JobSearch']);
             //inform sidebar with new authentication
             this.authService.informUserAuthentication(1);
           },
