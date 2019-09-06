@@ -17,14 +17,26 @@
                                     </div>
                                     </mat-tab>
                                     
-                                <!-- <mat-tab label="Age"><div style="display: block">
-                                        <canvas baseChart
-                                        [data]="pieChartData"
-                                        [labels]="pieChartLabels"
-                                        [chartType]="pieChartType">
-                                       </canvas></div>
+                                <mat-tab label="Age"><div style="display: block">
+                                 <canvas
+                                 baseChart
+                                 [chartType]="'bar'"
+                                 [datasets]="chartData"
+                                 [labels]="labels"
+                                
+                                   ></canvas>
+                                   </div>
                                 </mat-tab>
-                                 <mat-tab label="Town"> 
+                                <mat-tab label="gouvernorat"><div style="display: block">
+                                 <canvas
+                                 baseChart
+                                 [chartType]="'bar'"
+                                 [datasets]="chartData"
+                                 [labels]="labels"                               
+                                   ></canvas>
+                                   </div>
+                                </mat-tab>
+                                <!-- <mat-tab label="Town"> 
                                      <div style="display: block">
                                         <canvas baseChart
                                         [data]="pieChartData"

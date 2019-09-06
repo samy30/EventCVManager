@@ -72,9 +72,12 @@ export class EnterpriseListingComponent implements OnInit {
      });
   }
 
- deleteEnterprise(id){
-
- }
+  deleteEnterprise(id){
+     this.enterpriseService.deleteEnterprise(id)
+         .subscribe(res=>{
+             console.log("enterprise deleted");
+         })
+  }
 
  updateEnterprise(id){
   const dialogRef = this.dialog.open(EnterpriseEditionComponent, {

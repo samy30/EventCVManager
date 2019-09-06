@@ -76,7 +76,12 @@ export class JobOfferListingComponent implements OnInit {
   }
 
  deleteJobOffer(id){
-
+   console.log("attempt to delete")
+    this.jobOfferService.deleteOffer(id)
+       .subscribe(res=>{
+           console.log("jobOffer deleted");
+           console.log(res);
+       })
  }
 
  updateOffer(id)  {

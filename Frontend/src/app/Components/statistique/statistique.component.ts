@@ -33,6 +33,16 @@ export class StatistiqueComponent implements OnInit {
    
   }
   
+
+  labels =  ['JAdfgN', 'FEBfgdg', 'MAdfgdfgR', 'AdfgfdgPR','JgffdgfAN', 'FEfgdfgB', 'MgfdfgAR', 'AfgdfgPR', 'MAYdgfdg', 'JUfgfdgN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC','JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  chartData = [
+    {
+      label: 'Nombre de candidats de cette Gouvernorat',
+      data: [21, 56, 4, 31,21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59,21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+    },
+   
+  ];
+
   loadPosts() {
    this.jobsService.getJobs().subscribe(postes => {
       this.postList = postes ;

@@ -41,7 +41,7 @@
                       <th mat-header-cell *matHeaderCellDef    > Actions </th>
                       <td mat-cell *matCellDef="let element">
                          <a  matTooltip="Modifier l'offre" [routerLink]="" (click)="updateOffer(element.id)" ><mat-icon >edit</mat-icon></a>
-                          <a  matTooltip="Supprimer l'offre" style="color:red" [routerLink]="" (click)="delete(element.id)"><mat-icon >delete</mat-icon></a>
+                          <a  matTooltip="Supprimer l'offre" style="color:red" [routerLink]="" (click)="deleteJobOffer(element.id)"><mat-icon >delete</mat-icon></a>
               
                       </td>
                     </ng-container>
