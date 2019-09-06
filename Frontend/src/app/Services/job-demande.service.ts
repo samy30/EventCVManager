@@ -59,7 +59,7 @@ export class JobDemandeService {
   }
 // get job demandes sended to current entrep
   getMyJobDemandes(): Observable<any>{
-    return this.http.get("http://localhost:8080/api/enterprises/me/jobDemandes", httpOptions).pipe(
+    return this.http.get("http://localhost:8080/api/enterprise/me/jobDemandes", httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
