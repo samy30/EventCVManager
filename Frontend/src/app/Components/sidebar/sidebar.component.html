@@ -20,7 +20,7 @@
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" > JobDemande </a>
-        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()"> Logout</a>
+        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()">Logout</a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
