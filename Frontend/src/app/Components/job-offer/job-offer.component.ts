@@ -85,7 +85,6 @@ export class JobOfferComponent implements OnInit {
                  enterprise:{id:offer.enterprise.id},
                  status:"pending",
                  confirmedByUser:false
-
             };
             console.log('job demande');
             console.log(this.jobDemande);

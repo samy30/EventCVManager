@@ -80,13 +80,17 @@
               <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img  src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:20px; height:150px; width:150px;" alt="..."/>
+                         <img *ngIf="url!==null" [src]="url" style="border-radius:40px; height:200px; width:200px;"> <br/>
+                        <img *ngIf="url===null" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" 
+                                           style="border-radius:40px; height:200px; width:200px;" alt="..."/>
                     </div>
                     <div class="content" *ngIf="user">
                         <div class="author">
   
-                                <img  style=" object-fit: cover;"class="avatar border-gray" src="{{user.image}}" alt=""/>
-  
+                               <!--<img  style=" object-fit: cover;"class="avatar border-gray" src="{{user.image}}" alt=""/>
+                               --> 
+                               <input type='file' (change)="onSelectFile($event)">
+                               
                                 <h4 class="title">{{user.firstName}} {{user.lastName}}<br />
                                     <small>{{user.userName}}</small>
                                 </h4>

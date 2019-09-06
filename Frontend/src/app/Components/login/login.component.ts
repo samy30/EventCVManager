@@ -34,11 +34,12 @@ export class LoginComponent implements OnInit {
     return( !this.isFieldInvalid("username")&&!this.isFieldInvalid("password")
              &&this.loginForm.get("username").valid &&this.loginForm.get("password").valid);
   }
-
+  isAuthenticated=false;
   login(){
     this.isSubmitted=true;
     this.authService.login(this.loginForm.value).subscribe(
       res=>{
+        this.isAuthenticated=true;
         console.log("logged in");
         console.log(res);
             this.authService.setToken(res.accessToken);
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
             this.authService.informUserAuthentication(1);
           },
       err=>{
+        this.isAuthenticated=false;
          console.log("not toekn");
       }
     )
