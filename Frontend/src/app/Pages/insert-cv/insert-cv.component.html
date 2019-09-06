@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div>
 
           <div class="content">
             <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
@@ -61,22 +61,26 @@
 
               <div class="row">
                 <label>Logiciels</label>
-                <div class="col-md-6">
-
-                  <button type="button" class="btn btn-primary small" (click)="addLogicielClick()">
-                    +
-                  </button>
+                <div>
                   <div formArrayName="softwares" >
                     <div  *ngFor="let software of CVForm.get('softwares').controls; let i = index">
-                      <div [formGroupName]="i">
-                        <input formControlName="name" class="form-control" placeholder="software" >
-                        <input formControlName="level" class="form-control" type="number" placeholder="level" >
-
+                      <div [formGroupName]="i" class="row">
+                        <div  class="col-md-4">
+                          <input formControlName="name" class="form-control" placeholder="software" >
+                        </div>
+                        <div  class="col-md-4">
+                          <input formControlName="level" class="form-control" type="number" placeholder="level" >
+                        </div>
                         <button type="button" class="btn btn-primary small" (click)="deleteLogicielClick(i)">
                           del
                         </button>
 
                       </div>
+                      <br>
+                      <button type="button" class="btn btn-primary small" (click)="addLogicielClick()">
+                        +
+                      </button>
+                      <br>
 
                     </div>
                   </div>
@@ -85,16 +89,21 @@
 
               <div class="row">
                 <label>Langues</label>
-                <div class="col-md-6">
+                <div>
 
-                  <button type="button" class="btn btn-primary small" (click)="addLangueClick()">
-                    +
-                  </button>
+
                   <div formArrayName="languages" >
                     <div  *ngFor="let language of CVForm.get('languages').controls; let i = index">
-                      <div [formGroupName]="i">
-                        <input formControlName="name" class="form-control" placeholder="language" >
-                        <input formControlName="level" class="form-control"  type="number" placeholder="level" >
+                      <div [formGroupName]="i" class="row">
+                        <div class="col-md-4">
+                          <input formControlName="name" class="form-control" placeholder="language" >
+                        </div>
+
+                        <div class="col-md-4">
+                          <input formControlName="level" class="form-control"  type="number" placeholder="level" >
+                        </div>
+
+
 
                         <button type="button" class="btn btn-primary small" (click)="deleteLangueClick(i)">
                           del
@@ -104,21 +113,28 @@
 
                     </div>
                   </div>
+                  <br>
+                  <button type="button" class="btn btn-primary small" (click)="addLangueClick()">
+                    +
+                  </button>
+                  <br>
                 </div>
               </div>
 
               <div class="row">
                 <label>Interets</label>
-                <div class="col-md-6">
+                <div>
 
-                  <button type="button" class="btn btn-primary small" (click)="addInteretClick()">
-                    +
-                  </button>
+
                   <div formArrayName="interests" >
                     <div  *ngFor="let interest of CVForm.get('interests').controls; let i = index">
-                      <div [formGroupName]="i">
-                        <input formControlName="name"  class="form-control" placeholder="interest" >
-                        <input formControlName="description" class="form-control" placeholder="description">
+                      <div [formGroupName]="i" class="row">
+                        <div class="col-md-4">
+                          <input formControlName="name"  class="form-control" placeholder="interest" >
+                        </div>
+                        <div class="col-md-4">
+                          <input formControlName="description" class="form-control" placeholder="description">
+                        </div>
 
                         <button type="button" class="btn btn-primary small" (click)="deleteInteretClick(i)">
                           del
@@ -127,25 +143,35 @@
                       </div>
 
                     </div>
+                    <br>
+                    <button type="button" class="btn btn-primary small" (click)="addInteretClick()">
+                      +
+                    </button>
+                    <br>
                   </div>
                 </div>
               </div>
 
-              <div class="col-md-6 pull-right">
                 <div class="row">
                   <label>Experiences</label>
-                  <div class="col-md-6">
+                  <div>
 
-                    <button type="button" class="btn btn-primary small" (click)="addExperienceClick()">
-                      +
-                    </button>
+
                     <div formArrayName="professionalExperiences" >
                       <div  *ngFor="let experiences_professionnelle of CVForm.get('professionalExperiences').controls; let i = index">
-                        <div [formGroupName]="i">
-                          <input formControlName="enterprise" class="form-control" placeholder="Entreprise" >
-                          <input formControlName="post" class="form-control" placeholder="post" >
-                          <input formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
-                          <input formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
+                        <div [formGroupName]="i" class="row">
+                          <div class="col-md-2">
+                            <input formControlName="enterprise" class="form-control" placeholder="Entreprise" >
+                          </div>
+                          <div class="col-md-2">
+                            <input formControlName="post" class="form-control" placeholder="post" >
+                          </div>
+                          <div class="col-md-3">
+                            <input formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
+                          </div>
+                          <div class="col-md-3">
+                            <input formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
+                          </div>
 
 
                           <button type="button" class="btn btn-primary small" (click)="deleteExperienceClick(i)">
@@ -155,24 +181,32 @@
                         </div>
 
                       </div>
+                      <button type="button" class="btn btn-primary small" (click)="addExperienceClick()">
+                        +
+                      </button>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
                   <label>Formations</label>
-                  <div class="col-md-6">
-
-                    <button type="button" class="btn btn-primary small" (click)="addFormationClick()">
-                      +
-                    </button>
+                  <div>
                     <div formArrayName="studies" >
                       <div  *ngFor="let study of CVForm.get('studies').controls; let i = index">
-                        <div [formGroupName]="i">
-                          <input formControlName="name" class="form-control" placeholder="name" >
-                          <input formControlName="institution" class="form-control" placeholder="institution" >
-                          <input formControlName="mention" class="form-control" placeholder="mention" >
-                          <input type="date" class="form-control" formControlName="date" placeholder="date" >
+                        <div [formGroupName]="i" class="row">
+                          <div class="col-md-2">
+                            <input formControlName="name" class="form-control" placeholder="name" >
+                          </div>
+                          <div class="col-md-3">
+                            <input formControlName="institution" class="form-control" placeholder="institution" >
+                          </div>
+                          <div class="col-md-2">
+                            <input formControlName="mention" class="form-control" placeholder="mention" >
+                          </div>
+                          <div class="col-md-3">
+                            <input type="date" class="form-control" formControlName="date" placeholder="date" >
+                          </div>
+
                           <button type="button" class="btn btn-primary small" (click)="deleteFormationClick(i)">
                             del
                           </button>
@@ -180,22 +214,29 @@
                         </div>
 
                       </div>
+                      <br>
+                      <button type="button" class="btn btn-primary small" (click)="addFormationClick()">
+                        +
+                      </button>
+                      <br>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
                   <label>socialMedias</label>
-                  <div class="col-md-6">
-
-                    <button type="button" class="btn btn-primary small" (click)="addSocialMediaClick()">
-                      +
-                    </button>
+                  <div>
                     <div formArrayName="socialMedias" >
                       <div  *ngFor="let socialMedia  of CVForm.get('socialMedias').controls; let i = index">
-                        <div [formGroupName]="i">
-                          <input formControlName="type" class="form-control" placeholder="type" >
-                          <input formControlName="path"  class="form-control" placeholder="path" >
+                        <div [formGroupName]="i" class="row">
+                          <div class="col-md-4">
+                            <input formControlName="type" class="form-control" placeholder="type" >
+                          </div>
+                          <div class="col-md-4">
+                            <input formControlName="path"  class="form-control" placeholder="path" >
+                          </div>
+
+
                           <button type="button" class="btn btn-primary small" (click)="deleteSocialMediaClick(i)">
                             del
                           </button>
@@ -203,10 +244,14 @@
                         </div>
 
                       </div>
+                      <br>
+                      <button type="button" class="btn btn-primary small" (click)="addSocialMediaClick()">
+                        +
+                      </button>
+                      <br>
                     </div>
                   </div>
                 </div>
-              </div>
 
               <hr>
               <button type="submit" class="btn btn-info btn-fill pull-center" >Envoyer CV</button>
