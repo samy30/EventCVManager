@@ -5,6 +5,7 @@
       <h1 style="color: white">CVManagement</h1>
       <span class="menu-spacer" style="background : 1f790b7"></span>
       <div style="background : #1d70b7">
+
         <a mat-button [routerLink]="'/Acceuil'" class="link"> Acceuil </a>
         <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
@@ -28,7 +29,8 @@
 
       </div>
     </mat-toolbar-row>
-  </mat-toolbar>
+</mat-toolbar>
+<notifier-container></notifier-container>
 
   <!--
  <nav class="navbar navbar-expand-lg fixed-top ">

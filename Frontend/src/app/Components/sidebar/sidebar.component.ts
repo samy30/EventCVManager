@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { Router} from '@angular/router';
 import {SidebarService} from '../../Services/sidebar.service';
 import {MessagingService} from '../../Services/messaging.service';
+import {NotifierService} from 'angular-notifier';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -14,12 +15,16 @@ export class SidebarComponent implements OnInit {
   message;
   auths = {};
   role: string;
+  private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
               private authService: AuthService,
               private router: Router,
-              private messagingService: MessagingService
-    ) { }
+              private messagingService: MessagingService,
+              notifierService: NotifierService
+    ) {
+    this.notifier = notifierService;
+  }
 
     loggedUser;
 
@@ -72,7 +77,7 @@ export class SidebarComponent implements OnInit {
 
    notify() {
      this.messagingService.eventCallback$.subscribe(postes => {
-       alert(postes);
+       this.notifier.notify( 'success', 'woslotek notif');
      });
    }
 }
