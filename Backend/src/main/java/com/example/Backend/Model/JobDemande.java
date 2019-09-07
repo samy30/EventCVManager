@@ -3,6 +3,7 @@ package com.example.Backend.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,9 +31,10 @@ public class JobDemande extends UserDateAudit {
     @OneToOne(cascade = CascadeType.MERGE)
     private User sender;
 
-    @NotBlank
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
+    @Column(columnDefinition = "BOOLEAN")
     private boolean confirmedByUser;
 
 
@@ -60,11 +62,11 @@ public class JobDemande extends UserDateAudit {
         this.cv = cv;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
