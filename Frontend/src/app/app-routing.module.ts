@@ -9,6 +9,7 @@ import { JobOfferComponent } from './Components/job-offer/job-offer.component';
 import { AuthGuard } from './Services/auth.guard';
 import { SignupComponent } from './Components/signup/signup.component';
 import { ProfilComponent } from './Components/profil/profil.component';
+import { QuisommesnousComponent } from './Components/quisommesnous/quisommesnous.component';
 import { NotificationComponent } from './Components/notification/notification.component';
 import JobDemande from './Models/job-demande';
 import { JobDemandeComponent } from './Components/job-demande/job-demande.component';
@@ -16,6 +17,7 @@ import { NotificationDetailComponent } from './Components/notification-detail/no
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 import { AdministrationComponent } from './Components/administration/administration.component';
+import { NotreplatformeComponent } from './Components/notreplatforme/notreplatforme.component';
 
 
 const routes: Routes = [
@@ -23,7 +25,8 @@ const routes: Routes = [
                  data: { allowedRoles: ['ROLE_ENTERPRISE'] } },
   {path:'Profil',component: ProfilComponent, canActivate:[AuthGuard],
                 data: { allowedRoles: ['ROLE_ENTERPRISE','ROLE_USER','ROLE_ADMIN'] }},
-  {path:'Login',component: LoginComponent},
+                {path:'Login',component: LoginComponent},
+  
   {path:'Administration',component: AdministrationComponent,
                 data: { allowedRoles: ['ROLE_ENTERPRISE','ROLE_USER'] }},
   {path:'Notification',
@@ -45,7 +48,7 @@ const routes: Routes = [
         canActivate:[AuthGuard],
         data: { allowedRoles: ['ROLE_ENTERPRISE'] }
    },
-  {path:'Signup',component: SignupComponent},
+   {path:'Signup',component: SignupComponent},
   {     path:'JobSearch',
         component: JobSearchComponent,
         children:[
@@ -57,6 +60,8 @@ const routes: Routes = [
           data: { allowedRoles: ['ROLE_USER'] }
     }
     ,
+    { path: 'QuiSommesNous', component: QuisommesnousComponent },
+    { path: 'NotrePlateforme', component: NotreplatformeComponent },
   { path: '**', component: HomeComponent }
 ];
 

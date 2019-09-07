@@ -1,3 +1,7 @@
 
 Frontend/src/app/Components/footer/footer.component.html
 Frontend/src/app/Components/sidebar/sidebar.component.html
+Frontend/src/app/Components/sidebar/sidebar.component.html
+Frontend/src/app/app-routing.module.ts
+Backend/src/main/resources/application.properties
+Backend/.idea/misc.xml
