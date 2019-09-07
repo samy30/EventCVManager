@@ -17,7 +17,7 @@
                         <form id="login-form" class="form"  [formGroup]="loginForm" (ngSubmit)="login()">
                             <h3 class="text-center "></h3>
                             <div class="form-group">
-                                <label for="username" >UserName:</label><br>
+                                <label for="username" >Identifiant:</label><br>
                                 <input type="text"  formControlName="username" class="form-control" required>
                                 <mat-error *ngIf="isFieldInvalid('username')">
                                     username required
@@ -25,8 +25,8 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="password" >Password:</label><br>
-                                <input type="text"  formControlName="password" class="form-control" required>
+                                <label for="password" >Mot De Passe:</label><br>
+                                <input type="password"  formControlName="password" class="form-control" required>
                                 <mat-error *ngIf="isFieldInvalid('password')">
                                     password required
                                   </mat-error>
@@ -43,7 +43,7 @@
                                    
                             </div>
                             <div id="register-link" class="text-right">
-                                <a [routerLink]="'/Signup'" >Register here</a>
+                                <a [routerLink]="'/Signup'" >Creer Un Compte</a>
                             </div>
                         </form>
                     </div>

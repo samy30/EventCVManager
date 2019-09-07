@@ -17,7 +17,6 @@ import { NotificationDetailComponent } from './Components/notification-detail/no
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 import { AdministrationComponent } from './Components/administration/administration.component';
-import { QuisommesnousComponent } from './Components/quisommesnous/quisommesnous.component';
 import { NotreplatformeComponent } from './Components/notreplatforme/notreplatforme.component';
 
 
@@ -61,8 +60,8 @@ const routes: Routes = [
           data: { allowedRoles: ['ROLE_USER'] }
     }
     ,
-    { path: '/QuiSommesNous', component: QuisommesnousComponent },
-    { path: '/NotrePlateforme', component: NotreplatformeComponent },
+    { path: 'QuiSommesNous', component: QuisommesnousComponent },
+    { path: 'NotrePlateforme', component: NotreplatformeComponent },
   { path: '**', component: HomeComponent }
 ];
 
