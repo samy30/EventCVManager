@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
+import {MessagingService} from '../../Services/messaging.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService, private messagingService: MessagingService) { }
   username: string;
   password: string;
   loginForm: FormGroup;
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.authService.getCurrentUser()
           .subscribe(user => {
             this.authService.setCurrentUser(user);
+            this.messagingService.requestPermission(user.id);
             // inform sidebar with new authentication
             this.authService.informUserAuthentication(1);
             this.router.navigate(['/JobSearch']).then(r => console.log(r));

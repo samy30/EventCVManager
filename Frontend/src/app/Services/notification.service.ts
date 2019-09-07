@@ -14,7 +14,7 @@ const apiUrl = 'http://localhost:8080/api/offers';
 export class NotificationService {
 
   constructor(private http:HttpClient) { }
-  
+
   notifications = [
     { id: 1, entreprise:{'id':1,'name':'INSAT'},poste:'Graphic Designer' },
     { id: 2,entreprise:{'id':1,'name':'Headit'},poste:'Gamer'},
@@ -41,8 +41,8 @@ export class NotificationService {
   getNotifications():Observable<any[]>{
       return of(this.notifications);
   }
- 
-   
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -68,10 +68,10 @@ export class NotificationService {
       map(this.extractData),
       catchError(this.handleError));
   }*/
-  //emit notification
+  // emit notification
   private eventCallback = new Subject<any>()
   eventCallback$ = this.eventCallback.asObservable();
-  emitNotification(notification){
+  emitNotification(notification) {
       this.eventCallback.next(notification);
    }
 

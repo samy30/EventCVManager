@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   auths = {};
   role: string;
   loggedUser;
+  userId;
   private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
@@ -38,8 +39,10 @@ export class SidebarComponent implements OnInit {
     this.notify();
 
 
-    const userId = 'user002';
-    this.messagingService.requestPermission(userId);
+    if (this.loggedUser) {
+      this.userId = this.loggedUser.id;
+    }
+    this.messagingService.requestPermission(this.userId);
     this.messagingService.receiveMessage();
     this.message = this.messagingService.currentMessage;
 

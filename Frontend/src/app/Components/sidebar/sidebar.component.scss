@@ -83,11 +83,15 @@
 
   .dropdown-item{
     font-size:20px;
-  
+
   }
   .dropdown-item:hover {
     background-color: #94c01f; /* Green */
     color: black;
+  }
+
+  .dropdown-menu{
+    width: 500px;
   }
 
 
