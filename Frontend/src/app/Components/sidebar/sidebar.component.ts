@@ -15,15 +15,19 @@ export class SidebarComponent implements OnInit {
   message;
   auths = {};
   role: string;
-  private readonly notifier: NotifierService ;
+  loggedUser;
+  private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
               private authService: AuthService,
               private router: Router,
-              private messagingService: MessagingService
-    ) { }
+              private messagingService: MessagingService,
+              notifierService: NotifierService
+    ) {
+    this.notifier = notifierService;
+  }
 
-    loggedUser;
+
 
   ngOnInit() {
 
@@ -32,6 +36,7 @@ export class SidebarComponent implements OnInit {
     this.loadLoggedUser();
     this.listenToAuthentication();
     this.notify();
+
 
     const userId = 'user002';
     this.messagingService.requestPermission(userId);
@@ -49,18 +54,14 @@ export class SidebarComponent implements OnInit {
   }
 
   loadLoggedUser() {
-    this.authService.getCurrentUser()
-      .subscribe(user => {
-        console.log('current');
-        console.log(user);
-        this.loggedUser = user;
-        this.role = this.loggedUser.authorities[0].authority;
-        console.log('role');
-        console.log(this.role);
-     },
-     err => {
-         console.log('user non authenticated');
-     });
+    console.log('loggedUser');
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.loggedUser);
+    if (this.loggedUser) {
+      this.role = this.loggedUser.authorities[0].authority;
+      console.log('role');
+      console.log(this.role);
+    }
   }
 
    logout() {
@@ -74,8 +75,7 @@ export class SidebarComponent implements OnInit {
 
    notify() {
      this.messagingService.eventCallback$.subscribe(postes => {
-       alert(postes);
-       
+       this.notifier.notify( 'success', 'woslotek notif');
      });
    }
 }

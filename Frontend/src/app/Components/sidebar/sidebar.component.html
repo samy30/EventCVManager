@@ -1,18 +1,18 @@
 
 
-<mat-toolbar style="height:100px ; background :#1d70b7 ; size:30px">
+<mat-toolbar style="background :#1d70b7 ">
     <mat-toolbar-row style="background : #1d70b7">
-      
-      <span class="menu-spacer" style="background : 1f790b7"></span>
+      <h1 style="color: white">CVManagement</h1>
+      <span class="menu-spacer" style="background : #1d70b7"></span>
       <div style="background : #1d70b7">
         <a mat-button [routerLink]="'/Acceuil'"  class="link" >
           <i class="fa fa-home" style="size:50px"></i>
           Acceuil </a>
-        
+
         <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
         <a mat-button [routerLink]="'/Acceuil'" class="link"> Notre Platforme </a>
 
-        
+
         <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'" class="link">Administration </a>
