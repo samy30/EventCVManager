@@ -9,7 +9,7 @@
           <i class="fa fa-home" style="size:50px"></i>
           Acceuil </a>
         
-        <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
+        <a mat-button  class="link"> Qui Sommes nous ?</a>
         <a mat-button [routerLink]="'/Acceuil'" class="link"> Notre Platforme </a>
 
         
@@ -27,7 +27,7 @@
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" class="link" > Mes offres </a>
 
-        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Deconnection</a>
+        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Deconnexion</a>
         <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img">
             <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">
                {{loggedUser.username}}
