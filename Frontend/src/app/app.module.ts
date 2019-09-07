@@ -70,6 +70,8 @@ import { JobOfferEditionComponent } from './Components/job-offer-edition/job-off
 import {FooterComponent} from './Components/footer/footer.component';
 import {CarouselComponent} from './Components/carousel/carousel.component';
 import {NotifierModule} from 'angular-notifier';
+import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
+import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
 
 
 @NgModule({
@@ -99,7 +101,9 @@ import {NotifierModule} from 'angular-notifier';
     JobOfferEditionComponent,
     JobListingComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    NotreplatformeComponent,
+    QuisommesnousComponent
   ],
   imports: [
     ChartsModule,

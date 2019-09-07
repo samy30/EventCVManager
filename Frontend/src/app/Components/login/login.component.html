@@ -2,16 +2,20 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<!----
+<body style="background-image: url('../assets/images/empreinte.png')">
 
-<body>
-    <div id="login">
-        <h3 class="text-center text-white pt-5">Login form</h3>
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
+-->
+    <body style="background-image: url('../assets/images/login.png') ; background-size: 1920px;">
+
+<div id="login" style="background:a09d9c">
+        <h1 class="text-center text-white pt-3">Connectez-vous</h1>
+        <div class="container"style="background:a09d9c">
+            <div id="login-row"  class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form"  [formGroup]="loginForm" (ngSubmit)="login()">
-                            <h3 class="text-center ">Login</h3>
+                            <h3 class="text-center "></h3>
                             <div class="form-group">
                                 <label for="username" >UserName:</label><br>
                                 <input type="text"  formControlName="username" class="form-control" required>
@@ -27,7 +31,9 @@
                                     password required
                                   </mat-error>
                             </div>
-                            
+                            <mat-error *ngIf="this.isSubmitted && this.Authenticated" >
+                                 invalid username or password
+                            </mat-error>
 
                             <div class="form-group">
                                 <label for="remember-me" ><span>Remember me</span> 
