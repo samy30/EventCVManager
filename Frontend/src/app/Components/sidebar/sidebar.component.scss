@@ -47,10 +47,10 @@
     color: #1d70b7;
   }
 
-  .link:hover{ background: #f4f4f4; color: #1d70b7; }
+  .link:hover{ background: #94c01f; color: white; }
   .right{
 
-    margin-left: 45%;
+    margin-left:7%;
 
     //
   }
@@ -58,12 +58,13 @@
   .link {
     color: white;
   }
-  .link-login:hover{ background: #f4f4f4; color: #1d70b7; }
+  .link-login:hover{ background: #f4f4f4; color: white; }
   .link-login{
-    margin-left:950px;
+    margin-left:80vh;
+    float:right;
     font-size:25px;
   }
-  
+
 #connect{
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -76,6 +77,20 @@
     font-size:25px;
     color: white;
   }
+  .link-img{
+
+  }
+
+  .dropdown-item{
+    font-size:20px;
+  
+  }
+  .dropdown-item:hover {
+    background-color: #94c01f; /* Green */
+    color: black;
+  }
+
+
 // css of new navbar
 /*
 

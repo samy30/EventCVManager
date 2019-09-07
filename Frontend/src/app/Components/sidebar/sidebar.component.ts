@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   message;
   auths = {};
   role: string;
+  loggedUser;
   private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
@@ -26,7 +27,7 @@ export class SidebarComponent implements OnInit {
     this.notifier = notifierService;
   }
 
-    loggedUser;
+
 
   ngOnInit() {
 
@@ -35,6 +36,7 @@ export class SidebarComponent implements OnInit {
     this.loadLoggedUser();
     this.listenToAuthentication();
     this.notify();
+
 
     const userId = 'user002';
     this.messagingService.requestPermission(userId);
@@ -52,18 +54,14 @@ export class SidebarComponent implements OnInit {
   }
 
   loadLoggedUser() {
-    this.authService.getCurrentUser()
-      .subscribe(user => {
-        console.log('current');
-        console.log(user);
-        this.loggedUser = user;
-        this.role = this.loggedUser.authorities[0].authority;
-        console.log('role');
-        console.log(this.role);
-     },
-     err => {
-         console.log('user non authenticated');
-     });
+    console.log('loggedUser');
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.loggedUser);
+    if (this.loggedUser) {
+      this.role = this.loggedUser.authorities[0].authority;
+      console.log('role');
+      console.log(this.role);
+    }
   }
 
    logout() {
