@@ -49,7 +49,8 @@ public class NotificationController {
 
     @RequestMapping(value = "/send", method = RequestMethod.GET, produces = "application/json")
     public void  sendNotificationTo(){
-        this.send("cvrVsZq-lQs:APA91bGyGOgtPJBti-LRoxpK96o8a4YQMaOqMnH_I_-YUvoQwHeVeQ2yZX_FaFGmArQKHpF-D474ScOWCbodJnsDS4tmBJxWT9RDbe59lZjVYpgBG0jVUFKB6EKp-9219J_9QmnbWS5C");
+        this.send("eEpJjRgdNqI:APA91bEjCZ9q1sMyVSIHhlvPy8POOx9c5ZztkDdo8FYynFZKqs8NjTSRUcaWogxAq_IWZ29NEXQC-b85HVV736YOQFdsRjIJWiMOj9acMPXrV0Mb2ZFG9lkLYqQgIG1UrZhuNFc469QM");
+//this.send("cvrVsZq-lQs:APA91bGyGOgtPJBti-LRoxpK96o8a4YQMaOqMnH_I_-YUvoQwHeVeQ2yZX_FaFGmArQKHpF-D474ScOWCbodJnsDS4tmBJxWT9RDbe59lZjVYpgBG0jVUFKB6EKp-9219J_9QmnbWS5C");
     }
 
 
