@@ -27,7 +27,7 @@
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" class="link" > Mes offres </a>
 
-        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Deconnection</a>
+        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link">Deconnection</a>
         <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img">
             <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">
                {{loggedUser.username}}
