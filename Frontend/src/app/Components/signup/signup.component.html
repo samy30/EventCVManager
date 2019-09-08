@@ -75,16 +75,45 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label for="age" >Ville:</label><br>
-                                        <input id="age"  class="form-control" >
+                                        <label for="gouvernorat" >Gouvernorat:</label><br>
+                                       <select name="carlist" form="carform" class="form-control">
+                                        <option value="none" selected disabled hidden> 
+                                        Choisissez votre gouvernaurat
+                                        </option>   
+                                        <option value="Ariana">Ariana</option>
+                                          <option value="Baja">Baja</option>
+                                          <option value="Ben Arous">Ben Arous</option>
+                                          <option value="Bizerte">Bizerte</option>
+                                          <option value="Gabes">Gabes</option>
+                                          <option value="Gafsa">Gafsa</option>
+                                          <option value="Jendouba">Jendouba</option>
+                                          <option value="Kairouan">Kairouan</option>
+                                          <option value="Kasserine">Kasserine</option>
+                                          <option value="Kébili">Kébili</option>
+                                          <option value="Le Kef">Le Kef</option>
+                                          <option value="Mahdia">Mahdia</option>
+                                          <option value="La Manouba">La Manouba</option>
+                                          <option value="Medenine">Medenine</option>
+                                          <option value="Monastir">Monastir</option>
+                                          <option value="Nabeul">Nabeul</option>
+                                          <option value="Sfax">Sfax</option>
+                                          <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                          <option value="Siliana">Siliana</option>
+                                          <option value="Sousse">Sousse</option>
+                                          <option value="Tataouine">Tataouine</option>
+                                          <option value="Tozeur">Tozeur</option>
+                                          <option value="Tunis">Tunis</option>
+                                          <option value="Zaghouan">Zaghouan</option>
+
+                                        </select>
+                                
                                       </div>
                                 </div>
                             </div>    
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
-                                       [disabled]="!isFormValid(signupForm)"
-                                >
-                              </div>                  
+                                       [disabled]="!isFormValid(signupForm)">
+                                      </div>                  
                         </form>
                       </div>                
                     </div>

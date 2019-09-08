@@ -65,6 +65,14 @@ public class JobOfferController {
         jobOffer.setJob(job);
         jobOffer.setTown(jobOfferDetails.getTown());
         jobOffer.setSkills(jobOfferDetails.getSkills());
+        jobOffer.setActivity(jobOfferDetails.getActivity());
+        jobOffer.setDescription(jobOfferDetails.getDescription());
+        jobOffer.setStartingDate(jobOfferDetails.getStartingDate());
+        jobOffer.setType(jobOfferDetails.getType());
+        jobOffer.setExperienceYears(jobOfferDetails.getExperienceYears());
+        jobOffer.setMinimumSchoolDegree(jobOfferDetails.getMinimumSchoolDegree());
+        jobOffer.setTime(jobOfferDetails.getTime());
+        if(jobOfferDetails.getWage() == null)jobOffer.setWage(jobOfferDetails.getWage());
 
         JobOffer updatedJobOffer = jobOfferRepository.save(jobOffer);
         return updatedJobOffer;

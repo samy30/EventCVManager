@@ -16,7 +16,7 @@ const apiUrl = 'http://localhost:8080/api/notification';
 export class NotificationService {
 
   constructor(private http:HttpClient) { }
-  
+
   notifications = [
     { id: 1, entreprise:{'id':1,'name':'INSAT'},poste:'Graphic Designer' },
     { id: 2,entreprise:{'id':1,'name':'Headit'},poste:'Gamer'},
@@ -71,7 +71,7 @@ export class NotificationService {
   /*
   private eventCallback = new Subject<any>()
   eventCallback$ = this.eventCallback.asObservable();
-  emitNotification(notification){
+  emitNotification(notification) {
       this.eventCallback.next(notification);
    }*/
 

@@ -20,6 +20,22 @@ public class JobOffer extends UserDateAudit {
 
     private String[] skills;
 
+    private String activity;
+
+    private String type;
+
+    private String time;
+
+    private String startingDate;
+
+    private Double wage;
+
+    private String description;
+
+    private String minimumSchoolDegree;
+
+    private int experienceYears;
+
     private String town ;
 
     @JoinColumn(name = "enterprise_id")
@@ -74,5 +90,69 @@ public class JobOffer extends UserDateAudit {
 
     public void setEnterprise(User enterprise) {
         this.enterprise = enterprise;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getStartingDate() {
+        return startingDate;
+    }
+
+    public void setStartingDate(String startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public Double getWage() {
+        return wage;
+    }
+
+    public void setWage(Double wage) {
+        this.wage = wage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMinimumSchoolDegree() {
+        return minimumSchoolDegree;
+    }
+
+    public void setMinimumSchoolDegree(String minimumSchoolDegree) {
+        this.minimumSchoolDegree = minimumSchoolDegree;
+    }
+
+    public int getExperienceYears() {
+        return experienceYears;
+    }
+
+    public void setExperienceYears(int experienceYears) {
+        this.experienceYears = experienceYears;
     }
 }
