@@ -138,12 +138,11 @@ public class EnterpriseController {
         return jobDemandes ;
     }
 
-    @GetMapping("/enterprise/{username}/jobDemandes/confirmed")
-    public List<JobDemande> getConfirmedJobDemandesForEnterprise(@PathVariable(value = "username") String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
-
-
+    @GetMapping("/enterprise/{id}/jobDemandes/confirmed")
+    public List<JobDemande> getConfirmedJobDemandesForEnterprise(@PathVariable(value = "id") Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "id", id));
+        
         List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterpriseAndConfirmedByUser(user,true);
         return jobDemandes ;
     }

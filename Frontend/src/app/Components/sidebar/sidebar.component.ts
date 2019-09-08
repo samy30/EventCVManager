@@ -97,7 +97,7 @@ export class SidebarComponent implements OnInit {
 
  getNotificationDetails(notification){
  //sending notification to component notification-details throug notification service
-      
+      //update notification stuts=seen
         
          
      if(notification.content=="CONFIRMATION"){

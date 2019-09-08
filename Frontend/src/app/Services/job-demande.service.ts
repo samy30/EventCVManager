@@ -64,8 +64,8 @@ export class JobDemandeService {
       catchError(this.handleError));
   }
 
-  getMyConfirmedJobDemandes():Observable<any>{
-    return this.http.get("http://localhost:8080/api/enterprise/me/jobDemandes", httpOptions).pipe(
+  getMyConfirmedJobDemandes(enterpriseId):Observable<any>{
+    return this.http.get(`http://localhost:8080/api/enterprise/${enterpriseId}/jobDemandes/confirmed`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

@@ -17,16 +17,24 @@ export class ConfirmedJobDemandeComponent implements OnInit {
   jobDemandes:any[]=[];
   senders:any[]=[];
   sender;
-  jobDemandeCV;
+  confirmedJobDemandeCV;
+  loggedUser;
   ngOnInit() {
-       this.loadConfirmedJobDemandes();
        this.getNotification();
+       this.loadLoggedUser();
   }
 
+  
+  loadLoggedUser() {
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.loggedUser) {
+      this.loadConfirmedJobDemandes(this.loggedUser.id);
+    }
+  }
  
-  loadConfirmedJobDemandes(){
+  loadConfirmedJobDemandes(enterpriseId){
     this.senders=[];
-      this.jobDemandeService.getMyConfirmedJobDemandes()
+      this.jobDemandeService.getMyConfirmedJobDemandes(enterpriseId)
          .subscribe(jobDemandes=>{
             this.jobDemandes=jobDemandes;
              this.loadSenders(jobDemandes);         
@@ -64,6 +72,7 @@ getNotification(){
 confirmedJobDemande;
 getConfirmedJobDemandeDetails(confirmedJobDemande){
     this.confirmedJobDemande=confirmedJobDemande;
+    this.confirmedJobDemandeCV=confirmedJobDemande.cv;
     this.getJobSender(confirmedJobDemande);
 }
 
