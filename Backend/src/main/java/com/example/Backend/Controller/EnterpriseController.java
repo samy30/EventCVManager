@@ -45,7 +45,7 @@ public class EnterpriseController {
     @GetMapping("/enterprise/me")
     @PreAuthorize("hasRole('ENTERPRISE')")
     public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
-        return new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getNotificationID());
+        return new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getImage(), currentUser.getNotificationID());
     }
 
     // get all enterprises
@@ -63,7 +63,7 @@ public class EnterpriseController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt(),user.getNotificationID());
+        EnterpriseProfile enterpriseProfile = new EnterpriseProfile(user.getId(),user.getUsername(),user.getDescription(),user.getActivity(),user.getEmail(),user.getCreatedAt(), user.getImage(), user.getNotificationID());
         return enterpriseProfile;
     }
 
@@ -135,6 +135,16 @@ public class EnterpriseController {
 
 
         List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
+        return jobDemandes ;
+    }
+
+    @GetMapping("/enterprise/{username}/jobDemandes/confirmed")
+    public List<JobDemande> getConfirmedJobDemandesForEnterprise(@PathVariable(value = "username") String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
+
+
+        List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterpriseAndConfirmedByUser(user,true);
         return jobDemandes ;
     }
 }

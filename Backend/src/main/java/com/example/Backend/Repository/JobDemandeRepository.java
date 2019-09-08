@@ -11,6 +11,7 @@ import java.util.List;
 public interface JobDemandeRepository extends JpaRepository<JobDemande, Long> {
     List<JobDemande> findByEnterprise(User enterprise);
     List<JobDemande> findBySender(User user);
+    List<JobDemande> findByEnterpriseAndConfirmedByUser(User enterprise, boolean confirmed);
 //    List<JobDemande> findBySeenByEnterpriseAndEnterprise(boolean isSeen,User enterprise);
 //    List<JobDemande> findBySenderAndStatusAndSeenByUser(User sender, String status, boolean seenByUser);
 }
