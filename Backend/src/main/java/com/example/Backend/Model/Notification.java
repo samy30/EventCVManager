@@ -20,7 +20,8 @@ public class Notification extends AuditModel{
     private String content;
 
     private boolean seen;
-
+    
+    public Notification() {} 
     public Notification(Long senderID, Long receiverID, Long jobOfferID, Long jobDemandeID, String content, boolean seen) {
         this.senderID = senderID;
         this.receiverID = receiverID;
