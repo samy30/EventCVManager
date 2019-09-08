@@ -18,6 +18,7 @@ import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-d
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { NotreplatformeComponent } from './Components/notreplatforme/notreplatforme.component';
+import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
     ,
     { path: 'QuiSommesNous', component: QuisommesnousComponent },
     { path: 'NotrePlateforme', component: NotreplatformeComponent },
+    {path:'ConfirmedJobDemande',component:ConfirmedJobDemandeComponent},
   { path: '**', component: HomeComponent }
 ];
 

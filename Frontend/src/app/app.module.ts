@@ -72,6 +72,7 @@ import {CarouselComponent} from './Components/carousel/carousel.component';
 import {NotifierModule} from 'angular-notifier';
 import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
 import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
+import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.c
     FooterComponent,
     CarouselComponent,
     NotreplatformeComponent,
-    QuisommesnousComponent
+    QuisommesnousComponent,
+    ConfirmedJobDemandeComponent
   ],
   imports: [
     ChartsModule,
