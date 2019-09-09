@@ -11,6 +11,8 @@ import com.example.Backend.Payload.SignUpRequest;
 import com.example.Backend.Repository.RoleRepository;
 import com.example.Backend.Repository.UserRepository;
 import com.example.Backend.Security.JwtTokenProvider;
+import com.example.Backend.Service.ReCaptchaService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -46,9 +52,14 @@ public class AuthController {
     @Autowired
     JwtTokenProvider tokenProvider;
 
+    @Autowired
+    ReCaptchaService captchaService;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        List<User> userList = userRepository.findAll();
+        System.out.println(userList.get(0).getUsername() + " " + userList.get(0).getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsernameOrEmail(),
@@ -63,7 +74,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(
+            @Valid @RequestBody SignUpRequest signUpRequest,
+            HttpServletRequest request
+    ) {
+
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
@@ -72,6 +87,20 @@ public class AuthController {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
+        }
+
+        // Verify reCaptcha
+        String ip = request.getRemoteAddr();
+        String reCaptchaResponse = signUpRequest.getCaptchaResponse();
+        String captchaVerifyMessage =
+                captchaService.verifyRecaptcha(ip, reCaptchaResponse);
+
+        if(StringUtils.isNotEmpty(captchaVerifyMessage)) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", captchaVerifyMessage);
+            System.out.println(captchaVerifyMessage);
+            return ResponseEntity.badRequest()
+                    .body(response);
         }
 
         // Creating user's account

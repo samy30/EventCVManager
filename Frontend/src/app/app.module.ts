@@ -69,6 +69,7 @@ import { ChartsModule } from 'ng2-charts';
 import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
 import {FooterComponent} from './Components/footer/footer.component';
 import {CarouselComponent} from './Components/carousel/carousel.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 import {NotifierModule} from 'angular-notifier';
 import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
 import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
@@ -145,6 +146,7 @@ import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    RecaptchaModule.forRoot(),
     NotifierModule.withConfig( {
       position: {
         horizontal: {

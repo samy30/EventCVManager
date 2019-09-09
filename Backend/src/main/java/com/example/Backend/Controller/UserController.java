@@ -107,11 +107,9 @@ public class UserController {
     @GetMapping("/enterprise/{username}/jobOffers")
     public List<JobOffer> getJobOffersCreatedBy(@PathVariable(value = "username") String username,
                                           @CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
 
-
-        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
+        User enterprise = userRepository.findByUsername(username).get();
+        List<JobOffer> jobOffers = jobOfferRepository.findAllByEnterprise(enterprise);
         return jobOffers ;
     }
 

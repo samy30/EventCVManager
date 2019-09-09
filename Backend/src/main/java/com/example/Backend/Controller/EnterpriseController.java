@@ -2,15 +2,14 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.*;
-import com.example.Backend.Payload.ApiResponse;
-import com.example.Backend.Payload.EnterpriseProfile;
-import com.example.Backend.Payload.EnterpriseSummary;
+import com.example.Backend.Payload.*;
 import com.example.Backend.Repository.JobDemandeRepository;
 import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.RoleRepository;
 import com.example.Backend.Repository.UserRepository;
 import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.UserPrincipal;
+import com.example.Backend.Service.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +39,9 @@ public class EnterpriseController {
 
     @Autowired
     private JobDemandeRepository jobDemandeRepository;
+
+    @Autowired
+    private InterviewService interviewService;
 
     // get current enterprise
     @GetMapping("/enterprise/me")
@@ -117,6 +119,16 @@ public class EnterpriseController {
         return jobOffers ;
     }
 
+//    @GetMapping("/enterprise/{username}/jobOffers")
+//    public List<JobOffer> getJobOffersCreatedByEnterpriseUsername(@PathVariable String username) {
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
+//
+//
+//        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
+//        return jobOffers ;
+//    }
+
     @GetMapping("/enterprise/me/jobDemandes")
     @PreAuthorize("hasRole('ENTERPRISE')")
     public List<JobDemande> getJobDemandesForCurrentUser(@CurrentUser UserPrincipal currentUser) {
@@ -136,6 +148,14 @@ public class EnterpriseController {
 
         List<JobDemande> jobDemandes = jobDemandeRepository.findByEnterprise(user);
         return jobDemandes ;
+    }
+
+    @PostMapping("/enterprise/{username}/interviewCalendar")
+    public InterviewCalendar createInterviewCalendar(
+            @PathVariable String username,
+            @RequestBody InterviewCalendarPayload interviewCalendarPayload
+            ) {
+        return interviewService.createInterviewCalendar(username, interviewCalendarPayload);
     }
 
     @GetMapping("/enterprise/{id}/jobDemandes/confirmed")

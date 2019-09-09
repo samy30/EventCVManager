@@ -1,6 +1,8 @@
 package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -9,26 +11,29 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "job_demandes")
 public class JobDemande extends UserDateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "job_offer__id", nullable = false)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "jobOffer_id")
     private JobOffer jobOffer;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "cv_id", nullable = false)
+    @JoinColumn(name = "cv_id", nullable = true)
     private CV cv;
 
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enterprise_id")
-    @OneToOne(cascade = CascadeType.MERGE)
     private User enterprise;
 
+    @OneToOne
     @JoinColumn(name = "sender_id")
-    @OneToOne(cascade = CascadeType.MERGE)
     private User sender;
 
     @Enumerated(EnumType.STRING)
@@ -37,6 +42,28 @@ public class JobDemande extends UserDateAudit {
     @Column(columnDefinition = "BOOLEAN")
     private boolean confirmedByUser;
 
+    public JobDemande(
+            JobOffer jobOffer,
+            CV cv,
+            User enterprise,
+            User sender,
+            Status status
+    ) {
+        this.jobOffer = jobOffer;
+        this.cv = cv;
+        this.enterprise = enterprise;
+        this.sender = sender;
+        this.status = status;
+    }
+    public boolean isConfirmedByEntreprise() {
+        return confirmedByEntreprise;
+    }
+
+    public void setConfirmedByEntreprise(boolean confirmedByEntreprise) {
+        this.confirmedByEntreprise = confirmedByEntreprise;
+    }
+
+    private boolean confirmedByEntreprise;
 
     public Long getId() {
         return id;
@@ -93,4 +120,6 @@ public class JobDemande extends UserDateAudit {
     public void setConfirmedByUser(boolean confirmedByUser) {
         this.confirmedByUser = confirmedByUser;
     }
+
+
 }
