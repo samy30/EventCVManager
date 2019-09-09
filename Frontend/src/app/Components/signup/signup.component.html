@@ -115,7 +115,9 @@
                        [disabled]="!isFormValid(signupForm)"
                 >
               </div>
+<!--              <div [disabled]="!isFormValid(signupForm)">-->
               <re-captcha (resolved)="resolved($event)" siteKey="6Lf9MLcUAAAAAHT4LbIuv3XZnxYaOcZ7RhUM4KyY"></re-captcha>
+<!--          </div>-->
           </form>
         </div>
       </div>
