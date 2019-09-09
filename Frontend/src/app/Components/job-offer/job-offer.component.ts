@@ -35,7 +35,7 @@ export class JobOfferComponent implements OnInit {
   ngOnInit() {
    // this.loadSelectedPost();
      this.loadLoggedUser();
- 
+
   }
 
      loadSelectedPost(){
@@ -83,7 +83,7 @@ export class JobOfferComponent implements OnInit {
                  jobOffer: {id:offer.id},
                  sender:{id:this.currentUser.id},
                  enterprise:{id:offer.enterprise.id},
-                 status:"pending",
+                 status:'PENDING',
                  confirmedByUser:false
             };
             console.log('job demande');
