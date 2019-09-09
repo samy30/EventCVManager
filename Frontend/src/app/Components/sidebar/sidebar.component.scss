@@ -7,6 +7,17 @@
     align-items: center;
   }
 
+  .seen{
+    background-color: #EAEAEA;
+    border:2px;
+    height:50px;
+  }
+   .unseen{
+     background-color: rgb(236, 234, 234);
+     border:2px;
+     height:50px;
+   }
+
   .example-card-center{
       height:300px;
       width: 300px;
@@ -77,13 +88,11 @@
     font-size:25px;
     color: white;
   }
-  .link-img{
-
-  }
+  
 
   .dropdown-item{
     font-size:20px;
-
+    height:60px;
   }
   .dropdown-item:hover {
     background-color: #94c01f; /* Green */

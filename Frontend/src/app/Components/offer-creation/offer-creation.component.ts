@@ -19,7 +19,11 @@ export class OfferCreationComponent implements OnInit {
   jobs:any[]=[];
   enterprises:any[]=[];
   loggedEntreprise;
+  type_contrats=['Contract à durée déterminée','Contract à durée indéterminée','other options...'];
+  genres=['Temps plein','Temps partiel'];
+  towns=['Jendouba','Sfax','Tunisie','Sousse','Nabel','Bizerte'];
   skills:FormArray;
+  diplomes=['diplôme d’études primaires','diplôme d’études secondaires','mastere','doctorat'];
   constructor(  private formBuilder: FormBuilder,
     private jobOfferService:JobOfferService,
     private jobsService:JobsService,
@@ -30,7 +34,15 @@ export class OfferCreationComponent implements OnInit {
     this.offerFormGroup = this.formBuilder.group({
       nom_poste: ['', Validators.required],
       nom_enterprise: ['', Validators.required],
+      activity:['',Validators.required],
       town: ['', Validators.required],
+      type:['', Validators.required],
+      time:['',Validators.required],
+      wage:[''],
+      description:['',Validators.required],
+      minimumSchoolDegree:['',Validators.required],
+      experience_years:['',Validators.required],
+      startingDate:['',Validators.required],
       skills: this.formBuilder.array([ this.createSkill() ])
     });
    }
@@ -59,7 +71,7 @@ export class OfferCreationComponent implements OnInit {
         console.log("current");
         console.log(user);
         this.loggedEntreprise=user;
-        this.offerFormGroup.get('nom_entreprise').setValue(this.loggedEntreprise.name);
+        this.offerFormGroup.get('nom_enterprise').setValue(this.loggedEntreprise.name);
      });
   }
 
@@ -80,8 +92,6 @@ export class OfferCreationComponent implements OnInit {
   }
    
    createOffer(){
-      //var skills:any[]=[];
-    //  skills.push(this.offerFormGroup.get('skills').value);
      this.offer={
         job:{
           id:this.offerFormGroup.get('nom_poste').value,
@@ -90,7 +100,15 @@ export class OfferCreationComponent implements OnInit {
           id:this.offerFormGroup.get('nom_enterprise').value
         },
         town:this.offerFormGroup.get('town').value,
-        skills:this.offerFormGroup.get('skills').value.map(s=>s.name)
+        skills:this.offerFormGroup.get('skills').value.map(s=>s.name),
+        activity:this.offerFormGroup.get('activity').value,
+        type:this.offerFormGroup.get('type').value,
+        wage:this.offerFormGroup.get('wage').value,
+        time:this.offerFormGroup.get('time').value,
+        description:this.offerFormGroup.get('description').value,
+        minimumSchoolDegree:this.offerFormGroup.get('minimumSchoolDegree').value,
+        experience_years:this.offerFormGroup.get('experience_years').value,
+        startingDate:this.offerFormGroup.get('startingDate').value,
      }
      console.log("offer");
      console.log(this.offer);

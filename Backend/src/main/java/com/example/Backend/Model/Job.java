@@ -1,9 +1,12 @@
 package com.example.Backend.Model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "jobs")
 public class Job extends AuditModel {
     @Id
@@ -12,6 +15,10 @@ public class Job extends AuditModel {
 
     @NotBlank
     private String name;
+
+    public Job(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

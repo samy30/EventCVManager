@@ -9,15 +9,18 @@ import { AuthService} from 'src/app/Services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService) {
+  }
+
   username: string;
   password: string;
-  chosenSignupForm = 0 ;
+  chosenSignupForm = 0;
   signupForm: FormGroup;
-  isSubmitted  =  false;
+  isSubmitted = false;
+  captchaResponse: string;
 
   ngOnInit() {
-    this.signupForm  =  this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', Validators.required],
@@ -25,7 +28,7 @@ export class SignupComponent implements OnInit {
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
       age: [0, Validators.required]
-     });
+    });
   }
 
   chooseForm(index: number) {
@@ -33,30 +36,34 @@ export class SignupComponent implements OnInit {
   }
 
   isFieldInvalid(field: string) { // {6}
-  return (
-    (!this.signupForm.get(field).valid && this.signupForm.get(field).touched) ||
-    (this.signupForm.get(field).untouched && this.isSubmitted)
-  );
-   }
+    return (
+      (!this.signupForm.get(field).valid && this.signupForm.get(field).touched) ||
+      (this.signupForm.get(field).untouched && this.isSubmitted)
+    );
+  }
 
-   isFormValid(form: FormGroup): boolean {
-     return( !this.isFieldInvalid('username') && !this.isFieldInvalid('password')
-              && this.signupForm.get('username').valid && this.signupForm.get('password').valid);
-   }
+  isFormValid(form: FormGroup): boolean {
+    return (!this.isFieldInvalid('username') && !this.isFieldInvalid('password')
+      && this.signupForm.get('username').valid && this.signupForm.get('password').valid);
+  }
 
 
   signup() {
     this.isSubmitted = true;
-    this.authService.registerJobSeeker(this.signupForm.value).subscribe(
+    this.authService.registerJobSeeker(this.signupForm.value, this.captchaResponse).subscribe(
       res => {
         console.log('registered');
         console.log(res);
         this.router.navigate(['/Profile']);
-        },
+      },
       err => {
-         console.log('not token');
+        console.log('not token');
       }
     );
   }
 
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response ${captchaResponse}:`);
+    this.captchaResponse = captchaResponse;
   }
+}
