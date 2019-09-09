@@ -1,5 +1,6 @@
 package com.example.Backend.Model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -66,6 +67,18 @@ public class User extends AuditModel {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private InterviewCalendar interviewCalendar;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<JobOffer> jobOffers = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "sender")
+    private JobDemande jobRequest;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<JobDemande> jobRequests = new HashSet<>();
 
     public User() {
 
@@ -216,5 +229,21 @@ public class User extends AuditModel {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public Set<JobOffer> getJobOffers() {
+        return jobOffers;
+    }
+
+    public void setJobOffers(Set<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
+    }
+
+    public InterviewCalendar getInterviewCalendar() {
+        return interviewCalendar;
+    }
+
+    public void setInterviewCalendar(InterviewCalendar interviewCalendar) {
+        this.interviewCalendar = interviewCalendar;
     }
 }

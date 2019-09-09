@@ -72,7 +72,8 @@
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
                                        [disabled]="!isFormValid(signupForm)"
                                 >
-                              </div>                  
+                            </div>
+                          <re-captcha (resolved)="resolved($event)" siteKey="6Lf9MLcUAAAAAHT4LbIuv3XZnxYaOcZ7RhUM4KyY"></re-captcha>
                         </form>
                       </div>                
                     </div>

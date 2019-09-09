@@ -1,19 +1,23 @@
 package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "job_offers")
 public class JobOffer extends UserDateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonManagedReference
     @JoinColumn(name = "job_id", nullable = false)
     @OneToOne(cascade = CascadeType.MERGE)
     private Job job;
@@ -22,11 +26,21 @@ public class JobOffer extends UserDateAudit {
 
     private String town ;
 
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enterprise_id")
-    @OneToOne(cascade = CascadeType.MERGE)
     private User enterprise;
 
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "jobOffer")
+    private Set<JobDemande> jobRequests = new HashSet<>();
 
+    public JobOffer(Job job, String[] skills, String town, User enterprise) {
+        this.job = job;
+        this.skills = skills;
+        this.town = town;
+        this.enterprise = enterprise;
+    }
 
 
 //    @OneToOne(fetch = FetchType.LAZY)
@@ -75,4 +89,14 @@ public class JobOffer extends UserDateAudit {
     public void setEnterprise(User enterprise) {
         this.enterprise = enterprise;
     }
+
+    public Set<JobDemande> getJobRequests() {
+        return jobRequests;
+    }
+
+    public void setJobRequests(Set<JobDemande> jobRequests) {
+        this.jobRequests = jobRequests;
+    }
+
+
 }

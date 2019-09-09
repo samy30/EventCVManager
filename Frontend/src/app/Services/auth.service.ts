@@ -43,7 +43,7 @@ export class AuthService {
     console.log(enterprise);
     return this.http.post<User>(`${this.authUrl}/auth/signup`, enterprise);
   }
-  registerJobSeeker(user): Observable<any> {
+  registerJobSeeker(user, captchaResponse): Observable<any> {
     const jobSeeker = {
       username: user.username,
       email: user.email,
@@ -52,7 +52,8 @@ export class AuthService {
       lastName: user.lastName,
       gender: user.gender,
       age: user.age,
-      role: 'ROLE_USER'
+      role: 'ROLE_USER',
+      captchaResponse
     };
     console.log(jobSeeker);
     return this.http.post<User>(`${this.authUrl}/auth/signup`, jobSeeker);

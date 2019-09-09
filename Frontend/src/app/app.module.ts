@@ -45,7 +45,7 @@ import { JobDemandeComponent } from './Components/job-demande/job-demande.compon
 import { NotificationDetailComponent } from './Components/notification-detail/notification-detail.component';
 import { JobDemandeDetailComponent } from './Components/job-demande-detail/job-demande-detail.component';
 import { OfferCreationComponent } from './Components/offer-creation/offer-creation.component';
-import {UserService} from "./Services/user.service";
+import {UserService} from './Services/user.service';
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -66,7 +66,7 @@ import { ChartsModule } from 'ng2-charts';
 import { JobOfferEditionComponent } from './Components/job-offer-edition/job-offer-edition.component';
 import {FooterComponent} from './Components/footer/footer.component';
 import {CarouselComponent} from './Components/carousel/carousel.component';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -135,10 +135,10 @@ import {CarouselComponent} from './Components/carousel/carousel.component';
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
-
+    RecaptchaModule.forRoot()
   ],
-  entryComponents: [InsertCVComponent,EnterpriseCreationComponent,
-                    OfferCreationComponent,EnterpriseEditionComponent,
+  entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
+                    OfferCreationComponent, EnterpriseEditionComponent,
                     JobOfferEditionComponent],
   providers: [
     httpInterceptorProviders,
