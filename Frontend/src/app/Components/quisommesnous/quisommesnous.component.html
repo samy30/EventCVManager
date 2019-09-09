@@ -1,1 +1,183 @@
-<p>Haw jeyek</p>
+<div id="firascarousel">
+    <div class="firas_arrow" style="left:20px;" onclick="nextcarousel(-1);"></div>
+    <div class="firas_arrow" style="right:20px;transform: scaleX(-1);" onclick="nextcarousel(1);"></div>
+    <div class="firas_circle ciractive" onclick="carnum(0);" style="left:calc(50% - 40px);"></div>
+    <div class="firas_circle" onclick="carnum(1);" style="left:calc(50% - 8px);"></div>
+    <div class="firas_circle" onclick="carnum(2);" style="left:calc(50% + 24px);"></div>
+    <div class="kaaba caractive" style="background-color:rgb(50, 173, 50);">
+        <div class="cadri">
+            <h2>this is title</h2>
+            <h3>this is mini title</h3>
+            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+        </div>
+        <div class="taswira" style="background-image: url(../assets/carousel/car1.jpg);"></div>
+    </div>
+    <div class="kaaba" style="background-color:rgb(214, 88, 42);">
+        <div class="taswira" style="background-image: url(../assets/carousel/car2.jpg);"></div>
+        <div class="cadri">
+            <h2>this is title</h2>
+            <h3>this is mini title</h3>
+            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+        </div>
+    </div>
+    <div class="kaaba" style="background-color:rgb(43, 98, 182);">
+        <div class="cadri">
+            <h2>this is title</h2>
+            <h3>this is mini title</h3>
+            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+        </div>
+        <div class="taswira" style="background-image: url(../assets/carousel/car3.jpg);"></div>
+    </div>
+    <div class="carbar" style="background-color:rgba(40, 160, 40, .6);"></div>
+    <div class="carbar" style="background-color:rgba(190, 60, 35, .6);"></div>
+    <div class="carbar" style="background-color:rgba(35, 70, 150, .6);"></div>
+</div>
+
+<style>
+    .carbar{
+        width: 0;
+        height: 8px;
+        position: absolute;
+        top: calc(100% - 8px);
+        left: 0;
+        transition: width 3s linear 0ms;
+        opacity: 0;
+        z-index: 999;
+    }
+    .baractive{
+        width:100%;
+        opacity: 1;
+    }
+    .firas_circle{
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: calc(100% - 40px);
+        border-radius: 16px;
+        background-color: rgba(0, 0, 0, .5);
+        border: 1px solid rgba(255, 255, 255, .4);
+        transition: background-color .5 linear 0ms;
+        transition: border .5 linear 0ms;
+        cursor: pointer;
+        z-index: 999;
+    }
+    .ciractive, .firas_circle:hover{
+        background-color: rgba(0, 0, 0, .9);
+        border: 1px solid rgba(255, 255, 255, .9);
+    }
+    .firas_arrow{
+        padding: 15px;
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
+        color: white;
+        background-color: rgba(255,255,255,.6);
+        background-image: url(../assets/carousel/cararrow.png);
+        background-position: center;
+        background-size: 40%;
+        background-repeat: no-repeat;
+        filter: invert(100%);
+        transition: background-color .5s linear 0ms;
+        position: absolute;
+        top: calc(50% - 30px);
+        cursor: pointer;
+        z-index: 999;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .firas_arrow:hover{
+        background-color: rgba(255,255,255,1);
+    }
+    #firascarousel{
+        width: 100%;
+        position: relative;
+        height: 550px;
+        font-size: 0;
+    }
+    .kaaba{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        transition: opacity 1s ease-out 0s;
+        vertical-align: top;
+        opacity: 0;
+        z-index: 1;
+    }
+    .caractive{
+        opacity: 1;
+        z-index: 99;
+    }
+    .cadri{
+        display: inline-block;
+        vertical-align: top;
+        width: 600px;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 100px 80px;
+        font-size: initial;
+        text-align: center;
+        font-family: Roboto;
+    }
+    .taswira{
+        display: inline-block;
+        width: calc(100% - 600px);
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+
+<script type="text/javascript">
+    carrousels = document.getElementsByClassName("kaaba");
+    carcircles = document.getElementsByClassName("firas_circle");
+    carbars = document.getElementsByClassName("carbar");
+    carbars[0].className = "carbar baractive";
+    currentC = 0;
+    carouselT = setTimeout(autocarousel, 3000);
+    function autocarousel(){
+        carrousels[currentC].className = "kaaba";
+        carcircles[currentC].className = "firas_circle";
+        carbars[currentC].className = "carbar";
+        currentC += 1;
+        if(currentC == 3) currentC = 0;
+        carrousels[currentC].className = "kaaba caractive"
+        carcircles[currentC].className = "firas_circle ciractive";
+        carbars[currentC].className = "carbar baractive";
+        carouselT = setTimeout(autocarousel, 3000);
+    }
+    function nextcarousel(x){
+        clearTimeout(carouselT);
+        carrousels[currentC].className = "kaaba";
+        carcircles[currentC].className = "firas_circle";
+        carbars[currentC].className = "carbar";
+        currentC += x;
+        if(currentC == -1) currentC = 2;
+        if(currentC == 3) currentC = 0;
+        carrousels[currentC].className = "kaaba caractive"
+        carcircles[currentC].className = "firas_circle ciractive";
+        carbars[currentC].className = "carbar baractive";
+        carouselT = setTimeout(autocarousel, 3000);
+    }
+    function carnum(x){
+        clearTimeout(carouselT);
+        carrousels[0].className = "kaaba";
+        carcircles[0].className = "firas_circle";
+        carbars[0].className = "carbar";
+        carrousels[1].className = "kaaba";
+        carcircles[1].className = "firas_circle";
+        carbars[1].className = "carbar";
+        carrousels[2].className = "kaaba";
+        carcircles[2].className = "firas_circle";
+        carbars[2].className = "carbar";
+        currentC = x;
+        carrousels[currentC].className = "kaaba caractive";
+        carcircles[currentC].className = "firas_circle ciractive";
+        carbars[currentC].className = "carbar baractive";
+        carouselT = setTimeout(autocarousel, 3000);
+    }
+</script>
