@@ -8,13 +8,14 @@
   }
 
   .seen{
-    background-color: #EAEAEA;
+    background-color: rgb(235, 233, 233);
     border:2px;
+    border-radius:10px;
     height:50px;
   }
    .unseen{
-     background-color: rgb(236, 234, 234);
-     border:2px;
+     background-color: rgb(240, 240, 240);
+
      height:50px;
    }
 
@@ -81,7 +82,7 @@
   transition-duration: 0.4s;
 }
 #connect:hover {
-  background-color: #94c01f; /* Green */
+  background-color: #1f2ac0; /* Green */
   color: white;
 }
   .link,.link-img{

@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EnterpriseService } from 'src/app/Services/enterprise.service';
+import { JobDemandeService } from 'src/app/Services/job-demande.service';
 
 @Component({
   selector: 'app-notification',
@@ -13,7 +14,8 @@ export class NotificationComponent implements OnInit {
   constructor(private notificationService:NotificationService,
               private router:Router,
               private route:ActivatedRoute,
-              private enterpriseService:EnterpriseService) { 
+              private enterpriseService:EnterpriseService,
+              private jobDemandeService:JobDemandeService) { 
                 
                }
   loggedUser;
@@ -58,6 +60,13 @@ export class NotificationComponent implements OnInit {
    this.myNotification=notification;
  }
   
+ Confirm(){
+   var id=this.myNotification.jobDemandeID;
+    this.jobDemandeService.confirmJobDemande(id)
+      .subscribe(jb=>{
+          console.log("jobDemande confirmed");
+      })
+ }
 
 
 
