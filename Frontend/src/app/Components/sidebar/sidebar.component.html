@@ -1,10 +1,9 @@
 
-
-<mat-toolbar style="background :#1d70b7 ">
-    <mat-toolbar-row style="background : #1d70b7">
+<mat-toolbar style="background :#1d70b7  ">
+    <mat-toolbar-row style="background : #1d70b7 ">
       <div style="background : #1d70b7">
         <a mat-button [routerLink]="'/Acceuil'"  class="link" >
-          <i class="fa fa-home" style="size:50px"></i>
+          <i class="fa fa-home" style=""></i>
           Acceuil </a>
 
         <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
@@ -42,7 +41,10 @@
             <div class="nav-item dropdown">
                 <a  class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">       
-                  {{loggedUser.username}}</a>
+                <!--
+                    {{loggedUser.username}}
+                -->
+                </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a  [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" 
                                   class="dropdown-item">Profil<i class="fa fa-user" ></i> </a>
