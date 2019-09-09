@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
   loggedUser;
   userId;
   notifications:any[]=[];
+  senders:any[]=[];
   private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
@@ -69,6 +70,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+
+
    logout() {
      console.log('logout');
      this.authService.logout();
@@ -92,14 +95,32 @@ export class SidebarComponent implements OnInit {
          console.log("hello notification")
          console.log(notifications);
           this.notifications=notifications;
+          this.loadSenders(notifications);
        })
 }
+
+   loadSenders(notifications){
+     this.senders=[];
+         notifications.map(notif=>this.getSender(notif));
+  
+     }
+
+    getSender(notif){
+        this.authService.getUser(notif.senderID)
+              .subscribe(user=>{
+                this.senders.push(user);
+              })
+      }
+    getName(i){
+      console.log("senders");
+      console.log(this.senders);
+      return this.senders[i].username;
+    }
 
  getNotificationDetails(notification){
  //sending notification to component notification-details throug notification service
       //update notification stuts=seen
         
-         
      if(notification.content=="CONFIRMATION"){
          this.notificationService.emitNotification(notification);
          this.router.navigate(['/ConfirmedJobDemande']);

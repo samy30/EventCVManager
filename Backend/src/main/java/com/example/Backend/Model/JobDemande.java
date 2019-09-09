@@ -47,7 +47,7 @@ public class JobDemande extends UserDateAudit {
             CV cv,
             User enterprise,
             User sender,
-            String status
+            Status status
     ) {
         this.jobOffer = jobOffer;
         this.cv = cv;

@@ -1,5 +1,6 @@
 package com.example.Backend.Controller;
 
+import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.Notification;
 import com.example.Backend.Repository.NotificationRepository;
 import com.example.Backend.Service.PushNotificationsService;
@@ -31,6 +32,16 @@ public class NotificationController {
     @GetMapping("/notification/{id}")
     public List<Notification> getNotificationByReceiverId(@PathVariable(value = "id") Long id) {
         return notificationRepository.findByReceiverID(id);
+    }
+
+    // set notification seen
+    @GetMapping("/notification/{id}/seen")
+    public Notification setNotificationToSeenByReceiverId(@PathVariable(value = "id") Long id) {
+        Notification notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification", "id", id));
+        notification.setSeen(true);
+        Notification updatedNotification = notificationRepository.save(notification);
+        return updatedNotification;
     }
 
     // Count all Notifications by receiver ID

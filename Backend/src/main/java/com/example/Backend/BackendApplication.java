@@ -2,12 +2,10 @@ package com.example.Backend;
 
 import com.example.Backend.Model.*;
 import com.example.Backend.Repository.*;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
@@ -57,24 +55,24 @@ public class BackendApplication {
 			enterprise.getJobOffers().add(machineLearningJobOffer);
 
 			JobDemande[] jobRequests = new JobDemande[10];
-			jobRequests[0] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[0], "PENDING");
-			jobRequests[1] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[1], "PENDING");
-			jobRequests[2] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[2], "PENDING");
+			jobRequests[0] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[0], Status.PENDING);
+			jobRequests[1] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[1], Status.PENDING);
+			jobRequests[2] = new JobDemande(architectJobOffer, null, enterprise, jobSeekers[2], Status.PENDING);
 			architectJobOffer.getJobRequests().add(jobRequests[0]);
 			architectJobOffer.getJobRequests().add(jobRequests[1]);
 			architectJobOffer.getJobRequests().add(jobRequests[2]);
-			jobRequests[3] = new JobDemande(softwareEngineerJobOffer, null, enterprise, jobSeekers[3], "PENDING");
-			jobRequests[4] = new JobDemande(softwareEngineerJobOffer, null, enterprise, jobSeekers[4], "PENDING");
+			jobRequests[3] = new JobDemande(softwareEngineerJobOffer, null, enterprise, jobSeekers[3], Status.PENDING);
+			jobRequests[4] = new JobDemande(softwareEngineerJobOffer, null, enterprise, jobSeekers[4], Status.PENDING);
 			softwareEngineerJobOffer.getJobRequests().add(jobRequests[3]);
 			softwareEngineerJobOffer.getJobRequests().add(jobRequests[4]);
-			jobRequests[5] = new JobDemande(designerJobOffer, null, enterprise, jobSeekers[5], "PENDING");
+			jobRequests[5] = new JobDemande(designerJobOffer, null, enterprise, jobSeekers[5], Status.PENDING);
 			designerJobOffer.getJobRequests().add(jobRequests[5]);
-			jobRequests[6] = new JobDemande(bioTechnologyJobOffer, null, enterprise, jobSeekers[6], "PENDING");
-			jobRequests[7] = new JobDemande(bioTechnologyJobOffer, null, enterprise, jobSeekers[7], "PENDING");
+			jobRequests[6] = new JobDemande(bioTechnologyJobOffer, null, enterprise, jobSeekers[6], Status.PENDING);
+			jobRequests[7] = new JobDemande(bioTechnologyJobOffer, null, enterprise, jobSeekers[7], Status.PENDING);
 			bioTechnologyJobOffer.getJobRequests().add(jobRequests[6]);
 			bioTechnologyJobOffer.getJobRequests().add(jobRequests[7]);
-			jobRequests[8] = new JobDemande(machineLearningJobOffer, null, enterprise, jobSeekers[8], "PENDING");
-			jobRequests[9] = new JobDemande(machineLearningJobOffer, null, enterprise, jobSeekers[9], "PENDING");
+			jobRequests[8] = new JobDemande(machineLearningJobOffer, null, enterprise, jobSeekers[8], Status.PENDING);
+			jobRequests[9] = new JobDemande(machineLearningJobOffer, null, enterprise, jobSeekers[9], Status.PENDING);
 			machineLearningJobOffer.getJobRequests().add(jobRequests[8]);
 			machineLearningJobOffer.getJobRequests().add(jobRequests[9]);
 

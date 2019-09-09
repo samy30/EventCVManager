@@ -23,10 +23,10 @@
                       <div class="dropdown-menu dropdown-menu-right">                    
                             <a  
                                  class="dropdown-item"
-                                    *ngFor="let notification of notifications" (click)='getNotificationDetails(notification)'>
+                                    *ngFor="let notification of notifications;let i=index" (click)='getNotificationDetails(notification)'>
                                       <div *ngIf="notification.seen;else unseennotif"
-                                          class="seen" > user with Id {{notification.senderID}} sends this notification</div>
-                                       <ng-template #unseennotif class="unseen"> user with Id {{notification.senderID}} sends this notification</ng-template>                              
+                                          class="seen" >  {{getName(i)|uppercase }} a envoyé cette notification</div>
+                                       <ng-template #unseennotif class="unseen">  {{getName(i)|uppercase }} a envoyé cette notification</ng-template>                              
                             </a>                            
                     </div>                   
                                             
