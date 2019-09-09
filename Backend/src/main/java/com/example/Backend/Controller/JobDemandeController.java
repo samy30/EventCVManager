@@ -75,6 +75,7 @@ public class JobDemandeController {
                 .orElseThrow(() -> new ResourceNotFoundException("JobDemande", "id", id));
 
         jobDemande.setConfirmedByUser(true);
+        jobDemande.setStatus(Status.CONFIRMED);
 
         JobDemande updatedJobDemande = jobDemandeRepository.save(jobDemande);
         notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,true);
