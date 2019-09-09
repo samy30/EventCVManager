@@ -1,85 +1,216 @@
 
-<div class="main-content" >
-    <div class="container-fluid">
-        <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                      <div class="card-header">
-                             <h3> Create your job Offer</h3>
-                            </div>
-                    <div class="content">
-                        <form [formGroup]="offerFormGroup">                               
-                                <div class="row">  
-                                      <div class="col-md-2">
-                                              <mat-label>Job Name :</mat-label> 
-                                      </div>
-                                  <div class="col-md-6">
-                                     <div class="form-group">
-                                          
-                                      <mat-select formControlName="nom_poste"  [compareWith]="compareById" placeholder="Select poste"> 
-                                             
-                                              <mat-option *ngFor="let job of jobs" [value]="job">
-                                                      {{ job.name }}
-                                                    </mat-option>
-                                      </mat-select> 
-                                      </div>
-                                  </div>
-                                  
-                              </div>
-                              <hr>
-                              <div class="row">
-                                  <div class="col-md-2">
-                                          <label>nom_entreprise</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                          <div class="form-group">
-                                               
-                                           <mat-select formControlName="nom_enterprise" [compareWith]="compareById2" placeholder="Select entreprise"> 
-                                                   <mat-option *ngFor="let enterprise1 of enterprises" [value]="enterprise1">
-                                                           {{ enterprise1.name }}
-                                                         </mat-option>
-                                           </mat-select> 
-                                           </div>
-                                       </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                  <div class="col-md-2">
-                                          <label>town</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                         
-                                          <input formControlName="town" type="text" class="form-control" placeholder="town">
-                                      </div>
-                                  </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                 
-                                     <div class="col-md-2"><label>Skills</label> </div>  
-                                     
-                                     <div class="col-md-6">
-                                          <div formArrayName="skills"
-                                          *ngFor="let skill of offerFormGroup.get('skills').controls; let i = index;">
-                                          <div [formGroupName]="i">
-                                               <input formControlName="name"  class="form-control" type="text" placeholder="Skill Name">
+<div class="main-content" style="height:500px; overflow:auto;" >
+        <div class="container-fluid">
+            <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                          <div class="card-header">
+                                 <h3> Create your job Offer</h3>
+                                </div>
+                        <div class="content">
+                            <form [formGroup]="offerFormGroup">                               
+                                    <div class="row">  
+                                          <div class="col-md-4">
+                                                  <mat-label>intitulé du poste :</mat-label> 
                                           </div>
-                                        </div>
-                                     </div>
+                                      <div class="col-md-6">
+                                         <div class="form-group">
+                                              
+                                          <mat-select formControlName="nom_poste" [compareWith]="compareById2" placeholder="choisir poste"> 
+                                                 
+                                                  <mat-option *ngFor="let job of jobs" [value]="job">
+                                                          {{ job.name }}
+                                                        </mat-option>
+                                          </mat-select> 
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+                                  <div class="row">  
+                                          <div class="col-md-4">
+                                                  <mat-label>Secteur d'activité  :</mat-label> 
+                                          </div>
+                                      <div class="col-md-6">
+                                         <div class="form-group">
+                                              
+                                              <input formControlName="activity" type="text" class="form-control" placeholder="secteur d'activité">
+  
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                              <label>nom_entreprise</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                              <div class="form-group">
+                                                   
+                                               <mat-select formControlName="nom_enterprise" [compareWith]="compareById" placeholder="Select entreprise"> 
+                                                      
+                                                       <mat-option *ngFor="let enterprise of enterprises" [value]="enterprise">
+                                                               {{ enterprise.name }}
+                                                             </mat-option>
+                                               </mat-select> 
+                                               </div>
+                                           </div>
+                                  </div>
+                                  <hr>
+                                  <div class="row">  
+                                          <div class="col-md-4">
+                                                  <mat-label>Type de contrat :</mat-label> 
+                                          </div>
+                                      <div class="col-md-6">
+                                         <div class="form-group">
+                                              
+                                              <mat-select formControlName="type" placeholder="type_contrat"> 
+                                                      
+                                                      <mat-option *ngFor="let type of type_contrats" [value]="type">
+                                                              {{ type }}
+                                                            </mat-option>
+                                              </mat-select> 
+  
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+                                  <div class="row">  
+                                          <div class="col-md-4">
+                                                  <mat-label>Genre de travail :</mat-label> 
+                                          </div>
+                                      <div class="col-md-6">
+                                         <div class="form-group">
+                                              
+                                              <mat-select formControlName="time" placeholder="genre_travail"> 
+                                                      
+                                                      <mat-option *ngFor="let genre of genres" [value]="genre">
+                                                              {{ genre }}
+                                                            </mat-option>
+                                              </mat-select> 
+  
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+                                  <div class="row">  
+                                          <div class="col-md-4">
+                                                  <mat-label>Date debut de contrat :</mat-label> 
+                                          </div>
+                                      <div class="col-md-6">
+                                         <div class="form-group">
+                                              
+                                              <input formControlName="startingDate" type="date" class="form-control" placeholder="secteur d'activité">
+  
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+                                  <hr>
+                                  <div class="row">
+                                          <div class="col-md-4">
+                                                  <label>Salaire proposé</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                 
+                                                  <input formControlName="wage" type="number" class="form-control" placeholder="salaire">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                              <label>Lieu de travail </label>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+  
+                                                  <mat-select formControlName="town" placeholder="lieu de travail"> 
+                                                      
+                                                          <mat-option *ngFor="let town of towns" [value]="town">
+                                                                  {{ town }}
+                                                                </mat-option>
+                                                  </mat-select> 
+                                              
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <div class="row">
+                                          <div class="col-md-4">
+                                                  <label>Description de poste </label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+      
+                                                      <textarea formControlName="description"  class="form-control"  placeholder="decrire le poste">
+                                                          </textarea>
+                                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <hr>
+                                      <hr>
+                                      <div class="row">
+                                              <div class="col-md-4">
+                                                      <label>Diplôme minimum requis </label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+          
+                                                          <mat-select formControlName="minimumSchoolDegree" placeholder="Diplôme minimum requis"> 
+                                                      
+                                                                  <mat-option *ngFor="let diplome of diplomes" [value]="diplome">
+                                                                          {{ diplome }}
+                                                                        </mat-option>
+                                                          </mat-select> 
+                                                      
+                                                  </div>
+                                              </div>
+                                          </div>
+                                    <hr>
+                                    <div class="row">
+                                          <div class="col-md-4">
+                                                  <label>Expérience attendue pour ce poste (nombre d'annees) </label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+      
+                                                      <input formControlName="experience_years"  class="form-control" type="number" placeholder="entrer votre experience">
+                                                        
+                                                  
+                                              </div>
+                                          </div>
+                                      </div>
+                                <hr>
+                                  <div class="row">                 
+                                         <div class="col-md-2"><label>Qualités requises pour le poste </label> </div>  
+                                         <div class="col-md-2"> <button class="btn btn-info" (click)="addSkill()">add</button> </div>  
+                                         <div class="col-md-6">
+                                              <div formArrayName="skills"
+                                              *ngFor="let skill of offerFormGroup.get('skills').controls; let i = index;">
+                                              <div [formGroupName]="i">
+                                                   <input formControlName="name"  class="form-control" type="text" placeholder="Skill Name">
+                                              </div>
+                                            </div>
+                                         </div>
+                                      
+                                  </div>
+                                  <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateOffer()">Enregistrer modifications</button>
+                                  <div class="clearfix"></div>
+                             </form>
                                   
-                              </div>
-                              <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateOffer()">update Offer</button>
-                              <div class="clearfix"></div>
-                         </form>
-                              
+                          </div>
                       </div>
-                  </div>
-             </div>
-        </div>
-     </div>
-  </div>
-
-
-
-
+                 </div>
+            </div>
+         </div>
+      </div>
+    
+    
+    
+  

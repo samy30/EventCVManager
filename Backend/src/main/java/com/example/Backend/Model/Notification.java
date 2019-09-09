@@ -17,11 +17,15 @@ public class Notification extends AuditModel{
 
     private Long jobDemandeID;
 
-    private String content;
+    @Enumerated(EnumType.STRING)
+    private NotificationTypeName content;
 
     private boolean seen;
 
-    public Notification(Long senderID, Long receiverID, Long jobOfferID, Long jobDemandeID, String content, boolean seen) {
+    public Notification() {
+    }
+
+    public Notification(Long senderID, Long receiverID, Long jobOfferID, Long jobDemandeID, NotificationTypeName content, boolean seen) {
         this.senderID = senderID;
         this.receiverID = receiverID;
         this.jobOfferID = jobOfferID;
@@ -70,11 +74,11 @@ public class Notification extends AuditModel{
         this.jobDemandeID = jobDemandeID;
     }
 
-    public String getContent() {
+    public NotificationTypeName getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(NotificationTypeName content) {
         this.content = content;
     }
 

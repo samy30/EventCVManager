@@ -1,0 +1,21 @@
+
+{
+    "nom":"belaid",
+    "prenom":"sami",
+    "poste":"architecte",
+    "adresse":"sousse",
+    "telephone":"98 826 879",
+    "email":"samsum@jaw.com",
+    "profil":"Loyal , serviable et beau parleur",
+    "logiciels":{
+            "1":"laravel",
+            "2":"angular"       
+        },
+    "experience professionnelle":{
+        "experience 1":{
+            "annee":"2017-2019",
+            "entreprise":"SamCo",
+            "poste":"commis",
+        }
+    }
+}

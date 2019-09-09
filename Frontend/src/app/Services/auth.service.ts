@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, of, Subject, throwError} from 'rxjs';
 
 import User from '../Models/user';
-import { reject ,resolve} from 'q';
+import {catchError} from 'rxjs/operators';
 
 
 @Injectable({
@@ -12,10 +11,13 @@ import { reject ,resolve} from 'q';
 })
 export class AuthService {
 
-  authUrl = 'http://localhost:8080/api';
-
 
   constructor(private http: HttpClient) { }
+
+  authUrl = 'http://localhost:8080/api';
+
+  private eventCallback = new Subject<any>();
+  eventCallback$ = this.eventCallback.asObservable();
 
   login(user: User): Observable<any> {
     const authRequest = {
@@ -60,6 +62,9 @@ export class AuthService {
   }
 
   logout() {
+    this.updateUserNotificationToken(JSON.parse(localStorage.getItem('currentUser')).id, '').subscribe(res => {
+    console.log('notification token deleted');
+    });
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
   }
@@ -76,12 +81,11 @@ export class AuthService {
      localStorage.setItem('token', token);
   }
 
-  setCurrentUser(user){// save it in localstorage
-    if(user){
-      localStorage.setItem('currentUser',JSON.stringify(user));
+  setCurrentUser(user) {// save it in localstorage
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
       JSON.parse(localStorage.getItem('currentUser'));
-    }
-    else{
+    } else {
       localStorage.setItem('currentUser', null);
       JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -95,9 +99,6 @@ export class AuthService {
     return this.http.get<User>(`${this.authUrl}/user/${id}`);
   }
 
-  private eventCallback = new Subject<any>();
-  eventCallback$ = this.eventCallback.asObservable();
-
   informUserAuthentication(flag) {
     this.eventCallback.next(flag);
   }
@@ -107,61 +108,50 @@ export class AuthService {
     if (allowedRoles == null || allowedRoles.length === 0) {
       return true;
     }
-    var currentUserRoles=[],user;
-    user=JSON.parse(localStorage.getItem('currentUser'));
-    if(user&&user.authorities) currentUserRoles=user.authorities.map(a=>a.authority);
-   // if(currentUserRoles.length===0)return false;
-    return currentUserRoles.every(function (value) {
-      return (allowedRoles.indexOf(value) >= 0);
-    });
-    
+    let currentUserRoles = [];
+    let user;
+    user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user && user.authorities) { currentUserRoles = user.authorities.map(a => a.authority); }
+    return currentUserRoles.every(value => (allowedRoles.indexOf(value) >= 0));
   }
 
-  updateUser(id,updatedUser): Observable<User>{
-    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`,updatedUser);
+  updateUser(id, updatedUser): Observable<User> {
+    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`, updatedUser);
   }
 
-  updateEnterprise(id,updatedEnterprise): Observable<User>{
+  updateEnterprise(id, updatedEnterprise): Observable<User> {
     const enterprise = {
-     
+
       email: updatedEnterprise.email,
       name: updatedEnterprise.name,
       description: updatedEnterprise.description,
       activity: updatedEnterprise.activity,
     };
     console.log(enterprise);
-    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`,updatedEnterprise);
+    return this.http.put<User>(`${this.authUrl}/ApplicationUsers/${id}`, updatedEnterprise);
   }
 
-  
-  
-
-
-/*
-  getCurrentUser(): Observable<any> {
-    return this.http.get<any>(`${this.userUrl}/ApplicationUsers/current`);
+  updateUserNotificationToken(id, newToken): Observable<any> {
+    const notificationToken = {
+      token: newToken
+    };
+    return this.http.put(`${this.authUrl}/users/${id}/notificationToken`, notificationToken).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  get checkUser(): boolean {
-    console.log("ttttttttttt"+localStorage.getItem('jwtToken'));
-    return localStorage.getItem('jwtToken') !== null;
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a Category-facing error message
+    return throwError('Something bad happened; please try again later.');
   }
-
-  get loggedInUser(): User {
-    return this._loggedInUser;
-  }
-  getUsers(criteria): Observable<User[]> {
-    return this.http.get<User[]>(`${this.userUrl}/ApplicationUsers`);
-  }
-  addUser(newUser): Observable<User>{
-    return this.http.post<User>(`${this.userUrl}/ApplicationUsers/register`,newUser);
-  }
-  deleteUser(id): Observable<User>{
-    return this.http.delete<User>(`${this.userUrl}/ApplicationUsers/${id}`);
-  }
- 
-  getUser(id): Observable<User>{
-    return this.http.get<User>(`${this.userUrl}/ApplicationUsers/${id}`);
-  }*/
-
 }

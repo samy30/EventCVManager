@@ -7,18 +7,22 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSortModule, MatDialogModule, MatDialogRef } from '@angular/material';
+import { MatStepperModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSortModule,
+  MatDialogModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule} from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material';
-import { MatPaginatorModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatPaginatorModule} from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatTreeModule } from '@angular/material/tree';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,7 +39,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { JobSearchComponent } from './Components/job-search/job-search.component';
 import { JobOfferComponent } from './Components/job-offer/job-offer.component';
 import { TokenInterceptor } from './http-interceptors/token-Interceptor ';
-import { httpInterceptorProviders } from '../app/http-interceptors';
+import { httpInterceptorProviders } from './http-interceptors';
 import { AuthGuard } from './Services/auth.guard';
 import { AuthService } from './Services/auth.service';
 import { SignupComponent } from './Components/signup/signup.component';
@@ -48,7 +52,6 @@ import { OfferCreationComponent } from './Components/offer-creation/offer-creati
 import {UserService} from './Services/user.service';
 import { AdministrationComponent } from './Components/administration/administration.component';
 import { CvDisplayComponent } from './Components/cv-display/cv-display.component';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -67,6 +70,11 @@ import { JobOfferEditionComponent } from './Components/job-offer-edition/job-off
 import {FooterComponent} from './Components/footer/footer.component';
 import {CarouselComponent} from './Components/carousel/carousel.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import {NotifierModule} from 'angular-notifier';
+import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
+import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
+import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +103,10 @@ import { RecaptchaModule } from 'ng-recaptcha';
     JobOfferEditionComponent,
     JobListingComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    NotreplatformeComponent,
+    QuisommesnousComponent,
+    ConfirmedJobDemandeComponent
   ],
   imports: [
     ChartsModule,
@@ -135,7 +146,20 @@ import { RecaptchaModule } from 'ng-recaptcha';
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    RecaptchaModule.forRoot()
+    RecaptchaModule.forRoot(),
+    NotifierModule.withConfig( {
+      position: {
+        horizontal: {
+          position: 'right',
+          distance: 12
+        },
+        vertical: {
+          position: 'top',
+          distance: 12,
+          gap: 10
+        }
+      }
+    } )
   ],
   entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
                     OfferCreationComponent, EnterpriseEditionComponent,

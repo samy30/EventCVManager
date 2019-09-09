@@ -2,18 +2,22 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<!----
+<body style="background-image: url('../assets/images/empreinte.png')">
 
-<body>
-    <div id="login">
-        <h3 class="text-center text-white pt-5">Login form</h3>
-        <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
+-->
+    <body style="background-image: url('../assets/images/login.png') ; background-size: 1920px;">
+
+<div id="login" style="background:a09d9c">
+        <h1 class="text-center text-white pt-3">Connectez-vous</h1>
+        <div class="container"style="background:a09d9c">
+            <div id="login-row"  class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form"  [formGroup]="loginForm" (ngSubmit)="login()">
-                            <h3 class="text-center ">Login</h3>
+                            <h3 class="text-center "></h3>
                             <div class="form-group">
-                                <label for="username" >UserName:</label><br>
+                                <label for="username" >Identifiant:</label><br>
                                 <input type="text"  formControlName="username" class="form-control" required>
                                 <mat-error *ngIf="isFieldInvalid('username')">
                                     username required
@@ -21,23 +25,25 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="password" >Password:</label><br>
-                                <input type="text"  formControlName="password" class="form-control" required>
+                                <label for="password" >Mot De Passe:</label><br>
+                                <input type="password"  formControlName="password" class="form-control" required>
                                 <mat-error *ngIf="isFieldInvalid('password')">
                                     password required
                                   </mat-error>
                             </div>
-                            
+                            <mat-error *ngIf="this.isSubmitted && !this.Authenticated" >
+                                 invalid username or password
+                            </mat-error>
 
                             <div class="form-group">
-                                <label for="remember-me" ><span>Remember me</span> 
+                                <label for="remember-me" ><span>Se souvenir de moi</span> 
                                     <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
                                      [disabled]="!isFormValid(loginForm)">
                                    
                             </div>
                             <div id="register-link" class="text-right">
-                                <a [routerLink]="'/Signup'" >Register here</a>
+                                <a [routerLink]="'/Signup'" >Creer Un Compte</a>
                             </div>
                         </form>
                     </div>

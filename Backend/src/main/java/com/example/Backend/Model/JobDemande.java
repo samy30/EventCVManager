@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -35,9 +36,10 @@ public class JobDemande extends UserDateAudit {
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    @NotBlank
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
+    @Column(columnDefinition = "BOOLEAN")
     private boolean confirmedByUser;
 
     public JobDemande(
@@ -87,11 +89,11 @@ public class JobDemande extends UserDateAudit {
         this.cv = cv;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

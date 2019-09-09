@@ -3,8 +3,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<body>
-    <div id="login">
+<body style="background-image: url('../assets/images/empreinte.png')">
+    <div id="login" >
         <h3 class="text-center text-white pt-5">SignUp form</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
@@ -14,7 +14,7 @@
                         <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
                           <h3 class="text-center ">SignUp</h3>
                           <div class="form-group">
-                            <label for="username" >UserName:</label><br>
+                            <label for="username" >Identifiant:</label><br>
                             <input type="text"  formControlName="username" class="form-control" required>
                             <mat-error *ngIf="isFieldInvalid('username')">
                               username required
@@ -22,7 +22,15 @@
                           </div>
 
                           <div class="form-group">
-                            <label for="password" >Password:</label><br>
+                            <label for="password" >Mot De Passe:</label><br>
+                            <input type="password"  formControlName="password" class="form-control" required>
+                            <mat-error *ngIf="isFieldInvalid('password')">
+                              password required
+                            </mat-error>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label for="password" >Confirmer Votre Mot De Passe:</label><br>
                             <input type="password"  formControlName="password" class="form-control" required>
                             <mat-error *ngIf="isFieldInvalid('password')">
                               password required
@@ -35,12 +43,12 @@
                           </div>
 
                           <div class="form-group">
-                            <label for="firstName" >First Name:</label><br>
+                            <label for="firstName" >Prenom:</label><br>
                             <input type="text" id="firstName"  formControlName="firstName" class="form-control" required>
                           </div>
 
                           <div class="form-group">
-                            <label for="lastName" >Last Name:</label><br>
+                            <label for="lastName" >Nom:</label><br>
                             <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
                           </div>
 
@@ -48,8 +56,12 @@
                            <div class="row">
                              <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gender" >Gender:</label><br>
-                                    <input type="text" id="gender" formControlName="gender" class="form-control" required>
+                                    <label for="gender" >Genre:</label><br>
+                                    
+                                    <select name="GenderList" id="gender" formControlName="gender" class="form-control" required>
+                                      <option value="Male">Homme</option>
+                                      <option value="Female">Femme</option>
+                                    </select>
                                   </div>
                              </div>
                              <div class="col-md-6">
@@ -63,8 +75,38 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label for="age" >Town:</label><br>
-                                        <input id="age"  class="form-control" >
+                                        <label for="gouvernorat" >Gouvernorat:</label><br>
+                                       <select name="carlist" form="carform" class="form-control">
+                                        <option value="none" selected disabled hidden> 
+                                        Choisissez votre gouvernaurat
+                                        </option>   
+                                        <option value="Ariana">Ariana</option>
+                                          <option value="Baja">Baja</option>
+                                          <option value="Ben Arous">Ben Arous</option>
+                                          <option value="Bizerte">Bizerte</option>
+                                          <option value="Gabes">Gabes</option>
+                                          <option value="Gafsa">Gafsa</option>
+                                          <option value="Jendouba">Jendouba</option>
+                                          <option value="Kairouan">Kairouan</option>
+                                          <option value="Kasserine">Kasserine</option>
+                                          <option value="Kébili">Kébili</option>
+                                          <option value="Le Kef">Le Kef</option>
+                                          <option value="Mahdia">Mahdia</option>
+                                          <option value="La Manouba">La Manouba</option>
+                                          <option value="Medenine">Medenine</option>
+                                          <option value="Monastir">Monastir</option>
+                                          <option value="Nabeul">Nabeul</option>
+                                          <option value="Sfax">Sfax</option>
+                                          <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                          <option value="Siliana">Siliana</option>
+                                          <option value="Sousse">Sousse</option>
+                                          <option value="Tataouine">Tataouine</option>
+                                          <option value="Tozeur">Tozeur</option>
+                                          <option value="Tunis">Tunis</option>
+                                          <option value="Zaghouan">Zaghouan</option>
+
+                                        </select>
+                                
                                       </div>
                                 </div>
                             </div>    
@@ -74,6 +116,8 @@
                                 >
                             </div>
                           <re-captcha (resolved)="resolved($event)" siteKey="6Lf9MLcUAAAAAHT4LbIuv3XZnxYaOcZ7RhUM4KyY"></re-captcha>
+                                       [disabled]="!isFormValid(signupForm)">
+                                      </div>                  
                         </form>
                       </div>                
                     </div>

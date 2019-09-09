@@ -4,7 +4,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!-- details card section starts from here -->
-<section class="details-card">
+<section class="details-card" *ngIf="notification">
     <h2>Notifcation Details</h2>
     <hr>
     <div class="container">
@@ -23,12 +23,12 @@
                                 <h4>Bonjour Mahmoud ,vous avez ete selectionné par </h4>
                                 <div class="linediv">
                                         <h4 >Entreprise:</h4>
-                                        <h3>{{notification.entreprise.name}}</h3>
+                                        <h3>{{nameEnterprise}}</h3>
                                 </div>
                                 <h4>pour passer un entretien pour un </h4>
                                 <div class="linediv">
                                         <h4 >Poste:</h4>
-                                        <h3>{{notification.poste}}</h3>
+                                        <h3>***********</h3>
                                 </div>
                                  
                                 <button class="btn-card danger" >close Notification</button>   

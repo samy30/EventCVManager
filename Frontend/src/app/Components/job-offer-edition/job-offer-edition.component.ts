@@ -22,6 +22,10 @@ export class JobOfferEditionComponent implements OnInit {
   enterprises:any[]=[];
   skills:FormArray;
   id;
+  type_contrats=['Contract à durée déterminée','Contract à durée indéterminée','other options...'];
+  genres=['Temps plein','Temps partiel'];
+  towns=['Jendouba','Sfax','Tunisie','Sousse','Nabel','Bizerte'];
+  diplomes=['diplôme d’études primaires','diplôme d’études secondaires','mastere','doctorat','bac'];
   constructor(  private formBuilder: FormBuilder,
     private jobOfferService:JobOfferService,
     private jobsService:JobsService,
@@ -33,8 +37,17 @@ export class JobOfferEditionComponent implements OnInit {
     this.offerFormGroup = this.formBuilder.group({
       nom_poste: ['', Validators.required],
       nom_enterprise: ['', Validators.required],
+      activity:['',Validators.required],
       town: ['', Validators.required],
-      skills: this.formBuilder.array([]),
+      type:['', Validators.required],
+      time:['',Validators.required],
+      wage:[''],
+      description:['',Validators.required],
+      minimumSchoolDegree:['',Validators.required],
+      experience_years:['',Validators.required],
+      startingDate:['',Validators.required],
+      skills: this.formBuilder.array([])
+      
     });
     this.id=this.data.id;
    }
@@ -62,12 +75,21 @@ export class JobOfferEditionComponent implements OnInit {
   }
 
 displayData(jobOffer){
+  console.log(jobOffer);
   console.log("hmaar");
   console.log({id:jobOffer.enterprise.id,name:jobOffer.enterprise.name});
    this.offerFormGroup.patchValue({
-    nom_poste:jobOffer.job,
+    nom_poste:{id:jobOffer.job.id,name:jobOffer.job.name},
     nom_enterprise:{id:jobOffer.enterprise.id,name:jobOffer.enterprise.name},
-    town:jobOffer.town
+    activity:jobOffer.activity,
+    town:jobOffer.town,
+    time:jobOffer.time,
+    type:jobOffer.type,
+    wage:jobOffer.wage,
+    description:jobOffer.description,
+    minimumSchoolDegree:jobOffer.minimumSchoolDegree,
+    experience_years:jobOffer.experience_years,
+    startingDate:jobOffer.startingDate,
    });
    this.patchSkills(jobOffer);
 }
@@ -111,18 +133,24 @@ patchSkills(jobOffer){
   }
    
    updateOffer(){
-      //var skills:any[]=[];
-    //  skills.push(this.offerFormGroup.get('skills').value);
-     this.offer={
-        job:{
-          id:this.offerFormGroup.get('nom_poste').value.id,
-        },
-        enterprise: {
-          id:this.offerFormGroup.get('nom_enterprise').value.id
-        },
-        town:this.offerFormGroup.get('town').value,
-        skills:this.offerFormGroup.get('skills').value.map(s=>s.name)
-     }
+    this.offer={
+      job:{
+        id:this.offerFormGroup.get('nom_poste').value.id,
+      },
+      enterprise: {
+        id:this.offerFormGroup.get('nom_enterprise').value.id
+      },
+      town:this.offerFormGroup.get('town').value,
+      skills:this.offerFormGroup.get('skills').value.map(s=>s.name),
+      activity:this.offerFormGroup.get('activity').value,
+      type:this.offerFormGroup.get('type').value,
+      wage:this.offerFormGroup.get('wage').value,
+      time:this.offerFormGroup.get('time').value,
+      description:this.offerFormGroup.get('description').value,
+      minimumSchoolDegree:this.offerFormGroup.get('minimumSchoolDegree').value,
+      experience_years:this.offerFormGroup.get('experience_years').value,
+      startingDate:this.offerFormGroup.get('startingDate').value,
+   }
      console.log("offer");
      console.log(this.offer);
     this.jobOfferService.updateOffer(this.offer,this.id)

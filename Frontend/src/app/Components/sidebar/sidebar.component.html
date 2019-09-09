@@ -1,34 +1,63 @@
 
 
-<mat-toolbar style="height:100px ; background :#1d70b7">
+<mat-toolbar style="background :#1d70b7 ">
     <mat-toolbar-row style="background : #1d70b7">
-      <h1 style="color: white">CVManagement</h1>
-      <span class="menu-spacer" style="background : 1f790b7"></span>
-      <div style="background : #1d70b7">
-        <a mat-button [routerLink]="'/Acceuil'" class="link"> Acceuil </a>
-        <a mat-button [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" class="link">Profil </a>
+      <div class="fullbar" style="background : #1d70b7">
+        <a mat-button [routerLink]="'/Acceuil'"  class="link" >
+          <i class="fa fa-home" style="size:50px"></i>
+          Acceuil </a>
+
+        <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
+        <a mat-button [routerLink]="'/NotrePlateforme'" class="link"> Notre Platforme </a>
+
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'" class="link">Administration </a>
         <a mat-button [routerLink]="'/JobSearch'"
                 *ngIf="this.authService.loggedIn() &&
-                      this.role=='ROLE_USER'" class="link"> JobSearch </a>
-        <a mat-button [routerLink]="'/Notification'" *ngIf="this.authService.loggedIn() &&
-                                              this.role!=='ROLE_AdMIN'" class="link"> Notification </a>
-        <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()" class="link">Emploi du Temps </a>
-        <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" class="link-login" > Login </a>
+                      this.role=='ROLE_USER'" class="link"> Chercher un emploi </a>
+        <a mat-button  *ngIf="this.authService.loggedIn() &&
+                   this.role!=='ROLE_AdMIN'" class="link">
+                   <div class="nav-item dropdown">
+                      <a  class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                        Notification</a>
+                      <div class="dropdown-menu dropdown-menu-right">                    
+                            <a  
+                                 class="dropdown-item"
+                                    *ngFor="let notification of notifications" (click)='getNotificationDetails(notification)'>
+                                      <div *ngIf="notification.seen;else unseennotif"
+                                          class="seen" > user with Id {{notification.senderID}} sends this notification</div>
+                                       <ng-template #unseennotif class="unseen"> user with Id {{notification.senderID}} sends this notification</ng-template>                              
+                            </a>                            
+                    </div>                   
+                                            
+                  </div>                       
+        </a>
+        <a mat-button [routerLink]="'/EmploiTemps'" *ngIf="this.authService.loggedIn()" class="link">Calendrier </a>
+        <a mat-button [routerLink]="'/Login'" *ngIf="!this.authService.loggedIn()" style="color:white" id="connect" class="link-login" > Connectez-vous </a>
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
-                       this.role=='ROLE_ENTERPRISE'" class="link" > JobDemande </a>
+                       this.role=='ROLE_ENTERPRISE'" class="link" > Mes offres </a>
 
-        <a mat-button (click)="logout()" *ngIf="this.authService.loggedIn()" class="link right">Logout</a>
-        <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img">
-            <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">
-               {{loggedUser.username}}
+        <a  mat-button  *ngIf="this.authService.loggedIn()" [routerLink]="" class="link-img right">
+            <div class="nav-item dropdown">
+                <a  class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                    <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">       
+                  {{loggedUser.username}}</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a  [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" 
+                                  class="dropdown-item">Profil<i class="fa fa-user" ></i> </a>
+                    <div class="dropdown-divider"></div>
+                    <a (click)="logout()" [routerLink]="'/Login'" *ngIf="this.authService.loggedIn()"
+                            class="dropdown-item">Deconnection<i class="fa fa-sign-out" ></i></a>
+                </div>
+              </div>
           </a>
+       
 
       </div>
     </mat-toolbar-row>
-  </mat-toolbar>
+</mat-toolbar>
+<notifier-container></notifier-container>
 
   <!--
  <nav class="navbar navbar-expand-lg fixed-top ">
