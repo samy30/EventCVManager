@@ -10,14 +10,16 @@ public class EnterpriseProfile {
     private String email;
     private Date joinedAt;
     private String notificationID;
+    private byte[] image;
 
-    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt, String notificationID) {
+    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt, byte[] image, String notificationID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.activity = activity;
         this.email = email;
         this.joinedAt = joinedAt;
+        this.image = image;
         this.notificationID = notificationID;
     }
 
@@ -75,5 +77,13 @@ public class EnterpriseProfile {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

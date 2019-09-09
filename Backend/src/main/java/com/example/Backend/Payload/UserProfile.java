@@ -13,8 +13,9 @@ public class UserProfile {
     private String gender;
     private Date joinedAt;
     private String notificationID;
+    private byte[] image;
 
-    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt, String notificationID) {
+    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt, byte[] image, String notificationID) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -23,6 +24,7 @@ public class UserProfile {
         this.age = age;
         this.gender = gender;
         this.joinedAt = joinedAt;
+        this.image = image;
         this.notificationID = notificationID;
     }
 
@@ -96,5 +98,13 @@ public class UserProfile {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

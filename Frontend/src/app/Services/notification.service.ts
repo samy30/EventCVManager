@@ -3,10 +3,12 @@ import { Subject, AsyncSubject, BehaviorSubject, ReplaySubject,Observable, throw
 import { of } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/offers';
+const apiUrl = 'http://localhost:8080/api/notification';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,12 +39,8 @@ export class NotificationService {
     { id: 1,entreprise:{'id':1,'name':'Isamm'},poste:'Web dev'},
     { id: 1,entreprise:{'id':1,'name':'GOOGLE'},poste:'Graphic Designer'}
   ];
-  // get notifications based on current user
-  getNotifications():Observable<any[]>{
-      return of(this.notifications);
-  }
-
-
+  
+   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -63,15 +61,25 @@ export class NotificationService {
     return body || { };
   }
 
-  /*getNotifications(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions).pipe(
+  getNotifications(userId): Observable<any> {
+    const url = `${apiUrl}/${userId}`;
+    return this.http.get(url, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  }*/
-  // emit notification
+  }
+  //emit notification
+  /*
   private eventCallback = new Subject<any>()
   eventCallback$ = this.eventCallback.asObservable();
   emitNotification(notification) {
+      this.eventCallback.next(notification);
+   }*/
+
+    //emit notification
+
+  private eventCallback = new BehaviorSubject<any>('')
+  eventCallback$ = this.eventCallback.asObservable();
+  emitNotification(notification){
       this.eventCallback.next(notification);
    }
 

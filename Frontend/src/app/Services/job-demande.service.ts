@@ -45,7 +45,7 @@ export class JobDemandeService {
     return body || { };
   }
 
-  private eventCallback = new Subject<any>()
+  private eventCallback = new BehaviorSubject<any>('')
   eventCallback$ = this.eventCallback.asObservable();
   emitJobDemande(jobDemande){
       this.eventCallback.next(jobDemande);
@@ -60,6 +60,12 @@ export class JobDemandeService {
 // get job demandes sended to current entrep
   getMyJobDemandes(): Observable<any>{
     return this.http.get("http://localhost:8080/api/enterprise/me/jobDemandes", httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  getMyConfirmedJobDemandes(enterpriseId):Observable<any>{
+    return this.http.get(`http://localhost:8080/api/enterprise/${enterpriseId}/jobDemandes/confirmed`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

@@ -24,6 +24,7 @@ public class UserPrincipal implements UserDetails {
     private String activity;
     private String username;
     private String notificationID;
+    private byte[] image;
 
     private String email;
 
@@ -32,13 +33,14 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, byte[] image, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
+        this.image = image;
         this.description = description;
         this.activity = activity;
         this.username = username;
@@ -60,6 +62,7 @@ public class UserPrincipal implements UserDetails {
                 user.getLastName(),
                 user.getAge(),
                 user.getGender(),
+                user.getImage(),
                 user.getDescription(),
                 user.getActivity(),
                 user.getNotificationID(),
@@ -104,6 +107,10 @@ public class UserPrincipal implements UserDetails {
 
     public String getActivity() {
         return activity;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 
     public String getNotificationID() {

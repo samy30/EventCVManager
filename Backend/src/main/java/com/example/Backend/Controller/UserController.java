@@ -87,7 +87,7 @@ public class UserController {
 
         long cvCount = cvRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getNotificationID());
+        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getImage(),user.getNotificationID());
 
         return userProfile;
     }
@@ -107,11 +107,9 @@ public class UserController {
     @GetMapping("/enterprise/{username}/jobOffers")
     public List<JobOffer> getJobOffersCreatedBy(@PathVariable(value = "username") String username,
                                           @CurrentUser UserPrincipal currentUser) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", username));
 
-
-        List<JobOffer> jobOffers = jobOfferRepository.findByCreatedBy(user.getId());
+        User enterprise = userRepository.findByUsername(username).get();
+        List<JobOffer> jobOffers = jobOfferRepository.findAllByEnterprise(enterprise);
         return jobOffers ;
     }
 
@@ -145,39 +143,4 @@ public class UserController {
         User updatedUser = userRepository.save(user);
         return updatedUser;
     }
-
-
-//    @GetMapping("/users/me/jobDemandes/notifications")
-//    public List<JobDemande> getJobDemandesForUserForNotification(@CurrentUser UserPrincipal currentUser) {
-//        User user = userRepository.findByUsername(currentUser.getUsername())
-//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
-//
-//
-//        List<JobDemande> jobDemandes1 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"accepted",false);
-//        List<JobDemande> jobDemandes2 = jobDemandeRepository.findBySenderAndStatusAndSeenByUser(user,"refused",false);
-//        jobDemandes1.addAll(jobDemandes2);
-//        return jobDemandes1 ;
-//    }
-
-//    @GetMapping("/enterprises/me/jobDemandes/notifications")
-//    public List<JobDemande> getJobDemandesForEnterpriseForNotification(@CurrentUser UserPrincipal currentUser) {
-//        User user = userRepository.findByUsername(currentUser.getUsername())
-//                .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "username", currentUser.getUsername()));
-//
-//
-//        List<JobDemande> jobDemandes = jobDemandeRepository.findBySeenByEnterpriseAndEnterprise(false, user);
-//        return jobDemandes ;
-//    }
-
-
-
-
-//    @GetMapping("/users/{username}/votes")
-//    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,
-//                                                       @CurrentUser UserPrincipal currentUser,
-//                                                       @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-//                                                       @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-//        return pollService.getPollsVotedBy(username, currentUser, page, size);
-//    }
-
 }

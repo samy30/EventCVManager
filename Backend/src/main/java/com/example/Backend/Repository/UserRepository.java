@@ -1,5 +1,6 @@
 package com.example.Backend.Repository;
 
+import com.example.Backend.Model.JobDemande;
 import com.example.Backend.Model.Role;
 import com.example.Backend.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +27,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
     Long countByGender(String gender);
+
 }

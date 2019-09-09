@@ -1,5 +1,6 @@
 package com.example.Backend.Model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -35,6 +36,8 @@ public class User extends AuditModel {
 
     private Long age;
 
+    private byte[] image;
+
     @Size(max = 40)
     private String gender;
 
@@ -67,6 +70,18 @@ public class User extends AuditModel {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private InterviewCalendar interviewCalendar;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<JobOffer> jobOffers = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "sender")
+    private JobDemande jobRequest;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<JobDemande> jobRequests = new HashSet<>();
+
     public User() {
 
     }
@@ -78,12 +93,13 @@ public class User extends AuditModel {
         this.password = password;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
+    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, byte[] image, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.gender = gender;
+        this.image = image;
         this.description = description;
         this.activity = activity;
         this.username = username;
@@ -93,7 +109,31 @@ public class User extends AuditModel {
         this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, byte[] image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.image = image;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.notificationID = notificationID;
+    }
+
+    public User(@Size(max = 40) String name, byte[] image, @Size(max = 40) String description, @Size(max = 40) String activity, String notificationID, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.activity = activity;
+        this.notificationID = notificationID;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(String firstName, String lastName, long age, String gender, String username, String email, String password, String notificationID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -104,7 +144,7 @@ public class User extends AuditModel {
         this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+    public User(String name, String description, String activity, String username, String email, String password, String notificationID) {
         this.name = name;
         this.description = description;
         this.activity = activity;
@@ -170,6 +210,14 @@ public class User extends AuditModel {
         this.roles = roles;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -216,5 +264,21 @@ public class User extends AuditModel {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public Set<JobOffer> getJobOffers() {
+        return jobOffers;
+    }
+
+    public void setJobOffers(Set<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
+    }
+
+    public InterviewCalendar getInterviewCalendar() {
+        return interviewCalendar;
+    }
+
+    public void setInterviewCalendar(InterviewCalendar interviewCalendar) {
+        this.interviewCalendar = interviewCalendar;
     }
 }

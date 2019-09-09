@@ -28,6 +28,7 @@ export class CvDisplayComponent implements OnInit {
   socialMedias:FormArray;
   image:SafeResourceUrl;
   @Input()cv;
+  @Input()jobDemande;
   @Output() decisionEmitter = new EventEmitter();
   constructor(
     private cvService: CVService,
@@ -57,7 +58,7 @@ export class CvDisplayComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    if(changes.cv.currentValue)this.fillCVForm();
+    if(changes.cv.currentValue && changes.jobDemande.currentValue)this.fillCVForm();
    
 }
 

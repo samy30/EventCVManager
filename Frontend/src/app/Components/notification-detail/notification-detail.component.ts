@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { NotificationService } from 'src/app/Services/notification.service';
+import { EnterpriseService } from 'src/app/Services/enterprise.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-notification-detail',
@@ -8,20 +10,35 @@ import { NotificationService } from 'src/app/Services/notification.service';
 })
 export class NotificationDetailComponent implements OnInit {
 
-  constructor(private notificationService:NotificationService) { }
+  constructor(private notificationService:NotificationService,
+      private enterpriseService:EnterpriseService,
+      private authService:AuthService) { }
 
-  notification;
-
+  @Input() notification;
+  nameEnterprise;
+ 
   ngOnInit() {
-    this.loadNotification();
+    console.log("peskich")
+     console.log(this.notification);
   }
 
-  loadNotification(){
-        this.notificationService.eventCallback$.subscribe(notification => {
-          console.log("notification");
-          console.log(notification);
-           this.notification=notification;
-     })
-    }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    console.log(changes.notification.currentValue)
+  if(changes.notification.currentValue)  this.loadInformation(changes.notification.currentValue);
+   
+
+}
+
+loadInformation(notif){
+        this.authService.getUser(notif.senderID)
+         .subscribe(enterprise=>{
+            this.nameEnterprise=enterprise.name;
+         })
+
+}
+  
+
+  
 
 }

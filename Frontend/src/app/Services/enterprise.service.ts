@@ -29,7 +29,10 @@ export class EnterpriseService {
     console.log(enterprise);
     return this.http.put<any>(`${this.apiUrl}/enterprise/${id}`,updatedEnterprise);
   }
-
+  getEnterprise(id){
+    return this.http.get<any>(`${this.apiUrl}/enterprise/${id}`);
+  }
+  
   deleteEnterprise(id): Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}/enterprise/${id}`);
   }
