@@ -24,57 +24,77 @@
 }
 .example-card-center.mat-card-content{
     justify-content: center;
-}
+    align-items: center;
+  }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #1d70b7;
-  height: 100vh;
-}
-#login .container #login-row #login-column #login-box {
-  margin-top: 120px;
-  max-width: 600px;
-  height:370px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
-}
-#login .container #login-row #login-column #login-box #login-form {
-  padding: 20px;
-}
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
-}
+  .seen{
+    background-color: #EAEAEA;
+    border:2px;
+    height:50px;
+  }
+   .unseen{
+     background-color: rgb(236, 234, 234);
+     border:2px;
+     height:50px;
+   }
 
-label  {
-  color: #1d70b7;
-}
+  .example-card-center{
+      height:300px;
+      width: 300px;
+  }
+  .example-card-center.mat-card-content{
+      justify-content: center;
+  }
 
-h3 {
-  color: #1d70b7;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #1d70b7;
+    height: 100vh;
+  }
+  #login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    max-width: 600px;
+    height:370px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
 
-#register-link {
-  color: #1d70b7;
-}
+  label  {
+    color: #1d70b7;
+  }
 
-.link:hover{ background: #94c01f; color: white; }
-.right{
+  h3 {
+    color: #1d70b7;
+  }
 
-  margin-left:7%;
+  #register-link {
+    color: #1d70b7;
+  }
 
-  //
-}
+  .link:hover{ background: #94c01f; color: white; }
+  .right{
 
-.link {
-  color: white;
-}
-.link-login:hover{ background: #f4f4f4; color: white; }
-.link-login{
-  margin-left:80vh;
-  float:right;
-  font-size:25px;
-}
+    margin-left:7%;
+
+    //
+  }
+
+  .link {
+    color: white;
+  }
+  .link-login:hover{ background: #f4f4f4; color: white; }
+  .link-login{
+    margin-left:80vh;
+    float:right;
+    font-size:15px;
+  }
 
 #connect{
 -webkit-transition-duration: 0.4s; /* Safari */
@@ -88,7 +108,20 @@ color: white;
   font-size:25px;
   color: white;
 }
+  .link,.link-img{
+    font-size:15px;
+    color: white;
+  }
+  
 
+  .dropdown-item{
+    font-size:15px;
+    height:60px;
+  }
+  .dropdown-item:hover {
+    background-color: #94c01f; /* Green */
+    color: black;
+  }
 
 .dropdown-item{
   font-size:20px;
