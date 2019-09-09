@@ -9,8 +9,8 @@
   
 <div><img src="../assets/images/barre.gif" alt="barre" height="100%" width="100%">
 </div>
-<mat-toolbar style="background :#1d70b7 ">
-    <mat-toolbar-row style="background : #1d70b7">
+<div style="background :#1d70b7 ">
+    <div style="background : #1d70b7">
       <div class="fullbar" style="background : #1d70b7">
         <a mat-button [routerLink]="'/Acceuil'"  class="link" >
           <i class="fa fa-home" style="size:50px"></i>
@@ -58,6 +58,7 @@
                     <div class="dropdown-divider"></div>
                     <a (click)="logout()" [routerLink]="'/Login'" *ngIf="this.authService.loggedIn()"
                             class="dropdown-item">Deconnection<i class="fa fa-sign-out" ></i></a>
+                          
                 </div>
               </div>
           </a>

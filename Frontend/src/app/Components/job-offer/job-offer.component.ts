@@ -8,6 +8,7 @@ import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import {JobsService} from '../../Services/jobs.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Subscription} from 'rxjs';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class JobOfferComponent implements OnInit {
               public dialog: MatDialog,
               private cvService: CVService,
               private jobDemandeService: JobDemandeService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private notificationService:NotificationService) {
                 this.loadSelectedPost();
 
    }
@@ -31,6 +33,7 @@ export class JobOfferComponent implements OnInit {
   createdCV: any;
   jobDemande: any;
   currentUser;
+  notifications=[];
   sub: Subscription;
   ngOnInit() {
    // this.loadSelectedPost();
@@ -56,7 +59,23 @@ export class JobOfferComponent implements OnInit {
           this.authService.getCurrentUser()
              .subscribe(user=>{
                 this.currentUser=user;
+                this.notificationService.getNotifications(this.currentUser.id)
+                     .subscribe(notifs=>{
+                        this.notifications=notifs;
+                        console.log("notifications here");
+                        console.log(notifs);
+                })
              })
+     }
+
+     isToken(offer){
+
+           var offersId=this.notifications.map(notif=>notif.jobOfferID);
+           console.log("offersIDs");
+           console.log(this.notifications);
+           console.log(offersId);
+           return (offersId.indexOf(offer.id)!==-1);
+              
      }
 
   //
@@ -83,7 +102,7 @@ export class JobOfferComponent implements OnInit {
                  jobOffer: {id:offer.id},
                  sender:{id:this.currentUser.id},
                  enterprise:{id:offer.enterprise.id},
-                 status:"pending",
+                 status:"PENDING",
                  confirmedByUser:false
             };
             console.log('job demande');
@@ -92,8 +111,9 @@ export class JobOfferComponent implements OnInit {
            this.jobDemandeService.postJobDemande(this.jobDemande)
                  .subscribe(demande => {
                    this.jobDemande = demande;
+                  
                  });
-      });
+           });
     });
 
   }
