@@ -15,13 +15,7 @@ export class JobDemandeService {
 
   constructor(private http:HttpClient) { }
   
-  jobDemandes = [
-    { id: 1, sender:{'id':1,'name':'Tawfik'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
-    { id: 2,sender:{'id':1,'name':'Mahmoud'},poste:'Gamer',addresse:'tunis',description:'description' },
-    { id: 3,sender:{'id':1,'name':'Issam'},poste:'Web dev',addresse:'sfax',description:'description' },
-    { id: 1,sender:{'id':1,'name':'Sami'},poste:'engineer',addresse:'sfax' ,description:'description'},
-    { id: 1,sender:{'id':1,'name':'Khairi'},poste:'Graphic Designer',addresse:'sfax',description:'description' },
-  ];
+  jobDemandes = [];
  
 
    
@@ -83,8 +77,8 @@ export class JobDemandeService {
     );
   }
 
-  updateJobDemande(data, id): Observable<any> {
-    return this.http.put(`${apiUrl}/${id}`, data, httpOptions)
+  updateJobDemande(id,data): Observable<any> {
+    return this.http.put(`${apiUrl}/${id}/response`, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -96,5 +90,11 @@ export class JobDemandeService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+  confirmJobDemande(id:string):Observable<any>{
+    const url = `${apiUrl}/${id}`;
+    return this.http.get(`${url}/confirm`, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
   }
 }

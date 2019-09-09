@@ -96,6 +96,12 @@ export class NotificationService {
     );
   }
 
+  makeSeen(id):Observable<any>{
+    return this.http.get(`${apiUrl}/${id}/seen`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   updateNotification(data, id): Observable<any> {
     return this.http.put(`${apiUrl}/${id}`, data, httpOptions)
       .pipe(
@@ -109,5 +115,11 @@ export class NotificationService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+  getUnreadNotificationCount(id):Observable<any>{
+         return this.http.get(`${apiUrl}/${id}/unseen`)
+        .pipe(
+          catchError(this.handleError)
+        );
   }
 }

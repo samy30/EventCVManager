@@ -1,5 +1,6 @@
 package com.example.Backend.Controller;
 
+import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.Notification;
 import com.example.Backend.Repository.NotificationRepository;
 import com.example.Backend.Service.PushNotificationsService;
@@ -53,6 +54,15 @@ public class NotificationController {
 this.send("cvrVsZq-lQs:APA91bGyGOgtPJBti-LRoxpK96o8a4YQMaOqMnH_I_-YUvoQwHeVeQ2yZX_FaFGmArQKHpF-D474ScOWCbodJnsDS4tmBJxWT9RDbe59lZjVYpgBG0jVUFKB6EKp-9219J_9QmnbWS5C");
     }
 
+ // set notification seen
+    @GetMapping("/notification/{id}/seen")
+    public Notification setNotificationToSeenByReceiverId(@PathVariable(value = "id") Long id) {
+        Notification notification = notificationRepository.findById(id)
+        		.orElseThrow(() -> new ResourceNotFoundException("Notification", "id", id));
+        notification.setSeen(true);
+        Notification updatedNotification = notificationRepository.save(notification);
+        return updatedNotification;
+    }
 
     public ResponseEntity<String> send(String notificationID) throws JSONException {
 

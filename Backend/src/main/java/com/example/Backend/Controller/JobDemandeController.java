@@ -67,7 +67,8 @@ public class JobDemandeController {
         return updatedJobDemande;
     }
 
-    // Confirm a JobDemande
+  
+ // Confirm a JobDemande
     @GetMapping("/jobDemande/{id}/confirm")
     public JobDemande confirmJobDemande(@PathVariable(value = "id") Long id) {
 
@@ -75,12 +76,12 @@ public class JobDemandeController {
                 .orElseThrow(() -> new ResourceNotFoundException("JobDemande", "id", id));
 
         jobDemande.setConfirmedByUser(true);
+        jobDemande.setStatus(Status.CONFIRMED);
 
         JobDemande updatedJobDemande = jobDemandeRepository.save(jobDemande);
         notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,true);
         return updatedJobDemande;
     }
-
 
     // Get a Single JobDemande
     @GetMapping("/jobDemande/{id}")

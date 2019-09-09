@@ -30,11 +30,9 @@ export class ProfilComponent implements OnInit {
         username: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        address: ['', Validators.required],
-        postalCode: ['', Validators.required],
-        city: ['', Validators.required],
-        description: ['', Validators.required],
-        email: ['', [ Validators.required, Validators.email]]
+        email: ['', [ Validators.required, Validators.email]],
+        age: ['',  Validators.required],
+        gender: ['',  Validators.required]
      });
      }
 
@@ -52,21 +50,18 @@ export class ProfilComponent implements OnInit {
       this.userFormGroup.patchValue({
         username : this.user.username,
         email : this.user.email,
-        description : this.user.description,
-        city : this.user.city,
         firstName : this.user.firstName,
         lastName : this.user.lastName,
-        postalCode : this.user.postalCode,
-        address : this.user.address
-
+        age:this.user.age,
+        gender:this.user.gender
       })
     });
   }
   updateUser() {
 
-    let {username,email,description,city,firstName,lastName,postalCode,address} = this.userFormGroup.value;
+    let {username,email,firstName,lastName,age,gender} = this.userFormGroup.value;
     let data = {
-      username,email,description,city,firstName,lastName,postalCode,address
+      username,email,firstName,lastName,age,gender
     };
      console.log("hello");
       console.log(data);
