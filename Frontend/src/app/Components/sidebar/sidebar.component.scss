@@ -91,7 +91,6 @@
   }
   .link-login:hover{ background: #f4f4f4; color: white; }
   .link-login{
-    margin-left:80vh;
     float:right;
     font-size:15px;
   }
@@ -112,7 +111,7 @@ color: white;
     font-size:15px;
     color: white;
   }
-  
+
 
   .dropdown-item{
     font-size:15px;
@@ -137,7 +136,7 @@ color: white;
 }
 
 .fullbar{
-  height:120px;
+  height:36px;
   width:100%;
 }
 // css of new navbar
@@ -174,7 +173,7 @@ margin-left:30em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.notification::before, 
+.notification::before,
 .notification::after {
   color: #fff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
