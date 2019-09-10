@@ -35,7 +35,7 @@ public class User extends AuditModel {
 
     private Long age;
 
-    private byte[] image;
+    private String image;
 
     @Size(max = 40)
     private String gender;
@@ -80,7 +80,7 @@ public class User extends AuditModel {
         this.password = password;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, byte[] image, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
+    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -96,7 +96,7 @@ public class User extends AuditModel {
         this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, byte[] image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender,String image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -108,7 +108,7 @@ public class User extends AuditModel {
         this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String name, byte[] image, @Size(max = 40) String description, @Size(max = 40) String activity, String notificationID, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+    public User(@Size(max = 40) String name, String image, @Size(max = 40) String description, @Size(max = 40) String activity, String notificationID, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
         this.name = name;
         this.image = image;
         this.description = description;
@@ -197,11 +197,11 @@ public class User extends AuditModel {
         this.roles = roles;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
