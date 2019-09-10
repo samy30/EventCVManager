@@ -1,4 +1,9 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
 <div id="firascarousel">
+
     <div class="firas_arrow" style="left:20px;" onclick="nextcarousel(-1);"></div>
     <div class="firas_arrow" style="right:20px;transform: scaleX(-1);" onclick="nextcarousel(1);"></div>
     <div class="firas_circle ciractive" onclick="carnum(0);" style="left:calc(50% - 40px);"></div>
@@ -6,27 +11,27 @@
     <div class="firas_circle" onclick="carnum(2);" style="left:calc(50% + 24px);"></div>
     <div class="kaaba caractive" style="background-color:rgb(50, 173, 50);">
         <div class="cadri">
-            <h2>this is title</h2>
-            <h3>this is mini title</h3>
-            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+            <h1 class="text-white">Un Bon Entretien ... </h1>
+            <br>
+            <h3 class="text-white">Une garantie d'ambauche</h3>
+            
         </div>
-        <div class="taswira" style="background-image: url(../assets/carousel/car1.jpg);"></div>
+        <div class="taswira" style="background-image: url(car2.jpg);"></div>
     </div>
     <div class="kaaba" style="background-color:rgb(214, 88, 42);">
-        <div class="taswira" style="background-image: url(../assets/carousel/car2.jpg);"></div>
+        <div class="taswira" style="background-image: url(car1.jpg);"></div>
         <div class="cadri">
-            <h2>this is title</h2>
-            <h3>this is mini title</h3>
-            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+            <h2></h2>
+            <h1 class="text-white">La formation..</h1> 
+                <h3 class="text-white">l'essence de tout bon succes </h3>
         </div>
     </div>
     <div class="kaaba" style="background-color:rgb(43, 98, 182);">
         <div class="cadri">
-            <h2>this is title</h2>
-            <h3>this is mini title</h3>
-            <p>lorem ipsum etc ...... ... . .. .. . .. . .. . .......</p>
+            <h1 class="text-white">Postulez</h1>
+            <h3 class="text-white">Saisissez votre chance</h3>
         </div>
-        <div class="taswira" style="background-image: url(../assets/carousel/car3.jpg);"></div>
+        <div class="taswira" style="background-image: url(car3.jpg);"></div>
     </div>
     <div class="carbar" style="background-color:rgba(40, 160, 40, .6);"></div>
     <div class="carbar" style="background-color:rgba(190, 60, 35, .6);"></div>
@@ -55,7 +60,7 @@
         top: calc(100% - 40px);
         border-radius: 16px;
         background-color: rgba(0, 0, 0, .5);
-        border: 1px solid rgba(117, 115, 115, 0.4);
+        border: 1px solid rgba(255, 255, 255, .4);
         transition: background-color .5 linear 0ms;
         transition: border .5 linear 0ms;
         cursor: pointer;
@@ -72,7 +77,7 @@
         border-radius: 30px;
         color: white;
         background-color: rgba(255,255,255,.6);
-        background-image: url(../assets/carousel/cararrow.png);
+        background-image: url(cararrow.png);
         background-position: center;
         background-size: 40%;
         background-repeat: no-repeat;
@@ -178,7 +183,7 @@
         carrousels[currentC].className = "kaaba caractive";
         carcircles[currentC].className = "firas_circle ciractive";
         carbars[currentC].className = "carbar baractive";
-        carouselT = setTimeout(autocarousel, 3000);
+        carouselT = setTimeout(autocarousel, 30000);
     }
 </script>
 
