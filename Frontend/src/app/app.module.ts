@@ -73,6 +73,7 @@ import {NotifierModule} from 'angular-notifier';
 import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
 import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
+import { ScrollComponent } from './components/scroll/scroll.component';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande
     CarouselComponent,
     NotreplatformeComponent,
     QuisommesnousComponent,
-    ConfirmedJobDemandeComponent
+    ConfirmedJobDemandeComponent,
+    ScrollComponent
   ],
   imports: [
     ChartsModule,
