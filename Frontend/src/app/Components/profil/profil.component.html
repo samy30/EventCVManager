@@ -62,24 +62,21 @@
               </div>
               <div class="col-md-4">
                 <div class="card card-user">
+                        <app-upload (imageEmitter)="getImage($event)" [imgURL]="image"></app-upload>
                     <div class="image">
-                         <img *ngIf="url!==null" [src]="image" style="border-radius:40px; height:200px; width:200px;"> <br/>
+                        <!--- <img *ngIf="url!==null" [src]="image" style="border-radius:40px; height:200px; width:200px;"> <br/>
                         <img *ngIf="url===null" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" 
-                                           style="border-radius:40px; height:200px; width:200px;" alt="..."/>
+                                           style="border-radius:40px; height:200px; width:200px;" alt="..."/>-->
                     </div>
-                    <div class="content" *ngIf="user">
+                    <div class="content" >
                         <div class="author">
   
                                <!--<img  style=" object-fit: cover;"class="avatar border-gray" src="{{user.image}}" alt=""/>
                                --> 
-                               <input type='file' (change)="onSelectFile($event)">
-                               
-                                <h4 class="title">{{user.firstName}} {{user.lastName}}<br />
-                                    <small>{{user.userName}}</small>
-                                </h4>
+                             
   
                         </div>
-                        <p class="description text-center"> {{user.description }}
+                        <p class="description text-center"> {{user?.description }}
                         </p>
                     </div>
   

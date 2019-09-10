@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/components/common/message';
@@ -20,11 +20,11 @@ export class ProfilComponent implements OnInit {
   image;
   msgs: Message[] = [];
   uploadedFiles: any[] = [];
-  
+  imgURL:any=null;
   value: number = 0;
   constructor(
     private userService: UserService,
-
+    private cd: ChangeDetectorRef,
     private formBuilder: FormBuilder,
     private messageService: MessageService) {
       this.userFormGroup = this.formBuilder.group({
@@ -46,9 +46,7 @@ export class ProfilComponent implements OnInit {
   }
   loadUser()
   {
-    this.userService.getCurrentUser().subscribe(user=>{
-      this.user=user;
-
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
       this.userFormGroup.patchValue({
         username : this.user.username,
         email : this.user.email,
@@ -57,8 +55,9 @@ export class ProfilComponent implements OnInit {
         age:this.user.age,
         gender:this.user.gender
       })
-      this.image=this.url
-    });
+      this.image=this.user.image;
+      console.log("profile image");
+      console.log(this.image);
   }
   updateUser() {
 
@@ -70,13 +69,15 @@ export class ProfilComponent implements OnInit {
       lastName,
       age,
       gender,
-      image:this.url
+      image:this.imgURL
     };
      console.log("hello");
       console.log(data);
      var id=this.user.id;
-    this.userService.updateUser(id, data).subscribe(product => {
+    this.userService.updateUser(id, data).subscribe(user => {
       this.showSuccess('Votre profil a été mis a jour','Profil Modifie' ,'success' );
+      console.log(user);
+    //  this.
       this.loadUser();
 
  },err =>{
@@ -90,86 +91,11 @@ showSuccess( title , message, type) {
   this.msgs = [];
     }, 2000);
 }
-onUpload(event) {
-  this.Uploading = true;
-  this.Uploaded = false;
 
-  for(let file of event.files) {
-
-      this.uploadedFiles.push(file);
-  }
-
-}
-changeListener(event) : void {
-  this.Uploading = true;
-  this.Uploaded = false;
-  for(let file of event.files) {
-
-    this.readThis(file);
+getImage(imgURL){
+ this.imgURL=imgURL;
 }
 
-
-
-}
-
-
-
-
-
-url:any=null;
-onSelectFile(event) { // called each time file input changes
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      }
-    }
-}
-
-
-
-
-
-
-
-
-readThis(inputValue: any): void {
-  var file:File = inputValue;
-  var myReader:FileReader = new FileReader();
-
-  myReader.onloadend = (e) => {
-    this.image = myReader.result;
-   // this.updateImage(myReader.result);
-
-  }
-  myReader.readAsDataURL(file);
-}/*
-updateImage(imageUrl) {
-
-
-
-  let data = {
-    image:imageUrl
-  };
-
-    console.log(data);
-
-  this.userService.updateUser(this.user.id, data).subscribe(user => {
-    this.showSuccess('Votre photo a été mis a jour','Profil Modifié' ,'success' );
-    this.loadUser();
-
-
-    this.Uploading = false;
-    this.Uploaded = true;
-
-},err =>{
-
-this.showSuccess('Erreur ',err.error.Error,'error')
-});
-}*/
 }
 
 
