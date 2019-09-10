@@ -84,7 +84,6 @@ public class UserController {
     }
 
     @GetMapping("/users/{username}")
-    @PreAuthorize("hasRole('ADMIN')")
     public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
@@ -159,11 +158,11 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
-        if((userRepository.existsByEmail(userSummary.getEmail())) && userSummary.getEmail() != (user.getEmail())) {
+        if((userRepository.existsByEmail(userSummary.getEmail())) && (!userSummary.getEmail().equals(user.getEmail()))) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
-        if((userRepository.existsByUsername(userSummary.getUsername())) && (userSummary.getUsername() != user.getUsername())) {
+        if((userRepository.existsByUsername(userSummary.getUsername())) && (!userSummary.getUsername().equals(user.getUsername()))) {
             return new ResponseEntity(new ApiResponse(false, "Username already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -172,7 +171,9 @@ public class UserController {
         user.setGender(userSummary.getGender());
         user.setAge(userSummary.getAge());
         user.setImage(userSummary.getImage());
+        if(!userSummary.getUsername().equals(user.getUsername()))
         user.setUsername(userSummary.getUsername());
+        if(!userSummary.getEmail().equals(user.getEmail()))
         user.setEmail(userSummary.getEmail());
 
         User updatedUser = userRepository.save(user);
