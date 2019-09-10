@@ -60,7 +60,6 @@ export class ProfilComponent implements OnInit {
       console.log(this.image);
   }
   updateUser() {
-
     let {username,email,firstName,lastName,age,gender} = this.userFormGroup.value;
     let data = {
       username,

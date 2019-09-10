@@ -8,7 +8,7 @@ import User from '../Models/user';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/jobOffer/jobs/count';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,8 @@ export class UserService {
     return this.http.get<any>(`${this.authUrl}/user/me`);
   }
   
-  getUsers(criteria): Observable<User[]> {
-    return this.http.get<User[]>(`${this.userUrl}/ApplicationUsers`);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}/user/users`);
   }
   addUser(newUser): Observable<User>{
     return this.http.post<User>(`${this.userUrl}/ApplicationUsers/register`,newUser);

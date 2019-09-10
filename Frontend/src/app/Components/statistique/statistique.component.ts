@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { JobsService } from 'src/app/Services/jobs.service';
 import { StatisticService } from 'src/app/Services/statistic.service';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-statistique',
@@ -23,25 +24,87 @@ export class StatistiqueComponent implements OnInit {
   readyAge:number=0;
   readyGenderFlag=false;
   readyJobFlag=false;
-  constructor(private jobsService: JobsService,private statisticService:StatisticService){
+
+  @ViewChild ("age",{static: false})
+  age: ElementRef;
+
+  constructor(private jobsService: JobsService,
+    private statisticService:StatisticService,
+    private userService:UserService){
     
   }
 
   ngOnInit(){
     this.setGenderStatistic();
     this.loadPosts();
-   
+    this.loadUsers();
+
   }
   
+  searchByAge(){
+    var age=this.age.nativeElement.value;
+    console.log("age entré");
+    console.log(age);
+    if(age && age >15 ){
+        this.setAgeStatistic(age);
+    }
 
-  labels =  ['JAdfgN', 'FEBfgdg', 'MAdfgdfgR', 'AdfgfdgPR','JgffdgfAN', 'FEfgdfgB', 'MgfdfgAR', 'AfgdfgPR', 'MAYdgfdg', 'JUfgfdgN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC','JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+ }
+
+ ageLabels =  ['moin que','egal a','plus que'];
+ chartAgeData = [
+  {
+    label: 'Nombre de candidats selon age',
+     data: [] 
+  },
+ ];
+
+ setAgeStatistic(age:number){
+  this.ageLabels.forEach(label=>{
+    var count=0;
+    console.log("users");
+    console.log(age);
+    console.log(this.users);
+    this.users.forEach(user=>{
+         //if(user.age&&user.town===town)count++;
+         if(label==='moin que'&& user.age!=0 && user.age<age)count++;
+         if(label==='egal a'&& user.age!=0 && user.age==age)count++;
+         if(label==='plus que'&& user.age!=0 && user.age>age)count++;
+    })
+    this.chartAgeData[0].data.push(count);
+   })
+ }
+
+   
+
+  labels =  ['Ariana', 'Baja', 'Ben Arous', 'Bizerte','Gabes', 'Gafsa', 'Jendouba', 'Kairouan', 'Kasserine', 'Kébili',
+             'Mahdia', 'Manouba', 'Medenine', 'Monastir', 'Nabeul', 'Sfax','Sidi Bouzid', 'Siliana', 'Sousse', 'Tataouine',
+              'Tozeur', 'Tunis', 'Zaghouan'];
   chartData = [
     {
       label: 'Nombre de candidats de cette Gouvernorat',
-      data: [21, 56, 4, 31,21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59,21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+      data: [] 
     },
-   
   ];
+
+  loadUsers(){
+      this.userService.getUsers()
+         .subscribe(users=>{
+              this.users=users;
+              this.setTownStatistic(users);
+         })
+  }
+
+    setTownStatistic(users){
+        this.labels.forEach(town=>{
+             var count=0;
+             this.users.forEach(user=>{
+                  if(user.town&&user.town===town)count++;
+                
+             })
+             this.chartData[0].data.push(count);
+        })
+    }
 
   loadPosts() {
    this.jobsService.getJobs().subscribe(postes => {
