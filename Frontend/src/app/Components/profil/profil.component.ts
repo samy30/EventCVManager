@@ -56,6 +56,8 @@ export class ProfilComponent implements OnInit {
         gender:this.user.gender
       })
       this.image=this.user.image;
+      console.log("profile image");
+      console.log(this.image);
   }
   updateUser() {
 
@@ -75,6 +77,7 @@ export class ProfilComponent implements OnInit {
     this.userService.updateUser(id, data).subscribe(user => {
       this.showSuccess('Votre profil a été mis a jour','Profil Modifie' ,'success' );
       console.log(user);
+    //  this.
       this.loadUser();
 
  },err =>{

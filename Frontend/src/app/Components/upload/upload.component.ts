@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-upload',
@@ -8,18 +8,24 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 export class UploadComponent implements OnInit  {
 
-  constructor() { }
-
-  ngOnInit() {
-
-  }
-
   @Output() imageEmitter=new EventEmitter();
 
 
   public imagePath;
   @Input() imgURL: any;
   public message: string;
+
+  constructor() { }
+
+  ngOnInit() {
+
+  }
+
+  ngOnchange(changes: SimpleChanges){
+    console.log("imgae url change");
+    console.log(changes.imgURL.currentValue);
+    this.imgURL=changes.imgURL.currentValue;
+  }
  
   preview(files) {
     if (files.length === 0)
