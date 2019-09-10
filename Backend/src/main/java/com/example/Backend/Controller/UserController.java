@@ -155,17 +155,18 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable(value = "id") Long id,
                                               @Valid @RequestBody UserSummary userSummary) {
 
-        if(userRepository.existsByEmail(userSummary.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-        if(userRepository.existsByUsername(userSummary.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
 
+        if((userRepository.existsByEmail(userSummary.getEmail())) && userSummary.getEmail() != (user.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if((userRepository.existsByUsername(userSummary.getUsername())) && (userSummary.getUsername() != user.getUsername())) {
+            return new ResponseEntity(new ApiResponse(false, "Username already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
         user.setFirstName(userSummary.getFirstName());
         user.setLastName(userSummary.getLastName());
         user.setGender(userSummary.getGender());
