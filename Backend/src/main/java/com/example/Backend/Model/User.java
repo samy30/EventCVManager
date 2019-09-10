@@ -35,6 +35,7 @@ public class User extends AuditModel {
 
     private Long age;
 
+    @Lob
     private String image;
 
     @Size(max = 40)
@@ -96,7 +97,7 @@ public class User extends AuditModel {
         this.notificationID = notificationID;
     }
 
-    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender,String image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

@@ -24,7 +24,7 @@ public class UserPrincipal implements UserDetails {
     private String activity;
     private String username;
     private String notificationID;
-    private byte[] image;
+    private String image;
 
     private String email;
 
@@ -33,7 +33,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, byte[] image, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String image, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
@@ -109,7 +109,7 @@ public class UserPrincipal implements UserDetails {
         return activity;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
