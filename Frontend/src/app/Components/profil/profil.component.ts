@@ -17,9 +17,10 @@ export class ProfilComponent implements OnInit {
   user:any;
   Uploading = false;
   Uploaded = true;
+  image;
   msgs: Message[] = [];
   uploadedFiles: any[] = [];
-  image ;
+  
   value: number = 0;
   constructor(
     private userService: UserService,
@@ -30,12 +31,11 @@ export class ProfilComponent implements OnInit {
         username: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        address: ['', Validators.required],
-        postalCode: ['', Validators.required],
-        city: ['', Validators.required],
-        description: ['', Validators.required],
-        email: ['', [ Validators.required, Validators.email]]
+        email: ['', [ Validators.required, Validators.email]],
+        age: ['',  Validators.required],
+        gender: ['',  Validators.required]
      });
+
      }
 
   ngOnInit() {
@@ -52,21 +52,25 @@ export class ProfilComponent implements OnInit {
       this.userFormGroup.patchValue({
         username : this.user.username,
         email : this.user.email,
-        description : this.user.description,
-        city : this.user.city,
         firstName : this.user.firstName,
         lastName : this.user.lastName,
-        postalCode : this.user.postalCode,
-        address : this.user.address
-
+        age:this.user.age,
+        gender:this.user.gender
       })
+      this.image=this.url
     });
   }
   updateUser() {
 
-    let {username,email,description,city,firstName,lastName,postalCode,address} = this.userFormGroup.value;
+    let {username,email,firstName,lastName,age,gender} = this.userFormGroup.value;
     let data = {
-      username,email,description,city,firstName,lastName,postalCode,address
+      username,
+      email,
+      firstName,
+      lastName,
+      age,
+      gender,
+      image:this.url
     };
      console.log("hello");
       console.log(data);
@@ -111,7 +115,7 @@ changeListener(event) : void {
 
 
 
-/*
+
 url:any=null;
 onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
@@ -124,7 +128,7 @@ onSelectFile(event) { // called each time file input changes
       }
     }
 }
-*/
+
 
 
 
@@ -138,11 +142,11 @@ readThis(inputValue: any): void {
 
   myReader.onloadend = (e) => {
     this.image = myReader.result;
-    this.updateImage(myReader.result);
+   // this.updateImage(myReader.result);
 
   }
   myReader.readAsDataURL(file);
-}
+}/*
 updateImage(imageUrl) {
 
 
@@ -165,7 +169,7 @@ updateImage(imageUrl) {
 
 this.showSuccess('Erreur ',err.error.Error,'error')
 });
-}
+}*/
 }
 
 

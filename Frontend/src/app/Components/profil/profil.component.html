@@ -39,38 +39,21 @@
                               </div>
   
                               <div class="row">
-                                  <div class="col-md-12">
+                                  <div class="col-md-6">
                                       <div class="form-group">
-                                          <label>Adresse</label>
-                                          <input type="text" class="form-control" placeholder="Adresse" formControlName="address" >
+                                          <label>Age</label>
+                                          <input type="number" class="form-control" placeholder="Age" formControlName="age" >
                                       </div>
                                   </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sexe</label>
+                                        <input type="text" class="form-control" placeholder="sexe" formControlName="gender" >
+                                    </div>
+                                </div>
                               </div>
   
-                              <div class="row">
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>Ville</label>
-                                          <input type="text" class="form-control" formControlName="city" placeholder="Ville" >
-                                      </div>
-                                  </div>
-  
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>Code Postal</label>
-                                          <input type="number" class="form-control"  formControlName="postalCode"placeholder="Code postal">
-                                      </div>
-                                  </div>
-                              </div>
-  
-                              <div class="row">
-                                  <div class="col-md-12">
-                                      <div class="form-group">
-                                          <label>A propos </label>
-                                          <textarea rows="5" class="form-control" placeholder="A propos ..."  formControlName="description">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                                      </div>
-                                  </div>
-                              </div>
+                              
                               <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateUser()">Modifier Profile</button>
                               <div class="clearfix"></div>
                           </form>
@@ -80,7 +63,7 @@
               <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                         <img *ngIf="url!==null" [src]="url" style="border-radius:40px; height:200px; width:200px;"> <br/>
+                         <img *ngIf="url!==null" [src]="image" style="border-radius:40px; height:200px; width:200px;"> <br/>
                         <img *ngIf="url===null" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" 
                                            style="border-radius:40px; height:200px; width:200px;" alt="..."/>
                     </div>

@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
   loggedUser;
   userId;
   notifications:any[]=[];
+  senders:any[]=[];
   private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
@@ -69,6 +70,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+
+
    logout() {
      console.log('logout');
      this.authService.logout();
@@ -91,15 +94,51 @@ export class SidebarComponent implements OnInit {
        .subscribe(notifications=>{
          console.log("hello notification")
          console.log(notifications);
-          this.notifications=notifications;
+         this.getUnreadNotificationCount(userId);
+          this.notifications=notifications.reverse();
+          this.loadSenders(notifications);
        })
 }
+
+
+   loadSenders(notifications){
+     this.senders=[];
+         notifications.map(notif=>this.getSender(notif));
+  
+     }
+
+    getSender(notif){
+        this.authService.getUser(notif.senderID)
+              .subscribe(user=>{
+                this.senders.push(user);
+              })
+      }
+    getName(i){
+      console.log("senders");
+      console.log(this.senders);
+      return this.senders[i].username;
+    }
+
+    getUnreadNotificationCount(id){
+        this.notificationService.getUnreadNotificationCount(id)
+           .subscribe(count=>{
+             console.log("unseen count");
+             console.log(count);
+                this.myFunction(count);
+           })
+    }
 
  getNotificationDetails(notification){
  //sending notification to component notification-details throug notification service
       //update notification stuts=seen
-        
-         
+     
+     this.notificationService.makeSeen(notification.id)
+          .subscribe(notif=>{
+              console.log("notification seen");
+             console.log(notif)
+             this.loadNotifications(this.userId);
+         })
+
      if(notification.content=="CONFIRMATION"){
          this.notificationService.emitNotification(notification);
          this.router.navigate(['/ConfirmedJobDemande']);
@@ -112,5 +151,16 @@ export class SidebarComponent implements OnInit {
          this.notificationService.emitNotification(notification);
          this.router.navigate(['/Notification']);
      }
+   }
+
+   myFunction(nb){
+          
+        var el = document.querySelector('.notification');
+        var count = Number(nb);
+        el.classList.remove('show-count');  
+        el.setAttribute('data-count', (count).toString());
+        el.classList.remove('notify');
+        el.classList.add('notify');    
+       if(count!==0) el.classList.add('show-count');     
    }
 }

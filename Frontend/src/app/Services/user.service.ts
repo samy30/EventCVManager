@@ -14,8 +14,8 @@ const apiUrl = 'http://localhost:8080/api/jobOffer/jobs/count';
   providedIn: 'root'
 })
 export class UserService {
-  userUrl = 'http://localhost:49320/api';
-  authUrl = 'http://localhost:8080/api';
+  authUrl = 'http://localhost:49320/api';
+  userUrl  = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
  

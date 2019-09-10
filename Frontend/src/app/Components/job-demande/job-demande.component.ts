@@ -20,7 +20,7 @@ export class JobDemandeComponent implements OnInit {
 
   jobDemandes:any[]=[];
   senders:any[]=[];
-
+  selectedJobDemande;
   ngOnInit() {
      
       this.loadJobDemandes();
@@ -30,7 +30,7 @@ export class JobDemandeComponent implements OnInit {
     this.senders=[];
       this.jobDemandeService.getMyJobDemandes()
          .subscribe(jobDemandes=>{
-            this.jobDemandes=jobDemandes;
+            this.jobDemandes=jobDemandes.reverse();
              this.loadSenders(jobDemandes);         
              console.log("job demandes zzzzzzz");
              this.getNotification();
@@ -66,9 +66,27 @@ export class JobDemandeComponent implements OnInit {
     
    getJobDemandeDetails(jobDemande){
     //sending notification to component notification-details throug notification service
+    this.selectedJobDemande=jobDemande;
      this.jobDemandeService.emitJobDemande(jobDemande);
-    // this.router.navigate(['JobDemandeDetail'],{relativeTo:this.route});
   }
+
+  getDecision(decision:boolean){
+    var status="ACCEPTED";
+     if(!decision)status="REFUSED";
+    this.makeDecision(status);
+  }
+
+  makeDecision(status){
+    //create notification with sender entreprise receiver demandesender and poste 
+   console.log("demande acceptée")
+    this.jobDemandeService.updateJobDemande(this.selectedJobDemande.id,{status:status})
+       .subscribe(jb=>{
+          console.log("job demande updated");
+          console.log(jb);
+          this.loadJobDemandes();
+       })
+  
+ }
  
    
 

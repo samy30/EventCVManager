@@ -36,7 +36,7 @@ export class ConfirmedJobDemandeComponent implements OnInit {
     this.senders=[];
       this.jobDemandeService.getMyConfirmedJobDemandes(enterpriseId)
          .subscribe(jobDemandes=>{
-            this.jobDemandes=jobDemandes;
+            this.jobDemandes=jobDemandes.reverse();
              this.loadSenders(jobDemandes);         
              console.log("job demandes zzzzzzz");
              this.getNotification();

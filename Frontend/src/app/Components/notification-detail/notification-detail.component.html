@@ -11,7 +11,7 @@
         <div class="row">
           
 
-                <div class="col-md-4 " >
+                <div class="col-md-12 " >
                     <div class="divup" >
                         <div class="card-content">
                             <div class="card-img">
@@ -20,18 +20,56 @@
                             </div>
 
                             <div class="card-desc">
-                                <h4>Bonjour Mahmoud ,vous avez ete selectionné par </h4>
+                                <h4>Bonjour </h4>
+                                <h3>
+                                        {{this.loggedUser?.username}}
+                                </h3>
                                 <div class="linediv">
                                         <h4 >Entreprise:</h4>
                                         <h3>{{nameEnterprise}}</h3>
                                 </div>
-                                <h4>pour passer un entretien pour un </h4>
-                                <div class="linediv">
-                                        <h4 >Poste:</h4>
-                                        <h3>***********</h3>
+                                <h4>a accepté votre demande de travail</h4>
+                                <hr>
+                                <div class="row">
+                                <div class="col-md-8">
+                                        <mat-expansion-panel>
+                                                <mat-expansion-panel-header>
+                                                  <mat-panel-description>
+                                                    <h4>Voir details de l'Offre acceptée</h4>
+                                                  </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div class="card-desc" style="background-color: rgb(141, 126, 126)145, 142, 142)145, 142, 142)">
+                                                        <div class="linediv">
+                                                          <h4 >Entreprise:</h4>
+                                                          <h3 style="color: black">{{this.selectedJobOffer?.enterprise.name}}</h3>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="linediv">
+                                                          <h4 >Addresse:</h4>
+                                                          <h3 style="color: black">{{this.selectedJobOffer?.town}}</h3>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="linediv">
+                                                          <h4 >Job:</h4>
+                                                          <h3 style="color: black">{{this.selectedJobOffer?.job.name}}</h3>
+                                                        </div>
+                                                        <hr>
+                                                        <h4>skills:</h4>
+                                                        <div *ngFor="let skill of this.selectedJobOffer?.skills" >
+                                                          <h3 style="color: black">{{skill}}</h3>
+                                                        </div>
+                                                                                      
+                                                      </div>
+                                        </mat-expansion-panel>
                                 </div>
-                                 
-                                <button class="btn-card danger" >close Notification</button>   
+                                                            
+                               <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary btn-lg" 
+                                             (click)="Confirmer()" *ngIf="this.selectedJobDemande?.status!=='CONFIRMED'">Confimer</button> 
+                                    <button type="button" class="btn btn-primary btn-lg" 
+                                              *ngIf="this.selectedJobDemande?.status==='CONFIRMED'" [disabled]="true">Deja Confimée</button> 
+                                </div>                                 
+                              </div>
                              </div>
                           </div>
                       </div>

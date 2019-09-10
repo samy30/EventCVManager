@@ -14,10 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.*;
 
 @RestController
@@ -144,5 +148,38 @@ public class UserController {
 
         User updatedUser = userRepository.save(user);
         return updatedUser;
+    }
+
+    // Update a user
+    @PutMapping("/user/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable(value = "id") Long id,
+                                              @Valid @RequestBody UserSummary userSummary) {
+
+        if(userRepository.existsByEmail(userSummary.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if(userRepository.existsByUsername(userSummary.getUsername())) {
+            return new ResponseEntity(new ApiResponse(false, "Username already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        user.setFirstName(userSummary.getFirstName());
+        user.setLastName(userSummary.getLastName());
+        user.setGender(userSummary.getGender());
+        user.setAge(userSummary.getAge());
+        user.setImage(userSummary.getImage());
+        user.setUsername(userSummary.getUsername());
+        user.setEmail(userSummary.getEmail());
+
+        User updatedUser = userRepository.save(user);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(updatedUser.getUsername()).toUri();
+
+        return ResponseEntity.created(location).body(updatedUser);
     }
 }
