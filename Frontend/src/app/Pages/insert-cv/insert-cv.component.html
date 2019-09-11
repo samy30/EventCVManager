@@ -33,12 +33,12 @@
           <div class="content">
             <form [formGroup]="CVForm" (ngSubmit)="onSubmit()" style="padding: 50px;">
               <div class="form-group aalimin">
-                <label>First Name:</label>
+                <label>Prenom:</label>
                 <input formControlName="firstName" type="text" class="form-control na9eswidth" placeholder="Prenom">
               </div>
 
               <div class="form-group aalimin">
-                <label>Last Name:</label>
+                <label>Nom:</label>
                 <input formControlName="lastName" type="text" class="form-control na9eswidth" placeholder="Nom">
               </div>
 
@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="col-md-4">
-                          <input formControlName="level" class="form-control"  type="number" placeholder="level" >
+                          <input formControlName="level" class="form-control"  type="text"  >
                         </div>
 
 
@@ -163,7 +163,7 @@
                             <input formControlName="enterprise" class="form-control" placeholder="Entreprise" >
                           </div>
                           <div class="col-md-2">
-                            <input formControlName="post" class="form-control" placeholder="post" >
+                            <input formControlName="post" class="form-control" placeholder="poste" >
                           </div>
                           <div class="col-md-3">
                             <input formControlName="startingDate" type="date" class="form-control" placeholder="Date de debut" >

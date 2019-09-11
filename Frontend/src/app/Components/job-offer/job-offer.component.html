@@ -5,7 +5,7 @@
 
 <!-- details card section starts from here -->
 <section  class="details-card">
-  <h2 >Offres Disponibles</h2>
+  <h3 >Offres Disponibles</h3>
   <hr class="height_mriguel">
   <div class="container" >
     <div class="row fontsghir" >
@@ -19,64 +19,64 @@
             </div>
             <div class="card-desc" >
               <div class="linediv height_mriguel">
-               <h3> Entreprise:</h3>
-                <h3 style="color: white">{{offer.enterprise.name}}</h3>
+               <h3>Entreprise        : </h3>
+                <h3 style="color: black ">  {{offer.enterprise.name}}</h3>
               </div>
               <hr class="height_mriguel">
               <div class="linediv height_mriguel">
                   <h3 >Secteur d'activité:</h3>
-                  <h3 style="color: white">{{offer.activity}}</h3>
+                  <h3 style="color: black ">{{offer.activity}}</h3>
                 </div>
                 <hr class="height_mriguel">
               <div class="linediv height_mriguel">
                 <h3 >intitulé du poste:</h3>
-                <h3 style="color: white">{{offer.job.name}}</h3>
+                <h3 style="color: black ">{{offer.job.name}}</h3>
               </div>
               <hr class="height_mriguel">
               <div class="linediv height_mriguel">
                   <h3 >Type de contrat:</h3>
-                  <h3 style="color: white">{{offer.type}}</h3>
+                  <h3 style="color: black ">{{offer.type}}</h3>
                 </div>
                 <hr class="height_mriguel">
                 <div class="linediv height_mriguel">
                     <h3 >Temps:</h3>
-                    <h3 style="color: white">{{offer.time}}</h3>
+                    <h3 style="color: black ">{{offer.time}}</h3>
                   </div>
                   <hr class="height_mriguel">
                   <div class="linediv height_mriguel">
                       <h3 >Date debut de contrat :</h3>
-                      <h3 style="color: white">{{offer.startingDate}}</h3>
+                      <h3 style="color: black ">{{offer.startingDate}}</h3>
                     </div>
                     <hr class="height_mriguel">
                     <div class="linediv height_mriguel" *ngIf="offer.wage">
                         <h3 >Salaire proposé :</h3>
-                        <h3 style="color: white">{{offer.wage}}</h3>
+                        <h3 style="color: black ">{{offer.wage}}</h3>
                       </div>
                       <hr class="height_mriguel">
               <div class="linediv height_mriguel">
                   <h3 >Lieu de travail:</h3>
-                  <h3 style="color: white">{{offer.town}}</h3>
+                  <h3 style="color: black ">{{offer.town}}</h3>
                 </div>
                 <hr class="height_mriguel">
                 <div class="linediv height_mriguel" *ngIf="offer.description">
                     <h3 >Description de poste:</h3>
-                    <h3 style="color: white">{{offer.description}}</h3>
+                    <h3 style="color: black ">{{offer.description}}</h3>
                   </div>
                   <hr class="height_mriguel">
                   <div class="linediv height_mriguel">
                       <h3 >Diplôme minimum requis:</h3>
-                      <h3 style="color: white">{{offer.minimumSchoolDegree}}</h3>
+                      <h3 style="color: black ">{{offer.minimumSchoolDegree}}</h3>
                     </div>
                     <hr class="height_mriguel">
                     <div class="linediv height_mriguel">
                         <h3 >Expérience attendue pour ce poste (nombre d'annees):</h3>
-                        <h3 style="color: white">{{offer.experienceYears}}</h3>
+                        <h3 style="color: black ">{{offer.experienceYears}}</h3>
                       </div>
                       <hr class="height_mriguel">
                     
               <h3>Qualités requises pour le poste:</h3>
               <div *ngFor="let skill of offer.skills" >
-                <h3 style="color: white">{{skill}}</h3>
+                <h3 style="color: black ">{{skill}}</h3>
               </div>
               <hr class="height_mriguel">
               <a  class="btn-card"  (click)="getJob(offer)" 
