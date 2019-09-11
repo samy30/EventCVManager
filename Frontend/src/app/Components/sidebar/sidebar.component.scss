@@ -10,7 +10,7 @@
 .seen{
   background-color: rgb(235, 233, 233);
   border:2px;
-  border-radius:10px;
+  border-radius:20px;
   height:50px;
 }
  .unseen{
@@ -82,6 +82,7 @@
   .right{
 
     margin-left:7%;
+    border-radius:20px;
 
     //
   }
@@ -89,10 +90,10 @@
   .link {
     color: white;
   }
-  .link-login:hover{ background: #f4f4f4; color: white; }
+  .link-login:hover{ background: #f4f4f4; color: white;  border-radius: 20px; }
   .link-login{
     float:right;
-    font-size:15px;
+    font-size:20px;
   }
 
 #connect{
@@ -102,24 +103,26 @@ transition-duration: 0.4s;
 #connect:hover {
 background-color: #1f2ac0; /* Green */
 color: white;
+border-radius: 20px;
 }
 .link,.link-img{
   font-size:25px;
   color: white;
 }
   .link,.link-img{
-    font-size:15px;
+    font-size:20px;
     color: white;
   }
 
 
   .dropdown-item{
-    font-size:15px;
+    font-size:20px;
     height:60px;
+    max-width:30px
   }
-  .dropdown-item:hover {
-    background-color: #94c01f; /* Green */
+  .dropdown-item:hover { /* Green */
     color: black;
+    border-radius: 20px;
   }
 
 .dropdown-item{
@@ -129,14 +132,16 @@ color: white;
 .dropdown-item:hover {
   background-color: #94c01f; /* Green */
   color: black;
+  border-radius: 20px;
 }
 
 .dropdown-menu{
-  width: 500px;
+  width: 35px;
+  padding:30%
 }
 
 .fullbar{
-  height:36px;
+  height:90px;
   width:100%;
 }
 // css of new navbar

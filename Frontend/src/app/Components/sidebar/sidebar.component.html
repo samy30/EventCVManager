@@ -1,9 +1,11 @@
-<div style="background:#94c01f;height:35px;padding:5px;">
-  <div  style="margin-left:30px">
-    <h3 class="text-white " style="font-size:22px">
-    Postulez !
-    <i class="fa fa-paper-plane"></i>
-  </h3>
+<div style="background:#94c01f ; height:19px">
+  <div  style="margin-left:100px">
+    <h3 class="text-white " style="font-size:16px">
+      Consultez notre plateforme quotidiennement pour découvrir de nouvelles entreprises et de nouveaux postes
+      
+      <div class="float-right" style="background:#e9501e;font-size:19px ;width:150px; height:19px">Postulez<i class="fa fa-paper-plane"></i>
+    </div>
+      </h3>
   </div>
   </div>
 
@@ -11,14 +13,14 @@
 </div>
 <div style="background :#1d70b7 ">
     <div style="background : #1d70b7">
-      <div class="fullbar" style="background : #1d70b7">
+      <div class="fullbar" style="background : #1d70b7 ; padding:30px">
         <a mat-button [routerLink]="'/Acceuil'"  class="link" >
           <i class="fa fa-home" style="size:50px"></i>
           Acceuil </a>
 
-        <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
-        <a mat-button [routerLink]="'/NotrePlateforme'" class="link"> Notre Platforme </a>
-
+        <a mat-button [routerLink]="'/NotrePlateforme'" *ngIf="!this.authService.loggedIn()" class="link"> Qui Sommes nous ? </a>
+        <a mat-button [routerLink]="'/QuiSommesNous'" *ngIf="!this.authService.loggedIn()" class="link"> Notre Platforme</a>
+        
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'" class="link">Administration </a>
         <a mat-button [routerLink]="'/JobSearch'"
@@ -56,7 +58,7 @@
                         <img class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png"  style="border-radius:15px; height:30px; width:30px;">
                     </ng-template>-->
                     {{loggedUser.username}}</a>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-right" style="width:30px">
                     <a  [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()"
                                   class="dropdown-item">Profil<i class="fa fa-user" ></i> </a>
                     <div class="dropdown-divider"></div>
