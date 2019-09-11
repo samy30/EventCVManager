@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/components/common/message';
 import { MessageService } from 'primeng/components/common/messageservice';
 import {UserService} from "../../Services/user.service";
+import { AuthService } from 'src/app/Services/auth.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 
 @Component({
@@ -22,11 +24,15 @@ export class ProfilComponent implements OnInit {
   uploadedFiles: any[] = [];
   imgURL:any=null;
   value: number = 0;
+  genres=['male','female'];
+  genresFr=['Homme','Femme'];
   constructor(
     private userService: UserService,
     private cd: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private authService:AuthService,
+    private notificationService:NotificationService) {
       this.userFormGroup = this.formBuilder.group({
         username: ['', Validators.required],
         firstName: ['', Validators.required],
@@ -76,7 +82,8 @@ export class ProfilComponent implements OnInit {
     this.userService.updateUser(id, data).subscribe(user => {
       this.showSuccess('Votre profil a été mis a jour','Profil Modifie' ,'success' );
       console.log(user);
-    //  this.
+      this.authService.setCurrentUser(user);
+      this.notificationService.emitProfileChange(user);
       this.loadUser();
 
  },err =>{

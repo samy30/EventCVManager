@@ -168,7 +168,7 @@ margin-left:30em;
   position: relative;
   margin-top:10%;
   padding: 0.6em;
-  background: #db6334;
+  //background: #db6334;
   border-radius: 0.2em;
   font-size: 1.3em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -200,9 +200,9 @@ margin-left:30em;
   border: 2px #fff solid;
   border-radius: 80px;
   background: #da3a1e;
-  opacity: 0;
+  opacity: 1;
   content: attr(data-count);
-  opacity: 0;
+  opacity: 1;
   transform: scale(0.5);
   transition: transform, opacity;
   transition-duration: 0.3s;
@@ -214,7 +214,7 @@ margin-left:30em;
 }
 
 .notification.show-count::after {
-  transform: scale(1);
+  transform: scale(0.7);
   opacity: 1;
 }
 

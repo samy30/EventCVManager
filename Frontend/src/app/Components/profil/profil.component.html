@@ -47,9 +47,18 @@
                                   </div>
                                   <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Sexe</label>
-                                        <input type="text" class="form-control" placeholder="sexe" formControlName="gender" >
-                                    </div>
+                                        <label for="gender" >Genre:</label><br>
+                                        <mat-select formControlName="gender" > 
+                                                      
+                                            <mat-option *ngFor="let genre of genres;let i=index" [value]="genre">
+                                                    {{ genresFr[i] }}
+                                                  </mat-option>
+                                    </mat-select> 
+                                       <!-- <select  id="gender" formControlName="gender" class="form-control" required>
+                                          <option [value]="male">Homme</option>
+                                          <option [value]="female">Femme</option>
+                                        </select>-->
+                                      </div>
                                 </div>
                               </div>
   

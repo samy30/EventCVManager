@@ -6,15 +6,19 @@
 
             <div class="row">
               <div class="col-md-12">
-                    <div classs="card-header">  <h4 class="card-title">User CV</h4> </div>
+                    <div classs="card-header"> 
+                    <div class="row text-center">
+                        <div class="col-md-2">
+                            
+                        </div>
+                        <div class="col-md-6">
+                                <app-upload [flag]="0" [imgURL]="image"></app-upload> 
+                        </div>
+                         
+                    </div>
+                    </div>
                       <div class="content text-center ">
                           <form [formGroup]="CVForm" >
-                              <div class="row">
-                                    <div  *ngIf="image">
-                                            <img  style=" object-fit: cover;" class="avatar border-gray" [src]="image " alt='....' />
-                                    </div>
-
-                              </div>
                               <hr>
                               <div class="row text-center">
                                       <div class="col-md-6">
