@@ -83,6 +83,12 @@ export class NotificationService {
       this.eventCallback.next(notification);
    }
 
+   private profileCallback=new BehaviorSubject<any>('');
+   profileCallback$=this.profileCallback.asObservable();
+   emitProfileChange(notification){
+     this.profileCallback.next(notification);
+   }
+
   getNotification(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(

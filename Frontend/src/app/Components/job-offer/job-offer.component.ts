@@ -111,7 +111,7 @@ export class JobOfferComponent implements OnInit {
            this.jobDemandeService.postJobDemande(this.jobDemande)
                  .subscribe(demande => {
                    this.jobDemande = demande;
-                  
+                    this.loadSelectedPost();
                  });
            });
     });
