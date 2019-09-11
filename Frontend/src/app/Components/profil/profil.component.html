@@ -47,12 +47,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="gender" >Genre:</label><br>
-                        <mat-select formControlName="gender" > 
-                                      
+                        <mat-select formControlName="gender" >
+
                             <mat-option *ngFor="let genre of genres;let i=index" [value]="genre">
                                     {{ genresFr[i] }}
                                   </mat-option>
-                    </mat-select> 
+                    </mat-select>
                       </div>
                 </div>
               </div>

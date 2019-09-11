@@ -7,12 +7,14 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule,
+import {
+  MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatDialogModule } from '@angular/material';
+  MatDialogModule, ErrorStateMatcher
+} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -77,6 +79,7 @@ import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
 import { Scroll2Component } from './Components/scroll2/scroll2.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
 
 
 @NgModule({
@@ -177,6 +180,7 @@ import { ChangePasswordComponent } from './Components/change-password/change-pas
       useClass: TokenInterceptor,
       multi: true
     },
+    {provide: ErrorStateMatcher, useClass: MyErrorStateMatcher},
     AuthGuard,
     AuthService,
     UserService,
