@@ -74,6 +74,7 @@ import {NotreplatformeComponent} from './Components/notreplatforme/notreplatform
 import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { UploadComponent } from './Components/upload/upload.component';
+import {Carousel2Component} from './Components/carousel2/carousel2.component';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { UploadComponent } from './Components/upload/upload.component';
     NotreplatformeComponent,
     QuisommesnousComponent,
     ConfirmedJobDemandeComponent,
-    UploadComponent
+    UploadComponent,
+    Carousel2Component
   ],
   imports: [
     ChartsModule,

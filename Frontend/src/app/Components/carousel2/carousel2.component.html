@@ -1,0 +1,35 @@
+<div id="firascarousel">
+
+  <div class="firas_arrow" style="left:20px;"  (click)="nextCarousel(-1)"></div>
+  <div class="firas_arrow" style="right:20px;transform: scaleX(-1);" (click)="nextCarousel(1)"></div>
+  <div class="firas_circle ciractive" (click)="carnum(0)" style="left:calc(50% - 40px);"></div>
+  <div class="firas_circle" (click)="carnum(1)" style="left:calc(50% - 8px);"></div>
+  <div class="firas_circle" (click)="carnum(2)" style="left:calc(50% + 24px);"></div>
+  <div class="kaaba caractive" style="background-color:rgb(50, 173, 50);">
+    <div class="cadri">
+      <h1 class="text-white">Un Bon Entretien ... </h1>
+      <br>
+      <h3 class="text-white">Une garantie d'embauche</h3>
+
+    </div>
+    <div class="taswira" style="background-image: url(../../assets/images/car2.jpg);"></div>
+  </div>
+  <div class="kaaba" style="background-color:rgb(214, 88, 42);">
+    <div class="taswira" style="background-image: url(../../assets/images/car1.jpg);"></div>
+    <div class="cadri">
+      <h2></h2>
+      <h1 class="text-white">La formation..</h1>
+      <h3 class="text-white">l'essence de tout succès </h3>
+    </div>
+  </div>
+  <div class="kaaba" style="background-color:rgb(43, 98, 182);">
+    <div class="cadri">
+      <h1 class="text-white">Postulez</h1>
+      <h3 class="text-white">Saisissez votre chance</h3>
+    </div>
+    <div class="taswira" style="background-image: url(../../assets/images/car3.jpg);"></div>
+  </div>
+  <div class="carbar" style="background-color:rgba(40, 160, 40, .6);"></div>
+  <div class="carbar" style="background-color:rgba(190, 60, 35, .6);"></div>
+  <div class="carbar" style="background-color:rgba(35, 70, 150, .6);"></div>
+</div>
