@@ -75,6 +75,8 @@ import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.c
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
+import { Scroll2Component } from './Components/scroll2/scroll2.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 
 
 @NgModule({
@@ -109,7 +111,9 @@ import {Carousel2Component} from './Components/carousel2/carousel2.component';
     QuisommesnousComponent,
     ConfirmedJobDemandeComponent,
     UploadComponent,
-    Carousel2Component
+    Carousel2Component,
+    Scroll2Component,
+    ChangePasswordComponent
   ],
   imports: [
     ChartsModule,
