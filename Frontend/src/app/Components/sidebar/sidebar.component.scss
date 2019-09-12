@@ -10,7 +10,7 @@
 .seen{
   background-color: rgb(235, 233, 233);
   border:2px;
-  border-radius:20px;
+  border-radius:10px;
   height:50px;
 }
  .unseen{
@@ -82,7 +82,6 @@
   .right{
 
     margin-left:7%;
-    border-radius:20px;
 
     //
   }
@@ -90,10 +89,10 @@
   .link {
     color: white;
   }
-  .link-login:hover{ background: #f4f4f4; color: white;  border-radius: 20px; }
+  .link-login:hover{ background: #f4f4f4; color: white; }
   .link-login{
     float:right;
-    font-size:20px;
+    font-size:15px;
   }
 
 #connect{
@@ -103,41 +102,31 @@ transition-duration: 0.4s;
 #connect:hover {
 background-color: #1f2ac0; /* Green */
 color: white;
-border-radius: 20px;
 }
 .link,.link-img{
   font-size:25px;
   color: white;
 }
   .link,.link-img{
-    font-size:20px;
+    font-size:15px;
     color: white;
   }
 
 
   .dropdown-item{
-    font-size:20px;
+    font-size:15px;
     height:60px;
-    max-width:30px
+   
   }
-  .dropdown-item:hover { /* Green */
-    color: black;
-    border-radius: 20px;
-  }
-
-.dropdown-item{
-  font-size:20px;
-  height:60px;
-}
+ 
 .dropdown-item:hover {
   background-color: #94c01f; /* Green */
   color: black;
-  border-radius: 20px;
 }
 
 .dropdown-menu{
-  width: 35px;
-  padding:30%
+
+  width: 400px;
 }
 
 .fullbar{
@@ -150,7 +139,7 @@ border-radius: 20px;
 .notification {
   display: inline-block;
   position: relative;
-  margin-top:10%;
+  margin-top:1%;
   padding: 0.6em;
   //background: #db6334;
   border-radius: 0.2em;

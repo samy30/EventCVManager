@@ -57,6 +57,8 @@ export class ProfilComponent implements OnInit {
   }
   loadUser() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("user profil");
+    console.log(this.user);
     this.userFormGroup.patchValue({
       username : this.user.username,
       email : this.user.email,
