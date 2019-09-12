@@ -62,7 +62,6 @@ public class User extends AuditModel {
     @Size(max = 100)
     private String password;
 
-    @NotBlank
     @Size(max = 100)
     private String town;
 

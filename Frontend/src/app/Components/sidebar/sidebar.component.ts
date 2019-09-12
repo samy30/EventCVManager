@@ -70,27 +70,22 @@ export class SidebarComponent implements OnInit {
   }
 
   loadLoggedUser() {
-    console.log('loggedUser');
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.loggedUser);
     if (this.loggedUser) {
       this.userId=this.loggedUser.is;
        this.role = this.role = this.loggedUser.roles? this.loggedUser.roles[0].name:this.loggedUser.authorities[0].authority;            
       this.loadNotifications(this.loggedUser.id);
-      console.log('role');
-      console.log(this.role);
     }
   }
 
 
 
    logout() {
-     console.log('logout');
      this.authService.logout();
      this.router.navigate(['/Login']);
      this.loggedUser = {};
      this.role='';
-     console.log(this.authService.loggedIn());
    }
 
    notify() {
