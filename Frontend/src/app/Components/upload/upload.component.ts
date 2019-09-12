@@ -12,7 +12,8 @@ export class UploadComponent implements OnInit  {
 
 
   public imagePath;
-  @Input() imgURL: any;
+  @Input() imgURL: any=null;
+  @Input() flag=1;
   public message: string;
 
   constructor() { }
@@ -25,6 +26,7 @@ export class UploadComponent implements OnInit  {
     console.log("imgae url change");
     console.log(changes.imgURL.currentValue);
     this.imgURL=changes.imgURL.currentValue;
+    this.flag=changes.flag.currentValue;
   }
  
   preview(files) {

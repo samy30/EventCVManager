@@ -59,6 +59,8 @@ export class StatistiqueComponent implements OnInit {
   },
  ];
 
+  
+
  setAgeStatistic(age:number){
   this.ageLabels.forEach(label=>{
     var count=0;

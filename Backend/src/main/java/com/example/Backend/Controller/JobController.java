@@ -2,6 +2,10 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.Job;
+import com.example.Backend.Model.JobDemande;
+import com.example.Backend.Model.JobOffer;
+import com.example.Backend.Repository.JobDemandeRepository;
+import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,12 @@ import java.util.List;
 public class JobController {
     @Autowired
     JobRepository jobRepository;
+
+    @Autowired
+    JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    JobDemandeRepository jobDemandeRepository;
 
     // Get All Jobs
     @GetMapping("/job")
@@ -54,6 +64,16 @@ public class JobController {
     public ResponseEntity<?> deleteJob(@PathVariable(value = "id") Long id) {
         Job job = jobRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Job", "id", id));
+        List<JobOffer> jobOffersToDelete = jobOfferRepository.findByJob(job);
+        for (JobOffer jobOfferToDelete:jobOffersToDelete
+             ) {
+            List<JobDemande> jobdemandesToDelete = jobDemandeRepository.findByJobOffer(jobOfferToDelete);
+            for (JobDemande jobDemandeToDelete:jobdemandesToDelete
+            ) {
+                jobDemandeRepository.delete(jobDemandeToDelete);
+            }
+            jobOfferRepository.delete(jobOfferToDelete);
+        }
 
         jobRepository.delete(job);
 

@@ -12,70 +12,91 @@
                     <div id="login-box" class="col-md-12">
                       <div >
                         <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
-                          
+
                           <div class="form-group">
                             <label for="username" >Identifiant:</label><br>
-                            <input type="text"  formControlName="username" class="form-control" required>
-                          <!--
-                            <mat-error *ngIf="isFieldInvalid('username')">
-                              username required
-                            </mat-error>
-                          -->
+                            <input type="text"  formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.username.errors }">
+                            <div *ngIf="isSubmitted && signupForm.controls.username.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.username.errors.required">Nom d'utilisateur est nécessaire</div>
+                            </div>
                           </div>
 
                           <div class="form-group">
                             <label for="password" >Mot De Passe:</label><br>
-                            <input type="password"  formControlName="password" class="form-control" required>
-                          <!--  
-                            <mat-error *ngIf="isFieldInvalid('password')">
-                              password required
-                            </mat-error>
-                          -->
+                            <input type="password"  formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.password.errors }">
+                            <div *ngIf="isSubmitted && signupForm.controls.password.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.password.errors.required">Mot de passe est nécessaire</div>
+                              <div *ngIf="signupForm.controls.password.errors.minlength">Mot de passe doit contenir au moins 6 caractéres</div>
+                            </div>
                           </div>
-                          
+
+                          <div class="form-group">
+                            <label>Confirmer Votre Mot De Passe</label>
+                            <input type="password" class="form-control" placeholder="Confirmer Votre Mot De Passe" formControlName="confirmedPassword" [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.confirmedPassword.errors }" >
+                            <div *ngIf="isSubmitted && signupForm.controls.confirmedPassword.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.confirmedPassword.errors.required">Répéter mot de passe est nécessaire</div>
+                              <div *ngIf="signupForm.controls.confirmedPassword.errors.mustMatch">Passwords must match</div>
+                            </div>
+                          </div>
+
                           <div class="form-group">
                             <label for="email" >Email:</label><br>
-                            <input type="email"  formControlName="email" class="form-control" required>
+                            <input type="email"  formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.email.errors }">
+                            <div *ngIf="isSubmitted && signupForm.controls.email.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.email.errors.required">Adresse Email est nécessaire</div>
+                            </div>
                           </div>
 
                           <div class="form-group">
                             <label for="firstName" >Prenom:</label><br>
-                            <input type="text" id="firstName"  formControlName="firstName" class="form-control" required>
+                            <input type="text" id="firstName"  formControlName="firstName" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.firstName.errors }">
+                            <div *ngIf="isSubmitted && signupForm.controls.firstName.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.firstName.errors.required">Prénom est nécessaire</div>
+                            </div>
                           </div>
 
                           <div class="form-group">
                             <label for="lastName" >Nom:</label><br>
-                            <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
+                            <input type="text" id="lastName" formControlName="lastName" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.lastName.errors }">
+                            <div *ngIf="isSubmitted && signupForm.controls.lastName.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.lastName.errors.required">Nom est nécessaire</div>
+                            </div>
                           </div>
 
-                          
+
                            <div class="row">
                              <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="gender" >Genre:</label><br>
-                                    
-                                    <select name="GenderList" id="gender" formControlName="gender" class="form-control" required>
+
+                                    <select name="GenderList" id="gender" formControlName="gender" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.gender.errors }">
                                       <option value="Male">Homme</option>
                                       <option value="Female">Femme</option>
                                     </select>
+                                  <div *ngIf="isSubmitted && signupForm.controls.gender.errors" class="invalid-feedback">
+                                    <div *ngIf="signupForm.controls.gender.errors.required">Genre est nécessaire</div>
+                                  </div>
                                   </div>
                              </div>
                              <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="age" >Age:</label><br>
-                                    <input type="number" id="age" formControlName="age" class="form-control" required>
+                                    <input type="number" id="age" formControlName="age" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.age.errors }">
+                                  <div *ngIf="isSubmitted && signupForm.controls.age.errors" class="invalid-feedback">
+                                    <div *ngIf="signupForm.controls.age.errors.required">Age est nécessaire</div>
                                   </div>
+                                </div>
                              </div>
                            </div>
-                         
+
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="gouvernorat" >Gouvernorat:</label><br>
                                        <select name="carlist" form="carform" class="form-control">
-                                        <option value="none" selected disabled hidden> 
+                                        <option value="none" selected disabled hidden>
                                         Choisissez votre gouvernaurat
-                                        </option>   
+                                        </option>
                                         <option value="Ariana">Ariana</option>
                                           <option value="Baja">Baja</option>
                                           <option value="Ben Arous">Ben Arous</option>
@@ -102,16 +123,15 @@
                                           <option value="Zaghouan">Zaghouan</option>
 
                                         </select>
-                                
+
                                       </div>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
-                                       [disabled]="!isFormValid(signupForm)">
-                                      </div>                  
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                      </div>
                         </form>
-                      </div>                
+                      </div>
                     </div>
                 </div>
             </div>

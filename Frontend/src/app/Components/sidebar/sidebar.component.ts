@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
     this.loadLoggedUser();
     this.listenToAuthentication();
     this.notify();
-    
+    this.listenToProfileChange();
 
     if (this.loggedUser) {
       this.userId = this.loggedUser.id;
@@ -48,6 +48,17 @@ export class SidebarComponent implements OnInit {
     this.messagingService.receiveMessage();
     this.message = this.messagingService.currentMessage;
 
+  }
+
+  listenToProfileChange(){
+      this.notificationService.profileCallback$
+        .subscribe(user=>{
+           this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+           if (this.loggedUser) {
+            this.role = this.loggedUser.roles? this.loggedUser.roles[0].name: this.loggedUser.authorities[0].authority;
+                                             
+           }
+        })
   }
 
   listenToAuthentication() {
@@ -63,7 +74,7 @@ export class SidebarComponent implements OnInit {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.loggedUser);
     if (this.loggedUser) {
-      this.role = this.loggedUser.authorities[0].authority;
+      this.role = this.role = this.loggedUser.roles? this.loggedUser.roles[0].name:this.loggedUser.authorities[0].authority;            
       this.loadNotifications(this.loggedUser.id);
       console.log('role');
       console.log(this.role);

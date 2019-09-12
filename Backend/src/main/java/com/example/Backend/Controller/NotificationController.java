@@ -34,6 +34,12 @@ public class NotificationController {
         return notificationRepository.findByReceiverID(id);
     }
 
+    // Get Notification by sender ID
+    @GetMapping("/notification/sender/{id}")
+    public List<Notification> getNotificationBySenderId(@PathVariable(value = "id") Long id) {
+        return notificationRepository.findBySenderID(id);
+    }
+
     // Count all Notifications by receiver ID
     @GetMapping("/notification/{id}/all")
     public Long countNotificationByReceiverId(@PathVariable(value = "id") Long id) {

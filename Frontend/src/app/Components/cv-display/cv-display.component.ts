@@ -26,7 +26,7 @@ export class CvDisplayComponent implements OnInit {
   professionalExperiences:FormArray;
   studies:FormArray;
   socialMedias:FormArray;
-  image:SafeResourceUrl;
+  image:any;
   @Input()cv;
   @Input()jobDemande;
   @Output() decisionEmitter = new EventEmitter();
@@ -78,7 +78,8 @@ export class CvDisplayComponent implements OnInit {
        this.patchSocialMedias();
        this. patchProfessionalExperiences();
        this.patchStudies();
-       this.image = this.sanitization.bypassSecurityTrustStyle(this.cv.photo);
+     //  this.image = this.sanitization.bypassSecurityTrustStyle(this.cv.photo);
+     this.image=this.cv.photo;
   }
 
  patchSoftwares(){
@@ -195,42 +196,6 @@ export class CvDisplayComponent implements OnInit {
 
 
   
-onUpload(event) {
-  this.Uploading = true;
-  this.Uploaded = false;
 
-  for(let file of event.files) {
-
-      this.uploadedFiles.push(file);
-  }
-
-}
-changeListener(event) : void {
-  this.Uploading = true;
-  this.Uploaded = false;
-  for(let file of event.files) {
-
-    this.readThis(file);
-}
-
-
-
-}
-
-updateImage(ImageUrl){
-  this.user.image=ImageUrl;
-}
-
-readThis(inputValue: any): void {
-  var file:File = inputValue;
-  var myReader:FileReader = new FileReader();
-
-  myReader.onloadend = (e) => {
-    this.image = myReader.result;
-   this.updateImage(myReader.result);
-
-  }
-  myReader.readAsDataURL(file);
-}
 
 }

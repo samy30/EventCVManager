@@ -1,19 +1,20 @@
 package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.AppException;
+import com.example.Backend.Exception.InvalidOldPasswordException;
 import com.example.Backend.Model.Role;
 import com.example.Backend.Model.RoleName;
 import com.example.Backend.Model.User;
-import com.example.Backend.Payload.ApiResponse;
-import com.example.Backend.Payload.JwtAuthenticationResponse;
-import com.example.Backend.Payload.LoginRequest;
-import com.example.Backend.Payload.SignUpRequest;
+import com.example.Backend.Payload.*;
 import com.example.Backend.Repository.RoleRepository;
 import com.example.Backend.Repository.UserRepository;
+import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.JwtTokenProvider;
+import com.example.Backend.Security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Locale;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -112,4 +115,28 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
+
+    // update user password
+    @PostMapping("/user/updatePassword")
+    public ResponseEntity<?> changeUserPassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest, @CurrentUser UserPrincipal currentUser) {
+
+        Optional<User> user = userRepository.findById(currentUser.getId());
+
+        if (!checkIfValidOldPassword(user.get(), changePasswordRequest.getOldPassword())) {
+            throw new InvalidOldPasswordException();
+        }
+        user.get().setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
+        User result = userRepository.save(user.get());
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(result.getUsername()).toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Password changed Succefully successfully"));
+    }
+
+    // check if pasword is valid
+    public boolean checkIfValidOldPassword(final User user, final String oldPassword) {
+        return passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
 }

@@ -7,12 +7,14 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule,
+import {
+  MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatDialogModule } from '@angular/material';
+  MatDialogModule, ErrorStateMatcher
+} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -75,6 +77,9 @@ import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.c
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
+import { Scroll2Component } from './Components/scroll2/scroll2.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
 
 
 @NgModule({
@@ -109,7 +114,9 @@ import {Carousel2Component} from './Components/carousel2/carousel2.component';
     QuisommesnousComponent,
     ConfirmedJobDemandeComponent,
     UploadComponent,
-    Carousel2Component
+    Carousel2Component,
+    Scroll2Component,
+    ChangePasswordComponent
   ],
   imports: [
     ChartsModule,
@@ -173,6 +180,7 @@ import {Carousel2Component} from './Components/carousel2/carousel2.component';
       useClass: TokenInterceptor,
       multi: true
     },
+    {provide: ErrorStateMatcher, useClass: MyErrorStateMatcher},
     AuthGuard,
     AuthService,
     UserService,
