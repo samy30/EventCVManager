@@ -64,6 +64,7 @@ export class NotificationComponent implements OnInit {
    var id=this.myNotification.jobDemandeID;
     this.jobDemandeService.confirmJobDemande(id)
       .subscribe(jb=>{
+          
           console.log("jobDemande confirmed");
       })
  }

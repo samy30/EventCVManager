@@ -175,7 +175,7 @@ public class UserController {
         user.setUsername(userSummary.getUsername());
         if(!userSummary.getEmail().equals(user.getEmail()))
         user.setEmail(userSummary.getEmail());
-
+        user.setTown(userSummary.getTown());
         User updatedUser = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder

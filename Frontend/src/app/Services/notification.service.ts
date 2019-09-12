@@ -128,4 +128,13 @@ export class NotificationService {
           catchError(this.handleError)
         );
   }
+  
+  getSentNotifications(id):Observable<any>{
+
+    return this.http.get(`${apiUrl}/sender/${id}`)
+     .pipe(
+      catchError(this.handleError)
+    );
+
+  }
 }

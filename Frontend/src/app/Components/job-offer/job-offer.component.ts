@@ -39,13 +39,14 @@ export class JobOfferComponent implements OnInit {
   notifications=[];
   sub: Subscription;
   dataSource ;
+  sentNotifications=[];
   displayedColumns: string[] = ['enterprise', 'activity','job','town','actions'];
   ngOnInit() {
     this.loadSelectedPost();
      this.loadLoggedUser();
 
   }
-
+  
  applyFilter(filterValue: string) {
    this.dataSource.filter = filterValue.trim().toLowerCase();
  }
@@ -80,6 +81,10 @@ export class JobOfferComponent implements OnInit {
           this.authService.getCurrentUser()
              .subscribe(user=>{
                 this.currentUser=user;
+                this.notificationService.getSentNotifications(this.currentUser.id)
+                    .subscribe(notifs=>{
+                        this.sentNotifications=notifs;
+                    })
                 this.notificationService.getNotifications(this.currentUser.id)
                      .subscribe(notifs=>{
                         this.notifications=notifs;
@@ -90,7 +95,7 @@ export class JobOfferComponent implements OnInit {
      }
 
      isToken(offer){
-           var offersId=this.notifications.map(notif=>notif.jobOfferID);
+           var offersId=this.sentNotifications.map(notif=>notif.jobOfferID);
            console.log("offersIDs");
            console.log(this.notifications);
            console.log(offersId);
@@ -107,6 +112,13 @@ export class JobOfferComponent implements OnInit {
               isToken:this.isToken(offer)
               }
       });
+
+      dialogRef.afterClosed().subscribe(result=>{
+           if(result) this.notificationService.getSentNotifications(this.currentUser.id)
+               .subscribe(notifs=>{
+                     this.sentNotifications=notifs;
+                })
+           });
 
     }
 

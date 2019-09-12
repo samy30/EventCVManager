@@ -79,9 +79,10 @@
   }
 
   .link:hover{ background: #94c01f; color: white; }
+
   .right{
 
-    margin-left:7%;
+    margin-left:50%;
 
     //
   }
@@ -104,18 +105,16 @@ background-color: #1f2ac0; /* Green */
 color: white;
 }
 .link,.link-img{
-  font-size:25px;
+  font-size:15px;
   color: white;
+  margin-bottom: 0%;
+  
 }
-  .link,.link-img{
-    font-size:15px;
-    color: white;
-  }
 
 
   .dropdown-item{
     font-size:15px;
-    height:60px;
+
    
   }
  
@@ -126,7 +125,7 @@ color: white;
 
 .dropdown-menu{
 
-  width: 400px;
+  width: 300px;
 }
 
 .fullbar{
