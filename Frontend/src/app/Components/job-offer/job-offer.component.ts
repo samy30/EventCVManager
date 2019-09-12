@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobOfferService } from 'src/app/Services/job-offer.service';
-import { MatDialog } from '@angular/material';
 import { InsertCVComponent } from 'src/app/Pages/insert-cv/insert-cv.component';
 import { CVService } from 'src/app/Services/cv.service';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
@@ -9,7 +8,8 @@ import {JobsService} from '../../Services/jobs.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Subscription} from 'rxjs';
 import { NotificationService } from 'src/app/Services/notification.service';
-
+import { MatSort, MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
+import { JobOfferDisplayComponent } from '../job-offer-display/job-offer-display.component';
 
 @Component({
   selector: 'app-job-offer',
@@ -17,6 +17,9 @@ import { NotificationService } from 'src/app/Services/notification.service';
   styleUrls: ['./job-offer.component.scss']
 })
 export class JobOfferComponent implements OnInit {
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   constructor(private router: Router,
               private jobOfferService: JobOfferService,
               private jobsService: JobsService,
@@ -25,7 +28,7 @@ export class JobOfferComponent implements OnInit {
               private jobDemandeService: JobDemandeService,
               private authService: AuthService,
               private notificationService:NotificationService) {
-                this.loadSelectedPost();
+               
 
    }
   jobOffers: any[] = [];
@@ -35,11 +38,28 @@ export class JobOfferComponent implements OnInit {
   currentUser;
   notifications=[];
   sub: Subscription;
+  dataSource ;
+  displayedColumns: string[] = ['enterprise', 'activity','job','town','actions'];
   ngOnInit() {
-   // this.loadSelectedPost();
+    this.loadSelectedPost();
      this.loadLoggedUser();
 
   }
+
+ applyFilter(filterValue: string) {
+   this.dataSource.filter = filterValue.trim().toLowerCase();
+ }
+
+ reloadDataSource(data) {
+   this.dataSource = new MatTableDataSource(data);
+   this.dataSource.paginator = this.paginator;
+   this.dataSource.sort = this.sort;
+
+ }
+
+
+
+
 
      loadSelectedPost(){
       this.jobsService.eventCallback$.subscribe(postes => {
@@ -49,6 +69,7 @@ export class JobOfferComponent implements OnInit {
         this.jobOfferService.getOffers(this.selectedJob).subscribe(offers => {
               // list of jobOffers
                this.jobOffers = offers;
+               this.reloadDataSource(offers);
                console.log('offers');
                console.log(offers);
              });
@@ -69,14 +90,57 @@ export class JobOfferComponent implements OnInit {
      }
 
      isToken(offer){
-
            var offersId=this.notifications.map(notif=>notif.jobOfferID);
            console.log("offersIDs");
            console.log(this.notifications);
            console.log(offersId);
-           return (offersId.indexOf(offer.id)!==-1);
-              
-     }
+           return (offersId.indexOf(offer.id)!==-1);     
+    }
+
+    getDetail(offer){
+      console.log("element");
+      console.log(offer);
+      const dialogRef = this.dialog.open(JobOfferDisplayComponent, {
+        width: '95%',
+        height: '100%',
+        data: {offer:offer,
+              isToken:this.isToken(offer)
+              }
+      });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //
   getJob(offer) {

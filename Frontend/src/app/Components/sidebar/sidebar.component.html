@@ -29,7 +29,7 @@
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" class="link" > Mes offres </a>
-                       <a mat-button  *ngIf="this.authService.loggedIn() &&
+        <a mat-button  *ngIf="this.authService.loggedIn() &&
                        this.role!=='ROLE_AdMIN'" class="link">
                        <div class="nav-item dropdown">
                           <a  class="nav-link notification dropdown-toggle link" data-toggle="dropdown">

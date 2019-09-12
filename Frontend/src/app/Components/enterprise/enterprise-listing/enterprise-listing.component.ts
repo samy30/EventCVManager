@@ -75,6 +75,7 @@ export class EnterpriseListingComponent implements OnInit {
   deleteEnterprise(id){
      this.enterpriseService.deleteEnterprise(id)
          .subscribe(res=>{
+            this.loadEnterprises();
              console.log("enterprise deleted");
          })
   }

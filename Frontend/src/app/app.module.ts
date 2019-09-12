@@ -75,6 +75,7 @@ import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.c
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
+import { JobOfferDisplayComponent } from './Components/job-offer-display/job-offer-display.component';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import {Carousel2Component} from './Components/carousel2/carousel2.component';
     QuisommesnousComponent,
     ConfirmedJobDemandeComponent,
     UploadComponent,
-    Carousel2Component
+    Carousel2Component,
+    JobOfferDisplayComponent
   ],
   imports: [
     ChartsModule,
@@ -165,7 +167,7 @@ import {Carousel2Component} from './Components/carousel2/carousel2.component';
   ],
   entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
                     OfferCreationComponent, EnterpriseEditionComponent,
-                    JobOfferEditionComponent],
+                    JobOfferEditionComponent,JobOfferDisplayComponent],
   providers: [
     httpInterceptorProviders,
     {

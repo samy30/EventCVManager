@@ -9,8 +9,52 @@
   <hr>
   <div class="container">
     <div class="row">
+      <mat-form-field class="col-md-12">
+
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre ...">
+      </mat-form-field>
+      <mat-paginator class="col-md-12" [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
+      <table mat-table [dataSource]="dataSource" matSort  class="table table-hover table-striped">
+
+             <!-- Name Column -->
+       <ng-container matColumnDef="enterprise">
+                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Entreprise </th>
+                   <td mat-cell *matCellDef="let element"> {{element.enterprise.name}} </td>
+       </ng-container>
+            <!-- email Column -->
+            <ng-container matColumnDef="activity">
+             <th mat-header-cell *matHeaderCellDef mat-sort-header> Activié </th>
+             <td mat-cell *matCellDef="let element"> {{element.activity}} </td>
+      </ng-container>
+         <!-- email Column -->
+         <ng-container matColumnDef="job">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Poste </th>
+          <td mat-cell *matCellDef="let element"> {{element.job.name}} </td>
+       </ng-container>
+           <!-- email Column -->
+           <ng-container matColumnDef="town">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu de travail </th>
+            <td mat-cell *matCellDef="let element"> {{element.town}} </td>
+      </ng-container>
+       <ng-container  matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef    > Detail </th>
+            <td mat-cell *matCellDef="let element">
+               <a  matTooltip="Modifier l'entreprise" [routerLink]="" (click)="getDetail(element)" ><mat-icon >visibility</mat-icon></a>
+    
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+     </table>
+
+    </div>
+  </div>
+</section>
 
 
+
+<!-- details card section starts from here -->
+<!--
       <div class="col-md-8" *ngFor="let offer of jobOffers">
         <div class="divup" >
           <div class="card-content">
@@ -86,12 +130,8 @@
                   <a  class="btn-card" style="background-color: rgb(36, 98, 179) " >deja choisie</a>
               </ng-template>
 
-             <!-- <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Postuler</a>-->
+          
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- details card section starts from here -->
+      </div>-->
