@@ -31,19 +31,19 @@
         <a mat-button [routerLink]="'/JobDemande'"
                     *ngIf="this.authService.loggedIn() &&
                        this.role=='ROLE_ENTERPRISE'" class="link" > Mes offres </a>
-        <a mat-button  *ngIf="this.authService.loggedIn() &&
+       <a mat-button  *ngIf="this.authService.loggedIn() &&
                        this.role!=='ROLE_AdMIN'" class="link">
                        <div class="nav-item dropdown">
                           <a  class="nav-link notification dropdown-toggle link" data-toggle="dropdown">
 
                           </a>
-                          <div class="dropdown-menu dropdown-menu-right">
+                          <div class="dropdown-menu ">
                                 <a
                                      class="dropdown-item"
                                         *ngFor="let notification of notifications;let i=index" (click)='getNotificationDetails(notification)'>
                                           <div *ngIf="!notification.seen;else unseennotif"
-                                              class="seen" > {{getName(i)|uppercase }} sends this notification</div>
-                                           <ng-template #unseennotif class="unseen"> {{getName(i)|uppercase }} sends this notification</ng-template>
+                                              class="seen" > {{getName(i)|uppercase }} vous contacte</div>
+                                           <ng-template #unseennotif class="unseen"> {{getName(i)|uppercase }} vous contacte</ng-template>
                                 </a>
                         </div>
 
@@ -53,7 +53,7 @@
             <div class="nav-item dropdown" >
                 <a  class="nav-link dropdown-toggle link" data-toggle="dropdown" >
                     <img  class="link" [src]="loggedUser.image"  alt=""
-                         style="border-radius:15px; height:30px; width:30px;">
+                         style="border-radius:20px; height:40px; width:40px;">
                    <!-- <ng-template #nonImage>
                         <img class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png"  style="border-radius:15px; height:30px; width:30px;">
                     </ng-template>-->
@@ -64,7 +64,9 @@
                     <div class="dropdown-divider"></div>
                     <a (click)="logout()" [routerLink]="'/Login'" *ngIf="this.authService.loggedIn()"
                             class="dropdown-item">Deconnection<i class="fa fa-sign-out" ></i></a>
-
+                      <div class="dropdown-divider"></div>
+                   <a  [routerLink]="'/mdpChange'" *ngIf="this.authService.loggedIn()"
+                                    class="dropdown-item">changer mot de pass<i class="fa fa-sign-out" ></i></a>
                 </div>
               </div>
           </a>

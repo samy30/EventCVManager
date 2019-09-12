@@ -107,7 +107,7 @@ export class OfferCreationComponent implements OnInit {
         time:this.offerFormGroup.get('time').value,
         description:this.offerFormGroup.get('description').value,
         minimumSchoolDegree:this.offerFormGroup.get('minimumSchoolDegree').value,
-        experience_years:this.offerFormGroup.get('experience_years').value,
+        experienceYears:this.offerFormGroup.get('experience_years').value,
         startingDate:this.offerFormGroup.get('startingDate').value,
      }
      console.log("offer");

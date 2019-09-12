@@ -81,7 +81,7 @@ export class ProfilComponent implements OnInit {
     this.role = this.user.authorities?this.user.authorities[0].authority:this.user.roles[0].name;
   }
   updateUser() {
-    const {username, email, firstName, lastName, age, gender} = this.userFormGroup.value;
+    const {username, email, firstName, lastName, age, gender,town} = this.userFormGroup.value;
     const data = {
       username,
       email,
@@ -89,6 +89,7 @@ export class ProfilComponent implements OnInit {
       lastName,
       age,
       gender,
+      town,
       image: this.imgURL
     };
     console.log('hello');
