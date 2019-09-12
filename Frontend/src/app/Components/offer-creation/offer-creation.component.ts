@@ -32,11 +32,11 @@ export class OfferCreationComponent implements OnInit {
     public dialogRef: MatDialogRef<OfferCreationComponent>
   ) {
     this.offerFormGroup = this.formBuilder.group({
-      nom_poste: ['', Validators.required],
-      nom_enterprise: ['', Validators.required],
+      nom_poste: [''],
+      nom_enterprise: [''],
       activity:['',Validators.required],
-      town: ['', Validators.required],
-      type:['', Validators.required],
+      town: [''],
+      type:[''],
       time:['',Validators.required],
       wage:[''],
       description:['',Validators.required],
