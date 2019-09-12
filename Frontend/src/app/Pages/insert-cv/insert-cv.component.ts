@@ -49,8 +49,7 @@ export class InsertCVComponent implements OnInit {
 
 
   ngOnInit() {
-    // if(this.cv)this.fillCVForm();
-      
+     if(this.cv)this.fillCVForm();
   }
   
   fillCVForm(){
