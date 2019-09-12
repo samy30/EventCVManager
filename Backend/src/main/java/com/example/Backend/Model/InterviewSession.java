@@ -33,11 +33,12 @@ public class InterviewSession extends AuditModel {
     @OneToOne
     @JoinColumn(name = "jobRequest_id")
     private JobDemande jobRequest;
+
     private String jobName;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "interviewCalendar_id")
-    private InterviewCalendar interviewCalendar;
+    @JoinColumn(name = "enterprise_id")
+    private User enterprise;
 
 }

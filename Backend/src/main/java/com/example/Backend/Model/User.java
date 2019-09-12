@@ -70,8 +70,8 @@ public class User extends AuditModel {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
-    private InterviewCalendar interviewCalendar;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<InterviewSession> interviewSessions;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
     private Set<JobOffer> jobOffers = new HashSet<>();
@@ -274,11 +274,27 @@ public class User extends AuditModel {
         this.jobOffers = jobOffers;
     }
 
-    public InterviewCalendar getInterviewCalendar() {
-        return interviewCalendar;
+    public Set<InterviewSession> getInterviewSessions() {
+        return interviewSessions;
     }
 
-    public void setInterviewCalendar(InterviewCalendar interviewCalendar) {
-        this.interviewCalendar = interviewCalendar;
+    public void setInterviewSessions(Set<InterviewSession> interviewSessions) {
+        this.interviewSessions = interviewSessions;
+    }
+
+    public JobDemande getJobRequest() {
+        return jobRequest;
+    }
+
+    public void setJobRequest(JobDemande jobRequest) {
+        this.jobRequest = jobRequest;
+    }
+
+    public Set<JobDemande> getJobRequests() {
+        return jobRequests;
+    }
+
+    public void setJobRequests(Set<JobDemande> jobRequests) {
+        this.jobRequests = jobRequests;
     }
 }

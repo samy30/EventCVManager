@@ -5,15 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InterviewSessionPayload {
+public class JobRequestPayload {
 
-    private String fromTimeInterval;
-    private String toTimeInterval;
-    private Long jobRequestId;
+    private Long id;
+    private Long jobOfferId;
+    private Long enterpriseId;
+    private Long jobSeekerId;
     private String enterpriseUsername;
     private String jobSeekerName;
     private String jobName;

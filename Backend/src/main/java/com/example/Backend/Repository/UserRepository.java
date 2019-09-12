@@ -28,4 +28,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Long countByGender(String gender);
 
+    User findByJobRequestsId(Long jobRequestId);
+
+    User findByJobRequestId(Long jobRequestId);
+
 }

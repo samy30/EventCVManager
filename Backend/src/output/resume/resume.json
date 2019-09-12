@@ -1,0 +1,101 @@
+{
+  "skills": [
+    {
+      "level": "5",
+      "name": "mySoftware0"
+    },
+    {
+      "level": "5",
+      "name": "mySoftware1"
+    },
+    {
+      "level": "5",
+      "name": "mySoftware2"
+    }
+  ],
+  "basics": {
+    "name": "myFirstName myLastName",
+    "profiles": [
+      {
+        "url": "myPath0",
+        "network": "myType0"
+      },
+      {
+        "url": "myPath1",
+        "network": "myType1"
+      },
+      {
+        "url": "myPath2",
+        "network": "myType2"
+      }
+    ],
+    "location": {"address": "My address, Tunis, Tunisa"},
+    "email": "email@gmail.com",
+    "picture": "yo.jpg"
+  },
+  "education": [
+    {
+      "area": "myStudy2",
+      "institution": "myInstitution2",
+      "endDate": "2018-01-01"
+    },
+    {
+      "area": "myStudy0",
+      "institution": "myInstitution0",
+      "endDate": "2016-01-01"
+    },
+    {
+      "area": "myStudy1",
+      "institution": "myInstitution1",
+      "endDate": "2017-01-01"
+    }
+  ],
+  "languages": [
+    {
+      "fluency": "5",
+      "language": "language2"
+    },
+    {
+      "fluency": "5",
+      "language": "language1"
+    },
+    {
+      "fluency": "5",
+      "language": "language0"
+    }
+  ],
+  "work": [
+    {
+      "endDate": "2019-01-01",
+      "company": "MyEntreprise2",
+      "position": "Software Developer",
+      "startDate": "2018-01-01"
+    },
+    {
+      "endDate": "2017-01-01",
+      "company": "MyEntreprise0",
+      "position": "Software Developer",
+      "startDate": "2016-01-01"
+    },
+    {
+      "endDate": "2018-01-01",
+      "company": "MyEntreprise1",
+      "position": "Software Developer",
+      "startDate": "2017-01-01"
+    }
+  ],
+  "interests": [
+    {
+      "keywords": ["MyInterestDescription0"],
+      "name": "SuperInterest0"
+    },
+    {
+      "keywords": ["MyInterestDescription1"],
+      "name": "SuperInterest1"
+    },
+    {
+      "keywords": ["MyInterestDescription2"],
+      "name": "SuperInterest2"
+    }
+  ]
+}

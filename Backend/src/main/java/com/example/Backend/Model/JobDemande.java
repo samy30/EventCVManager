@@ -23,6 +23,7 @@ public class JobDemande extends UserDateAudit {
     @JoinColumn(name = "jobOffer_id")
     private JobOffer jobOffer;
 
+    @JsonBackReference
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "cv_id", nullable = true)
     private CV cv;
@@ -32,6 +33,7 @@ public class JobDemande extends UserDateAudit {
     @JoinColumn(name = "enterprise_id")
     private User enterprise;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "sender_id")
     private User sender;
@@ -42,12 +44,15 @@ public class JobDemande extends UserDateAudit {
     @Column(columnDefinition = "BOOLEAN")
     private boolean confirmedByUser;
 
+    @Column(columnDefinition = "BOOLEAN")
+    private boolean confirmedByEntreprise;
+
     public JobDemande(
             JobOffer jobOffer,
             CV cv,
             User enterprise,
             User sender,
-            String status
+            Status status
     ) {
         this.jobOffer = jobOffer;
         this.cv = cv;
@@ -62,8 +67,6 @@ public class JobDemande extends UserDateAudit {
     public void setConfirmedByEntreprise(boolean confirmedByEntreprise) {
         this.confirmedByEntreprise = confirmedByEntreprise;
     }
-
-    private boolean confirmedByEntreprise;
 
     public Long getId() {
         return id;

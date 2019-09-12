@@ -45,7 +45,7 @@ public class StudyController {
 
         study.setName(studyDetails.getName());
         study.setInstitution(studyDetails.getInstitution());
-        study.setDate(studyDetails.getDate());
+        study.setGraduationDate(studyDetails.getGraduationDate());
         study.setMention(studyDetails.getMention());
         study.setCv(studyDetails.getCv());
 

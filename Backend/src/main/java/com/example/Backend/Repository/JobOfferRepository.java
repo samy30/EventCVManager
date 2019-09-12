@@ -14,6 +14,7 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> findAllByEnterpriseUsername(String username);
     List<JobOffer> findAllByEnterprise(User user);
     List<JobOffer> findByJob(Job job);
+    JobOffer findByJobRequestsId(Long jobRequestId);
     long countByCreatedBy(Long userId);
     long countByJob(Job job);
 }

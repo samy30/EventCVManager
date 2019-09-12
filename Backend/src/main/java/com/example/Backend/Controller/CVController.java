@@ -3,6 +3,7 @@ package com.example.Backend.Controller;
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.CV;
 import com.example.Backend.Repository.CVRepository;
+import com.example.Backend.Service.JsonResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CVController {
+
     @Autowired
     private CVRepository cvRepository;
+
+    @Autowired
+    JsonResumeService jsonResumeService;
 
     @GetMapping("/cvs")
     public List<CV> getAllCVs() {
@@ -55,5 +60,11 @@ public class CVController {
             cvRepository.delete(CV);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("ProfessionalExperience", "id", cvId));
+    }
+
+
+    @GetMapping("/api/cvs/generatePdf/{resumeId}")
+    public void generateResume(@PathVariable Long resumeId) {
+        jsonResumeService.generateResume(resumeId);
     }
 }

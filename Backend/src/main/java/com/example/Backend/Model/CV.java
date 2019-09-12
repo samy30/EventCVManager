@@ -2,6 +2,9 @@ package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -10,6 +13,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cvs")
 public class CV extends UserDateAudit {
     @Id
@@ -36,37 +42,37 @@ public class CV extends UserDateAudit {
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<ProfessionalExperience> professionalExperiences  = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<Interest> interests  = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<Language> languages  = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<SocialMedia> socialMedias  = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<Software> softwares  = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<Study> studies  = new HashSet<>();
 

@@ -1,6 +1,9 @@
 package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -8,6 +11,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "studies")
 public class Study extends AuditModel{
     @Id
@@ -21,7 +27,7 @@ public class Study extends AuditModel{
     private String institution;
 
     @NotBlank
-    private String date;
+    private String graduationDate;
 
     @NotBlank
     private String mention;
@@ -56,12 +62,12 @@ public class Study extends AuditModel{
         this.institution = institution;
     }
 
-    public String getDate() {
-        return date;
+    public String getGraduationDate() {
+        return graduationDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setGraduationDate(String graduationDate) {
+        this.graduationDate = graduationDate;
     }
 
     public String getMention() {

@@ -3,6 +3,8 @@ import { Subject, AsyncSubject, BehaviorSubject, ReplaySubject,Observable, throw
 import { of } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import JobDemande from "../Models/job-demande";
+import JobRequest from "../Models/jobRequest";
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -50,7 +52,15 @@ export class JobDemandeService {
   emitJobDemande(jobDemande){
       this.eventCallback.next(jobDemande);
    }
- 
+
+
+   getJobRequestsConfirmedByEnterprise(): Observable<any> {
+    return this.http.get(apiUrl + '/accepted', httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+   }
+
    getJobDemandes(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),

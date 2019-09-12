@@ -3,9 +3,11 @@ package com.example.Backend.Controller;
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.*;
 import com.example.Backend.Payload.JobDemandeResponse;
+import com.example.Backend.Payload.JobRequestPayload;
 import com.example.Backend.Repository.JobDemandeRepository;
 import com.example.Backend.Repository.NotificationRepository;
 import com.example.Backend.Repository.UserRepository;
+import com.example.Backend.Service.JobRequestService;
 import com.example.Backend.Service.PushNotificationsService;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,10 +37,18 @@ public class JobDemandeController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private JobRequestService jobRequestService;
+
     // Get All JobDemandes
     @GetMapping("/jobDemande")
     public List<JobDemande> getAllJobDemandes() {
         return jobDemandeRepository.findAll();
+    }
+
+    @GetMapping("/jobDemande/accepted")
+    public List<JobRequestPayload> getAcceptedJobRequests() {
+        return jobRequestService.getJobRequestsAcceptedByEnterprise(true);
     }
 
     // Create a new JobDemande

@@ -6,14 +6,14 @@ import { NotificationService } from './Services/notification.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Frontend';
-   
-  constructor(private notificationService:NotificationService){
+
+  constructor(private notificationService: NotificationService){
 
   }
 
-  ngOnInit(){
-     
+  ngOnInit() {
+
   }
 }

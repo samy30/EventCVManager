@@ -7,12 +7,14 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule,
+import {
+  MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatDialogModule } from '@angular/material';
+  MatDialogModule, DateAdapter
+} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -74,7 +76,11 @@ import {NotifierModule} from 'angular-notifier';
 import {NotreplatformeComponent} from './Components/notreplatforme/notreplatforme.component';
 import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.component';
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
-
+import { InterviewCalendarComponent } from './Components/interview-calendar/interview-calendar.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter as CalendarDateAdapter} from 'angular-calendar';
 
 @NgModule({
   declarations: [
@@ -106,7 +112,8 @@ import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande
     CarouselComponent,
     NotreplatformeComponent,
     QuisommesnousComponent,
-    ConfirmedJobDemandeComponent
+    ConfirmedJobDemandeComponent,
+    InterviewCalendarComponent
   ],
   imports: [
     ChartsModule,
@@ -159,7 +166,13 @@ import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande
           gap: 10
         }
       }
-    } )
+    } ),
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: CalendarDateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
                     OfferCreationComponent, EnterpriseEditionComponent,
