@@ -90,7 +90,7 @@ public class UserController {
 
         long cvCount = cvRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getImage(),user.getNotificationID());
+        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getImage(),user.getNotificationID(), user.getTown());
 
         return userProfile;
     }

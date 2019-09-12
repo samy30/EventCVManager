@@ -119,7 +119,7 @@ export class OfferCreationComponent implements OnInit {
                    .subscribe(res=>{
                        console.log("final result");
                        console.log(res);
-                       this.dialogRef.close();
+                       this.dialogRef.close(res);
                    })
      })
    }

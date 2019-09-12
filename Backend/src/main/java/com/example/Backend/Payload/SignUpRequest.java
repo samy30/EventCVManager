@@ -15,6 +15,7 @@ public class SignUpRequest {
     private String activity;
     private String notificationID;
     private long age;
+    private String town;
 
     @NotBlank
     @Size(min = 3, max = 15)
@@ -125,5 +126,13 @@ public class SignUpRequest {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }

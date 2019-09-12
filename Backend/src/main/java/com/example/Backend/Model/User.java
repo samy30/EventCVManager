@@ -62,6 +62,10 @@ public class User extends AuditModel {
     @Size(max = 100)
     private String password;
 
+    @NotBlank
+    @Size(max = 100)
+    private String town;
+
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -81,7 +85,7 @@ public class User extends AuditModel {
         this.password = password;
     }
 
-    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID) {
+    public User(@Size(max = 40) String name, @Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @Size(max = 40) String description, @Size(max = 40) String activity, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles, String notificationID, String town) {
         this.name = name;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -95,9 +99,10 @@ public class User extends AuditModel {
         this.password = password;
         this.roles = roles;
         this.notificationID = notificationID;
+        this.town = town;
     }
 
-    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID) {
+    public User(@Size(max = 40) String firstName, @Size(max = 40) String lastName, Long age, @Size(max = 40) String gender, String image, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, String notificationID, String town) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -107,6 +112,7 @@ public class User extends AuditModel {
         this.email = email;
         this.password = password;
         this.notificationID = notificationID;
+        this.town = town;
     }
 
     public User(@Size(max = 40) String name, String image, @Size(max = 40) String description, @Size(max = 40) String activity, String notificationID, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
@@ -121,7 +127,7 @@ public class User extends AuditModel {
         this.roles = roles;
     }
 
-    public User(String firstName, String lastName, long age, String gender, String username, String email, String password, String notificationID) {
+    public User(String firstName, String lastName, long age, String gender, String username, String email, String password, String notificationID, String town) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -129,6 +135,7 @@ public class User extends AuditModel {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.town = town;
         this.notificationID = notificationID;
     }
 
@@ -252,5 +259,13 @@ public class User extends AuditModel {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }

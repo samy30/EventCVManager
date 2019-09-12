@@ -45,7 +45,7 @@ public class EnterpriseController {
     @GetMapping("/enterprise/me")
     @PreAuthorize("hasRole('ENTERPRISE')")
     public EnterpriseSummary getCurrentEnterprise(@CurrentUser UserPrincipal currentUser) {
-        return new EnterpriseSummary(currentUser.getId(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getImage(), currentUser.getNotificationID());
+        return new EnterpriseSummary(currentUser.getId(),currentUser.getUsername(),currentUser.getName(),currentUser.getDescription(),currentUser.getActivity(),currentUser.getEmail(),currentUser.getImage(), currentUser.getNotificationID());
     }
 
     // get all enterprises
@@ -73,12 +73,18 @@ public class EnterpriseController {
     public ResponseEntity<?> updateEnterprise(@PathVariable(value = "id") Long id,
                                  @Valid @RequestBody EnterpriseSummary enterpriseSummary) {
 
-        if(userRepository.existsByEmail(enterpriseSummary.getEmail())) {
+        User enterprise = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        if((userRepository.existsByEmail(enterpriseSummary.getEmail())) && (enterprise.getEmail() != enterpriseSummary.getEmail()) ) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
-        User enterprise = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        if((userRepository.existsByUsername(enterpriseSummary.getUsername())) && (enterprise.getUsername() != enterpriseSummary.getUsername()) ) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
 
         enterprise.setName(enterpriseSummary.getName());
         enterprise.setDescription(enterpriseSummary.getDescription());
@@ -100,6 +106,16 @@ public class EnterpriseController {
         User enterprise = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("user", "id", id));
 
+        List<JobOffer> jobOffersToDelete = jobOfferRepository.findByEnterprise(enterprise);
+        for (JobOffer jobOfferToDelete:jobOffersToDelete
+        ) {
+            List<JobDemande> jobdemandesToDelete = jobDemandeRepository.findByJobOffer(jobOfferToDelete);
+            for (JobDemande jobDemandeToDelete:jobdemandesToDelete
+            ) {
+                jobDemandeRepository.delete(jobDemandeToDelete);
+            }
+            jobOfferRepository.delete(jobOfferToDelete);
+        }
         userRepository.delete(enterprise);
 
         return ResponseEntity.ok().build();

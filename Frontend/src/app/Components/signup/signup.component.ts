@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required],
-      age: [0, Validators.required]
+      age: [0, Validators.required],
+      town: ['', Validators.required]
      }, {
       validator: this.MustMatch('password', 'confirmedPassword')
     });
@@ -56,14 +57,15 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    console.log(this.signupForm.value);
     this.authService.registerJobSeeker(this.signupForm.value).subscribe(
       res => {
         console.log('registered');
         console.log(res);
-        this.router.navigate(['/Profile']);
+        this.router.navigate(['/Login']);
         },
       err => {
-         console.log('not token');
+         console.log('not registered');
       }
     );
   }

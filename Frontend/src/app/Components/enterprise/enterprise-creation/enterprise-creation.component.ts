@@ -55,6 +55,7 @@ export class EnterpriseCreationComponent implements OnInit {
     this.authService.registerEnterprise(this.signupEnterpriseForm.value).subscribe(
       res => {
         console.log('registered');
+        this.dialogRef.close(res);
        // this.router.navigate(['/Profile']);
       },
       err => {

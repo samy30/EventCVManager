@@ -25,6 +25,7 @@ public class UserPrincipal implements UserDetails {
     private String username;
     private String notificationID;
     private String image;
+    private String town;
 
     private String email;
 
@@ -33,7 +34,7 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String image, String description, String activity,String notificationID, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String name, String firstName, String lastName, Long age, String gender, String image, String description, String activity,String notificationID, String username, String email, String password, String town, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
@@ -48,6 +49,7 @@ public class UserPrincipal implements UserDetails {
         this.password = password;
         this.authorities = authorities;
         this.notificationID = notificationID;
+        this.town = town;
     }
 
     public static UserPrincipal create(User user) {
@@ -69,6 +71,7 @@ public class UserPrincipal implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getTown(),
                 authorities
         );
     }
@@ -115,6 +118,10 @@ public class UserPrincipal implements UserDetails {
 
     public String getNotificationID() {
         return notificationID;
+    }
+
+    public String getTown() {
+        return town;
     }
 
     @Override

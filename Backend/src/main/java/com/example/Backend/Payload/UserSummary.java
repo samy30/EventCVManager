@@ -10,8 +10,9 @@ public class UserSummary {
     private String email;
     private String notificationID;
     private String image;
+    private String town;
 
-    public UserSummary(Long id, String username, String firstName, String lastName, String gender, long age, String email, String image, String notificationID) {
+    public UserSummary(Long id, String username, String firstName, String lastName, String gender, long age, String email, String image, String notificationID, String town) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -21,6 +22,7 @@ public class UserSummary {
         this.email = email;
         this.image = image;
         this.notificationID = notificationID;
+        this.town = town;
     }
 
     public Long getId() {
@@ -93,5 +95,13 @@ public class UserSummary {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }

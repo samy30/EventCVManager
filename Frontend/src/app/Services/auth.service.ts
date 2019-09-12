@@ -54,6 +54,7 @@ export class AuthService {
       lastName: user.lastName,
       gender: user.gender,
       age: user.age,
+      town: user.town,
       role: 'ROLE_USER'
     };
     console.log(jobSeeker);

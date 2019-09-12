@@ -14,8 +14,9 @@ public class UserProfile {
     private Date joinedAt;
     private String notificationID;
     private String image;
+    private String town;
 
-    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt, String image, String notificationID) {
+    public UserProfile(Long id, String username, String firstName, String lastName, String email, long age, String gender, Date joinedAt, String image, String notificationID, String town) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -26,6 +27,7 @@ public class UserProfile {
         this.joinedAt = joinedAt;
         this.image = image;
         this.notificationID = notificationID;
+        this.town = town;
     }
 
     public Long getId() {
@@ -106,5 +108,13 @@ public class UserProfile {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }
