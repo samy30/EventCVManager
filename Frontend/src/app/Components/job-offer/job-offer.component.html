@@ -10,13 +10,14 @@
   <div class="container">
     <div class="row">
       <mat-form-field class="col-md-12">-->
+  <section  class="details-card">
   <h3 >Offres Disponibles</h3>
   <hr class="height_mriguel">
   <div class="container" >
     <div class="row fontsghir" >
 
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre ...">
-      </mat-form-field>
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre ...">
+      
       <mat-paginator class="col-md-12" [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
       <table mat-table [dataSource]="dataSource" matSort  class="table table-hover table-striped">
 
@@ -50,7 +51,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
      </table>
-
+   
     </div>
   </div>
 </section>
