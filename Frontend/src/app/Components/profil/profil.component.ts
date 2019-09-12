@@ -76,7 +76,7 @@ export class ProfilComponent implements OnInit {
     this.image = this.user.image;
     console.log('profile image');
     console.log(this.image);
-    this.role = this.user.authorities[0].authority;
+    this.role = this.user.authorities?this.user.authorities[0].authority:this.user.roles[0].name;
   }
   updateUser() {
     const {username, email, firstName, lastName, age, gender} = this.userFormGroup.value;
@@ -120,7 +120,8 @@ export class ProfilComponent implements OnInit {
     this.userService.updateUser(id, data).subscribe(user => {
       this.showSuccess('Votre profil a été mis a jour', 'Profil Modifie' , 'success' );
       console.log(user);
-      //  this.
+      this.authService.setCurrentUser(user);
+      this.notificationService.emitProfileChange(user);
       this.loadUser();
 
     }, err => {

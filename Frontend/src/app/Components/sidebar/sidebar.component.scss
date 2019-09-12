@@ -144,26 +144,6 @@ border-radius: 20px;
   height:90px;
   width:100%;
 }
-// css of new navbar
-/*
-
-
-
-.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
-
-.nav-link{ margin-left: 1em !important;}
-
-
-.navbar-brand:hover{ background: #f4f4f4; color: #1d70b7; }
-//.navbar-collapse{ justify-content: flex-end;}
-
-.navbar-toggler{  background:#fff !important;}
-
-.right {
-float: right;
-margin-left:30em;
-
-}*/
 
 /* Notifications */
 
@@ -185,20 +165,21 @@ margin-left:30em;
 }
 
 .notification::before {
-  display: block;
+ // display: block;
   content: "\f0f3";
   font-family: "FontAwesome";
   transform-origin: top center;
 }
 
 .notification::after {
+   transform-origin: top center;
   margin-top:10%;
   font-family: Arial;
   font-size: 0.7em;
   font-weight: 700;
   position: absolute;
-  top: -9px;
-  right: -9px;
+  top: -11px;
+  right: -11px;
   padding: 0.6em;
   line-height: 100%;
   border: 2px #fff solid;
@@ -207,7 +188,7 @@ margin-left:30em;
   opacity: 1;
   content: attr(data-count);
   opacity: 1;
-  transform: scale(0.5);
+  transform: scale(0.8);
   transition: transform, opacity;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
@@ -218,7 +199,7 @@ margin-left:30em;
 }
 
 .notification.show-count::after {
-  transform: scale(0.7);
+ // transform: scale(1.5);
   opacity: 1;
 }
 

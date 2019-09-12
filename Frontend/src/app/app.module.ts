@@ -77,6 +77,7 @@ import {QuisommesnousComponent} from './Components/quisommesnous/quisommesnous.c
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
+import { JobOfferDisplayComponent } from './Components/job-offer-display/job-offer-display.component';
 import { Scroll2Component } from './Components/scroll2/scroll2.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
@@ -115,6 +116,7 @@ import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
     ConfirmedJobDemandeComponent,
     UploadComponent,
     Carousel2Component,
+    JobOfferDisplayComponent,
     Scroll2Component,
     ChangePasswordComponent
   ],
@@ -172,7 +174,7 @@ import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
   ],
   entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
                     OfferCreationComponent, EnterpriseEditionComponent,
-                    JobOfferEditionComponent],
+                    JobOfferEditionComponent,JobOfferDisplayComponent],
   providers: [
     httpInterceptorProviders,
     {
