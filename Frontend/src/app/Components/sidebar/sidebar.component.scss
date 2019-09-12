@@ -1,6 +1,6 @@
 //css of old navbar
 .main-div{
-    height: 100vh;
+    height: 50vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -8,18 +8,19 @@
   }
 
   .seen{
-    background-color: #EAEAEA;
+    background-color: rgb(235, 233, 233);
     border:2px;
+    border-radius:10px;
     height:50px;
   }
    .unseen{
-     background-color: rgb(236, 234, 234);
-     border:2px;
+     background-color: rgb(240, 240, 240);
+
      height:50px;
    }
 
   .example-card-center{
-      height:300px;
+      height:10px;
       width: 300px;
   }
   .example-card-center.mat-card-content{
@@ -30,17 +31,17 @@
     margin: 0;
     padding: 0;
     background-color: #1d70b7;
-    height: 100vh;
+    height: 10vh;
   }
   #login .container #login-row #login-column #login-box {
     margin-top: 120px;
     max-width: 600px;
-    height:370px;
+    height:10px;
     border: 1px solid #9C9C9C;
     background-color: #EAEAEA;
   }
   #login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
+    padding: 30px;
   }
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
@@ -73,7 +74,7 @@
   .link-login{
     margin-left:80vh;
     float:right;
-    font-size:25px;
+    font-size:20px;
   }
 
 #connect{
@@ -81,18 +82,18 @@
   transition-duration: 0.4s;
 }
 #connect:hover {
-  background-color: #94c01f; /* Green */
+  background-color: #1f2ac0; /* Green */
   color: white;
 }
   .link,.link-img{
-    font-size:25px;
+    font-size:20px;
     color: white;
   }
   
 
   .dropdown-item{
-    font-size:20px;
-    height:60px;
+    font-size:10px;
+
   }
   .dropdown-item:hover {
     background-color: #94c01f; /* Green */

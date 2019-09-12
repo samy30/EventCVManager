@@ -4,7 +4,7 @@
     <mat-toolbar-row style="background : #1d70b7">
       <div class="fullbar" style="background : #1d70b7">
         <a mat-button [routerLink]="'/Acceuil'"  class="link" >
-          <i class="fa fa-home" style="size:50px"></i>
+          <i class="fa fa-home" style=""></i>
           Acceuil </a>
 
         <a mat-button [routerLink]="'/QuiSommesNous'" class="link"> Qui Sommes nous ?</a>
@@ -23,10 +23,10 @@
                       <div class="dropdown-menu dropdown-menu-right">                    
                             <a  
                                  class="dropdown-item"
-                                    *ngFor="let notification of notifications" (click)='getNotificationDetails(notification)'>
+                                    *ngFor="let notification of notifications;let i=index" (click)='getNotificationDetails(notification)'>
                                       <div *ngIf="notification.seen;else unseennotif"
-                                          class="seen" > user with Id {{notification.senderID}} sends this notification</div>
-                                       <ng-template #unseennotif class="unseen"> user with Id {{notification.senderID}} sends this notification</ng-template>                              
+                                          class="seen" >  {{getName(i)|uppercase }} a envoyé cette notification</div>
+                                       <ng-template #unseennotif class="unseen">  {{getName(i)|uppercase }} a envoyé cette notification</ng-template>                              
                             </a>                            
                     </div>                   
                                             
@@ -42,7 +42,10 @@
             <div class="nav-item dropdown">
                 <a  class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <img *ngIf="loggedUser" class="link" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" style="border-radius:15px; height:30px; width:30px;">       
-                  {{loggedUser.username}}</a>
+                <!--
+                    {{loggedUser.username}}
+                -->
+                </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a  [routerLink]="'/Profil'" *ngIf="this.authService.loggedIn()" 
                                   class="dropdown-item">Profil<i class="fa fa-user" ></i> </a>

@@ -19,7 +19,8 @@
                                            <div class="col-md" >
                                               <div class="incenter">
                                                  <app-notification-detail *ngIf="myNotification" 
-                                                          [(notification)]="this.myNotification"> </app-notification-detail>
+                                                          [(notification)]="this.myNotification"
+                                                          (confirmationEmitter)="Confirm()"> </app-notification-detail>
                                              </div>     
                                                 
                                            </div>

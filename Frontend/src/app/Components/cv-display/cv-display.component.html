@@ -64,16 +64,29 @@
                                                   <div  *ngFor="let software of CVForm.get('softwares').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                <label>logiciel({{i+1}})</label>
-                                                                <input readonly formControlName="name" class="form-control" placeholder="software" >
-                                                                <input readonly formControlName="level" class="form-control" type="number" placeholder="level" >
-
+                                                               <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label for="name">Nom Logiciel</label>
+                                                                 </div>
+                                                                 <div class="col-md-10">
+                                                                    <input readonly formControlName="name" class="form-control" placeholder="software" >
+                                                                 </div>
+                                                             </div>
+                                                             <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label for="name">Niveau</label>
+                                                                 </div>
+                                                                 <div class="col-md-10">
+                                                                    <input readonly formControlName="level" class="form-control" type="number" placeholder="level" >
+                                                                </div>
+                                                                                                                        
                                                       </div>
 
                                                     </div>
                                               </div>
                                           </div>
-                                </div>
-
+                                       </div>
+                                    </div>
                                       <hr>
                                       <div class="row">
 
@@ -83,8 +96,22 @@
                                                   <div  *ngFor="let language of CVForm.get('languages').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                 <label>langue({{i+1}})</label>
-                                                                <input readonly formControlName="name" class="form-control" placeholder="language" >
-                                                                <input readonly formControlName="level" class="form-control"  type="number" placeholder="level" >
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <label for="name">Langue</label>
+                                                                     </div>
+                                                                     <div class="col-md-10">
+                                                                        <input readonly formControlName="name" class="form-control" placeholder="language" >
+                                                                    </div>
+                                                                 </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <label for="name">Niveau</label>
+                                                                     </div>
+                                                                     <div class="col-md-10">
+                                                                        <input readonly formControlName="level" class="form-control"  type="number" placeholder="level" >
+                                                                    </div>
+                                                                 </div>
                                                       </div>
 
                                                     </div>
@@ -100,11 +127,23 @@
                                                   <div  *ngFor="let interest of CVForm.get('interests').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                 <label>interest({{i+1}})</label>
-                                                                
-                                                                <input readonly formControlName="name"  class="form-control" placeholder="interest" >
-                                                                <input readonly formControlName="description" class="form-control" placeholder="description">
-                                                      </div>
-
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <label for="name">Inetret</label>
+                                                                     </div>
+                                                                     <div class="col-md-10">
+                                                                        <input readonly formControlName="name"  class="form-control" placeholder="interest" >
+                                                                    </div>
+                                                                 </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <label for="name">Description</label>
+                                                                     </div>
+                                                                     <div class="col-md-10">
+                                                                        <input readonly formControlName="description" class="form-control" placeholder="description">
+                                                                    </div>
+                                                                 </div>
+                                                          </div>
                                                     </div>
                                               </div>
                                           </div>
@@ -120,10 +159,38 @@
                                                   <div  *ngFor="let experiences_professionnelle of CVForm.get('professionalExperiences').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                <label>Experience ({{i+1}})</label>
-                                                                <input readonly formControlName="enterprise" class="form-control" placeholder="Entreprise" >
-                                                                <input readonly formControlName="post" class="form-control" placeholder="post" >
-                                                                <input readonly formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
-                                                                <input readonly formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
+                                                               <div class="row">
+                                                                   <div class="col-md-2">
+                                                                       <label for="name">Entreprise</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="enterprise" class="form-control" placeholder="Entreprise" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Poste</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="post" class="form-control" placeholder="post" >
+                                                                    </div>
+                                                                 </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Date debut</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="startingDate" type="date" class="form-control" placeholder="Date debut" >
+                                                                    </div>
+                                                                 </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Date fin</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="finishingDate" type="date" class="form-control" placeholder="Date fin" >
+                                                                    </div>
+                                                                 </div>
 
                                                       </div>
 
@@ -140,10 +207,38 @@
                                                   <div  *ngFor="let study of CVForm.get('studies').controls; let i = index">
                                                       <div [formGroupName]="i">
                                                                <label>Formation({{i+1}})</label>
-                                                                <input readonly formControlName="name" class="form-control" placeholder="name" >
-                                                                <input readonly formControlName="institution" class="form-control" placeholder="institution" >
-                                                                <input readonly formControlName="mention" class="form-control" placeholder="mention" >
-                                                                <input readonly type="date" class="form-control" formControlName="date" placeholder="date" >
+                                                                 <div class="row">
+                                                                     <div class="col-md-2">
+                                                                          <label for="name">Diplome</label>
+                                                                     </div>
+                                                                     <div class="col-md-10">
+                                                                        <input readonly formControlName="name" class="form-control" placeholder="name" >
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Institution</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="institution" class="form-control" placeholder="institution" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Mention</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly formControlName="mention" class="form-control" placeholder="mention" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <label for="name">Date</label>
+                                                                    </div>
+                                                                    <div class="col-md-10">
+                                                                        <input readonly type="date" class="form-control" formControlName="date" placeholder="date" >
+                                                                    </div>
+                                                                </div>
 
                                                       </div>
 
@@ -192,19 +287,34 @@
 
 
                               <hr>
-                              <div *ngIf="!this.jobDemande.confirmedByUser;else Confirmed">
+                              <div *ngIf="this.jobDemande.status==='PENDING'">
                                    <button type="submit" class="btn btn-info btn-fill pull-left" (click)="Accepter()" >Accepter</button>
                                    <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="Refuser()" >Refuser</button>
                               </div>
-                              <ng-template #Confirmed>
+                              <div *ngIf="this.jobDemande.status==='CONFIRMED'">
                                 <div class="row">
                                         <div class="col-md-5"></div>
                                         <div class="col-md-5">
                                               <button  class="btn btn-success btn-fill pull-left"  [disabled]="true">Confirmée</button>
                                         </div>
+                                </div>   
+                            </div>
+                            <div *ngIf="this.jobDemande.status==='REFUSED'">
+                                    <div class="row">
+                                            <div class="col-md-5"></div>
+                                            <div class="col-md-5">
+                                                  <button  class="btn btn-success btn-fill pull-left"  [disabled]="true">Deja Refusée</button>
+                                            </div>
+                                    </div>   
                                 </div>
-                                  
-                              </ng-template>
+                                <div *ngIf="this.jobDemande.status==='ACCEPTED'">
+                                        <div class="row">
+                                                <div class="col-md-5"></div>
+                                                <div class="col-md-5">
+                                                      <button  class="btn btn-success btn-fill pull-left"  [disabled]="true">Deja Acceptée</button>
+                                                </div>
+                                        </div>   
+                                    </div>
                              
                           </form>
                       </div>

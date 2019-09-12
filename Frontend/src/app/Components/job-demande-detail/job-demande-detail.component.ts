@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { JobDemandeService } from 'src/app/Services/job-demande.service';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -17,6 +17,8 @@ export class JobDemandeDetailComponent implements OnInit {
   jobDemande;
   sender;
   jobDemandeCV;
+  @Output() decisionEmitter = new EventEmitter();
+
   ngOnInit() {
     this.loadJobDetail();
   }
@@ -39,23 +41,9 @@ export class JobDemandeDetailComponent implements OnInit {
   }
 
   getDecision(decision:boolean){
-       if(decision){
-         this.acceptDemande();
-       }
-       else {
-         console.log("demande refusée");
-       }
+      this.decisionEmitter.emit(decision);
   }
+  
 
-  acceptDemande(){
-    //create notification with sender entreprise receiver demandesender and poste 
-    var notification={};
-    console.log("demande acceptée")
-    //post it in database
-   /* this.notificationService.postNotification(notification)
-       .subscribe(notif=>{
-            console.log("notification created");
-       })*/
-  }
 
 }

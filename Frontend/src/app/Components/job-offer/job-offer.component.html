@@ -4,8 +4,8 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!-- details card section starts from here -->
-<section class="details-card">
-  <h2>Available Offers</h2>
+<section  class="details-card">
+  <h2 >Offres Disponibles</h2>
   <hr>
   <div class="container">
     <div class="row">
@@ -36,8 +36,14 @@
               <div *ngFor="let skill of offer.skills" >
                 <h3 style="color: white">{{skill}}</h3>
               </div>
+              <hr>
+              <a  class="btn-card"  (click)="getJob(offer)" 
+                             *ngIf="!isToken(offer);else postule">Postuler</a>
+              <ng-template #postule>
+                  <a  class="btn-card" style="background-color: rgb(36, 98, 179) " >deja choisie</a>
+              </ng-template>
 
-              <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Get Job</a>
+              <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Postuler</a>
             </div>
           </div>
         </div>

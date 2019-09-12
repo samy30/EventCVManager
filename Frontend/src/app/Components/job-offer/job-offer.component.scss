@@ -24,6 +24,7 @@ section{
 	box-shadow: 0 2px 10px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 
+
 .card-img {
 	position: relative;
 	overflow: hidden;
@@ -94,7 +95,7 @@ section{
     -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    margin: 0;
+    margin-top:0;
     border: 0;
     -webkit-border-radius: .125rem;
     border-radius: .125rem;
@@ -103,12 +104,15 @@ section{
     white-space: normal;
     word-wrap: break-word;
     color: #fff;
+    background-color: goldenrod;
 }
-.btn-card:hover {
-    background: orange;
-}
+
 a.btn-card {
     text-decoration: none;
     color: #fff;
+    
+}
+a.btn-card:hover{
+    background: rgb(18, 138, 207);
 }
 /* End card section */

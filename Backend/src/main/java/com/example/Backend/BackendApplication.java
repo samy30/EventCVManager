@@ -3,12 +3,10 @@ package com.example.Backend;
 import com.example.Backend.Model.*;
 import com.example.Backend.Repository.*;
 import com.example.Backend.Service.JsonResumeService;
-import org.modelmapper.ModelMapper;
-import org.springframework.boot.CommandLineRunner;
+import org.modelmapper.ModelMapper;import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
