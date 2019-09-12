@@ -18,6 +18,11 @@
                 <table mat-table [dataSource]="dataSource" matSort  class="table table-hover table-striped">
         
                        <!-- entrprise Column -->
+                       <ng-container matColumnDef="id">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> ref </th>
+                              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+                       <!-- entrprise Column -->
                  <ng-container matColumnDef="enterprise">
                              <th mat-header-cell *matHeaderCellDef mat-sort-header> enterprise </th>
                              <td mat-cell *matCellDef="let element"> {{element.enterprise.name}} </td>
