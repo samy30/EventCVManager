@@ -7,12 +7,14 @@ import { InsertCVComponent } from './Pages/insert-cv/insert-cv.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule,
+import {
+  MatStepperModule,
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatDialogModule } from '@angular/material';
+  MatDialogModule, ErrorStateMatcher
+} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -76,6 +78,9 @@ import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande
 import { UploadComponent } from './Components/upload/upload.component';
 import {Carousel2Component} from './Components/carousel2/carousel2.component';
 import { JobOfferDisplayComponent } from './Components/job-offer-display/job-offer-display.component';
+import { Scroll2Component } from './Components/scroll2/scroll2.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
 
 
 @NgModule({
@@ -111,7 +116,9 @@ import { JobOfferDisplayComponent } from './Components/job-offer-display/job-off
     ConfirmedJobDemandeComponent,
     UploadComponent,
     Carousel2Component,
-    JobOfferDisplayComponent
+    JobOfferDisplayComponent,
+    Scroll2Component,
+    ChangePasswordComponent
   ],
   imports: [
     ChartsModule,
@@ -175,6 +182,7 @@ import { JobOfferDisplayComponent } from './Components/job-offer-display/job-off
       useClass: TokenInterceptor,
       multi: true
     },
+    {provide: ErrorStateMatcher, useClass: MyErrorStateMatcher},
     AuthGuard,
     AuthService,
     UserService,

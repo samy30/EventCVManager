@@ -18,12 +18,12 @@ export class UserService {
   userUrl  = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
- 
+
 
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/user/me`);
   }
-  
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.userUrl}/user/users`);
   }
@@ -38,5 +38,9 @@ export class UserService {
   }
   getUser(id): Observable<User>{
     return this.http.get<User>(`${this.userUrl}/ApplicationUsers/${id}`);
+  }
+
+  updatePassword(updatedPassword): Observable<any> {
+    return this.http.post(`${this.userUrl}/auth/user/updatePassword`, updatedPassword);
   }
 }

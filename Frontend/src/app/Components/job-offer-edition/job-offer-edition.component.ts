@@ -24,8 +24,9 @@ export class JobOfferEditionComponent implements OnInit {
   id;
   type_contrats=['Contract à durée déterminée','Contract à durée indéterminée','other options...'];
   genres=['Temps plein','Temps partiel'];
-  towns=['Jendouba','Sfax','Tunisie','Sousse','Nabel','Bizerte'];
-  diplomes=['diplôme d’études primaires','diplôme d’études secondaires','mastere','doctorat','bac'];
+  towns=['Jendouba','Sfax','Tunis','Sousse','Nabel','Bizerte'];
+  
+  diplomes=['','diplôme d’études primaires','diplôme d’études secondaires','mastere','doctorat','bac'];
   constructor(  private formBuilder: FormBuilder,
     private jobOfferService:JobOfferService,
     private jobsService:JobsService,

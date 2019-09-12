@@ -5,7 +5,7 @@
 
 <!-- details card section starts from here -->
 <section class="details-card" *ngIf="jobDemande">
-    <h2>JobDemande Details</h2>
+    <h2>Les details de votre demande</h2>
     <hr>
     <div class="container">
         <div class="row">
@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="card-desc">
-                                <h4>Bonjour Entreprise  </h4>
+                                <h4>Vous étiez présélectionnés par l’entreprise  </h4>
                                 <h3>{{this.jobDemande.jobOffer.enterprise.name}}</h3>
                                 <div class="linediv">
                                         <h4 > le  chercheur d'emploi:</h4>
@@ -44,7 +44,7 @@
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-description>
-                         <h4> voir details du CV</h4> 
+                         <h4> voir details du Curriculum Vitae</h4> 
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                         <app-cv-display [jobDemande]="jobDemande" 

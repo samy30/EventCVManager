@@ -23,53 +23,53 @@
         
 
           <div class="content">
-            <form [formGroup]="CVForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <label>First Name:</label>
-                <input formControlName="firstName" type="text" class="form-control" placeholder="firstName">
+            <form [formGroup]="CVForm" (ngSubmit)="onSubmit()" style="padding: 50px;">
+              <div class="form-group aalimin">
+                <label>Prenom:</label>
+                <input formControlName="firstName" type="text" class="form-control na9eswidth" placeholder="Prenom">
               </div>
-             <hr>
-              <div class="form-group">
-                <label>Last Name:</label>
-                <input formControlName="lastName" type="text" class="form-control" placeholder="lastName">
+
+              <div class="form-group aalimin">
+                <label>Nom:</label>
+                <input formControlName="lastName" type="text" class="form-control na9eswidth" placeholder="Nom">
               </div>
-              <hr>
-              <div class="form-group">
-                <label>Address</label>
-                <input type="text" class="form-control" placeholder="address" formControlName="address">
+
+              <div class="form-group aalimin">
+                <label>Addresse</label>
+                <input type="text" class="form-control na9eswidth" placeholder="addresse" formControlName="Addresse">
               </div>
-             <hr>
-              <div class="form-group">
+
+              <div class="form-group aalimin">
                 <label >telephone</label>
-                <input type="text" class="form-control" placeholder="telephone" formControlName="phone">
+                <input type="text" class="form-control na9eswidth" placeholder="telephone" formControlName="Telephone">
               </div>
-            <hr>
-              <div class="form-group">
+
+              <div class="form-group aalimin">
                 <label for="exampleInputEmail1">Adresse Email</label>
-                <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                <input type="email" class="form-control na9eswidth" placeholder="Email" formControlName="email">
               </div>
               <hr>
               <div class="row">
                 <label>Logiciels</label>
+                <br>
                 <div>
                   <div formArrayName="softwares" >
                     <div  *ngFor="let software of CVForm.get('softwares').controls; let i = index">
                       <div [formGroupName]="i" class="row">
                         <div  class="col-md-4">
-                          <input formControlName="name" class="form-control" placeholder="software" >
+                          <input formControlName="name" class="form-control" placeholder="logiciels" >
                         </div>
                         <div  class="col-md-4">
-                          <input formControlName="level" class="form-control" type="number" placeholder="level" >
+                          <input formControlName="level" class="form-control" type="number" placeholder="Niveau" >
                         </div>
                         <button type="button" class="btn btn-primary small" (click)="deleteLogicielClick(i)">
                           del
                         </button>
-
-                      </div>
-                      <br>
-                      <button type="button" class="btn btn-primary small" (click)="addLogicielClick()">
+                        
+                      <button type="button" class="btn btn-primary small plusB" (click)="addLogicielClick()">
                         +
                       </button>
+                      </div>
                       <br>
 
                     </div>
@@ -78,7 +78,8 @@
               </div>
 
               <div class="row">
-                <label>Langues</label>
+                <label>Langues  :</label>
+                
                 <div>
 
 
@@ -90,7 +91,7 @@
                         </div>
 
                         <div class="col-md-4">
-                          <input formControlName="level" class="form-control"  type="number" placeholder="level" >
+                          <input formControlName="level" class="form-control"  type="text"  >
                         </div>
 
 
@@ -98,21 +99,21 @@
                         <button type="button" class="btn btn-primary small" (click)="deleteLangueClick(i)">
                           del
                         </button>
+                        <button type="button" class="btn btn-primary small plusB" (click)="addLangueClick()">
+                          +
+                        </button>
 
                       </div>
 
                     </div>
                   </div>
                   <br>
-                  <button type="button" class="btn btn-primary small" (click)="addLangueClick()">
-                    +
-                  </button>
-                  <br>
                 </div>
               </div>
               <hr>
               <div class="row">
-                <label>Interets</label>
+                <label>Interets  :</label>
+                
                 <div>
 
 
@@ -129,21 +130,21 @@
                         <button type="button" class="btn btn-primary small" (click)="deleteInteretClick(i)">
                           del
                         </button>
+                        <button type="button" class="btn btn-primary small plusB" (click)="addInteretClick()">
+                          +
+                        </button>
 
                       </div>
 
                     </div>
-                    <br>
-                    <button type="button" class="btn btn-primary small" (click)="addInteretClick()">
-                      +
-                    </button>
                     <br>
                   </div>
                 </div>
               </div>
                <hr>
                 <div class="row">
-                  <label>Experiences</label>
+                  <label>Experiences Professionnelles</label>
+                  
                   <div>
 
 
@@ -154,38 +155,39 @@
                             <input formControlName="enterprise" class="form-control" placeholder="Entreprise" >
                           </div>
                           <div class="col-md-2">
-                            <input formControlName="post" class="form-control" placeholder="post" >
+                            <input formControlName="post" class="form-control" placeholder="poste" >
                           </div>
                           <div class="col-md-3">
-                            <input formControlName="startingDate" type="date" class="form-control" placeholder="startingDate" >
+                            <input formControlName="startingDate" type="date" class="form-control" placeholder="Date de debut" >
                           </div>
                           <div class="col-md-3">
-                            <input formControlName="finishingDate" type="date" class="form-control" placeholder="finishingDate" >
+                            <input formControlName="finishingDate" type="date" class="form-control" placeholder="Date de fin" >
                           </div>
 
 
                           <button type="button" class="btn btn-primary small" (click)="deleteExperienceClick(i)">
                             del
                           </button>
+                          <button type="button" class="btn btn-primary small plusB" (click)="addExperienceClick()">
+                            +
+                          </button>
 
                         </div>
 
                       </div>
-                      <button type="button" class="btn btn-primary small" (click)="addExperienceClick()">
-                        +
-                      </button>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
                   <label>Formations</label>
+
                   <div>
                     <div formArrayName="studies" >
                       <div  *ngFor="let study of CVForm.get('studies').controls; let i = index">
                         <div [formGroupName]="i" class="row">
                           <div class="col-md-2">
-                            <input formControlName="name" class="form-control" placeholder="name" >
+                            <input formControlName="name" class="form-control" placeholder="intitulé" >
                           </div>
                           <div class="col-md-3">
                             <input formControlName="institution" class="form-control" placeholder="institution" >
@@ -200,21 +202,20 @@
                           <button type="button" class="btn btn-primary small" (click)="deleteFormationClick(i)">
                             del
                           </button>
+                          <button type="button" class="btn btn-primary small plusB" (click)="addFormationClick()">
+                            +
+                          </button>
 
                         </div>
 
                       </div>
-                      <br>
-                      <button type="button" class="btn btn-primary small" (click)="addFormationClick()">
-                        +
-                      </button>
                       <br>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <div class="row">
-                  <label>socialMedias</label>
+                  <label>Reseaux sociaux</label>
                   <div>
                     <div formArrayName="socialMedias" >
                       <div  *ngFor="let socialMedia  of CVForm.get('socialMedias').controls; let i = index">
@@ -230,21 +231,20 @@
                           <button type="button" class="btn btn-primary small" (click)="deleteSocialMediaClick(i)">
                             del
                           </button>
+                          <button type="button" class="btn btn-primary small plusB" (click)="addSocialMediaClick()">
+                            +
+                          </button>
 
                         </div>
 
                       </div>
-                      <br>
-                      <button type="button" class="btn btn-primary small" (click)="addSocialMediaClick()">
-                        +
-                      </button>
                       <br>
                     </div>
                   </div>
                 </div>
 
               <hr>
-              <button type="submit" class="btn btn-info btn-fill pull-center" >Envoyer CV</button>
+              <button type="submit" class="btn btn-info btn-fill pull-center" >Envoyer Le CV</button>
               <div class="clearfix"></div>
             </form>
           
