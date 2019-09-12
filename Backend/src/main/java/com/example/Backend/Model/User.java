@@ -23,13 +23,13 @@ public class User extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 40)
+    @Size(max = 360)
     private String name;
 
-    @Size(max = 40)
+    @Size(max = 360)
     private String firstName;
 
-    @Size(max = 40)
+    @Size(max = 360)
     private String lastName;
 
 
@@ -38,23 +38,23 @@ public class User extends AuditModel {
     @Lob
     private String image;
 
-    @Size(max = 40)
+    @Size(max = 160)
     private String gender;
 
-    @Size(max = 40)
+    @Size(max = 5000)
     private String description;
 
-    @Size(max = 40)
+    @Size(max = 160)
     private String activity;
 
     private String notificationID;
 
     @NotBlank
-    @Size(max = 15)
+    @Size(max = 1000)
     private String username;
 
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 160)
     @Email
     private String email;
 
