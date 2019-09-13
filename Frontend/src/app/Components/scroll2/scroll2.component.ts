@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 
 @Component({
@@ -8,23 +8,25 @@ import {DOCUMENT} from '@angular/common';
 })
 export class Scroll2Component implements OnInit {
   scrollpicHeight;
-  element0;
-  element1;
-  element2;
-  element3;
-  element4;
-  @ViewChild('firas_img', {static: false}) firasImg;
+  element0:HTMLElement;
+  element1:HTMLElement;
+  element2:HTMLElement;
+  element3:HTMLElement;
+  element4:HTMLElement;
+  firasImg:HTMLElement;
   constructor( @Inject(DOCUMENT) document) {
-    // this.firasImg = document.getElementById('firas_img') ;
-    this.element0 = document.getElementsByClassName('firas_txt')[0] ;
-    this.element1 = document.getElementsByClassName("firas_txt")[1];
-    this.element2 = document.getElementsByClassName("firas_txt")[2];
-    this.element3 = document.getElementsByClassName("firas_txt")[3];
-    this.element4 = document.getElementsByClassName("firas_txt")[4];
+
   }
 
   ngOnInit() {
-    this.scrollpicHeight = Math.ceil(this.firasImg.nativeElement.offsetWidth * 1.7);
+    this.firasImg= document.getElementById('firas_img')  as HTMLElement;
+    var x=this.firasImg.offsetWidth;
+    this.scrollpicHeight = Math.ceil(x* 1.7);
+    this.element0 = document.getElementsByClassName('firas_txt')[0] as HTMLElement;
+    this.element1 = document.getElementsByClassName("firas_txt")[1]as HTMLElement;
+    this.element2 = document.getElementsByClassName("firas_txt")[2]as HTMLElement;
+    this.element3 = document.getElementsByClassName("firas_txt")[3]as HTMLElement;
+    this.element4 = document.getElementsByClassName("firas_txt")[4]as HTMLElement;
     this.firasImg.style['height'] = this.scrollpicHeight + 'px';
     this.element0.style["top"] = "0px";
     this.element1.style["top"] = Math.ceil(this.scrollpicHeight / 5) + 'px';

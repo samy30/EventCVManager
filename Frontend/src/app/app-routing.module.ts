@@ -20,6 +20,8 @@ import { AdministrationComponent } from './Components/administration/administrat
 import { NotreplatformeComponent } from './Components/notreplatforme/notreplatforme.component';
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import { ScrollComponent } from './Components/scroll/scroll.component';
+import { Scroll2Component } from './Components/scroll2/scroll2.component';
 
 
 const routes: Routes = [
@@ -63,6 +65,7 @@ const routes: Routes = [
     }
     ,
     { path: 'QuiSommesNous', component: QuisommesnousComponent },
+    { path: 'Scroll', component: Scroll2Component},
     { path: 'NotrePlateforme', component: NotreplatformeComponent },
     {path:'ConfirmedJobDemande',component:ConfirmedJobDemandeComponent},
     {path:'mdpChange',component:ChangePasswordComponent},

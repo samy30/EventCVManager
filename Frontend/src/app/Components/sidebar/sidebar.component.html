@@ -20,7 +20,7 @@
 
         <a mat-button [routerLink]="'/NotrePlateforme'" *ngIf="!this.authService.loggedIn()" class="link"> Qui Sommes nous ? </a>
         <a mat-button [routerLink]="'/QuiSommesNous'" *ngIf="!this.authService.loggedIn()" class="link"> Notre Platforme</a>
-        
+        <a mat-button [routerLink]="'/Scroll'" *ngIf="!this.authService.loggedIn()" class="link"> Scroll</a>
         <a mat-button [routerLink]="'/Administration'" *ngIf="this.authService.loggedIn()
                                                         && this.role=='ROLE_ADMIN'" class="link">Administration </a>
         <a mat-button [routerLink]="'/JobSearch'"
