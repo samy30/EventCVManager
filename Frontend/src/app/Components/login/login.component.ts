@@ -41,18 +41,11 @@ export class LoginComponent implements OnInit {
     this.isSubmitted = true;
     this.authService.login(this.loginForm.value).subscribe(
       res => {
-        console.log('logged in');
-        console.log(res);
         this.authService.setToken(res.accessToken);
-        this.authService.getCurrentUser()
-          .subscribe(user => {
-            this.authService.setCurrentUser(user);
-            this.messagingService.requestPermission(user.id);
-            // inform sidebar with new authentication
-            this.authService.informUserAuthentication(1);
-            this.router.navigate(['/JobSearch']).then(r => console.log(r));
-            this.isLoading = false;
-          });
+        // inform sidebar with new authentication
+        this.authService.informUserAuthentication(1);
+        this.isLoading = false;
+        this.router.navigate(['/JobSearch']).then(r => console.log(r));
       },
       err => {
         console.log(err + 'not token');

@@ -40,7 +40,9 @@
                                     <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
                                      [disabled]="!isFormValid(loginForm)">
-                                   
+                                     <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+                                        <span class="sr-only">Loading...</span>
+                                      </div>                                   
                             </div>
                             <div id="register-link" class="text-right">
                                 <a [routerLink]="'/Signup'" >Creer Un Compte</a>
