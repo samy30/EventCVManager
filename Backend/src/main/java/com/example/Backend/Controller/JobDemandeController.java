@@ -45,7 +45,7 @@ public class JobDemandeController {
     @PostMapping("/jobDemande")
     public JobDemande createJobDemande(@Valid @RequestBody JobDemande jobDemande) {
         JobDemande createdJobDemande = jobDemandeRepository.save(jobDemande);
-        notifyEnterprise(createdJobDemande.getSender().getId(),createdJobDemande.getEnterprise().getId(),createdJobDemande.getJobOffer().getId(),createdJobDemande.getId(), NotificationTypeName.JOB_DEMANDE_SENT,true);
+        notifyEnterprise(createdJobDemande.getSender().getId(),createdJobDemande.getEnterprise().getId(),createdJobDemande.getJobOffer().getId(),createdJobDemande.getId(), NotificationTypeName.JOB_DEMANDE_SENT,false);
         return createdJobDemande;
     }
 
@@ -74,12 +74,13 @@ public class JobDemandeController {
 
         JobDemande jobDemande = jobDemandeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobDemande", "id", id));
+        if(jobDemande.isConfirmedByUser()) return jobDemande;
 
         jobDemande.setConfirmedByUser(true);
         jobDemande.setStatus(Status.CONFIRMED);
 
         JobDemande updatedJobDemande = jobDemandeRepository.save(jobDemande);
-        notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,true);
+        notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,false);
         return updatedJobDemande;
     }
 

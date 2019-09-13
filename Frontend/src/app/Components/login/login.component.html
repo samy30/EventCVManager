@@ -31,7 +31,7 @@
                                     Mot de passe requis
                                   </mat-error>
                             </div>
-                            <mat-error *ngIf="this.isSubmitted && !this.Authenticated" >
+                            <mat-error *ngIf="this.isSubmitted && !this.Authenticated && !this.isLoading" >
                                  Mot de passe ou nom d'utilisateur invalide
                             </mat-error>
 

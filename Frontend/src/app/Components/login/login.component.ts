@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
   loginForm: FormGroup;
   isSubmitted  =  false;
+  isLoading = false;
 
   ngOnInit() {
     this.loginForm  =  this.formBuilder.group({
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isLoading = true;
     this.isSubmitted = true;
     this.authService.login(this.loginForm.value).subscribe(
       res => {
@@ -49,10 +51,12 @@ export class LoginComponent implements OnInit {
             // inform sidebar with new authentication
             this.authService.informUserAuthentication(1);
             this.router.navigate(['/JobSearch']).then(r => console.log(r));
+            this.isLoading = false;
           });
       },
       err => {
         console.log(err + 'not token');
+        this.isLoading = false;
       }
     );
     console.log(this.loginForm.value);

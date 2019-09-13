@@ -73,7 +73,7 @@ export class SidebarComponent implements OnInit {
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.loggedUser);
     if (this.loggedUser) {
-      this.userId=this.loggedUser.is;
+      this.userId=this.loggedUser.id;
        this.role = this.role = this.loggedUser.roles? this.loggedUser.roles[0].name:this.loggedUser.authorities[0].authority;            
       this.loadNotifications(this.loggedUser.id);
     }
@@ -144,20 +144,19 @@ export class SidebarComponent implements OnInit {
               console.log("notification seen");
              console.log(notif)
              this.loadNotifications(this.userId);
+             if(notification.content=="CONFIRMATION"){
+              this.notificationService.emitNotification(notification);
+              this.router.navigate(['/ConfirmedJobDemande']);
+          }
+          else if(notification.content=="JOB_DEMANDE_SENT"){
+             this.notificationService.emitNotification(notification);
+             this.router.navigate(['/JobDemande']);
+          }
+          else{
+              this.notificationService.emitNotification(notification);
+              this.router.navigate(['/Notification']);
+          }
          })
-   
-     if(notification.content=="CONFIRMATION"){
-         this.notificationService.emitNotification(notification);
-         this.router.navigate(['/ConfirmedJobDemande']);
-     }
-     else if(notification.content=="JOB_DEMANDE_SENT"){
-        this.notificationService.emitNotification(notification);
-        this.router.navigate(['/JobDemande']);
-     }
-     else{
-         this.notificationService.emitNotification(notification);
-         this.router.navigate(['/Notification']);
-     }
    }
 
    myFunction(nb){
