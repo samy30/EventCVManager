@@ -5,7 +5,7 @@
 
 <!-- details card section starts from here -->
 <section class="details-card" *ngIf="notification">
-    <h2>Notifcation Details</h2>
+    <h2>Details de la notification</h2>
     <hr>
     <div class="container">
         <div class="row">
@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="card-desc">
-                                <h4>Bonjour </h4>
+                                <h4> </h4>
                                 <h3>
                                         {{this.loggedUser?.username}}
                                 </h3>
@@ -40,8 +40,15 @@
                                                 </mat-expansion-panel-header>
                                                 <div class="card-desc" style="background-color: rgb(141, 126, 126)145, 142, 142)145, 142, 142)">
                                                         <div class="linediv">
+
+                                                          <h4>Vous étiez présélectionnés par l’entreprise </h4>
                                                           <h4 >Entreprise:</h4>
+                                                         <h4>et vous êtes convoqués à la formation de
+                                                          préparation à l’entretien d’embauche qui aura lieu le 14 octobre 2019 au HUB Dar El Ourabi
+                                                          à la Manouba à partir de 9h.veuillez confirmer votre présence</h4>
                                                           <h3 style="color: black">{{this.selectedJobOffer?.enterprise.name}}</h3>
+                                                        
+
                                                         </div>
                                                         <hr>
                                                         <div class="linediv">
@@ -65,9 +72,10 @@
                                                             
                                <div class="col-md-3">
                                     <button type="button" class="btn btn-primary btn-lg" 
-                                             (click)="Confirmer()" *ngIf="this.selectedJobDemande?.status!=='CONFIRMED'">Confimer</button> 
+
+                                             (click)="Confirmer()" *ngIf="this.selectedJobDemande?.status!=='CONFIRMED'">Confimer la presence</button> 
                                     <button type="button" class="btn btn-primary btn-lg" 
-                                              *ngIf="this.selectedJobDemande?.status==='CONFIRMED'" [disabled]="true">Deja Confimée</button> 
+                                              *ngIf="this.selectedJobDemande?.status==='CONFIRMED'" [disabled]="true">presence Confimée</button>-
                                 </div>                                 
                               </div>
                              </div>

@@ -1,0 +1,220 @@
+
+
+
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  <div id="firas_img" #firas_img>
+          <div class="firas_txt txtright" style="text-align: justify;
+    background-color: rgba(0, 0, 130, 0.1);">
+              <div style="margin-left: 200px">
+              <h2>Inscription</h2>
+  
+              <p>Je  dépose ma candidature online selon le format figurant au niveau de la plateforme ;
+  
+  L’entreprise étudie les CVs et communiquent les candidatures présélectionnées ;
+  
+  Si je suis présélectionné, je reçois une notification pour participer à une formation de préparation à l’entretien d'embauche et je serai invité pour passer  un entretien le 23 octobre au salon Job’in ;
+  
+  Si je suis retenu par l’entreprise, je serai invité à participer à un parcours de formation en Soft Skills
+              </p>
+          </div></div>
+          <div class="firas_txt txtleft" style="background-color: rgba(0, 130, 0, 0.1);">
+          <div style="text-align: justify;width: 400px">    
+              <h2>Formation en Soft Skills</h2>
+              <p>Les candidats retenus suite à l’entretien d’embauche suivront un parcours de formation en
+  Soft-Skills de la Communication.
+  Elle aura pour objectifs de :<br>
+  - Doter les jeunes recrus des aptitudes de base en matière de Communication<br>
+  - Améliorer leurs communications interpersonnelles en toutes circonstances<br>
+  - Savoir gérer les conflits<br>
+  - Bien gérer le stress, etc.</p>
+          </div>
+          </div>
+          <div class="firas_txt txtright" style="background-color: rgba(130, 0, 0, 0.1);">
+          <div style="text-align: justify;width: 400px">    
+          
+              <h2>Formation de préparation à l’entretien d’embauche</h2>
+              <p>Les candidats qui seront présélectionnés suite à l’envoi de leurs CVs poursuivront une
+  formation de préparation aux entretiens d&#39;embauche selon un calendrier défini dans la
+  période du 14, 16, 17 et 18 octobre 2019 au HUB Dar El Ourabi à la Manouba, avec des
+  experts confirmés.<br>
+  Cette formation apprendra aux candidats à présenter au mieux leurs parcours professionnels
+  grâce à différentes simulations d&#39;entretiens. Elle leur permettra d&#39;être plus à l&#39;aise dans les
+  échanges avec les recruteurs et de renforcer ainsi la confiance en soi.</p>
+          </div>
+          </div>
+          <div class="firas_txt txtleft" style="background-color: rgba(0, 0, 130, 0.1);">
+          <div style="text-align: justify;width: 400px">    
+          
+              <h2>Formation en Soft Skills </h2>
+              <p>
+                Les candidats retenus suite à l’entretien d’embauche suivront un parcours de formation en
+  Soft-Skills de la Communication.
+  Elle aura pour objectifs de :<br></p>
+  <div style="margin-left:10px">
+    <p>
+  - Doter les jeunes recrus des aptitudes de base en matière de Communication<br>
+  - Améliorer leurs communications interpersonnelles en toutes circonstances<br>
+  - Savoir gérer les conflits<br>
+  - Bien gérer le stress, etc.</p>
+  </div>
+  </div></div>
+          <div type="button" style="margin-left: 20px" class="firas_txt txtright" style="background-color: rgba(0, 130, 0, 0.1);">
+              <p>
+                  <br><br><br><br>
+  <button  class="btn btn-lg btn-warning">POSTULER </button></p>
+          </div>
+  </div>
+  </body>
+  <style>
+      #firas_img{
+          width: 100%;
+          background-image: url(ppp.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          position: relative;
+          overflow: hidden;
+      }
+      .firas_txt{
+          width: 100%;
+          height: calc(100% / 5);
+          position: absolute;
+          text-align: center;
+          box-sizing: border-box;
+          transition: all .5s ease-out 0ms;
+          opacity: 0;
+      }
+      .txtright{
+          right: -10%;
+          padding: 10% 40px 10% 50%;
+      }
+      .txtleft{
+          left: -10%;
+          padding: 10% 50% 10% 40px;
+      }
+      .righttxtactive{
+          right: 0;
+          opacity: 1;
+      }
+      .lefttxtactive{
+          left: 0;
+          opacity: 1;
+      }
+  </style>
+  
+  <script>
+  scrollpicHeight = Math.ceil(document.getElementById("firas_img").offsetWidth * 1.7);
+  document.getElementById("firas_img").style["height"] = scrollpicHeight + "px";
+  document.getElementsByClassName("firas_txt")[0].style["top"] = "0px";
+  document.getElementsByClassName("firas_txt")[1].style["top"] = Math.ceil(scrollpicHeight / 5) + "px";
+  document.getElementsByClassName("firas_txt")[2].style["top"] = Math.ceil(scrollpicHeight / 5 * 2) + "px";
+  document.getElementsByClassName("firas_txt")[3].style["top"] = Math.ceil(scrollpicHeight / 5 * 3) + "px";
+  document.getElementsByClassName("firas_txt")[4].style["top"] = Math.ceil(scrollpicHeight / 5 * 4) + "px";
+  document.addEventListener("scroll", function(){
+      domRect = document.getElementsByClassName("firas_txt")[0].getBoundingClientRect();
+      if(domRect.top < 400){
+          document.getElementsByClassName("firas_txt")[0].className = "firas_txt txtright righttxtactive";
+      }else{
+          document.getElementsByClassName("firas_txt")[0].className = "firas_txt txtright";
+      }
+      // _________________________________________________________________________________________________
+      domRect = document.getElementsByClassName("firas_txt")[1].getBoundingClientRect();
+      if(domRect.top < 400){
+          document.getElementsByClassName("firas_txt")[1].className = "firas_txt txtleft lefttxtactive";
+      }else{
+          document.getElementsByClassName("firas_txt")[1].className = "firas_txt txtleft";
+      }
+      // _________________________________________________________________________________________________
+      domRect = document.getElementsByClassName("firas_txt")[2].getBoundingClientRect();
+      if(domRect.top < 400){
+          document.getElementsByClassName("firas_txt")[2].className = "firas_txt txtright righttxtactive";
+      }else{
+          document.getElementsByClassName("firas_txt")[2].className = "firas_txt txtright";
+      }
+      // _________________________________________________________________________________________________
+      domRect = document.getElementsByClassName("firas_txt")[3].getBoundingClientRect();
+      if(domRect.top < 400){
+          document.getElementsByClassName("firas_txt")[3].className = "firas_txt txtleft lefttxtactive";
+      }else{
+          document.getElementsByClassName("firas_txt")[3].className = "firas_txt txtleft";
+      }
+      // _________________________________________________________________________________________________
+      domRect = document.getElementsByClassName("firas_txt")[4].getBoundingClientRect();
+      if(domRect.top < 400){
+          document.getElementsByClassName("firas_txt")[4].className = "firas_txt txtright righttxtactive";
+      }else{
+          document.getElementsByClassName("firas_txt")[4].className = "firas_txt txtright";
+      }
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<div id="firas_img">
+  <div class="firas_txt txtright" style="background-color: rgba(0, 0, 130, 0.1);">
+    <h2>Inscription</h2>
+    <p>
+      test
+    </p></div>
+  <div class="firas_txt txtleft" style="background-color: rgba(0, 130, 0, 0.1);">
+    <h2>Formation en Soft Skills de la Communication</h2>
+    <p>Les candidats retenus suite à l’entretien d’embauche suivront un parcours de formation en
+      Soft-Skills de la Communication.
+      Elle aura pour objectifs de :
+      - Doter les jeunes recrus des aptitudes de base en matière de Communication
+      - Améliorer leurs communications interpersonnelles en toutes circonstances
+      - Savoir gérer les conflits
+      - Bien gérer le stress, etc.</p>
+  </div>
+  <div class="firas_txt txtright" style="background-color: rgba(130, 0, 0, 0.1);">
+    <h2>Title 1</h2>
+    <p>Text</p>
+  </div>
+  <div class="firas_txt txtleft" style="background-color: rgba(0, 0, 130, 0.1);">
+    <h2>Formation en Soft Skills de la Communication</h2>
+    <p>Les candidats retenus suite à l’entretien d’embauche suivront un parcours de formation <br> en
+      Soft-Skills de la Communication.
+      Elle aura pour objectifs de :
+      - Doter les jeunes recrus des aptitudes de base en matière de Communication
+      - Améliorer leurs communications interpersonnelles en toutes circonstances
+      - Savoir gérer les conflits
+      - Bien gérer le stress, etc.</p></div>
+  <div type="button" style="margin-left: 20px" class="firas_txt txtright" style="background-color: rgba(0, 130, 0, 0.1);">
+    <p>
+      <br><br><br><br>
+      <button  class="btn btn-lg btn-warning">POSTULER </button></p>
+  </div>
+</div>-->

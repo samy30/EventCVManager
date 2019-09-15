@@ -32,11 +32,11 @@ export class OfferCreationComponent implements OnInit {
     public dialogRef: MatDialogRef<OfferCreationComponent>
   ) {
     this.offerFormGroup = this.formBuilder.group({
-      nom_poste: ['', Validators.required],
-      nom_enterprise: ['', Validators.required],
+      nom_poste: [''],
+      nom_enterprise: [''],
       activity:['',Validators.required],
-      town: ['', Validators.required],
-      type:['', Validators.required],
+      town: [''],
+      type:[''],
       time:['',Validators.required],
       wage:[''],
       description:['',Validators.required],
@@ -107,7 +107,7 @@ export class OfferCreationComponent implements OnInit {
         time:this.offerFormGroup.get('time').value,
         description:this.offerFormGroup.get('description').value,
         minimumSchoolDegree:this.offerFormGroup.get('minimumSchoolDegree').value,
-        experience_years:this.offerFormGroup.get('experience_years').value,
+        experienceYears:this.offerFormGroup.get('experience_years').value,
         startingDate:this.offerFormGroup.get('startingDate').value,
      }
      console.log("offer");
@@ -119,7 +119,7 @@ export class OfferCreationComponent implements OnInit {
                    .subscribe(res=>{
                        console.log("final result");
                        console.log(res);
-                       this.dialogRef.close();
+                       this.dialogRef.close(res);
                    })
      })
    }

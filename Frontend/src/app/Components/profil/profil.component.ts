@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/components/common/message';
 import { MessageService } from 'primeng/components/common/messageservice';
 import {UserService} from "../../Services/user.service";
+import { AuthService } from 'src/app/Services/auth.service';
+import { NotificationService } from 'src/app/Services/notification.service';
 
 
 @Component({
@@ -14,160 +16,134 @@ import {UserService} from "../../Services/user.service";
 })
 export class ProfilComponent implements OnInit {
   userFormGroup: FormGroup;
-  user:any;
-  Uploading = false;
-  Uploaded = true;
+  enterpriseFormGroup: FormGroup;
+  user: any;
+  image;
   msgs: Message[] = [];
   uploadedFiles: any[] = [];
-  image ;
+  imgURL:any=null;
   value: number = 0;
+  genres=['male','female'];
+  genresFr=['Homme','Femme'];
   constructor(
     private userService: UserService,
-
+    private cd: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private authService:AuthService,
+    private notificationService:NotificationService) {
       this.userFormGroup = this.formBuilder.group({
         username: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        address: ['', Validators.required],
-        postalCode: ['', Validators.required],
-        city: ['', Validators.required],
-        description: ['', Validators.required],
-        email: ['', [ Validators.required, Validators.email]]
-     });
-     }
+        email: ['', [ Validators.required, Validators.email]],
+        age: ['',  Validators.required],
+        gender: ['',  Validators.required],
+        town: ['',  Validators.required],
+      });
+      this.enterpriseFormGroup = this.formBuilder.group({
+        username: ['', Validators.required],
+        name: ['', Validators.required],
+        email: ['', [ Validators.required, Validators.email]],
+        description: ['',  Validators.required],
+        activity: ['',  Validators.required]
+      });
+    }
+  role: null;
+
 
   ngOnInit() {
-
     this.loadUser();
-
-
   }
-  loadUser()
-  {
-    this.userService.getCurrentUser().subscribe(user=>{
-      this.user=user;
-
-      this.userFormGroup.patchValue({
-        username : this.user.username,
-        email : this.user.email,
-        description : this.user.description,
-        city : this.user.city,
-        firstName : this.user.firstName,
-        lastName : this.user.lastName,
-        postalCode : this.user.postalCode,
-        address : this.user.address
-
-      })
+  loadUser() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("user profil");
+    console.log(this.user);
+    this.userFormGroup.patchValue({
+      username : this.user.username,
+      email : this.user.email,
+      firstName : this.user.firstName,
+      lastName : this.user.lastName,
+      age: this.user.age,
+      gender: this.user.gender,
+      town: this.user.town
     });
+    this.enterpriseFormGroup.patchValue({
+      name : this.user.name,
+      username: this.user.username,
+      email: this.user.email,
+      description: this.user.description,
+      activity: this.user.activity
+    });
+    this.image = this.user.image;
+    console.log('profile image');
+    console.log(this.image);
+    this.role = this.user.authorities?this.user.authorities[0].authority:this.user.roles[0].name;
   }
   updateUser() {
-
-    let {username,email,description,city,firstName,lastName,postalCode,address} = this.userFormGroup.value;
-    let data = {
-      username,email,description,city,firstName,lastName,postalCode,address
+    const {username, email, firstName, lastName, age, gender,town} = this.userFormGroup.value;
+    const data = {
+      username,
+      email,
+      firstName,
+      lastName,
+      age,
+      gender,
+      town,
+      image: this.imgURL
     };
-     console.log("hello");
-      console.log(data);
-     var id=this.user.id;
-    this.userService.updateUser(id, data).subscribe(product => {
-      this.showSuccess('Votre profil a été mis a jour','Profil Modifie' ,'success' );
+    console.log('hello');
+    console.log(data);
+    const id = this.user.id;
+    this.userService.updateUser(id, data).subscribe(user => {
+      this.showSuccess('Votre profil a été mis a jour', 'Profil Modifie' , 'success' );
+      console.log(user);
+      this.authService.setCurrentUser(user);
+      this.notificationService.emitProfileChange(user);
       this.loadUser();
 
- },err =>{
-  this.showSuccess('Erreur ',err.error.message,'error')
- });
-}
-showSuccess( title , message, type) {
-  this.msgs = [];
-  this.msgs.push({severity: type, summary: title, detail: message });
-  setTimeout(() => {
-  this.msgs = [];
-    }, 2000);
-}
-onUpload(event) {
-  this.Uploading = true;
-  this.Uploaded = false;
-
-  for(let file of event.files) {
-
-      this.uploadedFiles.push(file);
+    }, err => {
+      this.showSuccess('Erreur ', err.error.message, 'error');
+    });
   }
 
-}
-changeListener(event) : void {
-  this.Uploading = true;
-  this.Uploaded = false;
-  for(let file of event.files) {
-
-    this.readThis(file);
-}
-
-
-
-}
-
-
-
-
-/*
-url:any=null;
-onSelectFile(event) { // called each time file input changes
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      }
-    }
-}
-*/
-
-
-
-
-
-
-
-readThis(inputValue: any): void {
-  var file:File = inputValue;
-  var myReader:FileReader = new FileReader();
-
-  myReader.onloadend = (e) => {
-    this.image = myReader.result;
-    this.updateImage(myReader.result);
-
-  }
-  myReader.readAsDataURL(file);
-}
-updateImage(imageUrl) {
-
-
-
-  let data = {
-    image:imageUrl
-  };
-
+  updateEnterprise() {
+    const {name, username, email, description, activity} = this.enterpriseFormGroup.value;
+    const data = {
+      username,
+      email,
+      name,
+      description,
+      activity,
+      image: this.imgURL
+    };
+    console.log('hello');
     console.log(data);
+    const id = this.user.id;
+    this.userService.updateUser(id, data).subscribe(user => {
+      this.showSuccess('Votre profil a été mis a jour', 'Profil Modifie' , 'success' );
+      console.log(user);
+      this.authService.setCurrentUser(user);
+      this.notificationService.emitProfileChange(user);
+      this.loadUser();
 
-  this.userService.updateUser(this.user.id, data).subscribe(user => {
-    this.showSuccess('Votre photo a été mis a jour','Profil Modifié' ,'success' );
-    this.loadUser();
+    }, err => {
+      this.showSuccess('Erreur ', err.error.message, 'error');
+    });
+  }
 
+  showSuccess( title , message, type) {
+    this.msgs = [];
+    this.msgs.push({severity: type, summary: title, detail: message });
+    setTimeout(() => {
+      this.msgs = [];
+    }, 2000);
+  }
 
-    this.Uploading = false;
-    this.Uploaded = true;
+  getImage(imgURL) {
+    this.imgURL = imgURL;
+  }
 
-},err =>{
-
-this.showSuccess('Erreur ',err.error.Error,'error')
-});
 }
-}
-
-
 
 

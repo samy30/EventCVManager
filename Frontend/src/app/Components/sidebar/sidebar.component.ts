@@ -18,8 +18,8 @@ export class SidebarComponent implements OnInit {
   role: string;
   loggedUser;
   userId;
-  notifications:any[]=[];
-  senders:any[]=[];
+  notifications: any[] = [];
+  senders: any[] = [];
   private readonly notifier: NotifierService;
 
   constructor(private sideBarService: SidebarService,
@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
               private router: Router,
               private messagingService: MessagingService,
               notifierService: NotifierService,
-              private notificationService:NotificationService
+              private notificationService: NotificationService
     ) {
     this.notifier = notifierService;
   }
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit {
     this.loadLoggedUser();
     this.listenToAuthentication();
     this.notify();
-    
+    this.listenToProfileChange();
 
     if (this.loggedUser) {
       this.userId = this.loggedUser.id;
@@ -50,35 +50,48 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  listenToProfileChange() {
+      this.notificationService.profileCallback$
+        .subscribe(user => {
+           this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+           if (this.loggedUser) {
+            this.role = this.loggedUser.roles ? this.loggedUser.roles[0].name : this.loggedUser.authorities[0].authority;
+           }
+        });
+  }
+
   listenToAuthentication() {
 
     this.authService.eventCallback$.subscribe(postes => {
-         this.loadLoggedUser();
+
+      this.authService.getCurrentUser()
+        .subscribe(user => {
+          this.authService.setCurrentUser(user);
+          this.messagingService.requestPermission(user.id);
+          this.loadLoggedUser();
+        });
+
      });
 
   }
 
   loadLoggedUser() {
-    console.log('loggedUser');
     this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.loggedUser);
     if (this.loggedUser) {
-      this.role = this.loggedUser.authorities[0].authority;
+      this.userId = this.loggedUser.id;
+      this.role = this.role = this.loggedUser.roles ? this.loggedUser.roles[0].name : this.loggedUser.authorities[0].authority;
       this.loadNotifications(this.loggedUser.id);
-      console.log('role');
-      console.log(this.role);
     }
   }
 
 
 
    logout() {
-     console.log('logout');
      this.authService.logout();
      this.router.navigate(['/Login']);
      this.loggedUser = {};
-     this.role='';
-     console.log(this.authService.loggedIn());
+     this.role = '';
    }
 
    notify() {
@@ -88,50 +101,76 @@ export class SidebarComponent implements OnInit {
      });
    }
 
-   //get current user's notifications
-  loadNotifications(userId){
+   // get current user's notifications
+  loadNotifications(userId) {
     this.notificationService.getNotifications(userId)
-       .subscribe(notifications=>{
-         console.log("hello notification")
+       .subscribe(notifications => {
+         console.log('hello notification');
          console.log(notifications);
-          this.notifications=notifications;
-          this.loadSenders(notifications);
-       })
+         this.getUnreadNotificationCount(userId);
+         this.notifications = notifications.reverse();
+         this.loadSenders(notifications);
+       });
 }
 
-   loadSenders(notifications){
-     this.senders=[];
-         notifications.map(notif=>this.getSender(notif));
-  
+
+   loadSenders(notifications) {
+     this.senders = [];
+     notifications.map(notif => this.getSender(notif));
+
      }
 
-    getSender(notif){
+    getSender(notif) {
         this.authService.getUser(notif.senderID)
-              .subscribe(user=>{
+              .subscribe(user => {
                 this.senders.push(user);
-              })
+              });
       }
-    getName(i){
-      console.log("senders");
+    getName(i) {
+      console.log('senders');
       console.log(this.senders);
       return this.senders[i].username;
     }
 
- getNotificationDetails(notification){
- //sending notification to component notification-details throug notification service
-      //update notification stuts=seen
-        
-     if(notification.content=="CONFIRMATION"){
-         this.notificationService.emitNotification(notification);
-         this.router.navigate(['/ConfirmedJobDemande']);
-     }
-     else if(notification.content=="JOB_DEMANDE_SENT"){
-        this.notificationService.emitNotification(notification);
-        this.router.navigate(['/JobDemande']);
-     }
-     else{
-         this.notificationService.emitNotification(notification);
-         this.router.navigate(['/Notification']);
-     }
+    getUnreadNotificationCount(id) {
+        this.notificationService.getUnreadNotificationCount(id)
+           .subscribe(count => {
+             console.log('unseen count');
+             console.log(count);
+             this.myFunction(count);
+           });
+    }
+
+ getNotificationDetails(notification) {
+ // sending notification to component notification-details throug notification service
+      // update notification stuts=seen
+
+     this.notificationService.makeSeen(notification.id)
+          .subscribe(notif => {
+              console.log('notification seen');
+              console.log(notif);
+              this.loadNotifications(this.userId);
+              if (notification.content == 'CONFIRMATION') {
+              this.notificationService.emitNotification(notification);
+              this.router.navigate(['/ConfirmedJobDemande']);
+          } else if (notification.content == 'JOB_DEMANDE_SENT') {
+             this.notificationService.emitNotification(notification);
+             this.router.navigate(['/JobDemande']);
+          } else {
+              this.notificationService.emitNotification(notification);
+              this.router.navigate(['/Notification']);
+          }
+         });
+   }
+
+   myFunction(nb) {
+
+        let el = document.querySelector('.notification');
+        let count = Number(nb);
+        el.classList.remove('show-count');
+        el.setAttribute('data-count', (count).toString());
+        el.classList.remove('notify');
+        el.classList.add('notify');
+        if (count !== 0) { el.classList.add('show-count'); }
    }
 }

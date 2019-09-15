@@ -64,10 +64,10 @@ export class EnterpriseListingComponent implements OnInit {
     const dialogRef = this.dialog.open(EnterpriseCreationComponent, {
       width: '700px',
     });
-    dialogRef.afterClosed().subscribe(async result => {
+    dialogRef.afterClosed().subscribe( result => {
         if ( result) {
         this.loadEnterprises();
-         this.showSuccess( 'Entreprise ajoutée', 'Entreprise a été ajoutée avec success' );
+         this.showSuccess( 'Entreprise ajoutée', 'Entreprise a été ajoutée avec succé' );
          }
      });
   }
@@ -75,7 +75,9 @@ export class EnterpriseListingComponent implements OnInit {
   deleteEnterprise(id){
      this.enterpriseService.deleteEnterprise(id)
          .subscribe(res=>{
+            this.loadEnterprises();
              console.log("enterprise deleted");
+             this.loadEnterprises();
          })
   }
 

@@ -24,6 +24,7 @@ export class InsertCVComponent implements OnInit {
   studies:FormArray;
   socialMedias:FormArray;
   image;
+  
   @Input()cv;
   constructor(
     private cvService: CVService,
@@ -49,7 +50,6 @@ export class InsertCVComponent implements OnInit {
 
   ngOnInit() {
      if(this.cv)this.fillCVForm();
-      
   }
   
   fillCVForm(){
@@ -176,13 +176,9 @@ export class InsertCVComponent implements OnInit {
   }
 
   onSubmit() {
-    // Process checkout data here
-   /* this.cvService.postCV(customerData).subscribe(data => {
-      this.fetchData()
-    });*/
     console.log("voila");
    
-    var resultCV=_.merge(this.CVForm.value,{photo:this.image});
+    var resultCV=_.merge(this.CVForm.value,{photo:this.imgURL});
     console.log(resultCV);
     this.dialogRef.close(resultCV);
   }
@@ -202,43 +198,10 @@ export class InsertCVComponent implements OnInit {
 
 
 
-  
-onUpload(event) {
-  this.Uploading = true;
-  this.Uploaded = false;
-
-  for(let file of event.files) {
-
-      this.uploadedFiles.push(file);
-  }
-
-}
-changeListener(event) : void {
-  this.Uploading = true;
-  this.Uploaded = false;
-  for(let file of event.files) {
-
-    this.readThis(file);
-}
-
-
-
-}
-
-updateImage(ImageUrl){
-  this.user.image=ImageUrl;
-}
-
-readThis(inputValue: any): void {
-  var file:File = inputValue;
-  var myReader:FileReader = new FileReader();
-
-  myReader.onloadend = (e) => {
-    this.image = myReader.result;
-   this.updateImage(myReader.result);
-
-  }
-  myReader.readAsDataURL(file);
-}
+  imgURL;
+  getImage(imgURL){
+    this.imgURL=imgURL;
+   }
+   
 
 }

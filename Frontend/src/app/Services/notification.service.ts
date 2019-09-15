@@ -83,6 +83,12 @@ export class NotificationService {
       this.eventCallback.next(notification);
    }
 
+   private profileCallback=new BehaviorSubject<any>('');
+   profileCallback$=this.profileCallback.asObservable();
+   emitProfileChange(notification){
+     this.profileCallback.next(notification);
+   }
+
   getNotification(id: string): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
@@ -92,6 +98,12 @@ export class NotificationService {
 
   postNotification(data): Observable<any> {
     return this.http.post(apiUrl, data, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  makeSeen(id):Observable<any>{
+    return this.http.get(`${apiUrl}/${id}/seen`).pipe(
       catchError(this.handleError)
     );
   }
@@ -109,5 +121,20 @@ export class NotificationService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+  getUnreadNotificationCount(id):Observable<any>{
+         return this.http.get(`${apiUrl}/${id}/unseen`)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+  
+  getSentNotifications(id):Observable<any>{
+
+    return this.http.get(`${apiUrl}/sender/${id}`)
+     .pipe(
+      catchError(this.handleError)
+    );
+
   }
 }

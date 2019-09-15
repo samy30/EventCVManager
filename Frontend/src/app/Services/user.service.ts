@@ -8,24 +8,24 @@ import User from '../Models/user';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/jobOffer/jobs/count';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  userUrl = 'http://localhost:49320/api';
-  authUrl = 'http://localhost:8080/api';
+  authUrl = 'http://localhost:49320/api';
+  userUrl  = 'http://localhost:8080/api';
   constructor(private http: HttpClient) { }
 
- 
+
 
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.authUrl}/user/me`);
   }
-  
-  getUsers(criteria): Observable<User[]> {
-    return this.http.get<User[]>(`${this.userUrl}/ApplicationUsers`);
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}/user/users`);
   }
   addUser(newUser): Observable<User>{
     return this.http.post<User>(`${this.userUrl}/ApplicationUsers/register`,newUser);
@@ -34,9 +34,13 @@ export class UserService {
     return this.http.delete<User>(`${this.userUrl}/ApplicationUsers/${id}`);
   }
   updateUser(id,updatedUser): Observable<User>{
-    return this.http.put<User>(`${this.userUrl}/ApplicationUsers/${id}`,updatedUser);
+    return this.http.put<User>(`${this.userUrl}/user/${id}`,updatedUser);
   }
   getUser(id): Observable<User>{
     return this.http.get<User>(`${this.userUrl}/ApplicationUsers/${id}`);
+  }
+
+  updatePassword(updatedPassword): Observable<any> {
+    return this.http.post(`${this.userUrl}/auth/user/updatePassword`, updatedPassword);
   }
 }

@@ -1,34 +1,35 @@
 
 
 <div class="main-content" >
-    <div class="container-fluid">
-                              <div class="row">
-                                      <div class="col-md-4"> 
-                                        <div class="list-group" >
-                                            <button type="button" class="list-group-item list-group-item-action active">
-                                              Vos Notifications  ({{notifications.length}})
-                                            </button>
-                                            <button type="button" 
-                                                   class="list-group-item list-group-item-action"
-                                                   *ngFor="let notification of notifications;let i= index"                                                
-                                                   (click)="getNotificationDetails(notification)">Enterprise with ID {{notification.senderID}} sends this notification</button>
-   
-                                          </div>
-                                           </div> 
-                                           <div class="vl"></div>
-                                           <div class="col-md" >
-                                              <div class="incenter">
-                                                 <app-notification-detail *ngIf="myNotification" 
-                                                          [(notification)]="this.myNotification"
-                                                          (confirmationEmitter)="Confirm()"> </app-notification-detail>
-                                             </div>     
-                                                
-                                           </div>
+  <div class="container-fluid">
+                            <div class="row">
+                                    <div class="col-md-4"> 
+                                      <div class="list-group" >
+                                          <button type="button" class="list-group-item list-group-item-action active">
+                                            Vos Notifications  ({{notifications.length}})
+                                          </button>
+                                          <button type="button" 
+                                                 class="list-group-item list-group-item-action"
+                                                 *ngFor="let notification of notifications;let i= index"                                                
+                                                 (click)="getNotificationDetails(notification)">Enterprise with ID {{notification.senderID}} sends this notification</button>
+ 
+                                        </div>
+                                         </div> 
+                                         <div class="vl"></div>
+                                         <div class="col-md" >
+                                            <div class="incenter">
+                                               <app-notification-detail *ngIf="myNotification" 
+                                                        [(notification)]="this.myNotification"
+                                                        (confirmationEmitter)="Confirm()"> </app-notification-detail>
+                                           </div>     
+                                              
+                                         </div>
 
-                              
-                         
-                      </div>
-             
-        
-  </div>
+
+                            
+                       
+                    </div>
+           
+      
+</div>
 </div>

@@ -3,15 +3,17 @@ package com.example.Backend.Payload;
 public class EnterpriseSummary {
     private Long id;
     private String name;
+    private String username;
     private String description;
     private String activity;
     private String email;
     private String notificationID;
-    private byte[] image;
+    private String image;
 
-    public EnterpriseSummary(Long id, String name, String description, String activity, String email, byte[] image, String notificationID) {
+    public EnterpriseSummary(Long id, String username, String name, String description, String activity, String email, String image, String notificationID) {
         this.id = id;
         this.name = name;
+        this.username = username;
         this.description = description;
         this.activity = activity;
         this.email = email;
@@ -67,11 +69,19 @@ public class EnterpriseSummary {
         this.notificationID = notificationID;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

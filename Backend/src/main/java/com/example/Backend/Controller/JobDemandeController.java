@@ -55,7 +55,7 @@ public class JobDemandeController {
     @PostMapping("/jobDemande")
     public JobDemande createJobDemande(@Valid @RequestBody JobDemande jobDemande) {
         JobDemande createdJobDemande = jobDemandeRepository.save(jobDemande);
-        notifyEnterprise(createdJobDemande.getSender().getId(),createdJobDemande.getEnterprise().getId(),createdJobDemande.getJobOffer().getId(),createdJobDemande.getId(), NotificationTypeName.JOB_DEMANDE_SENT,true);
+        notifyEnterprise(createdJobDemande.getSender().getId(),createdJobDemande.getEnterprise().getId(),createdJobDemande.getJobOffer().getId(),createdJobDemande.getId(), NotificationTypeName.JOB_DEMANDE_SENT,false);
         return createdJobDemande;
     }
 
@@ -73,25 +73,26 @@ public class JobDemandeController {
         if(jobDemandeDetails.getStatus() == Status.ACCEPTED)
         notifyEnterprise(jobDemande.getEnterprise().getId(),jobDemande.getSender().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(),NotificationTypeName.JOB_DEMANDE_ACCEPTED,false);
         else if(jobDemandeDetails.getStatus() == Status.REFUSED)
+
             notifyEnterprise(jobDemande.getEnterprise().getId(),jobDemande.getSender().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(),NotificationTypeName.JOB_DEMANDE_REFUSED,false);
         return updatedJobDemande;
     }
 
-    // Confirm a JobDemande
+ // Confirm a JobDemande
     @GetMapping("/jobDemande/{id}/confirm")
     public JobDemande confirmJobDemande(@PathVariable(value = "id") Long id) {
 
         JobDemande jobDemande = jobDemandeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobDemande", "id", id));
+        if(jobDemande.isConfirmedByUser()) return jobDemande;
 
         jobDemande.setConfirmedByUser(true);
         jobDemande.setStatus(Status.CONFIRMED);
 
         JobDemande updatedJobDemande = jobDemandeRepository.save(jobDemande);
-        notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,true);
+        notifyEnterprise(jobDemande.getSender().getId(),jobDemande.getEnterprise().getId(),jobDemande.getJobOffer().getId(),jobDemande.getId(), NotificationTypeName.CONFIRMATION,false);
         return updatedJobDemande;
     }
-
 
     // Get a Single JobDemande
     @GetMapping("/jobDemande/{id}")
@@ -115,7 +116,7 @@ public class JobDemandeController {
         return updatedJobDemande;
     }
 
-    // Delete a JobDemande
+    // DSelete a JobDemande
     @DeleteMapping("/jobDemande/{id}")
     public ResponseEntity<?> deleteJobDemande(@PathVariable(value = "id") Long id) {
         JobDemande jobDemande = jobDemandeRepository.findById(id)
@@ -134,17 +135,20 @@ public class JobDemandeController {
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", sender));
         User receiverUser = userRepository.findById(receiver)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", sender));
-        if(content == NotificationTypeName.JOB_DEMANDE_ACCEPTED)
-        send(receiverUser.getNotificationID(),senderUser.getName(), content);
-        else if(content == NotificationTypeName.JOB_DEMANDE_REFUSED)
-            send(receiverUser.getNotificationID(),senderUser.getName(), content);
-        else if(content == NotificationTypeName.JOB_DEMANDE_SENT)
-        send(receiverUser.getNotificationID(),senderUser.getFirstName()+' '+senderUser.getLastName(), content);
-        else if(content == NotificationTypeName.CONFIRMATION)
-            send(receiverUser.getNotificationID(),senderUser.getFirstName()+' '+senderUser.getLastName(), content);
+        if(receiverUser.getNotificationID() != null) {
+            if (content == NotificationTypeName.JOB_DEMANDE_ACCEPTED)
+                send(receiverUser.getNotificationID(), senderUser.getName(), content);
+            else if (content == NotificationTypeName.JOB_DEMANDE_REFUSED)
+                send(receiverUser.getNotificationID(), senderUser.getName(), content);
+            else if (content == NotificationTypeName.JOB_DEMANDE_SENT)
+                send(receiverUser.getNotificationID(), senderUser.getFirstName() + ' ' + senderUser.getLastName(), content);
+            else if (content == NotificationTypeName.CONFIRMATION)
+                send(receiverUser.getNotificationID(), senderUser.getFirstName() + ' ' + senderUser.getLastName(), content);
+        }
     }
 
     public ResponseEntity<String> send(String notificationID, String senderName, NotificationTypeName type) throws JSONException {
+
 
         JSONObject body = new JSONObject();
         body.put("to",notificationID);

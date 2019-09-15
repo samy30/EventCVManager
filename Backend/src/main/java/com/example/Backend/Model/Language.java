@@ -18,12 +18,12 @@ import javax.validation.constraints.NotBlank;
 public class Language extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @NotBlank
     private String name;
 
-    private Long level;
+    private String level;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cv_id", nullable = false)
@@ -31,11 +31,11 @@ public class Language extends AuditModel{
     @JsonBackReference
     private CV cv;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,11 +47,11 @@ public class Language extends AuditModel{
         this.name = name;
     }
 
-    public Long getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Long level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

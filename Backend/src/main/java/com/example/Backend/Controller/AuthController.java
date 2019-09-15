@@ -1,16 +1,16 @@
 package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.AppException;
+import com.example.Backend.Exception.InvalidOldPasswordException;
 import com.example.Backend.Model.Role;
 import com.example.Backend.Model.RoleName;
 import com.example.Backend.Model.User;
-import com.example.Backend.Payload.ApiResponse;
-import com.example.Backend.Payload.JwtAuthenticationResponse;
-import com.example.Backend.Payload.LoginRequest;
-import com.example.Backend.Payload.SignUpRequest;
+import com.example.Backend.Payload.*;
 import com.example.Backend.Repository.RoleRepository;
 import com.example.Backend.Repository.UserRepository;
+import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.JwtTokenProvider;
+import com.example.Backend.Security.UserPrincipal;
 import com.example.Backend.Service.ReCaptchaService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -109,7 +106,7 @@ public class AuthController {
 
         if(signUpRequest.getRole() != null) {
             if (signUpRequest.getRole().equals("ROLE_USER")) {
-                user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(),signUpRequest.getNotificationID());
+                user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getAge(), signUpRequest.getGender(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(),signUpRequest.getNotificationID(),signUpRequest.getTown());
             }
             if (signUpRequest.getRole().equals("ROLE_ENTERPRISE")) {
                 user = new User(signUpRequest.getName(), signUpRequest.getDescription(), signUpRequest.getActivity(), signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(),signUpRequest.getNotificationID());
@@ -141,4 +138,28 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
+
+    // update user password
+    @PostMapping("/user/updatePassword")
+    public ResponseEntity<?> changeUserPassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest, @CurrentUser UserPrincipal currentUser) {
+
+        Optional<User> user = userRepository.findById(currentUser.getId());
+
+        if (!checkIfValidOldPassword(user.get(), changePasswordRequest.getOldPassword())) {
+            throw new InvalidOldPasswordException();
+        }
+        user.get().setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
+        User result = userRepository.save(user.get());
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(result.getUsername()).toUri();
+
+        return ResponseEntity.created(location).body(new ApiResponse(true, "Password changed Succefully successfully"));
+    }
+
+    // check if pasword is valid
+    public boolean checkIfValidOldPassword(final User user, final String oldPassword) {
+        return passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
 }

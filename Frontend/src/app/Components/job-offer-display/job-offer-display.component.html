@@ -1,0 +1,96 @@
+
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-md-12" >
+        <div class="divup" >
+          <div class="card-content">
+            <div class="card-img">
+              <img src="https://placeimg.com/380/230/tech" alt="">
+
+            </div>
+            <div class="card-desc">
+              <div class="linediv">
+                <h4 >Entreprise:</h4>
+                <h3 style="color: white">{{offer.enterprise.name}}</h3>
+              </div>
+              <hr>
+              <div class="linediv">
+                  <h4 >Secteur d'activité:</h4>
+                  <h3 style="color: white">{{offer.activity}}</h3>
+                </div>
+                <hr>
+              <div class="linediv">
+                <h4 >intitulé du poste:</h4>
+                <h3 style="color: white">{{offer.job.name}}</h3>
+              </div>
+              <hr>
+              <div class="linediv">
+                  <h4 >Type de contrat:</h4>
+                  <h3 style="color: white">{{offer.type}}</h3>
+                </div>
+                <hr>
+                <div class="linediv">
+                    <h4 >Genre de travail:</h4>
+                    <h3 style="color: white">{{offer.time}}</h3>
+                  </div>
+                  <hr>
+                  <div class="linediv">
+                      <h4 >Date debut de contrat :</h4>
+                      <h3 style="color: white">{{offer.startingDate}}</h3>
+                    </div>
+                    <hr>
+                    <div class="linediv" *ngIf="offer.wage">
+                        <h4 >Salaire proposé :</h4>
+                        <h3 style="color: white">{{offer.wage}}</h3>
+                      </div>
+                      <hr>
+              <div class="linediv">
+                  <h4 >Lieu de travail:</h4>
+                  <h3 style="color: white">{{offer.town}}</h3>
+                </div>
+                <hr>
+                <div class="linediv" *ngIf="offer.description">
+                    <h4 >Description de poste:</h4>
+                    <h3 style="color: white">{{offer.description}}</h3>
+                  </div>
+                  <hr>
+                  <div class="linediv">
+                      <h4 >Diplôme minimum requis:</h4>
+                      <h3 style="color: white">{{offer.minimumSchoolDegree}}</h3>
+                    </div>
+                    <hr>
+                    <div class="linediv">
+                        <h4 >Expérience attendue pour ce poste (nombre d'annees):</h4>
+                        <h3 style="color: white">{{offer.experienceYears}}</h3>
+                      </div>
+                      <hr>
+                    
+              <h4>Qualités requises pour le poste:</h4>
+              <div *ngFor="let skill of offer.skills" >
+                <h3 style="color: white">{{skill}}</h3>
+              </div>
+              <hr>
+              <div class="row">
+                  <div class="col-md-4">
+                    <a  class="btn-card"  (click)="getJob(offer)" 
+                         *ngIf="!isToken;else postule">Postuler</a>
+                    <ng-template #postule>
+                        <a  class="btn-card" style="background-color: rgb(36, 98, 179) " >deja choisie</a>
+                      </ng-template>
+                      <a  class="btn-card redone "   (click)="close()" >Fermer</a>
+                  </div>
+                
+               </div>
+            
+           
+             <!-- <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Postuler</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- details card section starts from here -->

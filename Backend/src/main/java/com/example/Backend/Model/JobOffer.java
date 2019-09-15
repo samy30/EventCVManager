@@ -32,13 +32,13 @@ public class JobOffer extends UserDateAudit {
 
     private String startingDate;
 
-    private Double wage;
+    private String wage;
 
     private String description;
 
     private String minimumSchoolDegree;
 
-    private int experienceYears;
+    private String experienceYears;
 
     private String town ;
 
@@ -138,14 +138,6 @@ public class JobOffer extends UserDateAudit {
         this.startingDate = startingDate;
     }
 
-    public Double getWage() {
-        return wage;
-    }
-
-    public void setWage(Double wage) {
-        this.wage = wage;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -162,11 +154,19 @@ public class JobOffer extends UserDateAudit {
         this.minimumSchoolDegree = minimumSchoolDegree;
     }
 
-    public int getExperienceYears() {
+    public String getWage() {
+        return wage;
+    }
+
+    public void setWage(String wage) {
+        this.wage = wage;
+    }
+
+    public String getExperienceYears() {
         return experienceYears;
     }
 
-    public void setExperienceYears(int experienceYears) {
+    public void setExperienceYears(String experienceYears) {
         this.experienceYears = experienceYears;
     }
 

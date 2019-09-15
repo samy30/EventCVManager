@@ -14,10 +14,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.*;
 
 @RestController
@@ -80,14 +84,13 @@ public class UserController {
     }
 
     @GetMapping("/users/{username}")
-    @PreAuthorize("hasRole('ADMIN')")
     public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         long cvCount = cvRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getImage(),user.getNotificationID());
+        UserProfile userProfile = new UserProfile(user.getId(),user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getAge(),user.getGender(),user.getCreatedAt(),user.getImage(),user.getNotificationID(), user.getTown());
 
         return userProfile;
     }
@@ -142,5 +145,41 @@ public class UserController {
 
         User updatedUser = userRepository.save(user);
         return updatedUser;
+    }
+
+    // Update a user
+    @PutMapping("/user/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable(value = "id") Long id,
+                                              @Valid @RequestBody UserSummary userSummary) {
+
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
+        if((userRepository.existsByEmail(userSummary.getEmail())) && (!userSummary.getEmail().equals(user.getEmail()))) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        if((userRepository.existsByUsername(userSummary.getUsername())) && (!userSummary.getUsername().equals(user.getUsername()))) {
+            return new ResponseEntity(new ApiResponse(false, "Username already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        user.setFirstName(userSummary.getFirstName());
+        user.setLastName(userSummary.getLastName());
+        user.setGender(userSummary.getGender());
+        user.setAge(userSummary.getAge());
+        user.setImage(userSummary.getImage());
+        if(!userSummary.getUsername().equals(user.getUsername()))
+        user.setUsername(userSummary.getUsername());
+        if(!userSummary.getEmail().equals(user.getEmail()))
+        user.setEmail(userSummary.getEmail());
+        user.setTown(userSummary.getTown());
+        User updatedUser = userRepository.save(user);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/api/users/{username}")
+                .buildAndExpand(updatedUser.getUsername()).toUri();
+
+        return ResponseEntity.created(location).body(updatedUser);
     }
 }

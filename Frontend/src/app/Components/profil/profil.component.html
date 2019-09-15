@@ -1,117 +1,142 @@
 <div class="main-content" >
-    <p-messages [(value)]="msgs"></p-messages>
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-md-8">
-                  <div class="card">
-  
-                      <div class="content">
-                          <form [formGroup]="userFormGroup">
-                              <div class="row">
-  
-                                  <div class="col-md-3">
-                                      <div class="form-group">
-                                          <label>Username</label>
-                                          <input formControlName="username" type="text" class="form-control" placeholder="Username">
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Adresse Email</label>
-                                          <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                                      </div>
-                                  </div>
-                              </div>
-  
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                          <label>Prénom</label>
-                                          <input type="text" class="form-control" placeholder="Prénom" formControlName="firstName" >
-                                      </div>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <div class="form-group">
-                                          <label>Nom</label>
-                                          <input type="text" class="form-control" placeholder="Nom" formControlName="lastName" >
-                                      </div>
-                                  </div>
-                              </div>
-  
-                              <div class="row">
-                                  <div class="col-md-12">
-                                      <div class="form-group">
-                                          <label>Adresse</label>
-                                          <input type="text" class="form-control" placeholder="Adresse" formControlName="address" >
-                                      </div>
-                                  </div>
-                              </div>
-  
-                              <div class="row">
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>Ville</label>
-                                          <input type="text" class="form-control" formControlName="city" placeholder="Ville" >
-                                      </div>
-                                  </div>
-  
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>Code Postal</label>
-                                          <input type="number" class="form-control"  formControlName="postalCode"placeholder="Code postal">
-                                      </div>
-                                  </div>
-                              </div>
-  
-                              <div class="row">
-                                  <div class="col-md-12">
-                                      <div class="form-group">
-                                          <label>A propos </label>
-                                          <textarea rows="5" class="form-control" placeholder="A propos ..."  formControlName="description">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                                      </div>
-                                  </div>
-                              </div>
-                              <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateUser()">Modifier Profile</button>
-                              <div class="clearfix"></div>
-                          </form>
-                      </div>
+  <p-messages [(value)]="msgs"></p-messages>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="content" *ngIf="role !== 'ROLE_ENTERPRISE'">
+            <form [formGroup]="userFormGroup">
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input formControlName="username" type="text" class="form-control" placeholder="Username">
                   </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card card-user">
-                    <div class="image">
-                         <img *ngIf="url!==null" [src]="url" style="border-radius:40px; height:200px; width:200px;"> <br/>
-                        <img *ngIf="url===null" src="http://res.cloudinary.com/dk34qvajk/image/upload/v1513190129/placeholder.png" 
-                                           style="border-radius:40px; height:200px; width:200px;" alt="..."/>
-                    </div>
-                    <div class="content" *ngIf="user">
-                        <div class="author">
-  
-                               <!--<img  style=" object-fit: cover;"class="avatar border-gray" src="{{user.image}}" alt=""/>
-                               --> 
-                               <input type='file' (change)="onSelectFile($event)">
-                               
-                                <h4 class="title">{{user.firstName}} {{user.lastName}}<br />
-                                    <small>{{user.userName}}</small>
-                                </h4>
-  
-                        </div>
-                        <p class="description text-center"> {{user.description }}
-                        </p>
-                    </div>
-  
-                    <hr>
-  
                 </div>
-                  
-  
-                 
-  
-  
-            </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse Email</label>
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Prénom</label>
+                    <input type="text" class="form-control" placeholder="Prénom" formControlName="firstName" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" placeholder="Nom" formControlName="lastName" >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" class="form-control" placeholder="Age" formControlName="age" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="gender" >Genre:</label><br>
+                        <mat-select formControlName="gender" >
+
+                            <mat-option *ngFor="let genre of genres;let i=index" [value]="genre">
+                                    {{ genresFr[i] }}
+                                  </mat-option>
+                    </mat-select>
+                      </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Ville</label>
+                    <input type="text" class="form-control" placeholder="ville" formControlName="town" >
+                  </div>
+                </div>
+              </div>
+
+
+              <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateUser()">Modifier Profile</button>
+              <div class="clearfix"></div>
+            </form>
+
           </div>
+          <div class="content" *ngIf="role === 'ROLE_ENTERPRISE'">
+            <form [formGroup]="enterpriseFormGroup">
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input formControlName="username" type="text" class="form-control" placeholder="Username">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Adresse Email</label>
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" placeholder="Nom" formControlName="name" >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" placeholder="Description" formControlName="description" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Secteur d'activité</label>
+                    <input type="text" class="form-control" placeholder="Activité" formControlName="activity" >
+                  </div>
+                </div>
+              </div>
+
+
+              <button type="submit" class="btn btn-info btn-fill pull-right"  (click)="updateEnterprise()">Modifier Profile</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
       </div>
+      <div class="col-md-4">
+        <div class="card card-user">
+          <app-upload (imageEmitter)="getImage($event)" [imgURL]="image"></app-upload>
+          <div class="image">
+           </div>
+          <div class="content" >
+            <div class="author">
+            </div>
+            <p class="description text-center"> {{user?.description }}
+            </p>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  
-  
+</div>
+
+
+

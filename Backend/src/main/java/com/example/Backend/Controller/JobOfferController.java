@@ -2,8 +2,10 @@ package com.example.Backend.Controller;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.Job;
+import com.example.Backend.Model.JobDemande;
 import com.example.Backend.Model.JobOffer;
 import com.example.Backend.Model.User;
+import com.example.Backend.Repository.JobDemandeRepository;
 import com.example.Backend.Repository.JobOfferRepository;
 import com.example.Backend.Repository.JobRepository;
 import com.example.Backend.Repository.UserRepository;
@@ -19,6 +21,9 @@ import java.util.List;
 public class JobOfferController {
     @Autowired
     JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    JobDemandeRepository jobDemandeRepository;
 
     @Autowired
     JobRepository jobRepository;
@@ -83,6 +88,12 @@ public class JobOfferController {
     public ResponseEntity<?> deleteJobOffer(@PathVariable(value = "id") Long id) {
         JobOffer jobOffer = jobOfferRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobOffer", "id", id));
+
+        List<JobDemande> jobdemandesToDelete = jobDemandeRepository.findByJobOffer(jobOffer);
+        for (JobDemande jobDemandeToDelete:jobdemandesToDelete
+        ) {
+            jobDemandeRepository.delete(jobDemandeToDelete);
+        }
 
         jobOfferRepository.delete(jobOffer);
 

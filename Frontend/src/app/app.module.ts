@@ -13,7 +13,9 @@ import {
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatDialogModule, DateAdapter
+  MatDialogModule,
+  DateAdapter,
+  ErrorStateMatcher
 } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -81,6 +83,14 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter as CalendarDateAdapter} from 'angular-calendar';
+import { UploadComponent } from './Components/upload/upload.component';
+import {Carousel2Component} from './Components/carousel2/carousel2.component';
+import { JobOfferDisplayComponent } from './Components/job-offer-display/job-offer-display.component';
+import { Scroll2Component } from './Components/scroll2/scroll2.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
+import { ScrollComponent } from './Components/scroll/scroll.component';
+
 
 @NgModule({
   declarations: [
@@ -113,7 +123,13 @@ import { CalendarModule, DateAdapter as CalendarDateAdapter} from 'angular-calen
     NotreplatformeComponent,
     QuisommesnousComponent,
     ConfirmedJobDemandeComponent,
-    InterviewCalendarComponent
+    InterviewCalendarComponent,
+    UploadComponent,
+    Carousel2Component,
+    JobOfferDisplayComponent,
+    Scroll2Component,
+    ChangePasswordComponent,
+    ScrollComponent
   ],
   imports: [
     ChartsModule,
@@ -174,9 +190,14 @@ import { CalendarModule, DateAdapter as CalendarDateAdapter} from 'angular-calen
       useFactory: adapterFactory
     })
   ],
-  entryComponents: [InsertCVComponent, EnterpriseCreationComponent,
-                    OfferCreationComponent, EnterpriseEditionComponent,
-                    JobOfferEditionComponent],
+  entryComponents: [
+    InsertCVComponent,
+    EnterpriseCreationComponent,
+    OfferCreationComponent,
+    EnterpriseEditionComponent,
+    JobOfferEditionComponent,
+    JobOfferDisplayComponent
+  ],
   providers: [
     httpInterceptorProviders,
     {
@@ -184,6 +205,7 @@ import { CalendarModule, DateAdapter as CalendarDateAdapter} from 'angular-calen
       useClass: TokenInterceptor,
       multi: true
     },
+    {provide: ErrorStateMatcher, useClass: MyErrorStateMatcher},
     AuthGuard,
     AuthService,
     UserService,

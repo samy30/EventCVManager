@@ -4,130 +4,126 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body style="background-image: url('../assets/images/empreinte.png')">
-<div id="login" >
-  <h3 class="text-center text-white pt-5">SignUp form</h3>
-  <div class="container">
-    <div id="login-row" class="row justify-content-center align-items-center">
-      <div id="login-column" class="col-md-6">
-        <div id="login-box" class="col-md-12">
-          <div >
-            <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
-              <h3 class="text-center ">SignUp</h3>
-              <div class="form-group">
-                <label for="username" >Identifiant:</label><br>
-                <input type="text"  formControlName="username" class="form-control" required>
-                <mat-error *ngIf="isFieldInvalid('username')">
-                  username required
-                </mat-error>
-              </div>
+    <div id="login" >
+        <h3 class="text-center text-white pt-5">Inscrivez Vous</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                      <form id="login-form" class="form"  [formGroup]="signupForm" (ngSubmit)="signup()">
 
-              <div class="form-group">
-                <label for="password" >Mot De Passe:</label><br>
-                <input type="password"  formControlName="password" class="form-control" required>
-                <mat-error *ngIf="isFieldInvalid('password')">
-                  password required
-                </mat-error>
-              </div>
+                        <div class="form-group">
+                          <label for="username" >Identifiant:</label><br>
+                          <input type="text"  formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.username.errors }">
+                          <div *ngIf="isSubmitted && signupForm.controls.username.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.username.errors.required">Nom d'utilisateur est nécessaire</div>
+                          </div>
+                        </div>
 
-              <div class="form-group">
-                <label for="password" >Confirmer Votre Mot De Passe:</label><br>
-                <input type="password"  formControlName="password" class="form-control" required>
-                <mat-error *ngIf="isFieldInvalid('password')">
-                  password required
-                </mat-error>
-              </div>
+                        <div class="form-group">
+                          <label for="password" >Mot De Passe:</label><br>
+                          <input type="password"  formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.password.errors }">
+                          <div *ngIf="isSubmitted && signupForm.controls.password.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.password.errors.required">Mot de passe est nécessaire</div>
+                            <div *ngIf="signupForm.controls.password.errors.minlength">Mot de passe doit contenir au moins 6 caractéres</div>
+                          </div>
+                        </div>
 
-              <div class="form-group">
-                <label for="email" >Email:</label><br>
-                <input type="email"  formControlName="email" class="form-control" required>
-              </div>
+                        <div class="form-group">
+                          <label>Confirmer Votre Mot De Passe</label>
+                          <input type="password" class="form-control" placeholder="Confirmer Votre Mot De Passe" formControlName="confirmedPassword" [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.confirmedPassword.errors }" >
+                          <div *ngIf="isSubmitted && signupForm.controls.confirmedPassword.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.confirmedPassword.errors.required">Répéter mot de passe est nécessaire</div>
+                            <div *ngIf="signupForm.controls.confirmedPassword.errors.mustMatch">Passwords must match</div>
+                          </div>
+                        </div>
 
-              <div class="form-group">
-                <label for="firstName" >Prenom:</label><br>
-                <input type="text" id="firstName"  formControlName="firstName" class="form-control" required>
-              </div>
+                        <div class="form-group">
+                          <label for="email" >Email:</label><br>
+                          <input type="email"  formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.email.errors }">
+                          <div *ngIf="isSubmitted && signupForm.controls.email.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.email.errors.required">Adresse Email est nécessaire</div>
+                          </div>
+                        </div>
 
-              <div class="form-group">
-                <label for="lastName" >Nom:</label><br>
-                <input type="text" id="lastName" formControlName="lastName" class="form-control" required>
-              </div>
+                        <div class="form-group">
+                          <label for="firstName" >Prenom:</label><br>
+                          <input type="text" id="firstName"  formControlName="firstName" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.firstName.errors }">
+                          <div *ngIf="isSubmitted && signupForm.controls.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.firstName.errors.required">Prénom est nécessaire</div>
+                          </div>
+                        </div>
 
-<<<<<<< HEAD
-                                        </select>
-                                
-                                      </div>
-                                </div>
-                            </div>    
+                        <div class="form-group">
+                          <label for="lastName" >Nom:</label><br>
+                          <input type="text" id="lastName" formControlName="lastName" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.lastName.errors }">
+                          <div *ngIf="isSubmitted && signupForm.controls.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="signupForm.controls.lastName.errors.required">Nom est nécessaire</div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-md-6">
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
-                                       [disabled]="!isFormValid(signupForm)"
-                                >
+                              <label for="gender" >Genre:</label><br>
+
+                              <select name="GenderList" id="gender" formControlName="gender" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.gender.errors }">
+                                <option value="Male">Homme</option>
+                                <option value="Female">Femme</option>
+                              </select>
+                              <div *ngIf="isSubmitted && signupForm.controls.gender.errors" class="invalid-feedback">
+                                <div *ngIf="signupForm.controls.gender.errors.required">Genre est nécessaire</div>
+                              </div>
                             </div>
-                          <re-captcha (resolved)="resolved($event)" siteKey="6Lf9MLcUAAAAAHT4LbIuv3XZnxYaOcZ7RhUM4KyY"></re-captcha>
-                                       [disabled]="!isFormValid(signupForm)">
-                        </form>
-                      </div>                
-                    </div>
-=======
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="age" >Age:</label><br>
+                              <input type="number" id="age" formControlName="age" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.age.errors }">
+                              <div *ngIf="isSubmitted && signupForm.controls.age.errors" class="invalid-feedback">
+                                <div *ngIf="signupForm.controls.age.errors.required">Age est nécessaire</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="gender" >Genre:</label><br>
+                        <div class="row">
+                          <div class="form-group">
+                            <label for="town" >Gouvernorat:</label><br>
 
-                    <select name="GenderList" id="gender" formControlName="gender" class="form-control" required>
-                      <option value="Male">Homme</option>
-                      <option value="Female">Femme</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="age" >Age:</label><br>
-                    <input type="number" id="age" formControlName="age" class="form-control" required>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <label for="gouvernorat" >Gouvernorat:</label><br>
-                    <select name="carlist" form="carform" class="form-control">
-                      <option value="none" selected disabled hidden>
-                        Choisissez votre gouvernaurat
-                      </option>
-                      <option value="Ariana">Ariana</option>
-                      <option value="Baja">Baja</option>
-                      <option value="Ben Arous">Ben Arous</option>
-                      <option value="Bizerte">Bizerte</option>
-                      <option value="Gabes">Gabes</option>
-                      <option value="Gafsa">Gafsa</option>
-                      <option value="Jendouba">Jendouba</option>
-                      <option value="Kairouan">Kairouan</option>
-                      <option value="Kasserine">Kasserine</option>
-                      <option value="Kébili">Kébili</option>
-                      <option value="Le Kef">Le Kef</option>
-                      <option value="Mahdia">Mahdia</option>
-                      <option value="La Manouba">La Manouba</option>
-                      <option value="Medenine">Medenine</option>
-                      <option value="Monastir">Monastir</option>
-                      <option value="Nabeul">Nabeul</option>
-                      <option value="Sfax">Sfax</option>
-                      <option value="Sidi Bouzid">Sidi Bouzid</option>
-                      <option value="Siliana">Siliana</option>
-                      <option value="Sousse">Sousse</option>
-                      <option value="Tataouine">Tataouine</option>
-                      <option value="Tozeur">Tozeur</option>
-                      <option value="Tunis">Tunis</option>
-                      <option value="Zaghouan">Zaghouan</option>
-
-                    </select>
-
-                  </div>
->>>>>>> bf0905eeffd11aad0056e2a973c5999dfbb84ab8
-                </div>
-              </div>
+                            <select name="town" id="town" formControlName="town" class="form-control" required [ngClass]="{ 'is-invalid': isSubmitted && signupForm.controls.town.errors }">
+                              <option value="none" selected disabled hidden>
+                                Choisissez votre gouvernaurat
+                              </option>
+                              <option value="Ariana">Ariana</option>
+                              <option value="Baja">Baja</option>
+                              <option value="Ben Arous">Ben Arous</option>
+                              <option value="Bizerte">Bizerte</option>
+                              <option value="Gabes">Gabes</option>
+                              <option value="Gafsa">Gafsa</option>
+                              <option value="Jendouba">Jendouba</option>
+                              <option value="Kairouan">Kairouan</option>
+                              <option value="Kasserine">Kasserine</option>
+                              <option value="Kébili">Kébili</option>
+                              <option value="Le Kef">Le Kef</option>
+                              <option value="Mahdia">Mahdia</option>
+                              <option value="La Manouba">La Manouba</option>
+                              <option value="Medenine">Medenine</option>
+                              <option value="Monastir">Monastir</option>
+                              <option value="Nabeul">Nabeul</option>
+                              <option value="Sfax">Sfax</option>
+                              <option value="Sidi Bouzid">Sidi Bouzid</option>
+                              <option value="Siliana">Siliana</option>
+                              <option value="Sousse">Sousse</option>
+                              <option value="Tataouine">Tataouine</option>
+                              <option value="Tozeur">Tozeur</option>
+                              <option value="Tunis">Tunis</option>
+                              <option value="Zaghouan">Zaghouan</option>
+                            </select>
+                            <div *ngIf="isSubmitted && signupForm.controls.town.errors" class="invalid-feedback">
+                              <div *ngIf="signupForm.controls.town.errors.required">Genre est nécessaire</div>
+                            </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit"
                        [disabled]="!isFormValid(signupForm)"
@@ -136,11 +132,12 @@
 <!--              <div [disabled]="!isFormValid(signupForm)">-->
               <re-captcha (resolved)="resolved($event)" siteKey="6Lf9MLcUAAAAAHT4LbIuv3XZnxYaOcZ7RhUM4KyY"></re-captcha>
 <!--          </div>-->
+                          </div>
+                        </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 </body>

@@ -4,51 +4,137 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!-- details card section starts from here -->
-<section  class="details-card">
+<!--<section  class="details-card">
   <h2 >Offres Disponibles</h2>
   <hr>
   <div class="container">
     <div class="row">
+      <mat-form-field class="col-md-12">-->
+  <section  class="details-card">
+  <h3 >Offres Disponibles</h3>
+  <hr class="height_mriguel">
+  <div class="container" >
+    <div class="row fontsghir" >
+
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre ...">
+      
+      <mat-paginator class="col-md-12" [pageSizeOptions]="[5, 10, 20,50,100]" showFirstLastButtons></mat-paginator>
+      <table mat-table [dataSource]="dataSource" matSort  class="table table-hover table-striped">
+
+             <!-- Name Column -->
+       <ng-container matColumnDef="enterprise">
+                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Entreprise </th>
+                   <td mat-cell *matCellDef="let element"> {{element.enterprise.name}} </td>
+       </ng-container>
+            <!-- email Column -->
+            <ng-container matColumnDef="activity">
+             <th mat-header-cell *matHeaderCellDef mat-sort-header> Activié </th>
+             <td mat-cell *matCellDef="let element"> {{element.activity}} </td>
+      </ng-container>
+         <!-- email Column -->
+         <ng-container matColumnDef="job">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Poste </th>
+          <td mat-cell *matCellDef="let element"> {{element.job.name}} </td>
+       </ng-container>
+           <!-- email Column -->
+           <ng-container matColumnDef="town">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Lieu de travail </th>
+            <td mat-cell *matCellDef="let element"> {{element.town}} </td>
+      </ng-container>
+       <ng-container  matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef    > Detail </th>
+            <td mat-cell *matCellDef="let element">
+               <a  matTooltip="Modifier l'entreprise" [routerLink]="" (click)="getDetail(element)" ><mat-icon >visibility</mat-icon></a>
+    
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+     </table>
+   
+    </div>
+  </div>
+</section>
 
 
+
+<!-- details card section starts from here -->
+<!--
       <div class="col-md-8" *ngFor="let offer of jobOffers">
         <div class="divup" >
           <div class="card-content">
             <div class="card-img">
-              <img src="https://placeimg.com/380/230/tech" alt="">
-
+              
             </div>
-            <div class="card-desc">
-              <div class="linediv">
-                <h4 >Entreprise:</h4>
-                <h3 style="color: white">{{offer.enterprise.name}}</h3>
+            <div class="card-desc" >
+              <div class="linediv height_mriguel">
+               <h3>Entreprise        : </h3>
+                <h3 style="color: black ">  {{offer.enterprise.name}}</h3>
               </div>
-              <div class="linediv">
-                <h4 >Addresse:</h4>
-                <h3 style="color: white">{{offer.town}}</h3>
+              <hr class="height_mriguel">
+              <div class="linediv height_mriguel">
+                  <h3 >Secteur d'activité:</h3>
+                  <h3 style="color: black ">{{offer.activity}}</h3>
+                </div>
+                <hr class="height_mriguel">
+              <div class="linediv height_mriguel">
+                <h3 >intitulé du poste:</h3>
+                <h3 style="color: black ">{{offer.job.name}}</h3>
               </div>
-              <div class="linediv">
-                <h4 >Job:</h4>
-                <h3 style="color: white">{{offer.job.name}}</h3>
-              </div>
-
-              <h4>skills:</h4>
+              <hr class="height_mriguel">
+              <div class="linediv height_mriguel">
+                  <h3 >Type de contrat:</h3>
+                  <h3 style="color: black ">{{offer.type}}</h3>
+                </div>
+                <hr class="height_mriguel">
+                <div class="linediv height_mriguel">
+                    <h3 >Temps:</h3>
+                    <h3 style="color: black ">{{offer.time}}</h3>
+                  </div>
+                  <hr class="height_mriguel">
+                  <div class="linediv height_mriguel">
+                      <h3 >Date debut de contrat :</h3>
+                      <h3 style="color: black ">{{offer.startingDate}}</h3>
+                    </div>
+                    <hr class="height_mriguel">
+                    <div class="linediv height_mriguel" *ngIf="offer.wage">
+                        <h3 >Salaire proposé :</h3>
+                        <h3 style="color: black ">{{offer.wage}}</h3>
+                      </div>
+                      <hr class="height_mriguel">
+              <div class="linediv height_mriguel">
+                  <h3 >Lieu de travail:</h3>
+                  <h3 style="color: black ">{{offer.town}}</h3>
+                </div>
+                <hr class="height_mriguel">
+                <div class="linediv height_mriguel" *ngIf="offer.description">
+                    <h3 >Description de poste:</h3>
+                    <h3 style="color: black ">{{offer.description}}</h3>
+                  </div>
+                  <hr class="height_mriguel">
+                  <div class="linediv height_mriguel">
+                      <h3 >Diplôme minimum requis:</h3>
+                      <h3 style="color: black ">{{offer.minimumSchoolDegree}}</h3>
+                    </div>
+                    <hr class="height_mriguel">
+                    <div class="linediv height_mriguel">
+                        <h3 >Expérience attendue pour ce poste (nombre d'annees):</h3>
+                        <h3 style="color: black ">{{offer.experienceYears}}</h3>
+                      </div>
+                      <hr class="height_mriguel">
+                    
+              <h3>Qualités requises pour le poste:</h3>
               <div *ngFor="let skill of offer.skills" >
-                <h3 style="color: white">{{skill}}</h3>
+                <h3 style="color: black ">{{skill}}</h3>
               </div>
-              <hr>
+              <hr class="height_mriguel">
               <a  class="btn-card"  (click)="getJob(offer)" 
                              *ngIf="!isToken(offer);else postule">Postuler</a>
               <ng-template #postule>
                   <a  class="btn-card" style="background-color: rgb(36, 98, 179) " >deja choisie</a>
               </ng-template>
 
-              <a  class="btn-card" style="background-color: goldenrod " (click)="getJob(offer)">Postuler</a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- details card section starts from here -->
+      </div>-->

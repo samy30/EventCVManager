@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
   loginForm: FormGroup;
   isSubmitted  =  false;
+  isLoading = false;
 
   ngOnInit() {
     this.loginForm  =  this.formBuilder.group({
@@ -36,23 +37,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isLoading = true;
     this.isSubmitted = true;
     this.authService.login(this.loginForm.value).subscribe(
       res => {
-        console.log('logged in');
-        console.log(res);
         this.authService.setToken(res.accessToken);
-        this.authService.getCurrentUser()
-          .subscribe(user => {
-            this.authService.setCurrentUser(user);
-            this.messagingService.requestPermission(user.id);
-            // inform sidebar with new authentication
-            this.authService.informUserAuthentication(1);
-            this.router.navigate(['/JobSearch']).then(r => console.log(r));
-          });
+        // inform sidebar with new authentication
+        this.authService.informUserAuthentication(1);
+        this.isLoading = false;
+        this.router.navigate(['/JobSearch']).then(r => console.log(r));
       },
       err => {
         console.log(err + 'not token');
+        this.isLoading = false;
       }
     );
     console.log(this.loginForm.value);

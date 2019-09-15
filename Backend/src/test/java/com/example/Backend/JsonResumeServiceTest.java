@@ -59,7 +59,7 @@ public class JsonResumeServiceTest {
         for(int i = 0; i < 3; i++) {
             languages.add(Language.builder()
                     .name("language" + i)
-                    .level(5L)
+                    .level("5L")
                     .build()
             );
         }
@@ -76,7 +76,7 @@ public class JsonResumeServiceTest {
         for(int i = 0; i < 3; i++) {
             softwares.add(Software.builder()
                     .name("mySoftware" + i)
-                    .level(5L)
+                    .level("5L")
                     .build()
             );
         }

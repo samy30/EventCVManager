@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,6 +32,7 @@ public class ProfessionalExperience extends AuditModel {
     private String enterprise;
 
     @NotBlank
+    @Size(max = 5000)
     private String post;
 
     @NotBlank

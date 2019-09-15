@@ -5,7 +5,7 @@
          <div class="col-md-12">
              <div class="left">
                         <mat-tab-group >
-                                    <mat-tab label="Gender"> 
+                                    <mat-tab label="Genre"> 
                                       <div style="display: block" *ngIf="readyGenderFlag">
                                         <canvas baseChart
                                         [data]="pieChartGenderData"
@@ -17,14 +17,30 @@
                                     </div>
                                     </mat-tab>
                                     
-                                <mat-tab label="Age"><div style="display: block">
-                                 <canvas
-                                 baseChart
-                                 [chartType]="'bar'"
-                                 [datasets]="chartData"
-                                 [labels]="labels"
-                                
-                                   ></canvas>
+                                <mat-tab label="Age">
+                                   <div class="row">
+                                       <div class="col-md-4">
+                                             <button  (click)="searchByAge()"
+                                             matTooltip="statistique selon age du candidat"
+                                             style="margin-top:15px;margin-bottom: 15px"
+                                              class="btn btn-primary btn-md"  color="accent"
+                                              
+                                              mat-flat-button> <mat-icon > search</mat-icon>entrez l'age</button>
+                                        </div>
+                                       <div class="col-md-4" >
+                                           <input  #age type="number" class="form-control bas" placeholder="age du candidat">
+                                       </div> 
+                                   </div>
+                                   <div class="r">
+                                       <div style="display: block">
+                                             <canvas
+                                             baseChart
+                                             [chartType]="'bar'"
+                                             [datasets]="chartAgeData"
+                                             [labels]="ageLabels"
+                                            
+                                               ></canvas>
+                                               </div>
                                    </div>
                                 </mat-tab>
                                 <mat-tab label="gouvernorat"><div style="display: block">
@@ -36,14 +52,8 @@
                                    ></canvas>
                                    </div>
                                 </mat-tab>
-                                <!-- <mat-tab label="Town"> 
-                                     <div style="display: block">
-                                        <canvas baseChart
-                                        [data]="pieChartData"
-                                        [labels]="pieChartLabels"
-                                        [chartType]="pieChartType"></canvas>
-                                  </div></mat-tab>-->
-                                  <mat-tab label="Job"> 
+                               
+                                  <mat-tab label="Postes"> 
                                           <div style="display: block" *ngIf="readyJobFlag">
                                              <canvas baseChart
                                              [data]="pieChartJobData"

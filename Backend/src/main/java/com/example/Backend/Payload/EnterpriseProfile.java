@@ -10,9 +10,9 @@ public class EnterpriseProfile {
     private String email;
     private Date joinedAt;
     private String notificationID;
-    private byte[] image;
+    private String image;
 
-    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt, byte[] image, String notificationID) {
+    public EnterpriseProfile(Long id, String name, String description, String activity, String email, Date joinedAt, String image, String notificationID) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -79,11 +79,11 @@ public class EnterpriseProfile {
         this.notificationID = notificationID;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

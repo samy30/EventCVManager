@@ -54,8 +54,9 @@ export class AuthService {
       lastName: user.lastName,
       gender: user.gender,
       age: user.age,
-      role: 'ROLE_USER',
-      captchaResponse
+      captchaResponse,
+      town: user.town,
+      role: 'ROLE_USER'
     };
     console.log(jobSeeker);
     return this.http.post<User>(`${this.authUrl}/auth/signup`, jobSeeker);

@@ -11,6 +11,7 @@ public class UserSignUpRequest {
     private long age;
     private String gender;
     private String notificationID;
+    private String town;
 
     @NotBlank
     @Size(min = 3, max = 15)
@@ -87,5 +88,13 @@ public class UserSignUpRequest {
 
     public void setNotificationID(String notificationID) {
         this.notificationID = notificationID;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 }

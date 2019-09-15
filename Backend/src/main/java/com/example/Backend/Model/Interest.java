@@ -1,3 +1,4 @@
+
 package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Builder
@@ -22,8 +24,8 @@ public class Interest extends AuditModel{
 
     @NotBlank
     private String name;
-
     @NotBlank
+    @Size(max = 5000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
