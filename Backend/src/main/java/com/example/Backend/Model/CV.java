@@ -25,6 +25,17 @@ public class CV extends UserDateAudit {
     @NotBlank
     private String firstName;
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    @NotBlank
+    private String nationality;
+
     @NotBlank
     private String lastName;
 

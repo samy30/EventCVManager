@@ -19,7 +19,8 @@ public class BackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
-
+}
+/*
 	@Bean
 	public CommandLineRunner seedDatabase(
 			RoleRepository roleRepository,
@@ -30,6 +31,7 @@ public class BackendApplication {
 			JsonResumeService jsonResumeService
 	) {
 		return (args) -> {
+
 			User enterprise = new User("Enterprise", "google", "entreprise@gmail.com", passwordEncoder.encode("password"));
 			User[] jobSeekers = new User[10];
 			for(int i = 0; i < 10; i++) {
@@ -166,7 +168,8 @@ public class BackendApplication {
 			resume.setStudies(studies);
 			resume = cvRepository.save(resume);
 			System.out.println(resume.getId());
-			jsonResumeService.generateResume(resume.getId());
+			//jsonResumeService.generateResume(resume.getId());
 		};
 	}
 }
+*/

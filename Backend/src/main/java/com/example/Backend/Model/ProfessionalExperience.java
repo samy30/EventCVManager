@@ -35,6 +35,18 @@ public class ProfessionalExperience extends AuditModel {
     @Size(max = 5000)
     private String post;
 
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    @NotBlank
+    @Size(max = 5000)
+    private String Description;
+
     @NotBlank
     private String startingDate;
 
