@@ -3,13 +3,14 @@ package com.example.Backend.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter @Setter
 @NoArgsConstructor
 @Table(name = "job_offers")
 public class JobOffer extends UserDateAudit {
@@ -19,7 +20,7 @@ public class JobOffer extends UserDateAudit {
 
     @JsonManagedReference
     @JoinColumn(name = "job_id", nullable = false)
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Job job;
 
     private String[] skills;

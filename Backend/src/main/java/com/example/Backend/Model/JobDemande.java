@@ -2,7 +2,8 @@ package com.example.Backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -11,6 +12,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "job_demandes")
 public class JobDemande extends UserDateAudit {
@@ -19,7 +22,7 @@ public class JobDemande extends UserDateAudit {
     private Long id;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jobOffer_id")
     private JobOffer jobOffer;
 
@@ -44,8 +47,9 @@ public class JobDemande extends UserDateAudit {
     @Column(columnDefinition = "BOOLEAN")
     private boolean confirmedByUser;
 
-    @Column(columnDefinition = "BOOLEAN")
-    private boolean confirmedByEntreprise;
+    @JsonManagedReference
+    @OneToOne(mappedBy = "jobRequest")
+    private InterviewSession interviewSession;
 
     public JobDemande(
             JobOffer jobOffer,
@@ -59,13 +63,6 @@ public class JobDemande extends UserDateAudit {
         this.enterprise = enterprise;
         this.sender = sender;
         this.status = status;
-    }
-    public boolean isConfirmedByEntreprise() {
-        return confirmedByEntreprise;
-    }
-
-    public void setConfirmedByEntreprise(boolean confirmedByEntreprise) {
-        this.confirmedByEntreprise = confirmedByEntreprise;
     }
 
     public Long getId() {
@@ -124,5 +121,12 @@ public class JobDemande extends UserDateAudit {
         this.confirmedByUser = confirmedByUser;
     }
 
+    public InterviewSession getInterviewSession() {
+        return interviewSession;
+    }
+
+    public void setInterviewSession(InterviewSession interviewSession) {
+        this.interviewSession = interviewSession;
+    }
 
 }

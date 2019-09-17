@@ -1,5 +1,10 @@
 package com.example.Backend.Model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -7,6 +12,8 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
@@ -64,23 +71,25 @@ public class User extends AuditModel {
     private String town;
 
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
-    private Set<InterviewSession> interviewSessions;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise")
+    private Set<InterviewSession> EnterpriseInterviewSessions = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jobSeeker")
+    private Set<InterviewSession> jobSeekerInterviewSessions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
     private Set<JobOffer> jobOffers = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "sender")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sender")
     private JobDemande jobRequest;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "enterprise")
     private Set<JobDemande> jobRequests = new HashSet<>();
 
     public User() {
@@ -156,157 +165,5 @@ public class User extends AuditModel {
         this.email = email;
         this.password = password;
         this.notificationID = notificationID;
-    }
-
-    public String getActivity() {
-        return activity;
-    }
-
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Long getAge() {
-        return age;
-    }
-
-    public void setAge(Long age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getNotificationID() {
-        return notificationID;
-    }
-
-    public void setNotificationID(String notificationID) {
-        this.notificationID = notificationID;
-    }
-
-    public Set<JobOffer> getJobOffers() {
-        return jobOffers;
-    }
-
-    public void setJobOffers(Set<JobOffer> jobOffers) {
-        this.jobOffers = jobOffers;
-    }
-
-    public Set<InterviewSession> getInterviewSessions() {
-        return interviewSessions;
-    }
-
-    public void setInterviewSessions(Set<InterviewSession> interviewSessions) {
-        this.interviewSessions = interviewSessions;
-    }
-
-    public JobDemande getJobRequest() {
-        return jobRequest;
-    }
-
-    public void setJobRequest(JobDemande jobRequest) {
-        this.jobRequest = jobRequest;
-    }
-
-    public Set<JobDemande> getJobRequests() {
-        return jobRequests;
-    }
-
-    public void setJobRequests(Set<JobDemande> jobRequests) {
-        this.jobRequests = jobRequests;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
     }
 }

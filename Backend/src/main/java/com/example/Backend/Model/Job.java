@@ -1,5 +1,6 @@
 package com.example.Backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,6 +16,10 @@ public class Job extends AuditModel {
 
     @NotBlank
     private String name;
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "job")
+    private JobOffer jobOffer;
 
     public Job(String name) {
         this.name = name;

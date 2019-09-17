@@ -7,6 +7,8 @@ import com.example.Backend.Payload.JobRequestPayload;
 import com.example.Backend.Repository.JobDemandeRepository;
 import com.example.Backend.Repository.NotificationRepository;
 import com.example.Backend.Repository.UserRepository;
+import com.example.Backend.Security.CurrentUser;
+import com.example.Backend.Security.UserPrincipal;
 import com.example.Backend.Service.JobRequestService;
 import com.example.Backend.Service.PushNotificationsService;
 import org.json.JSONException;
@@ -48,7 +50,12 @@ public class JobDemandeController {
 
     @GetMapping("/jobDemande/accepted")
     public List<JobRequestPayload> getAcceptedJobRequests() {
-        return jobRequestService.getJobRequestsAcceptedByEnterprise(true);
+        return jobRequestService.getJobRequestsAccepted();
+    }
+
+    @GetMapping("/jobDemande/acceptedByEnterprise")
+    public List<JobRequestPayload> getAcceptedJobRequestsByEnterprise(@CurrentUser UserPrincipal currentUSer) {
+        return jobRequestService.getJobRequestsAcceptedByEnterprise(currentUSer.getUsername());
     }
 
     // Create a new JobDemande

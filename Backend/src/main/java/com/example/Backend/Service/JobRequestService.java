@@ -2,6 +2,7 @@ package com.example.Backend.Service;
 
 import com.example.Backend.Model.JobDemande;
 import com.example.Backend.Model.JobOffer;
+import com.example.Backend.Model.Status;
 import com.example.Backend.Model.User;
 import com.example.Backend.Payload.JobRequestPayload;
 import com.example.Backend.Repository.JobDemandeRepository;
@@ -25,12 +26,24 @@ public class JobRequestService {
     @Autowired
     private JobOfferRepository jobOfferRepository;
 
-    public List<JobRequestPayload> getJobRequestsAcceptedByEnterprise(Boolean isConfirmed) {
-        return jobRequestRepository
-                .findAllByConfirmedByEntreprise(isConfirmed)
+    public List<JobRequestPayload> getJobRequestsAccepted() {
+        return mapToPayload(jobRequestRepository.findAllByStatus(Status.ACCEPTED));
+
+    }
+
+    public List<JobRequestPayload> getJobRequestsAcceptedByEnterprise(String username) {
+        return mapToPayload(jobRequestRepository.findAllByEnterprise_UsernameAndStatus(username, Status.ACCEPTED));
+    }
+
+    public List<JobRequestPayload> getJobRequestsAcceptedBySender(String username) {
+        return mapToPayload(jobRequestRepository.findAllBySender_UsernameAndStatus(username, Status.ACCEPTED));
+    }
+
+    private List<JobRequestPayload> mapToPayload(List<JobDemande> jobRequests) {
+        return jobRequests
                 .stream()
                 .map(jobRequest -> {
-                    User enterprise = userRepository.findByJobRequestsId(jobRequest.getId());
+                    User enterprise = userRepository.findByJobRequests(jobRequest);
                     User jobSeeker = userRepository.findByJobRequestId(jobRequest.getId());
                     JobOffer jobOffer = jobOfferRepository.findByJobRequestsId(jobRequest.getId());
                     return JobRequestPayload

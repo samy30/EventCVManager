@@ -2,14 +2,14 @@ package com.example.Backend.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,7 +25,7 @@ public class InterviewSession extends AuditModel {
     private String toTimeInterval;
 
     @JsonBackReference
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "jobSeeker_id")
     private User jobSeeker;
 
