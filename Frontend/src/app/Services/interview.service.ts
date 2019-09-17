@@ -7,7 +7,7 @@ import InterviewCalendar from "../Models/InterviewCalendar";
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://localhost:8080/api/interviews';
+const apiUrl = 'http://localhost:8080/api/interviews/';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +47,18 @@ export class InterviewService {
       catchError(this.handleError)
     );
   }
+
+  getInterviewSessionsByEnterpriseUsername(username: string): Observable<any> {
+    return this.http.get(apiUrl + 'enterprise/' + username, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getInterviewSessionsByCandidateUsername(username: string): Observable<any> {
+    return this.http.get(apiUrl + 'candidate/' + username, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 }

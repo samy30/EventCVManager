@@ -20,7 +20,7 @@ public class JobOffer extends UserDateAudit {
 
     @JsonManagedReference
     @JoinColumn(name = "job_id", nullable = false)
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Job job;
 
     private String[] skills;

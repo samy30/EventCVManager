@@ -2,15 +2,15 @@
   "skills": [
     {
       "level": "5L",
+      "name": "mySoftware0"
+    },
+    {
+      "level": "5L",
       "name": "mySoftware1"
     },
     {
       "level": "5L",
       "name": "mySoftware2"
-    },
-    {
-      "level": "5L",
-      "name": "mySoftware0"
     }
   ],
   "basics": {
@@ -20,11 +20,11 @@
     "profiles": [
       {
         "url": "myPath",
-        "network": "facebook"
+        "network": "twitter"
       },
       {
         "url": "myPath",
-        "network": "twitter"
+        "network": "facebook"
       },
       {
         "url": "myPath",
@@ -37,6 +37,11 @@
   },
   "education": [
     {
+      "area": "myStudy1",
+      "institution": "myInstitution1",
+      "endDate": "2017-01-01"
+    },
+    {
       "area": "myStudy0",
       "institution": "myInstitution0",
       "endDate": "2016-01-01"
@@ -45,11 +50,6 @@
       "area": "myStudy2",
       "institution": "myInstitution2",
       "endDate": "2018-01-01"
-    },
-    {
-      "area": "myStudy1",
-      "institution": "myInstitution1",
-      "endDate": "2017-01-01"
     }
   ],
   "languages": [
@@ -59,11 +59,11 @@
     },
     {
       "fluency": "5L",
-      "language": "language1"
+      "language": "language0"
     },
     {
       "fluency": "5L",
-      "language": "language0"
+      "language": "language1"
     }
   ],
   "work": [
@@ -74,30 +74,30 @@
       "startDate": "2016-01-01"
     },
     {
-      "endDate": "2018-01-01",
-      "company": "MyEntreprise1",
-      "position": "Software Developer",
-      "startDate": "2017-01-01"
-    },
-    {
       "endDate": "2019-01-01",
       "company": "MyEntreprise2",
       "position": "Software Developer",
       "startDate": "2018-01-01"
+    },
+    {
+      "endDate": "2018-01-01",
+      "company": "MyEntreprise1",
+      "position": "Software Developer",
+      "startDate": "2017-01-01"
     }
   ],
   "interests": [
     {
-      "keywords": ["MyInterestDescription0"],
-      "name": "SuperInterest0"
+      "keywords": ["MyInterestDescription1"],
+      "name": "SuperInterest1"
     },
     {
       "keywords": ["MyInterestDescription2"],
       "name": "SuperInterest2"
     },
     {
-      "keywords": ["MyInterestDescription1"],
-      "name": "SuperInterest1"
+      "keywords": ["MyInterestDescription0"],
+      "name": "SuperInterest0"
     }
   ]
 }

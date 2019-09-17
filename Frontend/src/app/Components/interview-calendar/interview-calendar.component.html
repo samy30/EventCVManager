@@ -11,42 +11,41 @@
   [dayStartHour]="8"
   [dayEndHour]="17"
   [eventWidth]="400"
-  (hourSegmentClicked)="handleInterviewSessionClick($event.date.getHours())"
 >
 <!--  (eventClicked)="handleEvent('Clicked', $event.event)"-->
 <!--  (eventTimesChanged)="eventTimesChanged($event)"-->
 </mwl-calendar-day-view>
 
-<button type="button" class="btn btn-outline-primary" [disabled]="assignedJobRequestsIds.length !== jobRequests.length"
-        (click)="submitInterviewCalendar()">
-  Submit
-</button>
+<!--<button type="button" class="btn btn-outline-primary" [disabled]="assignedJobRequestsIds.length !== jobRequests.length"-->
+<!--        (click)="submitInterviewCalendar()">-->
+<!--  Submit-->
+<!--</button>-->
 
 <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
 
-<ng-template #modalContent let-close="close">
-  <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
-    <button type="button" class="close" (click)="close()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      InterviewSessions:
-      <select (change)="onOptionSelected($event.target.value)">
-        <option [value]="jobRequest.id" *ngFor="let jobRequest of getNonAssignedJobRequests()">
-          {{interviewSessionsTitles.get(jobRequest.id)}}
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">
-      Cancel
-    </button>
-    <button type="button" class="btn btn-outline-secondary" (click)="addEvent(); close()">
-      Validate
-    </button>
-  </div>
-</ng-template>
+<!--<ng-template #modalContent let-close="close">-->
+<!--  <div class="modal-header">-->
+<!--    <h5 class="modal-title">Event action occurred</h5>-->
+<!--    <button type="button" class="close" (click)="close()">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="modal-body">-->
+<!--    <div>-->
+<!--      InterviewSessions:-->
+<!--      <select (change)="onOptionSelected($event.target.value)">-->
+<!--        <option [value]="jobRequest.id" *ngFor="let jobRequest of getNonAssignedJobRequests()">-->
+<!--          {{interviewSessionsTitles.get(jobRequest.id)}}-->
+<!--        </option>-->
+<!--      </select>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-outline-secondary" (click)="close()">-->
+<!--      Cancel-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-outline-secondary" (click)="addEvent(); close()">-->
+<!--      Validate-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</ng-template>-->

@@ -18,7 +18,7 @@ public class Job extends AuditModel {
     private String name;
 
     @JsonBackReference
-    @OneToOne(mappedBy = "job")
+    @OneToMany(mappedBy = "job")
     private JobOffer jobOffer;
 
     public Job(String name) {
