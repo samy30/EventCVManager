@@ -27,7 +27,7 @@ public class JobDemande extends UserDateAudit {
     private JobOffer jobOffer;
 
     @JsonBackReference
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id", nullable = true)
     private CV cv;
 

@@ -2,7 +2,13 @@ package com.example.Backend.Service;
 
 import com.example.Backend.Exception.ResourceNotFoundException;
 import com.example.Backend.Model.CV;
+import com.example.Backend.Model.JobDemande;
+import com.example.Backend.Model.JobOffer;
+import com.example.Backend.Model.User;
 import com.example.Backend.Repository.CVRepository;
+import com.example.Backend.Repository.JobDemandeRepository;
+import com.example.Backend.Repository.JobOfferRepository;
+import com.example.Backend.Repository.UserRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +25,41 @@ public class JsonResumeService {
     @Autowired
     CVRepository cvRepository;
 
-    final String OUTPUT_PATH = "src/output/resume/";
+    @Autowired
+    JobDemandeRepository jobRequestRepository;
+
+    @Autowired
+    JobOfferRepository jobOfferRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    FileService fileService;
+
+    final String OUTPUT_PATH = "src/output/resumes/";
 
     public JSONObject generateResume(Long cvId) {
         CV cv = cvRepository.findById(cvId)
                 .orElseThrow(() -> new ResourceNotFoundException("CV", "id", cvId));
+        JobDemande jobRequest = jobRequestRepository.findByCv_Id(cvId);
+        JobOffer jobOffer = jobOfferRepository.findByJobRequestsId(jobRequest.getId());
+        User enterprise = userRepository.findByJobRequestId(jobRequest.getId());
+        String jobName = jobOffer.getJob().getName();
+        String enterpriseName = jobRequest.getEnterprise().getUsername();
         JSONObject jsonResume = new JSONObject();
 
         // Basics Json Object
         JSONObject basicsJsonObject = new JSONObject();
         basicsJsonObject.put("name", cv.getFirstName() + " " + cv.getLastName());
         basicsJsonObject.put("email", cv.getEmail());
+        basicsJsonObject.put("phone", cv.getPhone());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Applying to Enterprise: " + enterpriseName + '\n');
+        stringBuilder.append("For Job:" + jobName + '\n');
+        stringBuilder.append("Nationality : " + cv.getNationality() + '\n');
+        stringBuilder.append("Driving Licence: " + (cv.getDrivingLicence() ? "True" : "False") + '\n');
+        basicsJsonObject.put("summary", stringBuilder.toString());
         JSONObject location = new JSONObject();
         location.put("address", cv.getAddress());
         basicsJsonObject.put("location", location);
@@ -42,7 +72,7 @@ public class JsonResumeService {
                     profilesJsonArray.put(profileJsonObject);
                 });
         basicsJsonObject.put("profiles", profilesJsonArray);
-        basicsJsonObject.put("picture", "yo.jpg");
+        basicsJsonObject.put("picture", fileService.getImagePath(cv.getId()));
         jsonResume.put("basics", basicsJsonObject);
 
         // Work Json Array
@@ -53,7 +83,9 @@ public class JsonResumeService {
                     workJsonObject.put("company", professionalExperience.getEnterprise());
                     workJsonObject.put("position", professionalExperience.getPost());
                     workJsonObject.put("startDate", professionalExperience.getStartingDate());
-                    workJsonObject.put("endDate", professionalExperience.getFinishingDate());
+                    if (professionalExperience.getFinishingDate() != null) {
+                        workJsonObject.put("endDate", professionalExperience.getFinishingDate());
+                    }
                     workJsonArray.put(workJsonObject);
                 });
         jsonResume.put("work", workJsonArray);
@@ -106,7 +138,7 @@ public class JsonResumeService {
         jsonResume.put("interests", interestsJsonArray);
         System.out.println(jsonResume.toString(2));
         try {
-            String fileName = "resume_" + cvId.toString();
+            String fileName = "resume" + cvId.toString();
             generateHTMLFromJson(jsonResume, fileName);
             generatePDFFromHTML(fileName);
         } catch(Exception e) {

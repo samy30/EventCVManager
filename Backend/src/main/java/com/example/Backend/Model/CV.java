@@ -1,5 +1,6 @@
 package com.example.Backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +37,9 @@ public class CV extends UserDateAudit {
 
     @NotBlank
     private String nationality;
+
+    @NotNull
+    private Boolean drivingLicence;
 
     @NotBlank
     private String lastName;
@@ -86,6 +91,10 @@ public class CV extends UserDateAudit {
             fetch = FetchType.EAGER,
             mappedBy = "cv")
     private Set<Study> studies  = new HashSet<>();
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "cv")
+    private JobDemande jobRequest;
 
     public Long getId() {
         return id;
@@ -189,5 +198,21 @@ public class CV extends UserDateAudit {
 
     public void setStudies(Set<Study> studies) {
         this.studies = studies;
+    }
+
+    public Boolean getDrivingLicence() {
+        return drivingLicence;
+    }
+
+    public void setDrivingLicence(Boolean drivingLicence) {
+        this.drivingLicence = drivingLicence;
+    }
+
+    public JobDemande getJobRequest() {
+        return jobRequest;
+    }
+
+    public void setJobRequest(JobDemande jobRequest) {
+        this.jobRequest = jobRequest;
     }
 }

@@ -22,6 +22,7 @@ public interface JobDemandeRepository extends JpaRepository<JobDemande, Long> {
     List<JobDemande> findAllByEnterprise_UsernameAndStatus(String username, Status status);
     List<JobDemande> findAllBySender_UsernameAndStatus(String username, Status status);
     List<JobDemande> findByJobOffer(JobOffer jobOffer);
+    JobDemande findByCv_Id(Long resumeId);
 
 //    @Query(value = "SELECT jR FROM job_demandes jR LEFT JOIN FETCH jR.jobOffer jO LEFT JOIN FETCH jO.job where jR.id = :id", nativeQuery=true)
 //    JobDemande findByIdAndFetchJobOfferAndJobName(@Param("id") Long jobRequestId);

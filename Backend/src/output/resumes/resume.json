@@ -2,42 +2,44 @@
   "skills": [
     {
       "level": "5L",
-      "name": "mySoftware0"
-    },
-    {
-      "level": "5L",
       "name": "mySoftware1"
     },
     {
       "level": "5L",
       "name": "mySoftware2"
+    },
+    {
+      "level": "5L",
+      "name": "mySoftware0"
     }
   ],
   "basics": {
+    "summary": "Applying to Enterprise: google\nFor Job:Architect\nNationality : Tunisian\nDriving Licence: True\n",
+    "phone": "+21611111111",
     "name": "myFirstName myLastName",
     "profiles": [
       {
-        "url": "myPath0",
-        "network": "myType0"
+        "url": "myPath",
+        "network": "facebook"
       },
       {
-        "url": "myPath2",
-        "network": "myType2"
+        "url": "myPath",
+        "network": "twitter"
       },
       {
-        "url": "myPath1",
-        "network": "myType1"
+        "url": "myPath",
+        "network": "linkedin"
       }
     ],
     "location": {"address": "My address, Tunis, Tunisa"},
     "email": "email@gmail.com",
-    "picture": "yo.jpg"
+    "picture": "/home/ayedm/EventCVManager/EventCVManager/Backend/src/output/images/image1.jpg"
   },
   "education": [
     {
-      "area": "myStudy1",
-      "institution": "myInstitution1",
-      "endDate": "2017-01-01"
+      "area": "myStudy0",
+      "institution": "myInstitution0",
+      "endDate": "2016-01-01"
     },
     {
       "area": "myStudy2",
@@ -45,19 +47,19 @@
       "endDate": "2018-01-01"
     },
     {
-      "area": "myStudy0",
-      "institution": "myInstitution0",
-      "endDate": "2016-01-01"
+      "area": "myStudy1",
+      "institution": "myInstitution1",
+      "endDate": "2017-01-01"
     }
   ],
   "languages": [
     {
       "fluency": "5L",
-      "language": "language1"
+      "language": "language2"
     },
     {
       "fluency": "5L",
-      "language": "language2"
+      "language": "language1"
     },
     {
       "fluency": "5L",
