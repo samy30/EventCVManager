@@ -33,17 +33,21 @@ public class InterviewService {
         mapJobRequestsToInterviewSessions(jobRequests);
     }
 
+    private String padWithZero(String timeString) {
+        return timeString.length() < 5 ? '0' + timeString : timeString;
+    }
+
     public void mapJobRequestsToInterviewSessions(List<JobDemande> jobRequests) {
         List<String> leftTimeIntervals = new ArrayList<>();
         List<String> rightTimeIntervals = new ArrayList<>();
         IntStream.range(0, jobRequests.size())
                 .forEach(index -> {
                     if (index % 2 == 0) {
-                        leftTimeIntervals.add((index / 2 + 8) + ":00");
-                        rightTimeIntervals.add((index / 2 + 8) + ":30");
+                        leftTimeIntervals.add(padWithZero(( index / 2 + 8) + ":00"));
+                        rightTimeIntervals.add(padWithZero((index / 2 + 8) + ":30"));
                     } else {
-                        leftTimeIntervals.add((index / 2 + 8) + ":30");
-                        rightTimeIntervals.add((index / 2 + 9) + ":00");
+                        leftTimeIntervals.add(padWithZero((index / 2 + 8) + ":30"));
+                        rightTimeIntervals.add(padWithZero((index / 2 + 9) + ":00"));
                     }
                 });
         IntStream.range(0, jobRequests.size())

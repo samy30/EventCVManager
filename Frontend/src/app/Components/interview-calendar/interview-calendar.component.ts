@@ -102,17 +102,31 @@ export class InterviewCalendarComponent implements OnInit {
     const role = currentUser.authorities[0].authority;
     if (role === 'ROLE_ENTREPRISE') {
       this.interviewService.getInterviewSessionsByEnterpriseUsername(currentUser.username).subscribe(
-        interviewSessions => this.interviewSessions = interviewSessions
+        interviewSessions => {
+          this.interviewSessions = interviewSessions;
+          this.parseInterviewSessions();
+        }
       );
     } else if (role === 'ROLE_USER') {
       this.interviewService.getInterviewSessionsByCandidateUsername(currentUser.username).subscribe(
-        interviewSessions => this.interviewSessions = interviewSessions
+        interviewSessions => {
+          this.interviewSessions = interviewSessions;
+          this.parseInterviewSessions();
+        }
       );
     }
   }
 
   parseInterviewSessions() {
-
+    this.events = this.interviewSessions
+      .map(interviewSession => {
+        return  {
+          title: this.interviewSessionsTitles.get(this.selectedJobRequestId),
+          start: new Date(this.interviewDate + 'T' + interviewSession.fromTimeInterval ,
+          end: this.modalData.endTime,
+          color: colors.red
+        };
+      });
   }
     // this.jobDemandeService.getJobRequestsConfirmedByEnterprise().subscribe(jobRequests => {
     //   this.jobRequests = jobRequests;

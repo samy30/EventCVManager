@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class Job extends AuditModel {
 
     @JsonBackReference
     @OneToMany(mappedBy = "job")
-    private JobOffer jobOffer;
+    private Set<JobOffer> jobOffers = new HashSet<>();
 
     public Job(String name) {
         this.name = name;
@@ -39,5 +41,13 @@ public class Job extends AuditModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<JobOffer> getJobOffers() {
+        return jobOffers;
+    }
+
+    public void setJobOffers(Set<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
     }
 }

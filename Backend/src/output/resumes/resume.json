@@ -2,15 +2,15 @@
   "skills": [
     {
       "level": "5L",
+      "name": "mySoftware2"
+    },
+    {
+      "level": "5L",
       "name": "mySoftware0"
     },
     {
       "level": "5L",
       "name": "mySoftware1"
-    },
-    {
-      "level": "5L",
-      "name": "mySoftware2"
     }
   ],
   "basics": {
@@ -20,11 +20,11 @@
     "profiles": [
       {
         "url": "myPath",
-        "network": "twitter"
+        "network": "facebook"
       },
       {
         "url": "myPath",
-        "network": "facebook"
+        "network": "twitter"
       },
       {
         "url": "myPath",
@@ -55,7 +55,7 @@
   "languages": [
     {
       "fluency": "5L",
-      "language": "language2"
+      "language": "language1"
     },
     {
       "fluency": "5L",
@@ -63,15 +63,15 @@
     },
     {
       "fluency": "5L",
-      "language": "language1"
+      "language": "language2"
     }
   ],
   "work": [
     {
-      "endDate": "2017-01-01",
-      "company": "MyEntreprise0",
+      "endDate": "2018-01-01",
+      "company": "MyEntreprise1",
       "position": "Software Developer",
-      "startDate": "2016-01-01"
+      "startDate": "2017-01-01"
     },
     {
       "endDate": "2019-01-01",
@@ -80,10 +80,10 @@
       "startDate": "2018-01-01"
     },
     {
-      "endDate": "2018-01-01",
-      "company": "MyEntreprise1",
+      "endDate": "2017-01-01",
+      "company": "MyEntreprise0",
       "position": "Software Developer",
-      "startDate": "2017-01-01"
+      "startDate": "2016-01-01"
     }
   ],
   "interests": [
