@@ -90,12 +90,18 @@ public class BackendApplication {
 			machineLearningJobOffer.getJobRequests().add(jobRequests[9]);
 
 			Arrays.stream(jobRequests)
-					.forEach(jobRequest -> jobRequest.setStatus(Status.ACCEPTED));
+					.forEach(jobRequest -> {
+						jobRequest.setStatus(Status.ACCEPTED);
+						jobRequest.setConfirmedByUser(true);
+					});
 			jobRequests[0].setStatus(Status.REFUSED);
 
 			Role enterpriseRole = new Role(RoleName.ROLE_ENTERPRISE);
 			enterprise.getRoles().add(enterpriseRole);
-			roleRepository.save(new Role(RoleName.ROLE_USER));
+			Role userRole = new Role(RoleName.ROLE_USER);
+			jobSeekers[1].getRoles().add(userRole);
+			roleRepository.save(userRole);
+			jobSeekers[1] = userRepository.save(jobSeekers[1]);
 			roleRepository.save(enterpriseRole);
 			roleRepository.save(new Role(RoleName.ROLE_ADMIN));
 

@@ -36,7 +36,6 @@ public class JobDemande extends UserDateAudit {
     @JoinColumn(name = "enterprise_id")
     private User enterprise;
 
-    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "sender_id")
     private User sender;

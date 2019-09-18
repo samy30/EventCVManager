@@ -90,6 +90,7 @@ import { Scroll2Component } from './Components/scroll2/scroll2.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import {MyErrorStateMatcher} from './Errors/my-error-state-matcher';
 import { ScrollComponent } from './Components/scroll/scroll.component';
+import { AdminJobRequestsComponent } from './Components/admin-job-requests/admin-job-requests.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { ScrollComponent } from './Components/scroll/scroll.component';
     JobOfferDisplayComponent,
     Scroll2Component,
     ChangePasswordComponent,
-    ScrollComponent
+    ScrollComponent,
+    AdminJobRequestsComponent
   ],
   imports: [
     ChartsModule,

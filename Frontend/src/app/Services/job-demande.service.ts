@@ -55,6 +55,13 @@ export class JobDemandeService {
     );
    }
 
+   getJobRequestsConfirmedByEnterpriseAndUser(): Observable<any> {
+     return this.http.get(apiUrl + '/acceptedAndConfirmedByUser', httpOptions).pipe(
+       map(this.extractData),
+       catchError(this.handleError)
+     );
+   }
+
    getJobDemandes(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),

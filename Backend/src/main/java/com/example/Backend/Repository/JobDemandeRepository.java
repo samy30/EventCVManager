@@ -19,6 +19,10 @@ public interface JobDemandeRepository extends JpaRepository<JobDemande, Long> {
     List<JobDemande> findBySender(User user);
     List<JobDemande> findByEnterpriseAndConfirmedByUser(User enterprise, boolean confirmed);
     List<JobDemande> findAllByStatus(Status status);
+
+    @Query(value = "SELECT jR FROM JobDemande jR LEFT JOIN FETCH jR.sender LEFT JOIN FETCH jR.enterprise where jR.status= :status and jR.confirmedByUser= :confirmedByUser")
+    List<JobDemande> findAllByStatusAndAndConfirmedByUser(@Param("status") Status status, @Param("confirmedByUser") Boolean confirmedByUser);
+
     List<JobDemande> findAllByEnterprise_UsernameAndStatus(String username, Status status);
     List<JobDemande> findAllBySender_UsernameAndStatus(String username, Status status);
     List<JobDemande> findByJobOffer(JobOffer jobOffer);

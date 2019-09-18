@@ -39,6 +39,10 @@ public class JobRequestService {
         return mapToPayload(jobRequestRepository.findAllBySender_UsernameAndStatus(username, Status.ACCEPTED));
     }
 
+    public List<JobRequestPayload> getJobRequestsAcceptedByEnterpriseAndConfirmedByUser() {
+        return mapToPayload(jobRequestRepository.findAllByStatusAndAndConfirmedByUser(Status.ACCEPTED, true));
+    }
+
     private List<JobRequestPayload> mapToPayload(List<JobDemande> jobRequests) {
         return jobRequests
                 .stream()

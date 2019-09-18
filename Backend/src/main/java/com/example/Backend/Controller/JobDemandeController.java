@@ -11,6 +11,7 @@ import com.example.Backend.Security.CurrentUser;
 import com.example.Backend.Security.UserPrincipal;
 import com.example.Backend.Service.JobRequestService;
 import com.example.Backend.Service.PushNotificationsService;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,9 @@ public class JobDemandeController {
     public List<JobRequestPayload> getAcceptedJobRequests() {
         return jobRequestService.getJobRequestsAccepted();
     }
+
+    @GetMapping("/jobDemande/acceptedAndConfirmedByUser")
+    public List<JobRequestPayload> getAcceptedAndConfirmedJobRequests() { return jobRequestService.getJobRequestsAcceptedByEnterpriseAndConfirmedByUser(); }
 
     @GetMapping("/jobDemande/acceptedByEnterprise")
     public List<JobRequestPayload> getAcceptedJobRequestsByEnterprise(@CurrentUser UserPrincipal currentUSer) {

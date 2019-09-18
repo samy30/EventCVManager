@@ -1,0 +1,25 @@
+<div class="main-content" >
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-3" *ngFor="let i of groupRange">
+        <div class="list-group">
+          <button type="button" class="list-group-item list-group-item-action active">
+            Groupe {{i + 1}}
+          </button>
+          <button type="button"
+                  class="list-group-item list-group-item-action"
+                  *ngFor="let jobDemande of jobRequestsGroups.get(i)">
+
+            <div>
+              {{jobDemande.jobSeekerName}}
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

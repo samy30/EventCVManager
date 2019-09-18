@@ -20,6 +20,8 @@ import { NotreplatformeComponent } from './Components/notreplatforme/notreplatfo
 import { ConfirmedJobDemandeComponent } from './Components/confirmed-job-demande/confirmed-job-demande.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { Scroll2Component } from './Components/scroll2/scroll2.component';
+import {InterviewCalendarComponent} from "./Components/interview-calendar/interview-calendar.component";
+import {AdminJobRequestsComponent} from "./Components/admin-job-requests/admin-job-requests.component";
 
 
 const routes: Routes = [
@@ -103,6 +105,14 @@ const routes: Routes = [
   {
     path: 'mdpChange',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'interviewCalendar',
+    component: InterviewCalendarComponent
+  },
+  {
+    path: 'adminJobRequests',
+    component: AdminJobRequestsComponent
   },
   {
     path: '**',

@@ -48,7 +48,6 @@ const colors: any = {
 
 @Component({
   selector: 'app-interview-calendar-component',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['interview-calendar.component.scss'],
   templateUrl: 'interview-calendar.component.html'
 })
@@ -89,7 +88,7 @@ export class InterviewCalendarComponent implements OnInit {
   interviewSessionsTitles: Map<number, string> = new Map<number, string>();
   assignedJobRequestsIds: Array<number> = [];
   jobRequestIdToIndex: Map<number, number> = new Map<number, number>();
-  interviewSessions: Array<InterviewSession> = [];
+  interviewSessions = [];
 
   constructor(
     private modal: NgbModal,
@@ -100,7 +99,7 @@ export class InterviewCalendarComponent implements OnInit {
   ngOnInit() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const role = currentUser.authorities[0].authority;
-    if (role === 'ROLE_ENTREPRISE') {
+    if (role === 'ROLE_ENTERPRISE') {
       this.interviewService.getInterviewSessionsByEnterpriseUsername(currentUser.username).subscribe(
         interviewSessions => {
           this.interviewSessions = interviewSessions;
@@ -118,15 +117,17 @@ export class InterviewCalendarComponent implements OnInit {
   }
 
   parseInterviewSessions() {
-    this.events = this.interviewSessions
-      .map(interviewSession => {
-        return  {
-          title: this.interviewSessionsTitles.get(this.selectedJobRequestId),
-          start: new Date(this.interviewDate + 'T' + interviewSession.fromTimeInterval ,
-          end: this.modalData.endTime,
-          color: colors.red
-        };
-      });
+    this.interviewSessions.forEach(interviewSession => {
+      console.log(this.interviewDate + 'T' + interviewSession.fromTimeInterval + ':00');
+      this.events = [...this.events, {
+        title: interviewSession.enterpriseUsername + '\'s interview with ' + interviewSession.jobSeekerName +
+          ', ' + interviewSession.jobName,
+        start: new Date(this.interviewDate + 'T' + interviewSession.fromTimeInterval + ':00'),
+        end: new Date(this.interviewDate + 'T' + interviewSession.toTimeInterval + ':00'),
+        color: colors.red
+      }];
+    });
+    console.log(this.events);
   }
     // this.jobDemandeService.getJobRequestsConfirmedByEnterprise().subscribe(jobRequests => {
     //   this.jobRequests = jobRequests;
